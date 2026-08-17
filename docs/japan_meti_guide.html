@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Japan METI petroleum statistics — User Guide</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1a2332;
+      --muted: #5a6b7d;
+      --accent: #b45309;
+      --accent-soft: #fff7ed;
+      --border: #d8e0ea;
+      --code-bg: #eef2f7;
+      --warn-bg: #fff8e6;
+      --warn-border: #f0c040;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+    header {
+      background: linear-gradient(135deg, #7c2d12 0%, #ea580c 100%);
+      color: #fff;
+      padding: 2.5rem 2rem 2rem;
+    }
+    header h1 { margin: 0 0 0.5rem; font-size: 1.85rem; font-weight: 600; }
+    header p { margin: 0; opacity: 0.92; max-width: 52rem; }
+    .wrap {
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    nav.toc {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    nav.toc h2 { margin: 0 0 0.75rem; font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    nav.toc ol { margin: 0; padding-left: 1.25rem; }
+    nav.toc a { color: var(--accent); text-decoration: none; }
+    nav.toc a:hover { text-decoration: underline; }
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+    h2 { margin-top: 0; font-size: 1.35rem; border-bottom: 2px solid var(--accent-soft); padding-bottom: 0.4rem; }
+    h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    p { margin: 0.75rem 0; }
+    ul, ol { margin: 0.5rem 0; padding-left: 1.4rem; }
+    li { margin: 0.35rem 0; }
+    code, kbd {
+      font-family: Consolas, "Cascadia Mono", monospace;
+      font-size: 0.9em;
+      background: var(--code-bg);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+    }
+    pre {
+      background: #1e2936;
+      color: #e8eef5;
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+    pre code { background: none; padding: 0; color: inherit; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      margin: 1rem 0;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: var(--accent-soft); font-weight: 600; }
+    tr:nth-child(even) td { background: #fafbfd; }
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+    .flow span {
+      background: var(--accent-soft);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+    }
+    .flow .arrow { background: none; border: none; color: var(--muted); padding: 0; }
+    .callout {
+      background: var(--warn-bg);
+      border-left: 4px solid var(--warn-border);
+      padding: 0.85rem 1rem;
+      margin: 1rem 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .callout strong { display: block; margin-bottom: 0.25rem; }
+    .muted { color: var(--muted); font-size: 0.92rem; }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      padding: 2rem 1rem;
+    }
+    a { color: var(--accent); }
+    .jp { font-family: "Segoe UI", "Yu Gothic UI", "Meiryo", sans-serif; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Japan METI domestic sales — guide</h1>
+  <p>
+    How Ministry of Economy, Trade and Industry (METI) petroleum statistics flow into
+    <code>country_oil_scraper</code>, how to refresh the database, and how the demand
+    dashboard notebook uses the results.
+  </p>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#overview">What the code does</a></li>
+    <li><a href="#glossary">METI publication types (速報 / 確報 / 年報)</a></li>
+    <li><a href="#layout">Files and folders</a></li>
+    <li><a href="#products">Products, units, and product_map</a></li>
+    <li><a href="#merge">How sources are merged</a></li>
+    <li><a href="#update">How to update data (cookbook)</a></li>
+    <li><a href="#notebook">Demand dashboard notebook</a></li>
+    <li><a href="#jodi">METI vs JODI</a></li>
+    <li><a href="#code-map">Code map</a></li>
+    <li><a href="#troubleshooting">Troubleshooting</a></li>
+  </ol>
+</nav>
+
+<section id="overview">
+  <h2>1. What the code does</h2>
+  <p>
+    The Japan pipeline ingests <strong>domestic sales</strong>
+    (<span class="jp">国内向販売</span>) from METI’s petroleum statistics workbooks (Excel),
+    normalizes them to a long-form parquet database, and feeds
+    <code>notebooks/14_japan_demand_dashboard.ipynb</code>.
+  </p>
+
+  <div class="flow">
+    <span>METI XLS/XLSX</span>
+    <span class="arrow">→</span>
+    <span>Raw cache</span>
+    <span class="arrow">→</span>
+    <span>Parse (reference/japan.py)</span>
+    <span class="arrow">→</span>
+    <span>Parquet</span>
+    <span class="arrow">→</span>
+    <span>Dashboard</span>
+  </div>
+
+  <h3>Layers</h3>
+  <table>
+    <thead>
+      <tr><th>Layer</th><th>Role</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Scraper</strong><br><code>scrapers/japan_meti.py</code></td>
+        <td>Downloads 確報 monthly files, latest 速報, and 年報 editions from METI pages (via <code>curl_cffi</code>).</td>
+      </tr>
+      <tr>
+        <td><strong>Reference</strong><br><code>reference/japan.py</code></td>
+        <td>Parsers for 速報 / 確報 / 年報; period labels (Reiwa/Heisei); JODI compare specs; seasonality helpers.</td>
+      </tr>
+      <tr>
+        <td><strong>Processor</strong><br><code>processors/japan_meti_consumption.py</code></td>
+        <td>Maps <code>product_native</code> → <code>product_canonical</code> via <code>reference/product_map.csv</code>; writes parquet.</td>
+      </tr>
+      <tr>
+        <td><strong>Update script</strong><br><code>scripts/update_japan.py</code></td>
+        <td>CLI: download → parse → upsert (routine) or full rebuild (bootstrap).</td>
+      </tr>
+      <tr>
+        <td><strong>Notebook</strong><br><code>notebooks/14_japan_demand_dashboard.ipynb</code></td>
+        <td>Charts: headline total, seasonality, METI vs JODI, Kayrros jet. Reads parquet only.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="muted">
+    Metric in the database: <code>TOTDEMO</code> (total domestic demand). Country code <code>JP</code>.
+    Source id: <code>japan_meti_domestic_sales</code>.
+  </p>
+</section>
+
+<section id="glossary">
+  <h2>2. METI publication types</h2>
+  <p>Three tiers matter for this project. Filenames follow METI conventions.</p>
+  <table>
+    <thead>
+      <tr><th>Japanese</th><th>Reading</th><th>Typical lag</th><th>File pattern</th><th>Role here</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="jp">速報</td>
+        <td><em>sokuhō</em> — preliminary flash</td>
+        <td>~M+1</td>
+        <td><code>h2j….xlsx</code> under <code>data/raw/japan/sokuhou/</code></td>
+        <td>Fast first estimate for the latest month; marked <code>is_provisional=true</code> until 確報 replaces it.</td>
+      </tr>
+      <tr>
+        <td class="jp">確報</td>
+        <td><em>kakuhō</em> — final monthly</td>
+        <td>~M+2</td>
+        <td><code>seYYYYMMkakji.xlsx</code> under <code>data/raw/japan/kakuhou/</code></td>
+        <td>Authoritative monthly product tables (~15-month rolling window per file). Wins over 速報 and 年報 on overlaps.</td>
+      </tr>
+      <tr>
+        <td class="jp">年報</td>
+        <td><em>nenpō</em> — annual yearbook</td>
+        <td>Annual edition</td>
+        <td><code>h2dhhpeYYYYk.xls</code> / <code>.xlsx</code> under <code>data/raw/japan/yearbook/</code></td>
+        <td>Long history (2007+ locally); fills years before 確報 window. Lower priority than 確報 when both exist.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>Filename vs survey month</strong>
+    <code>se202603kakji.xlsx</code> is the <em>March 2026 edition</em> of 確報, not “only March 2026 data”.
+    Each file usually contains a rolling block of monthly rows (e.g. 2025-01 through 2026-03).
+  </div>
+</section>
+
+<section id="layout">
+  <h2>3. Files and folders</h2>
+  <table>
+    <thead>
+      <tr><th>Path</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>data/raw/japan/kakuhou/</code></td>
+        <td>確報 monthly workbooks (<code>se*kakji.xlsx</code>).</td>
+      </tr>
+      <tr>
+        <td><code>data/raw/japan/sokuhou/</code></td>
+        <td>速報 preliminary workbook(s) (<code>h2j*.xlsx</code>).</td>
+      </tr>
+      <tr>
+        <td><code>data/raw/japan/yearbook/</code></td>
+        <td>年報 editions — <code>h2dhhpe2007k.xls</code> … <code>h2dhhpe2024k.xlsx</code> (add more as METI publishes).</td>
+      </tr>
+      <tr>
+        <td><code>data/processed/japan/japan_meti_consumption.parquet</code></td>
+        <td>Long-form database: one row per month × <code>product_native</code>. Used by the notebook.</td>
+      </tr>
+      <tr>
+        <td><code>reference/product_map.csv</code></td>
+        <td>Rows with <code>Source=METI</code>; <code>Product_name</code> = <code>product_native</code> key (e.g. <code>gas_oil</code>).</td>
+      </tr>
+      <tr>
+        <td><code>data/processed/jodi/jodi_secondary.parquet</code></td>
+        <td>JODI cross-check (<code>python scripts/update_jodi.py</code>).</td>
+      </tr>
+      <tr>
+        <td><code>config/sources.yaml</code></td>
+        <td>Metadata and update command notes under <code>japan:</code>.</td>
+      </tr>
+      <tr>
+        <td><code>docs/japan_meti_guide.html</code></td>
+        <td>This document.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="products">
+  <h2>4. Products, units, and product_map</h2>
+
+  <h3>Native products (<code>product_native</code>)</h3>
+  <p>Parsed from METI sheet section titles and 国内向販売 columns:</p>
+  <table>
+    <thead>
+      <tr><th>Key</th><th>METI label (typical)</th><th>Stored unit</th><th>Canonical (Sub-category)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>gasoline</code></td><td class="jp">ガソリン</td><td>kL</td><td>Gasoline</td></tr>
+      <tr><td><code>naphtha</code></td><td class="jp">ナフサ</td><td>kL</td><td>Naphtha</td></tr>
+      <tr><td><code>jet_fuel</code></td><td class="jp">ジェット / 燃料油</td><td>kL</td><td>Jet Fuel</td></tr>
+      <tr><td><code>kerosene</code></td><td class="jp">灯油</td><td>kL</td><td>Kerosene</td></tr>
+      <tr><td><code>gas_oil</code></td><td class="jp">軽油</td><td>kL</td><td>Diesel</td></tr>
+      <tr><td><code>fuel_oil_a</code></td><td class="jp">Ａ重油</td><td>kL</td><td>Gasoil</td></tr>
+      <tr><td><code>fuel_oil_bc</code></td><td class="jp">Ｂ・Ｃ重油</td><td>kL</td><td>Fuel oil</td></tr>
+      <tr><td><code>lpg</code></td><td>LPG</td><td>t (tonnes)</td><td>LPG</td></tr>
+      <tr><td><code>lubricating_oil</code></td><td class="jp">潤滑油</td><td>kL</td><td>Lubricants</td></tr>
+      <tr><td><code>asphalt</code></td><td class="jp">アスファルト</td><td>t</td><td>Bitumen</td></tr>
+      <tr><td><code>grease</code></td><td class="jp">グリース</td><td>t</td><td>Grease</td></tr>
+      <tr><td><code>paraffin_wax</code></td><td class="jp">パラフィン</td><td>t</td><td>Wax</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Charts (notebook)</h3>
+  <ul>
+    <li>Raw values are kL or tonnes as published.</li>
+    <li>Notebook converts to <strong>kbd</strong> using <code>analytics.units.convert_series</code> and per-product density kinds in <code>reference/japan.py</code> (<code>UNITS_KIND</code>).</li>
+    <li><strong>Headline total</strong> includes all delivery products above, <strong>including naphtha</strong> (overall industrial + transport demand view).</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Fuel-oil split (important)</strong>
+    METI reports Ａ重油 and Ｂ・Ｃ重油 separately. In <code>product_map.csv</code>,
+    Ａ重油 is <strong>Gasoil</strong> (distillate, compared with 軽油 vs JODI <code>GASDIES</code>),
+    while Ｂ・Ｃ重油 is <strong>Fuel oil</strong> (residual, vs JODI <code>RESFUEL</code>).
+    Do not sum them into one “fuel oil” series for JODI unless you mean heavy oil only (<code>fuel_oil_bc</code>).
+  </div>
+</section>
+
+<section id="merge">
+  <h2>5. How sources are merged</h2>
+  <p>When building parquet from all local workbooks, duplicate <code>(date, product_native)</code> keys are resolved by priority:</p>
+  <ol>
+    <li><strong>確報</strong> (kakuhou) — highest</li>
+    <li><strong>年報</strong> (yearbook)</li>
+    <li><strong>速報</strong> (sokuhou) — lowest; sets <code>is_provisional</code> until replaced</li>
+  </ol>
+  <p class="muted">
+    Within a single 確報 sheet, only the <em>first</em> domestic-sales table per product block is used
+    (avoids a second table on the same sheet overwriting gasoline/gas oil with wrong scale).
+  </p>
+</section>
+
+<section id="update">
+  <h2>6. How to update data (cookbook)</h2>
+  <p>Run all commands from the <code>country_oil_scraper/</code> folder:</p>
+  <pre><code>cd country_oil_scraper</code></pre>
+
+  <h3>What do you want to do?</h3>
+  <table>
+    <thead>
+      <tr><th>Goal</th><th>Command</th><th>What happens</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Monthly refresh</strong> (usual)</td>
+        <td><pre><code>python scripts/update_japan.py</code></pre></td>
+        <td>
+          Downloads latest 速報 + last 6 確報 months (configurable with <code>--lookback-months</code>),
+          parses only new/changed files, upserts into parquet.
+        </td>
+      </tr>
+      <tr>
+        <td>Force re-download</td>
+        <td><pre><code>python scripts/update_japan.py --force</code></pre></td>
+        <td>Re-fetches METI files even if already cached.</td>
+      </tr>
+      <tr>
+        <td><strong>Full rebuild</strong> from local files</td>
+        <td><pre><code>python scripts/update_japan.py --bootstrap --no-download</code></pre></td>
+        <td>
+          Re-parses every <code>.xlsx</code> / <code>.xls</code> under <code>data/raw/japan/</code>
+          (yearbook + kakuhou + sokuhou). Use after parser fixes or adding yearbooks.
+        </td>
+      </tr>
+      <tr>
+        <td>Bootstrap + download everything</td>
+        <td><pre><code>python scripts/update_japan.py --bootstrap</code></pre></td>
+        <td>Downloads 年報 (online where available), all 確報 links on index, latest 速報; full rebuild.</td>
+      </tr>
+      <tr>
+        <td>Reparse local only (no download)</td>
+        <td><pre><code>python scripts/update_japan.py --no-download --reparse-all</code></pre></td>
+        <td>Same full rebuild as bootstrap but never hits METI servers.</td>
+      </tr>
+      <tr>
+        <td>Manual file drop</td>
+        <td>Save xlsx under <code>kakuhou/</code> or <code>yearbook/</code>, then bootstrap with <code>--no-download</code></td>
+        <td>Parser picks up new files on next rebuild.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>After any update</strong>
+    Restart the Jupyter kernel and re-run
+    <code>notebooks/14_japan_demand_dashboard.ipynb</code> from §1 Setup.
+  </div>
+
+  <h3>Log lines to expect</h3>
+  <ul>
+    <li><code>Rows : 2,7xx</code> and <code>Date range : 2007-01-01 -> …</code> after a full rebuild with 2007–2024 yearbooks.</li>
+    <li><code>Provisional : 0 rows</code> when 確報 has caught up to the latest months (速報 fully replaced).</li>
+    <li><code>Upsert: N replaced, M appended</code> on routine refresh.</li>
+  </ul>
+
+  <h3>Also update JODI (for §5–§6 charts)</h3>
+  <pre><code>python scripts/update_jodi.py</code></pre>
+  <p class="muted">JODI often lags METI by one or more months.</p>
+
+  <h3>Tests</h3>
+  <pre><code>python -m pytest tests/test_japan_meti.py -q</code></pre>
+</section>
+
+<section id="notebook">
+  <h2>7. Demand dashboard notebook</h2>
+  <p><strong>File:</strong> <code>notebooks/14_japan_demand_dashboard.ipynb</code></p>
+  <table>
+    <thead>
+      <tr><th>Section</th><th>Content</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>§1 Setup</td><td>Load parquet; kL/t → kbd; build <code>demand_canonical</code> from <code>product_canonical</code>.</td></tr>
+      <tr><td>§2 Headline total</td><td>Sum of all delivery products <strong>including naphtha</strong>.</td></tr>
+      <tr><td>§3 Native products</td><td>Small multiples by <code>product_native</code>.</td></tr>
+      <tr><td>§4 Seasonality</td><td>Native or canonical view; highlight year uses last full calendar year (≥6 months).</td></tr>
+      <tr><td>§5 METI vs JODI</td><td>Product panels — see <a href="#jodi">§9</a>.</td></tr>
+      <tr><td>§6 Total demand</td><td>Comparable METI sum vs JODI (§5 scope); broad headline vs JODI TOTPRODS.</td></tr>
+      <tr><td>§7 Jet vs Kayrros</td><td>Optional; needs <code>kayros/jet_fuel/data/jet_fuel.duckdb</code>.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="jodi">
+  <h2>8. METI vs JODI</h2>
+  <p>Notebook §5 uses <code>reference/japan.JODI_COMPARE_SERIES</code> and JODI flow <code>TOTDEMO</code>, unit <code>KBD</code>, country <code>JP</code>.</p>
+  <table>
+    <thead>
+      <tr><th>Dashboard panel</th><th>METI (summed natives)</th><th>JODI code</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Gas/diesel oil</td><td><code>gas_oil</code> + <code>fuel_oil_a</code> (軽油 + Ａ重油)</td><td><code>GASDIES</code></td></tr>
+      <tr><td>Fuel oil</td><td><code>fuel_oil_bc</code> only (Ｂ・Ｃ重油)</td><td><code>RESFUEL</code></td></tr>
+      <tr><td>Gasoline</td><td><code>gasoline</code></td><td><code>GASOLINE</code></td></tr>
+      <tr><td>Kerosene</td><td><code>kerosene</code></td><td><code>X_OTHKERO</code> (derived non-jet kerosene in JODI)</td></tr>
+      <tr><td>Jet fuel</td><td><code>jet_fuel</code></td><td><code>JETKERO</code></td></tr>
+      <tr><td>LPG</td><td><code>lpg</code></td><td><code>LPG</code></td></tr>
+      <tr><td>Naphtha</td><td><code>naphtha</code></td><td><code>NAPHTHA</code></td></tr>
+    </tbody>
+  </table>
+  <p class="muted">
+    JODI has no separate “gasoil” product — middle distillates are bundled in <code>GASDIES</code>.
+    The dashboard uses one combined Gas/diesel oil panel for METI 軽油+Ａ重油 vs that single JODI series.
+  </p>
+</section>
+
+<section id="code-map">
+  <h2>9. Code map (for developers)</h2>
+  <table>
+    <thead>
+      <tr><th>File</th><th>Key symbols</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>reference/japan.py</code></td>
+        <td>
+          <code>parse_meti_kakuhou_workbook</code>,
+          <code>parse_meti_yearbook_workbook</code>,
+          <code>parse_meti_directory</code>,
+          <code>JODI_COMPARE_SERIES</code>,
+          <code>build_meti_jodi_panel_frames</code>,
+          <code>build_demand_canonical</code>
+        </td>
+      </tr>
+      <tr>
+        <td><code>scrapers/japan_meti.py</code></td>
+        <td><code>JapanMetiScraper.download_refresh</code>, <code>download_bootstrap</code></td>
+      </tr>
+      <tr>
+        <td><code>processors/japan_meti_consumption.py</code></td>
+        <td><code>build_from_raw</code>, <code>build_from_files</code>, <code>upsert</code></td>
+      </tr>
+      <tr>
+        <td><code>scripts/update_japan.py</code></td>
+        <td>CLI entrypoint</td>
+      </tr>
+      <tr>
+        <td><code>tests/test_japan_meti.py</code></td>
+        <td>Offline parser tests; probe xlsx under <code>data/raw/japan/_probe/</code></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="troubleshooting">
+  <h2>10. Troubleshooting</h2>
+  <table>
+    <thead>
+      <tr><th>Symptom</th><th>Likely cause</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Notebook shows old data</td>
+        <td>Kernel not restarted</td>
+        <td>Restart kernel; re-run from §1</td>
+      </tr>
+      <tr>
+        <td><code>product_canonical</code> all empty</td>
+        <td>product_map keys didn’t match <code>product_native</code></td>
+        <td>Fix METI rows in <code>product_map.csv</code>; run <code>--bootstrap --no-download</code></td>
+      </tr>
+      <tr>
+        <td>Missing 2026 months in DB</td>
+        <td>確報 not downloaded or parser skip on Reiwa 8 labels</td>
+        <td>Add <code>se202601/602/603kakji.xlsx</code> to <code>kakuhou/</code>; rebuild; ensure parser ≥ current</td>
+      </tr>
+      <tr>
+        <td>History stops at 2013</td>
+        <td>Yearbooks 2007–2012 missing locally</td>
+        <td>Add <code>h2dhhpe2007k.xls</code> … under <code>yearbook/</code>; bootstrap</td>
+      </tr>
+      <tr>
+        <td>Spikes in 2021–2023</td>
+        <td>Annual/quarter rows parsed as months (old parser)</td>
+        <td>Re-bootstrap with current <code>reference/japan.py</code></td>
+      </tr>
+      <tr>
+        <td>§5 JODI section skipped</td>
+        <td>No JODI parquet</td>
+        <td><code>python scripts/update_jodi.py</code></td>
+      </tr>
+      <tr>
+        <td>Yearbook download 404</td>
+        <td>METI removed old edition from website</td>
+        <td>Place file manually in <code>yearbook/</code></td>
+      </tr>
+      <tr>
+        <td>Seasonality highlights wrong year</td>
+        <td>Only one 2026 month so far</td>
+        <td>Expected: <code>seasonality_highlight_year</code> uses last full year (e.g. 2025)</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+</div>
+
+<footer>
+  Japan METI guide · country_oil_scraper ·
+  <a href="https://www.meti.go.jp/statistics/tyo/sekiyuka/index.html" target="_blank" rel="noopener">METI petroleum statistics</a>
+</footer>
+
+</body>
+</html>

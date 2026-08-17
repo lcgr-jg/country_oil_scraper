@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Korea KNOC / Petronet — User Guide</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1a2332;
+      --muted: #5a6b7d;
+      --accent: #0b5fff;
+      --accent-soft: #e8f0ff;
+      --border: #d8e0ea;
+      --code-bg: #eef2f7;
+      --warn-bg: #fff8e6;
+      --warn-border: #f0c040;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+    header {
+      background: linear-gradient(135deg, #0b2d6b 0%, #0b5fff 100%);
+      color: #fff;
+      padding: 2.5rem 2rem 2rem;
+    }
+    header h1 { margin: 0 0 0.5rem; font-size: 1.85rem; font-weight: 600; }
+    header p { margin: 0; opacity: 0.92; max-width: 52rem; }
+    .wrap {
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    nav.toc {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    nav.toc h2 { margin: 0 0 0.75rem; font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    nav.toc ol { margin: 0; padding-left: 1.25rem; }
+    nav.toc a { color: var(--accent); text-decoration: none; }
+    nav.toc a:hover { text-decoration: underline; }
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+    h2 { margin-top: 0; font-size: 1.35rem; border-bottom: 2px solid var(--accent-soft); padding-bottom: 0.4rem; }
+    h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    p { margin: 0.75rem 0; }
+    ul, ol { margin: 0.5rem 0; padding-left: 1.4rem; }
+    li { margin: 0.35rem 0; }
+    code, kbd {
+      font-family: Consolas, "Cascadia Mono", monospace;
+      font-size: 0.9em;
+      background: var(--code-bg);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+    }
+    pre {
+      background: #1e2936;
+      color: #e8eef5;
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+    pre code { background: none; padding: 0; color: inherit; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      margin: 1rem 0;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: var(--accent-soft); font-weight: 600; }
+    tr:nth-child(even) td { background: #fafbfd; }
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+    .flow span {
+      background: var(--accent-soft);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+    }
+    .flow .arrow { background: none; border: none; color: var(--muted); padding: 0; }
+    .callout {
+      background: var(--warn-bg);
+      border-left: 4px solid var(--warn-border);
+      padding: 0.85rem 1rem;
+      margin: 1rem 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .callout strong { display: block; margin-bottom: 0.25rem; }
+    .muted { color: var(--muted); font-size: 0.92rem; }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      padding: 2rem 1rem;
+    }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Korea KNOC demand data — guide</h1>
+  <p>
+    How Petronet <em>제품별소비</em> flows into this project, how to refresh the database,
+    and how the demand dashboard notebook uses the results.
+  </p>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#overview">What the code does</a></li>
+    <li><a href="#layout">Files and folders</a></li>
+    <li><a href="#units">Units and products</a></li>
+    <li><a href="#update">How to update data (cookbook)</a></li>
+    <li><a href="#notebook">Demand dashboard notebook</a></li>
+    <li><a href="#naphtha">Naphtha vs headline demand</a></li>
+    <li><a href="#code-map">Code map</a></li>
+    <li><a href="#troubleshooting">Troubleshooting</a></li>
+    <li><a href="#future">Future automation (email / multi-country)</a></li>
+  </ol>
+</nav>
+
+<section id="overview">
+  <h2>1. What the code does</h2>
+  <p>
+    The Korea pipeline automates <strong>product-by-product domestic petroleum consumption</strong>
+    from KNOC/MOTIE via the public Petronet website
+    (<a href="https://www.petronet.co.kr/v4/sub.jsp" target="_blank" rel="noopener">petronet.co.kr</a>),
+    menu <strong>국내석유통계 → 국내소비 → 제품별소비</strong> (program id <code>KDCQ0200</code>).
+  </p>
+
+  <div class="flow">
+    <span>Petronet (HTML table)</span>
+    <span class="arrow">→</span>
+    <span>Raw CSV bundles</span>
+    <span class="arrow">→</span>
+    <span>Parse &amp; normalize</span>
+    <span class="arrow">→</span>
+    <span>Parquet database</span>
+    <span class="arrow">→</span>
+    <span>Dashboard notebook</span>
+  </div>
+
+  <h3>Layers</h3>
+  <table>
+    <thead>
+      <tr><th>Layer</th><th>Role</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Scraper</strong><br><code>scrapers/korea_knoc.py</code></td>
+        <td>Downloads date ranges from Petronet, saves wide CSV files under <code>data/raw/korea/</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>Reference</strong><br><code>reference/korea.py</code>, <code>reference/petronet_knoc.py</code></td>
+        <td>Parses CSV/HTML, maps Korean/English columns to <code>product_native</code>, JODI compare specs, seasonality helpers.</td>
+      </tr>
+      <tr>
+        <td><strong>Processor</strong><br><code>processors/korea_knoc_consumption.py</code></td>
+        <td>Builds canonical long-form table, upserts into <code>korea_knoc_consumption.parquet</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>Update script</strong><br><code>scripts/update_korea.py</code></td>
+        <td>CLI you run monthly: download → parse → save.</td>
+      </tr>
+      <tr>
+        <td><strong>Notebook</strong><br><code>notebooks/13_korea_demand_dashboard.ipynb</code></td>
+        <td>Charts: seasonality, KNOC vs JODI, Kayrros jet, etc. Reads parquet only (no live scrape).</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="muted">
+    Historical bundles were bootstrapped once (~1997–present in ~5-year downloads).
+    Routine updates are <strong>incremental</strong>: only newly fetched CSV files are parsed and merged.
+  </p>
+</section>
+
+<section id="layout">
+  <h2>2. Files and folders</h2>
+  <table>
+    <thead>
+      <tr><th>Path</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>data/raw/korea/제품별소비(YYYYMM-YYYYMM).csv</code></td>
+        <td>Wide-format exports (month row + share row per month). Source of truth on disk.</td>
+      </tr>
+      <tr>
+        <td><code>data/processed/korea/korea_knoc_consumption.parquet</code></td>
+        <td>Long-form database: one row per month × product. Used by the notebook.</td>
+      </tr>
+      <tr>
+        <td><code>reference/product_map.csv</code></td>
+        <td>Maps <code>product_native</code> → canonical labels (rows with Source = KNOC).</td>
+      </tr>
+      <tr>
+        <td><code>data/processed/jodi/jodi_secondary.parquet</code></td>
+        <td>JODI series for cross-check (updated via <code>scripts/update_jodi.py</code>).</td>
+      </tr>
+      <tr>
+        <td><code>config/sources.yaml</code></td>
+        <td>Metadata: Petronet URLs, menu ids, update command notes.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="units">
+  <h2>3. Units and products</h2>
+  <ul>
+    <li><strong>Native unit:</strong> <code>kbpm</code> — thousand barrels per calendar month (from Petronet table).</li>
+    <li><strong>Charts:</strong> converted to <code>kbd</code> (thousand barrels per day) using days-in-month.</li>
+    <li><strong>Products:</strong> 15 primary lines (gasoline, diesel, jet, naphtha, fuel-oil components, etc.). File “Total” is not summed with products.</li>
+    <li><strong>JODI compare:</strong> uses flow <code>TOTDEMO</code>, unit <code>KBD</code>, country <code>KR</code>.</li>
+  </ul>
+</section>
+
+<section id="update">
+  <h2>4. How to update data (cookbook)</h2>
+  <p>Run all commands from the <code>country_oil_scraper/</code> folder (project root):</p>
+  <pre><code>cd country_oil_scraper</code></pre>
+
+  <h3>What do you want to do?</h3>
+  <table>
+    <thead>
+      <tr><th>Goal</th><th>Command</th><th>What happens</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Monthly refresh</strong> (usual)</td>
+        <td><pre><code>python scripts/update_korea.py --force</code></pre></td>
+        <td>
+          Re-downloads the recent bundle (<code>제품별소비(202201-latest).csv</code>),
+          parses <em>only that file</em>, upserts into parquet.
+          Also repairs any truncated historical CSV if detected.
+        </td>
+      </tr>
+      <tr>
+        <td>Quick check (no network)</td>
+        <td><pre><code>python scripts/update_korea.py --no-download</code></pre></td>
+        <td>Skips download and parsing; parquet unchanged.</td>
+      </tr>
+      <tr>
+        <td>New month on Petronet, cache in the way</td>
+        <td><pre><code>python scripts/update_korea.py --force</code></pre></td>
+        <td><code>--force</code> ignores “file already exists” and re-fetches.</td>
+      </tr>
+      <tr>
+        <td>Re-read all local CSVs into parquet</td>
+        <td><pre><code>python scripts/update_korea.py --no-download --reparse-all</code></pre></td>
+        <td>Parses every <code>제품별소비(*).csv</code>; does not hit Petronet.</td>
+      </tr>
+      <tr>
+        <td>Full history re-download</td>
+        <td><pre><code>python scripts/update_korea.py --bootstrap</code></pre></td>
+        <td>Downloads 1997→present in ~5-year chunks; rebuilds parquet from all bundles.</td>
+      </tr>
+      <tr>
+        <td>Fix a broken / truncated CSV</td>
+        <td><pre><code>python scripts/update_korea.py --repair-gaps</code></pre></td>
+        <td>Finds bundles whose filename range doesn’t match months inside the file; re-downloads and incremental parse.</td>
+      </tr>
+      <tr>
+        <td>Manual CSV drop</td>
+        <td>Save file under <code>data/raw/korea/</code>, then<br><pre><code>python scripts/update_korea.py --no-download --reparse-all</code></pre></td>
+        <td>Or name it as a new bundle and use <code>--reparse-all</code> if it overlaps existing keys.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>After any update</strong>
+    Re-run (or restart kernel and run) <code>notebooks/13_korea_demand_dashboard.ipynb</code>
+    so charts load the new parquet.
+  </div>
+
+  <h3>Log messages to watch for</h3>
+  <ul>
+    <li><code>Incremental parse (1 file(s)): 제품별소비(...).csv</code> — only that bundle was parsed.</li>
+    <li><code>Upsert: N replaced, M appended</code> — rows updated in parquet.</li>
+    <li><code>No new downloads and no --reparse-all; parquet unchanged.</code> — nothing to do.</li>
+    <li><code>Missing months in stitched series</code> — run <code>--repair-gaps</code>.</li>
+  </ul>
+
+  <h3>Also update JODI (for §7 charts)</h3>
+  <pre><code>python scripts/update_jodi.py</code></pre>
+  <p class="muted">JODI often lags KNOC by one month; April KNOC may not have April JODI yet.</p>
+</section>
+
+<section id="notebook">
+  <h2>5. Demand dashboard notebook</h2>
+  <p><strong>File:</strong> <code>notebooks/13_korea_demand_dashboard.ipynb</code></p>
+  <table>
+    <thead>
+      <tr><th>Section</th><th>Content</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>§1 Setup</td><td>Load parquet, convert kbpm → kbd, build headline and canonical frames.</td></tr>
+      <tr><td>§2 Headline total</td><td>End-use total <strong>excluding naphtha</strong>.</td></tr>
+      <tr><td>§3 Native products</td><td>Gasoline, diesel, jet, LPG, fuel-oil splits (no naphtha).</td></tr>
+      <tr><td>§4 Canonical rollup</td><td>All mapped products including <strong>Naphtha</strong>.</td></tr>
+      <tr><td>§5 Recent trends</td><td>Last 24 months, headline products.</td></tr>
+      <tr><td>§6 Seasonality</td><td>Dropdown: native (incl. naphtha) or canonical (incl. Naphtha panel).</td></tr>
+      <tr><td>§7 KNOC vs JODI</td><td>Seven panels: gasoline, diesel, jet, kerosene, LPG, <strong>naphtha (NAPHTHA)</strong>, fuel oil.</td></tr>
+      <tr><td>§8 Jet vs Kayrros</td><td>Nowcaster comparison for jet fuel.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="naphtha">
+  <h2>6. Naphtha vs headline demand</h2>
+  <p>
+    Naphtha is ~40–50% of Petronet’s file total but is mostly <strong>petrochemical feedstock</strong>,
+    not transport demand. Headline charts (§2, §3, §5) exclude it so trends stay comparable to
+    Thailand/Australia-style end-use views.
+  </p>
+  <ul>
+    <li>Naphtha <strong>is in the parquet</strong> and in seasonality + JODI (like India PPAC).</li>
+    <li>JODI product code: <code>NAPHTHA</code> (not used for Thailand/Australia — they don’t report it the same way).</li>
+  </ul>
+</section>
+
+<section id="code-map">
+  <h2>7. Code map (for developers)</h2>
+  <table>
+    <thead>
+      <tr><th>File</th><th>Key symbols</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>reference/petronet_knoc.py</code></td>
+        <td>Petronet POST/HTML fetch, <code>html_table_to_wide_csv</code>, date ranges, <code>audit_raw_csv</code></td>
+      </tr>
+      <tr>
+        <td><code>reference/korea.py</code></td>
+        <td><code>parse_korea_csv_files</code>, <code>JODI_COMPARE_SERIES</code>, <code>seasonality_chart_inputs</code>, <code>knoc_series_for_jodi</code></td>
+      </tr>
+      <tr>
+        <td><code>scrapers/korea_knoc.py</code></td>
+        <td><code>KoreaKnocScraper.download_refresh</code>, <code>DownloadResult.fetched</code></td>
+      </tr>
+      <tr>
+        <td><code>processors/korea_knoc_consumption.py</code></td>
+        <td><code>build_from_files</code> (incremental), <code>build_from_raw</code> (full), <code>upsert</code></td>
+      </tr>
+      <tr>
+        <td><code>scripts/update_korea.py</code></td>
+        <td>CLI entrypoint</td>
+      </tr>
+      <tr>
+        <td><code>tests/test_petronet_knoc.py</code></td>
+        <td>Offline tests; <code>pytest -m "not integration"</code></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="troubleshooting">
+  <h2>8. Troubleshooting</h2>
+  <table>
+    <thead>
+      <tr><th>Symptom</th><th>Likely cause</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Gap in charts (e.g. 2016–2018)</td>
+        <td>Truncated manual CSV</td>
+        <td><code>python scripts/update_korea.py --repair-gaps</code></td>
+      </tr>
+      <tr>
+        <td>Notebook shows old data</td>
+        <td>Kernel not refreshed</td>
+        <td>Restart kernel; re-run from §1</td>
+      </tr>
+      <tr>
+        <td>No new month after update</td>
+        <td>Cached CSV without <code>--force</code></td>
+        <td><code>python scripts/update_korea.py --force</code></td>
+      </tr>
+      <tr>
+        <td>KNOC April but no JODI April</td>
+        <td>JODI publication lag</td>
+        <td>Update JODI later; compare through last common month</td>
+      </tr>
+      <tr>
+        <td>Duplicate months after overlap files</td>
+        <td>Two bundles same period (e.g. 202301 + 202201)</td>
+        <td>Delete redundant bundle or <code>--reparse-all</code></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="future">
+  <h2>9. Future automation (email / multi-country)</h2>
+  <p>Not built yet, but the intended pattern is:</p>
+  <ol>
+    <li>Scheduled job runs <code>update_korea.py --force</code> (and other countries’ scripts).</li>
+    <li>Compare parquet <code>max(date)</code> before vs after; collect gap warnings.</li>
+    <li>Send one email summary: country, success/fail, new months, rows changed.</li>
+  </ol>
+  <p class="muted">
+    Korea incremental design already avoids re-parsing full history each run — suitable for a nightly or monthly cron task.
+  </p>
+</section>
+
+</div>
+
+<footer>
+  Korea KNOC guide · country_oil_scraper · generated for internal use
+</footer>
+
+</body>
+</html>

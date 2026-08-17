@@ -1,0 +1,399 @@
+sheets (20): ['CZESC I', 'tab 1.1__1. 2 ', 'wykres 1.1__1..2', 'tab 1.3', 'tab 1.4__1.5', 'tab 1.6__1.7__1.8', 'wykres 1.3__1.4', 'tab 1.9__1.10', 'wykres 1.5__1.6', 'tab 1.11', 'tab 1.11 cd.', 'tab 1.11 dok.', 'tab 1.12', 'CZESC II', 'tab 2.1__2.2  narast', 'wykres 2.1__2.2 narast', 'tab 2.3 narast', 'tab 2.4__2.5 narast', 'tab 2.6__2.7__2.8 narast', 'wykres 2.3__2.4 narast']
+
+
+=== CZESC I (4, 1) ===
+
+                                     0
+0                                  NaN
+1                                  NaN
+2                                  NaN
+3  1. Dane miesięczne\n1. Monthly data
+
+
+
+=== tab 1.1__1. 2  (25, 6) ===
+
+                                                                                               0                   1          2          3                                   4           5
+0                                                                                            NaN                 NaN        NaN        NaN                                 NaN         NaN
+1               Tablica 1.1. Produkcja paliw ciekłych \nTable 1.1.    Production of liquid fuels                 NaN        NaN        NaN                                 NaN         NaN
+2                                                                                            NaN                 NaN        NaN        NaN                                 NaN         NaN
+3                                                                                            NaN                 NaN        NaN        NaN                                 NaN         NaN
+4                                                               Wyszczególnienie \nSpecification            III 2025    II 2026   III 2026  Indeksy dynamiki\nDynamics indexes         NaN
+5                                                                                            NaN                 NaN        NaN        NaN                            III 2026    III 2026
+6                                                                                            NaN                 NaN        NaN        NaN                            III 2025     II 2026
+7                                                                                            NaN  tys. ton\nktonnes         NaN        NaN                                   %         NaN
+8    Benzyny silnikowe \n (wraz z benzyną lotniczą)\n Motor gasoline\n (incl. aviation gasoline)            365.4975   364.5893    400.363                           109.53919  109.812054
+9                                                                   Oleje napędowe\n Diesel oils           1176.3174  1169.2035  1314.6197                          111.757226  112.437202
+10                                                              Lekki olej opałowy\n Heating oil             45.9686    91.1515    52.9608                          115.210818   58.101951
+11                                                                Ciężki olej opałowy\n Fuel oil             98.3944   118.8091   132.0525                          134.207333  111.146789
+12                                                                          Gaz ciekły LPG\n LPG             45.2578    55.4877    49.6064                          109.608509   89.400714
+13                                                                                           NaN                 NaN        NaN        NaN                                 NaN         NaN
+14                     Tablica 1.2. Import paliw ciekłych \nTable 1.2.    Import of liquid fuels                 NaN        NaN        NaN                                 NaN         NaN
+
+
+
+=== wykres 1.1__1..2 (15, 1) ===
+
+                                                                                  0
+0   Wykres 1.1. Produkcja paliw ciekłych\nChart 1.1.     Production of liquid fuels
+1                                                                               NaN
+2                                                                               NaN
+3                                                                               NaN
+4                                                                               NaN
+5                                                                               NaN
+6                                                                               NaN
+7                                                                               NaN
+8                                                                               NaN
+9                                                                               NaN
+10                                                                              NaN
+11                                                                              NaN
+12                                                                              NaN
+13                                                                              NaN
+14          Wykres 1.2. Import paliw ciekłych\nChart 1.2.    Import of liquid fuels
+
+
+
+=== tab 1.3 (49, 7) ===
+
+                                                                                                                                                                                                                      0                                  1                            2                                3                              4                    5                  6
+0                                                                                                                                                                                                                   NaN                                NaN                          NaN                              NaN                            NaN                  NaN                NaN
+1   Tablica 1.3. Import i nabycie wewnątrzwspólnotowe paliw ciekłych w podziale na kraje \n                    pochodzenia\nTable 1.3.    Imports and intra-Community acquisitions of liquid fuels by country of origin                                NaN                          NaN                              NaN                            NaN                  NaN                NaN
+2                                                                                                                                                                                                                   NaN                                NaN                          NaN                              NaN                            NaN                  NaN                NaN
+3                                                                                                                                                                                                                   NaN                                NaN                          NaN          marzec 2026\nMarch 2026                            NaN                  NaN                NaN
+4                                                                                                                                                                                                                   NaN                                NaN                          NaN                              NaN                            NaN                  NaN                NaN
+5                                                                                                                                                                                                      Kraj pochodzenia  Benzyny silnikowe\nMotor gasoline  Oleje napędowe\nDiesel oils  Lekki olej opałowy\nHeating oil  Ciężki olej opałowy\nFuel oil  Gaz ciekły LPG\nLPG  Country of origin
+6                                                                                                                                                                                                                   NaN                                NaN                          NaN                              NaN                            NaN                  NaN                NaN
+7                                                                                                                                                                                                                   NaN                 tys. ton \nktonnes                          NaN                              NaN                            NaN                  NaN                NaN
+8                                                                                                                                                                                                              Algieria                                  -                            -                                -                              -                   #             Algeria
+9                                                                                                                                                                                                      Arabia Saudyjska                                -                             #                               -                              -                    -         Saudi Arabia
+10                                                                                                                                                                                                              Austria                                 #                            #                               -                              -                     #             Austria
+11                                                                                                                                                                                                          Azerbejdżan                                -                            -                                -                              -                    -           Azerbaijan
+12                                                                                                                                                                                                               Belgia                                -                            -                                -                              -                     #             Belgium
+13                                                                                                                                                                                                             Białoruś                                -                            -                                -                              -                    -              Belarus
+14                                                                                                                                                                                                             Bułgaria                                -                            -                                -                              -                    -             Bulgaria
+
+
+
+=== tab 1.4__1.5 (31, 6) ===
+
+                                                                                                                             0                  1         2         3                                   4           5
+0                                                                                                                          NaN                NaN       NaN       NaN                                 NaN         NaN
+1   Tablica 1.4. Sprzedaż i zużycie krajowe benzyn silnikowych\nTable 1.4.    Sales and domestic consumption of motor gasoline                NaN       NaN       NaN                                 NaN         NaN
+2                                                                                                                          NaN                NaN       NaN       NaN                                 NaN         NaN
+3                                                                                                                          NaN                NaN       NaN       NaN                                 NaN         NaN
+4                                                                                             Wyszczególnienie \nSpecification           III 2025   II 2026  III 2026  Indeksy dynamiki\nDynamics indexes         NaN
+5                                                                                                                          NaN                NaN       NaN       NaN                            III 2026    III 2026
+6                                                                                                                          NaN                NaN       NaN       NaN                            III 2025     II 2026
+7                                                                                                                          NaN  tys. ton\nktonnes       NaN       NaN                                   %         NaN
+8                                                                                                 Producenci 1)\n Producers 1)           413.3073  410.3086  457.7098                          110.743217  111.552573
+9                                             Firmy handlowe o rocznej \n sprzedaży:\n Trading companies with \n annual sales:                NaN       NaN       NaN                                 NaN         NaN
+10                                                                                                                         NaN                NaN       NaN       NaN                                 NaN         NaN
+11                                                                                                                 > 100 000 t           245.4099  238.5365  276.7665                          112.777235  116.026897
+12                                                                                                          10 000 - 100 000 t             78.271   63.5996   72.2664                           92.328449   113.62713
+13                                                                          Pozostałe firmy handlowe\n Other trading companies            30.2777   20.9302   22.8684                           75.528855  109.260303
+14                                                                                      Zużycie krajowe\n Domestic consumption           456.7936  423.6498  499.7971                          109.414208  117.974114
+
+
+
+=== tab 1.6__1.7__1.8 (44, 6) ===
+
+                                                                                                                                0                  1        2         3                                   4          5
+0                                                                                                                             NaN                NaN      NaN       NaN                                 NaN        NaN
+1   Tablica 1.6. Sprzedaż i zużycie krajowe lekkiego oleju opałowego\nTable 1.6.    Sales and domestic consumption of heating oil                NaN      NaN       NaN                                 NaN        NaN
+2                                                                                                                             NaN                NaN      NaN       NaN                                 NaN        NaN
+3                                                                                                                             NaN                NaN      NaN       NaN                                 NaN        NaN
+4                                                                                                Wyszczególnienie \nSpecification           III 2025  II 2026  III 2026  Indeksy dynamiki\nDynamics indexes        NaN
+5                                                                                                                             NaN                NaN      NaN       NaN                            III 2026   III 2026
+6                                                                                                                             NaN                NaN      NaN       NaN                            III 2025    II 2026
+7                                                                                                                             NaN  tys. ton\nktonnes      NaN       NaN                                   %        NaN
+8                                                                                                          Producenci\n Producers            41.2513  81.7959   57.4437                          139.253066  70.228092
+9                                                    Firmy handlowe o rocznej  sprzedaży:\n Trading companies with  annual sales:                NaN      NaN       NaN                                 NaN        NaN
+10                                                                                                                            NaN                NaN      NaN       NaN                                 NaN        NaN
+11                                                                                                                     > 20 000 t            41.6744  39.5979   23.2887                           55.882508  58.812967
+12                                                                                                              10 000 - 20 000 t              1.691    3.613      1.94                          114.725015   53.69499
+13                                                                                                               5 000 - 10 000 t             2.1077   4.3283    2.2298                          105.793045  51.516762
+14                                                                             Pozostałe firmy handlowe\n Other trading companies            11.1619  15.0624    7.3428                           65.784499  48.749203
+
+
+
+=== wykres 1.3__1.4 (24, 1) ===
+
+                                                                                                  0
+0                                                                                               NaN
+1                                                                                               NaN
+2   Wykres 1.3. Zużycie krajowe paliw ciekłych\nChart 1.3.     Domestic consumption of liquid fuels
+3                                                                                               NaN
+4                                                                                               NaN
+5                                                                                               NaN
+6                                                                                               NaN
+7                                                                                               NaN
+8                                                                                               NaN
+9                                                                                               NaN
+10                                                                                              NaN
+11                                                                                              NaN
+12                                                                                              NaN
+13                                                                                              NaN
+14                                                                                              NaN
+
+
+
+=== tab 1.9__1.10 (28, 6) ===
+
+                                                                                                               0                  1          2          3                                   4           5
+0                                                                                                            NaN                NaN        NaN        NaN                                 NaN         NaN
+1   Tablica 1.9. Zapasy obowiązkowe ropy naftowej i paliw\nTable 1.9.    Mandatory stocks of crude oil and fuels                NaN        NaN        NaN                                 NaN         NaN
+2                                                                                                            NaN                NaN        NaN        NaN                                 NaN         NaN
+3                                                                                     ogółem kraj\ntotal country                NaN        NaN        NaN                                 NaN         NaN
+4                                                                               Wyszczególnienie \nSpecification           III 2025    II 2026   III 2026  Indeksy dynamiki\nDynamics indexes         NaN
+5                                                                                                            NaN                NaN        NaN        NaN                            III 2026    III 2026
+6                                                                                                            NaN                NaN        NaN        NaN                            III 2025     II 2026
+7                                                                                                            NaN  tys. ton\nktonnes        NaN        NaN                                   %         NaN
+8                                                                                       Ropa naftowa\n Crude oil           2894.464  2617.3963  2610.8953                           90.203067   99.751623
+9                                                                             Benzyny silnikowe\n Motor gasoline           505.5447   493.4177   492.1821                           97.356792   99.749583
+10                                                                                  Oleje napędowe\n Diesel oils          1605.2202  1471.4673  1469.5404                            91.54759   99.869049
+11                                                                              Lekki olej opałowy\n Heating oil            38.7643    29.1603    36.7671                           94.847837  126.086151
+12                                                                                Ciężki olej opałowy\n Fuel oil            13.4229     10.935     10.935                           81.465257         100
+13                                                                                          Gaz ciekły LPG\n LPG             7.4838    11.3522    11.3739                          151.980277  100.191152
+14                                                                                                           NaN                NaN        NaN        NaN                                 NaN         NaN
+
+
+
+=== wykres 1.5__1.6 (18, 1) ===
+
+                                                                                                                0
+0                                                                                                             NaN
+1   Wykres 1.5. Zapasy obowiązkowe ropy naftowej i paliw\nChart 1.5.     Mandatory stocks of crude oil and fuels 
+2                                                                                                             NaN
+3                                                                                                             NaN
+4                                                                                                             NaN
+5                                                                                                             NaN
+6                                                                                                             NaN
+7                                                                                                             NaN
+8                                                                                                             NaN
+9                                                                                                             NaN
+10                                                                                                            NaN
+11                                                                                                            NaN
+12                                                                                                            NaN
+13                                                                                                            NaN
+14                                                                                                            NaN
+
+
+
+=== tab 1.11 (27, 7) ===
+
+                                                                                                                                                                                                                                              0                                     1                                                                                      2                3                                                                 4                      5                              6
+0                                                                                                                                                                                                                                           NaN                                   NaN                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+1   Tablica 1.11. Informacje o cenach produktów naftowych - ceny obowiązujące \n                      w każdy poniedziałek\nTable 1.11.    Information on prices of petroleum products - prices applicable every \n                      Monday                                   NaN                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+2                                                                                                                                                                                                                                           NaN                                   NaN                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+3                                                                                                                                                                                                                                           NaN                                   NaN                                                                                    NaN              NaN                                                               NaN                    NaN                            PLN
+4                                                                                                                                                                                                                                           NaN                                   NaN                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+5                                                                                                                                                                                                                                    Data\nDate          Nazwa produktu\nProduct name                                                                                    NaN  Jednostka\nUnit                                    Cena rzeczywista\nActual price                    NaN                            NaN
+6                                                                                                                                                                                                                                           NaN                                   NaN                                                                                    NaN              NaN  Łącznie               z podatkami \nIncluding taxes               Podatki1)  \nTaxes1)   Bez podatków\nExcluding taxes
+7                                                                                                                                                                                                                           2026-03-02 00:00:00         Paliwa silnikowe\nMotor fuels                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+8                                                                                                                                                                                                                                           NaN                                     1                                            Benzyna Eurosuper 95\nEurosuper 95 gasoline           1000 l                                                       5834.742426            2910.339397                    2924.403029
+9                                                                                                                                                                                                                                           NaN                                     2                                                              Olej napędowy\nDiesel oil           1000 l                                                       6053.859641            2825.542535                    3228.317107
+10                                                                                                                                                                                                                                          NaN                                     3                                                                    Gaz ciekły LPG\nLPG           1000 l                                                       2810.111834            1020.586033                    1789.525801
+11                                                                                                                                                                                                                                          NaN         Paliwa domowe\nDomestic fuels                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+12                                                                                                                                                                                                                                          NaN                                     4                                                        Lekki olej opałowy\nHeating oil           1000 l                                                        4368.61634            1048.895738                    3319.720601
+13                                                                                                                                                                                                                                          NaN  Paliwa przemysłowe\nIndustrial fuels                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+14                                                                                                                                                                                                                                          NaN                                     5  Ciężki olej opałowy o zawartości siarki ≤ 1%\nFuel oil with a sulfur content of ≤ 1%                 t                                                       3027.228525             635.067123                    2392.161402
+
+
+
+=== tab 1.11 cd. (27, 7) ===
+
+                                                                                                                                                                                                                                                            0                                     1                                                                                      2                3                                                                 4                      5                              6
+0                                                                                                                                                                                                                                                         NaN                                   NaN                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+1   Tablica 1.11. Informacje o cenach produktów naftowych - ceny obowiązujące \n                      w każdy poniedziałek (cd.)\nTable 1.11.    Information on prices of petroleum products - prices applicable every \n                      Monday (cont.)                                   NaN                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+2                                                                                                                                                                                                                                                         NaN                                   NaN                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+3                                                                                                                                                                                                                                                         NaN                                   NaN                                                                                    NaN              NaN                                                               NaN                    NaN                            PLN
+4                                                                                                                                                                                                                                                         NaN                                   NaN                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+5                                                                                                                                                                                                                                                  Data\nDate          Nazwa produktu\nProduct name                                                                                    NaN  Jednostka\nUnit                                    Cena rzeczywista\nActual price                    NaN                            NaN
+6                                                                                                                                                                                                                                                         NaN                                   NaN                                                                                    NaN              NaN  Łącznie               z podatkami \nIncluding taxes               Podatki1)  \nTaxes1)   Bez podatków\nExcluding taxes
+7                                                                                                                                                                                                                                         2026-03-16 00:00:00         Paliwa silnikowe\nMotor fuels                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+8                                                                                                                                                                                                                                                         NaN                                     1                                            Benzyna Eurosuper 95\nEurosuper 95 gasoline           1000 l                                                       6736.285731            3078.920665                    3657.365066
+9                                                                                                                                                                                                                                                         NaN                                     2                                                              Olej napędowy\nDiesel oil           1000 l                                                       7606.721515             3115.91508                    4490.806435
+10                                                                                                                                                                                                                                                        NaN                                     3                                                                    Gaz ciekły LPG\nLPG           1000 l                                                       3274.436234            1107.410921                    2167.025313
+11                                                                                                                                                                                                                                                        NaN         Paliwa domowe\nDomestic fuels                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+12                                                                                                                                                                                                                                                        NaN                                     4                                                        Lekki olej opałowy\nHeating oil           1000 l                                                       6269.873564            1404.415382                    4865.458182
+13                                                                                                                                                                                                                                                        NaN  Paliwa przemysłowe\nIndustrial fuels                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+14                                                                                                                                                                                                                                                        NaN                                     5  Ciężki olej opałowy o zawartości siarki ≤ 1%\nFuel oil with a sulfur content of ≤ 1%                 t                                                       3892.301198             796.828679                    3095.472519
+
+
+
+=== tab 1.11 dok. (18, 7) ===
+
+                                                                                                                                                                                                                                                             0                                     1                                                                                      2                3                                                                 4                      5                              6
+0                                                                                                                                                                                                                                                          NaN                                   NaN                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+1   Tablica 1.11. Informacje o cenach produktów naftowych - ceny obowiązujące \n                      w każdy poniedziałek (dok.)\nTable 1.11.    Information on prices of petroleum products - prices applicable every \n                      Monday (comp.)                                   NaN                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+2                                                                                                                                                                                                                                                          NaN                                   NaN                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+3                                                                                                                                                                                                                                                          NaN                                   NaN                                                                                    NaN              NaN                                                               NaN                    NaN                            PLN
+4                                                                                                                                                                                                                                                          NaN                                   NaN                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+5                                                                                                                                                                                                                                                   Data\nDate          Nazwa produktu\nProduct name                                                                                    NaN  Jednostka\nUnit                                    Cena rzeczywista\nActual price                    NaN                            NaN
+6                                                                                                                                                                                                                                                          NaN                                   NaN                                                                                    NaN              NaN  Łącznie               z podatkami \nIncluding taxes               Podatki1)  \nTaxes1)   Bez podatków\nExcluding taxes
+7                                                                                                                                                                                                                                          2026-03-30 00:00:00         Paliwa silnikowe\nMotor fuels                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+8                                                                                                                                                                                                                                                          NaN                                     1                                            Benzyna Eurosuper 95\nEurosuper 95 gasoline           1000 l                                                       7206.721608            2876.888349                    4329.833258
+9                                                                                                                                                                                                                                                          NaN                                     2                                                              Olej napędowy\nDiesel oil           1000 l                                                       8651.197927            3031.223677                    5619.974249
+10                                                                                                                                                                                                                                                         NaN                                     3                                                                    Gaz ciekły LPG\nLPG           1000 l                                                        3704.23933            1187.780605                    2516.458725
+11                                                                                                                                                                                                                                                         NaN         Paliwa domowe\nDomestic fuels                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+12                                                                                                                                                                                                                                                         NaN                                     4                                                        Lekki olej opałowy\nHeating oil           1000 l                                                       6850.508034            1512.989307                    5337.518727
+13                                                                                                                                                                                                                                                         NaN  Paliwa przemysłowe\nIndustrial fuels                                                                                    NaN              NaN                                                               NaN                    NaN                            NaN
+14                                                                                                                                                                                                                                                         NaN                                     5  Ciężki olej opałowy o zawartości siarki ≤ 1%\nFuel oil with a sulfur content of ≤ 1%                 t                                                       4349.701797             882.358873                    3467.342924
+
+
+
+=== tab 1.12 (24, 6) ===
+
+                                                                                                                                               0   1                        2                                            3                          4                     5
+0                                                                                                                                            NaN NaN                      NaN                                          NaN                        NaN                   NaN
+1   Tablica 1.12. Średnie ceny paliw na stacjach paliw w układzie wojewódzkim\nTable 1.12.    Average fuel prices at gas stations by voivodeship NaN                      NaN                                          NaN                        NaN                   NaN
+2                                                                                                                                            NaN NaN                      NaN                                          NaN                        NaN                   NaN
+3                                                                                                           Ceny w miesiącu: \nPrices per month: NaN  marzec 2026\nMarch 2026                                          NaN                        NaN                   NaN
+4                                                                                                                                            NaN NaN                      NaN                                          NaN                        NaN                   NaN
+5                                                                                                                       Województwo\nVoivodeship NaN                      NaN  Benzyna Eurosuper 95\nEurosuper 95 gasoline  Olej napędowy\nDiesel oil  Gaz ciekły LPG\nLPG 
+6                                                                                                                                            NaN NaN                      NaN                                        PLN/l                        NaN                   NaN
+7                                                                                                                                   Dolnośląskie NaN                      NaN                                         6.53                       7.39                  3.22
+8                                                                                                                             Kujawsko-pomorskie NaN                      NaN                                         6.62                       7.37                  3.19
+9                                                                                                                                      Lubelskie NaN                      NaN                                         6.66                       7.35                  3.19
+10                                                                                                                                      Lubuskie NaN                      NaN                                         6.59                       7.42                  3.24
+11                                                                                                                                       Łódzkie NaN                      NaN                                         6.46                       7.33                  3.17
+12                                                                                                                                   Małopolskie NaN                      NaN                                         6.49                       7.33                  3.19
+13                                                                                                                                   Mazowieckie NaN                      NaN                                         6.65                       7.39                   3.2
+14                                                                                                                                      Opolskie NaN                      NaN                                         6.56                       7.31                  3.15
+
+
+
+=== CZESC II (4, 1) ===
+
+                                         0
+0                                      NaN
+1                                      NaN
+2                                      NaN
+3  2. Dane narastające\n2. Cumulative data
+
+
+
+=== tab 2.1__2.2  narast (25, 7) ===
+
+                                                                                               0   1                            2                           3                          4                                   5             6
+0                                                                                            NaN NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+1               Tablica 2.1. Produkcja paliw ciekłych \nTable 2.1.    Production of liquid fuels NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+2                                                                                            NaN NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+3                                                                                            NaN NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+4                                                               Wyszczególnienie \nSpecification NaN  I - III                2025  I - II                2026  I - III              2026  Indeksy dynamiki\nDynamics indexes           NaN
+5                                                                                            NaN NaN                          NaN                         NaN                        NaN                        I - III 2026  I - III 2026
+6                                                                                            NaN NaN                          NaN                         NaN                        NaN                        I - III 2025   I - II 2026
+7                                                                                            NaN NaN           tys. ton\nktonnes                          NaN                        NaN                                   %           NaN
+8    Benzyny silnikowe \n (wraz z benzyną lotniczą)\n Motor gasoline\n (incl. aviation gasoline) NaN                    1028.9191                    775.4554                  1175.8184                          114.277051    151.629404
+9                                                                   Oleje napędowe\n Diesel oils NaN                    3155.1403                   2331.6289                  3646.2486                           115.56534     156.38203
+10                                                              Lekki olej opałowy\n Heating oil NaN                      198.001                    228.3722                    281.333                          142.086656    123.190563
+11                                                                Ciężki olej opałowy\n Fuel oil NaN                     433.0131                    219.1943                   351.2468                           81.116899    160.244495
+12                                                                          Gaz ciekły LPG\n LPG NaN                     116.6899                    109.2531                   158.8595                          136.138175    145.405027
+13                                                                                           NaN NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+14                     Tablica 2.2. Import paliw ciekłych \nTable 2.2.    Import of liquid fuels NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+
+
+
+=== wykres 2.1__2.2 narast (15, 1) ===
+
+                                                                                  0
+0   Wykres 2.1. Produkcja paliw ciekłych\nChart 2.1.     Production of liquid fuels
+1                                                                               NaN
+2                                                                               NaN
+3                                                                               NaN
+4                                                                               NaN
+5                                                                               NaN
+6                                                                               NaN
+7                                                                               NaN
+8                                                                               NaN
+9                                                                               NaN
+10                                                                              NaN
+11                                                                              NaN
+12                                                                              NaN
+13                                                                              NaN
+14          Wykres 2.2. Import paliw ciekłych\nChart 2.2.    Import of liquid fuels
+
+
+
+=== tab 2.3 narast (49, 7) ===
+
+                                                                                                                                                                                                                      0                                  1                            2                                            3                              4                    5                  6
+0                                                                                                                                                                                                                   NaN                                NaN                          NaN                                          NaN                            NaN                  NaN                NaN
+1   Tablica 2.3. Import i nabycie wewnątrzwspólnotowe paliw ciekłych w podziale na kraje \n                    pochodzenia\nTable 2.3.    Imports and intra-Community acquisitions of liquid fuels by country of origin                                NaN                          NaN                                          NaN                            NaN                  NaN                NaN
+2                                                                                                                                                                                                                   NaN                                NaN                          NaN                                          NaN                            NaN                  NaN                NaN
+3                                                                                                                                                                                                                   NaN                                NaN                          NaN  styczeń - marzec 2026\nJanuary - March 2026                            NaN                  NaN                NaN
+4                                                                                                                                                                                                                   NaN                                NaN                          NaN                                          NaN                            NaN                  NaN                NaN
+5                                                                                                                                                                                                      Kraj pochodzenia  Benzyny silnikowe\nMotor gasoline  Oleje napędowe\nDiesel oils              Lekki olej opałowy\nHeating oil  Ciężki olej opałowy\nFuel oil  Gaz ciekły LPG\nLPG  Country of origin
+6                                                                                                                                                                                                                   NaN                                NaN                          NaN                                          NaN                            NaN                  NaN                NaN
+7                                                                                                                                                                                                                   NaN                 tys. ton \nktonnes                          NaN                                          NaN                            NaN                  NaN                NaN
+8                                                                                                                                                                                                              Algieria                                  -                            -                                            -                              -                   #             Algeria
+9                                                                                                                                                                                                      Arabia Saudyjska                                -                        49.9568                                          -                              -                    -         Saudi Arabia
+10                                                                                                                                                                                                              Austria                                 #                            #                                           -                              -                     #             Austria
+11                                                                                                                                                                                                          Azerbejdżan                                -                            -                                            -                              -                    -           Azerbaijan
+12                                                                                                                                                                                                               Belgia                                -                            -                                            -                              -                     #             Belgium
+13                                                                                                                                                                                                             Białoruś                                -                            -                                            -                              -                     #             Belarus
+14                                                                                                                                                                                                             Bułgaria                                -                            -                                            -                              -                    -             Bulgaria
+
+
+
+=== tab 2.4__2.5 narast (31, 7) ===
+
+                                                                                                                             0   1                            2                           3                          4                                   5             6
+0                                                                                                                          NaN NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+1   Tablica 2.4. Sprzedaż i zużycie krajowe benzyn silnikowych\nTable 2.4.    Sales and domestic consumption of motor gasoline NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+2                                                                                                                          NaN NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+3                                                                                                                          NaN NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+4                                                                                             Wyszczególnienie \nSpecification NaN  I - III                2025  I - II                2026  I - III              2026  Indeksy dynamiki\nDynamics indexes           NaN
+5                                                                                                                          NaN NaN                          NaN                         NaN                        NaN                        I - III 2026  I - III 2026
+6                                                                                                                          NaN NaN                          NaN                         NaN                        NaN                        I - III 2025   I - II 2026
+7                                                                                                                          NaN NaN           tys. ton\nktonnes                          NaN                        NaN                                   %           NaN
+8                                                                                                 Producenci 1)\n Producers 1) NaN                    1188.3504                    830.8302                    1288.54                          108.430981    155.090655
+9                                             Firmy handlowe o rocznej \n sprzedaży:\n Trading companies with \n annual sales: NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+10                                                                                                                         NaN NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+11                                                                                                                 > 100 000 t NaN                     690.3529                    492.8371                   769.6036                          111.479737    156.157805
+12                                                                                                          10 000 - 100 000 t NaN                     209.5211                    128.7809                   201.0473                           95.955634    156.115775
+13                                                                          Pozostałe firmy handlowe\n Other trading companies NaN                      77.1707                     43.0864                    65.9548                           85.466116     153.07568
+14                                                                                      Zużycie krajowe\n Domestic consumption NaN                    1314.8893                    929.2131                  1429.0102                          108.679126    153.787135
+
+
+
+=== tab 2.6__2.7__2.8 narast (44, 7) ===
+
+                                                                                                                                0   1                            2                           3                          4                                   5             6
+0                                                                                                                             NaN NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+1   Tablica 2.6. Sprzedaż i zużycie krajowe lekkiego oleju opałowego\nTable 2.6.    Sales and domestic consumption of heating oil NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+2                                                                                                                             NaN NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+3                                                                                                                             NaN NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+4                                                                                                Wyszczególnienie \nSpecification NaN  I - III                2025  I - II                2026  I - III              2026  Indeksy dynamiki\nDynamics indexes           NaN
+5                                                                                                                             NaN NaN                          NaN                         NaN                        NaN                        I - III 2026  I - III 2026
+6                                                                                                                             NaN NaN                          NaN                         NaN                        NaN                        I - III 2025   I - II 2026
+7                                                                                                                             NaN NaN           tys. ton\nktonnes                          NaN                        NaN                                   %           NaN
+8                                                                                                          Producenci\n Producers NaN                     155.9388                    183.7805                   241.2242                          154.691584    131.256689
+9                                                    Firmy handlowe o rocznej  sprzedaży:\n Trading companies with  annual sales: NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+10                                                                                                                            NaN NaN                          NaN                         NaN                        NaN                                 NaN           NaN
+11                                                                                                                     > 20 000 t NaN                     140.9637                     83.7334                   107.0221                           75.921744    127.812916
+12                                                                                                              10 000 - 20 000 t NaN                        6.398                       8.786                     10.726                          167.646139    122.080583
+13                                                                                                               5 000 - 10 000 t NaN                        7.736                      8.5557                    10.7855                          139.419597    126.062157
+14                                                                             Pozostałe firmy handlowe\n Other trading companies NaN                       33.318                     33.4967                    40.8395                          122.574884    121.920965
+
+
+
+=== wykres 2.3__2.4 narast (24, 1) ===
+
+                                                                                                  0
+0                                                                                               NaN
+1                                                                                               NaN
+2   Wykres 2.3. Zużycie krajowe paliw ciekłych\nChart 2.3.     Domestic consumption of liquid fuels
+3                                                                                               NaN
+4                                                                                               NaN
+5                                                                                               NaN
+6                                                                                               NaN
+7                                                                                               NaN
+8                                                                                               NaN
+9                                                                                               NaN
+10                                                                                              NaN
+11                                                                                              NaN
+12                                                                                              NaN
+13                                                                                              NaN
+14                                                                                              NaN
+

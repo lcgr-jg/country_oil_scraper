@@ -1,0 +1,273 @@
+# Country registry for the central warehouse and demand dashboard.
+# Enable a country here, run consolidate_warehouse.py — existing scrapers unchanged.
+#
+# Optional YAML keys:
+#   unit_native       — override when reference module has mixed / missing unit const
+#   unit_native_attr  — attribute name on reference module (e.g. MASE_UNIT_NATIVE)
+#   product_column    — parquet product column if not product_native (India: product)
+#   value_column      — parquet value column if not value (India: value_000mt)
+#   jet_product_native — native line for Kayrros jet panel in the dashboard
+#   reference_module  — omit for countries without a reference package (none yet)
+
+countries:
+  germany:
+    display_name: Germany
+    country_code: "DE"
+    enabled: true
+    official_source_label: BAFA
+    parquet:
+      rel_path: germany/germany_bafa_demand.parquet
+    reference_module: reference.germany
+    jodi_ref_area: "DE"
+    demand_metric_type: TOTDEMO
+    jet_product_native: "Flugturb.Kraftst.,schwer"
+
+  norway:
+    display_name: Norway
+    country_code: "NO"
+    enabled: true
+    official_source_label: SSB
+    parquet:
+      rel_path: norway/norway_ssb_sales.parquet
+    reference_module: reference.norway
+    jodi_ref_area: "NO"
+    demand_metric_type: TOTDEMO
+    jet_product_native: Jet kerosene
+    kayrros:
+      enabled: true
+      products:
+        - product_key: jet_fuel
+          product_canonical: Jet fuel
+          scope_type: country
+          scope: "NO"
+          country_match: code
+
+  poland:
+    display_name: Poland
+    country_code: "PL"
+    enabled: true
+    official_source_label: ARE
+    parquet:
+      rel_path: poland/poland_are_liquid_fuels.parquet
+    reference_module: reference.poland
+    jodi_ref_area: "PL"
+    demand_metric_type: TOTDEMO
+
+  ukraine:
+    display_name: Ukraine
+    country_code: "UA"
+    enabled: true
+    official_source_label: SSSU
+    parquet:
+      rel_path: ukraine/ukraine_sssu_fuel.parquet
+    reference_module: reference.ukraine
+    jodi_ref_area: "UA"
+    demand_metric_type: TOTDEMO
+
+  hungary:
+    display_name: Hungary
+    country_code: "HU"
+    enabled: true
+    official_source_label: MEKH
+    parquet:
+      rel_path: hungary/hungary_mekh_demand.parquet
+    reference_module: reference.hungary
+    jodi_ref_area: "HU"
+    demand_metric_type: TOTDEMO
+    jet_product_native: Kerosene type jet fuel
+    kayrros:
+      enabled: true
+      products:
+        - product_key: jet_fuel
+          product_canonical: Jet fuel
+          scope_type: country
+          scope: "HU"
+          country_match: code
+
+  korea:
+    display_name: Korea
+    country_code: "KR"
+    enabled: true
+    official_source_label: KNOC
+    parquet:
+      rel_path: korea/korea_knoc.parquet
+    reference_module: reference.korea
+    jodi_ref_area: "KR"
+    demand_metric_type: TOTDEMO
+    jet_product_native: jet_fuel
+    kayrros:
+      enabled: true
+      products:
+        - product_key: jet_fuel
+          product_canonical: Jet fuel
+          scope_type: country
+          scope: "Korea (the Republic of)"
+          country_match: name
+
+  portugal:
+    display_name: Portugal
+    country_code: "PT"
+    enabled: true
+    official_source_label: DGEG
+    parquet:
+      rel_path: portugal/portugal_dgeg_sales.parquet
+    reference_module: reference.portugal
+    jodi_ref_area: "PT"
+    demand_metric_type: TOTDEMO
+    jet_product_native: "Aviation | Jet fuel"
+    kayrros:
+      enabled: true
+      products:
+        - product_key: jet_fuel
+          product_canonical: Jet fuel
+          scope_type: country
+          scope: Portugal
+          country_match: name
+
+  uk:
+    display_name: United Kingdom
+    country_code: "GB"
+    enabled: true
+    official_source_label: DESNZ
+    parquet:
+      rel_path: uk/uk_energy_trends.parquet
+    reference_module: reference.uk
+    jodi_ref_area: "GB"
+    demand_metric_type: TOTDEMO
+    jet_product_native: Jet fuel
+    kayrros:
+      enabled: true
+      products:
+        - product_key: jet_fuel
+          product_canonical: Jet fuel
+          scope_type: country
+          scope: "GB"
+          country_match: code
+
+  japan:
+    display_name: Japan
+    country_code: "JP"
+    enabled: true
+    official_source_label: METI
+    parquet:
+      rel_path: japan/japan_meti_consumption.parquet
+    reference_module: reference.japan
+    jodi_ref_area: "JP"
+    demand_metric_type: TOTDEMO
+    jet_product_native: jet_fuel
+    kayrros:
+      enabled: true
+      products:
+        - product_key: jet_fuel
+          product_canonical: Jet fuel
+          scope_type: country
+          scope: Japan
+          country_match: name
+
+  spain:
+    display_name: Spain
+    country_code: "ES"
+    enabled: true
+    official_source_label: CORES
+    parquet:
+      rel_path: spain/spain_cores_consumption.parquet
+    reference_module: reference.spain
+    jodi_ref_area: "ES"
+    demand_metric_type: TOTDEMO
+    jet_product_native: "Kerosene | Jet"
+    kayrros:
+      enabled: true
+      products:
+        - product_key: jet_fuel
+          product_canonical: Jet fuel
+          scope_type: country
+          scope: Spain
+          country_match: name
+
+  taiwan:
+    display_name: Taiwan
+    country_code: "TW"
+    enabled: true
+    official_source_label: MOEA
+    parquet:
+      rel_path: taiwan/taiwan_moea_consumption.parquet
+    reference_module: reference.taiwan
+    jodi_ref_area: "TW"
+    demand_metric_type: TOTDEMO
+    jet_product_native: jet_fuel
+    kayrros:
+      enabled: true
+      products:
+        - product_key: jet_fuel
+          product_canonical: Jet fuel
+          scope_type: country
+          scope: "Taiwan (Province of China)"
+          country_match: name
+
+  italy:
+    display_name: Italy
+    country_code: "IT"
+    enabled: true
+    official_source_label: MASE
+    parquet:
+      rel_path: italy/italy_mase_consumption.parquet
+    reference_module: reference.italy
+    jodi_ref_area: "IT"
+    demand_metric_type: TOTDEMO
+    unit_native_attr: MASE_UNIT_NATIVE
+    jet_product_native: "CARBOTURBO | TOTALE (A)"
+
+  thailand:
+    display_name: Thailand
+    country_code: "TH"
+    enabled: true
+    official_source_label: EPPO
+    parquet:
+      rel_path: thailand/thailand_eppo_sales.parquet
+    reference_module: reference.eppo
+    jodi_ref_area: "TH"
+    demand_metric_type: TOTDEMO
+    jet_product_native: "J.P."
+    kayrros:
+      enabled: true
+      products:
+        - product_key: jet_fuel
+          product_canonical: Jet fuel
+          scope_type: country
+          scope: Thailand
+          country_match: name
+
+  australia:
+    display_name: Australia
+    country_code: "AU"
+    enabled: true
+    official_source_label: DCCEEW
+    parquet:
+      rel_path: australia/australia_petroleum_statistics.parquet
+    reference_module: reference.australia
+    jodi_ref_area: "AU"
+    demand_metric_type: TOTDEMO
+    unit_native: ML
+    jet_product_native: "Aviation turbine fuel total"
+    kayrros:
+      enabled: true
+      products:
+        - product_key: jet_fuel
+          product_canonical: Jet fuel
+          scope_type: country
+          scope: Australia
+          country_match: name
+
+  india:
+    display_name: India
+    country_code: "IN"
+    enabled: true
+    official_source_label: PPAC
+    parquet:
+      rel_path: india/india_pt_consumption.parquet
+    reference_module: reference.india
+    jodi_ref_area: "IN"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    product_column: product
+    value_column: value_000mt

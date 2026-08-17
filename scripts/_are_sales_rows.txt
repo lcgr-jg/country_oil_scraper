@@ -1,0 +1,4 @@
+1: ['Tablica 1.4. Sprzedaż i zużycie krajowe benzyn silnikowych\nTable 1.4.    Sales and domestic consumption of motor gasoline', nan, nan, nan, nan, nan]
+14: [' Zużycie krajowe\n Domestic consumption', 456.7936000000001, 423.6498, 499.7970999999999, 109.41420807997306, 117.97411446907324]
+17: ['Tablica 1.5. Sprzedaż i zużycie krajowe olejów napędowych\nTable 1.5.    Sales and domestic consumption of diesel oils', nan, nan, nan, nan, nan]
+30: [' Zużycie krajowe\n Domestic consumption', 1626.3502000000003, 1381.6759, 1765.1832, 108.53647633824497, 127.75667578771548]

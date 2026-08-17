@@ -1,0 +1,20 @@
+# Kayrros satellite demand configuration.
+# Phase 1: jet fuel by country (via sibling kayros/jet_fuel repo).
+# Future: gasoline / diesel for US and Europe aggregates.
+
+db:
+  # Relative to Coding/ repo root (parent of country_oil_scraper).
+  rel_path: kayros/jet_fuel/data/jet_fuel.duckdb
+  export_module: src.export
+  export_function: get_consumption
+
+products:
+  jet_fuel:
+    metric: avg_kbd
+    freq: monthly
+    drop_incomplete: true
+  # Planned — wire when kayros loaders for road fuels are available:
+  # gasoline:
+  #   metric: avg_kbd
+  # diesel:
+  #   metric: avg_kbd

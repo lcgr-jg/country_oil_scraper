@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hungary MEKH oil balance — User Guide</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1a2332;
+      --muted: #5a6b7d;
+      --accent: #477050;
+      --accent-soft: #e8f2eb;
+      --border: #d8e0ea;
+      --code-bg: #eef2f7;
+      --warn-bg: #fff8e6;
+      --warn-border: #f0c040;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+    header {
+      background: linear-gradient(135deg, #2d4a35 0%, #477050 55%, #ce2939 100%);
+      color: #fff;
+      padding: 2.5rem 2rem 2rem;
+    }
+    header h1 { margin: 0 0 0.5rem; font-size: 1.85rem; font-weight: 600; }
+    header p { margin: 0; opacity: 0.92; max-width: 52rem; }
+    .wrap {
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    nav.toc {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    nav.toc h2 { margin: 0 0 0.75rem; font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    nav.toc ol { margin: 0; padding-left: 1.25rem; }
+    nav.toc a { color: var(--accent); text-decoration: none; }
+    nav.toc a:hover { text-decoration: underline; }
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+    h2 { margin-top: 0; font-size: 1.35rem; border-bottom: 2px solid var(--accent-soft); padding-bottom: 0.4rem; }
+    h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    p { margin: 0.75rem 0; }
+    ul, ol { margin: 0.5rem 0; padding-left: 1.4rem; }
+    li { margin: 0.35rem 0; }
+    code, kbd {
+      font-family: Consolas, "Cascadia Mono", monospace;
+      font-size: 0.9em;
+      background: var(--code-bg);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+    }
+    pre {
+      background: #1e2936;
+      color: #e8eef5;
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+    pre code { background: none; padding: 0; color: inherit; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      margin: 1rem 0;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: var(--accent-soft); font-weight: 600; }
+    tr:nth-child(even) td { background: #fafbfd; }
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+    .flow span {
+      background: var(--accent-soft);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+    }
+    .flow .arrow { background: none; border: none; color: var(--muted); padding: 0; }
+    .callout {
+      background: var(--warn-bg);
+      border-left: 4px solid var(--warn-border);
+      padding: 0.85rem 1rem;
+      margin: 1rem 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .callout strong { display: block; margin-bottom: 0.25rem; }
+    .muted { color: var(--muted); font-size: 0.92rem; }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      padding: 2rem 1rem;
+    }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Hungary MEKH oil data — guide</h1>
+  <p>
+    How MEKH monthly oil balance and closing-stock statistics flow into this project,
+    how to refresh the database, and how the demand dashboard uses the results.
+  </p>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#overview">What the code does</a></li>
+    <li><a href="#source">Data source (MEKH TAB / OData)</a></li>
+    <li><a href="#flows">Demand vs stocks flows</a></li>
+    <li><a href="#products">Product mapping</a></li>
+    <li><a href="#layout">Files and folders</a></li>
+    <li><a href="#update">How to update data (cookbook)</a></li>
+    <li><a href="#notebook">Demand dashboard notebook</a></li>
+    <li><a href="#jodi">JODI and Kayrros comparisons</a></li>
+    <li><a href="#code-map">Code map</a></li>
+    <li><a href="#troubleshooting">Troubleshooting</a></li>
+  </ol>
+</nav>
+
+<section id="overview">
+  <h2>1. What the code does</h2>
+  <p>
+    The Hungary pipeline ingests monthly petroleum statistics from
+    <strong>MEKH</strong> (Hungarian Energy and Public Utility Regulatory Authority)
+    via the public portal
+    <a href="https://stattab.mekh.hu/" target="_blank" rel="noopener">MEKH TAB</a>
+    (<code>stattab.mekh.hu</code>).
+  </p>
+  <p>
+    The web UI is an Angular + DevExtreme app backed by a <strong>public OData v4 API</strong>
+    — not a Power BI export. The scraper calls OData directly; manual Excel downloads from
+    the portal are optional for validation only.
+  </p>
+
+  <div class="flow">
+    <span>OData API</span>
+    <span class="arrow">→</span>
+    <span>JSON cache</span>
+    <span class="arrow">→</span>
+    <span>Roll up products</span>
+    <span class="arrow">→</span>
+    <span>Parquet</span>
+    <span class="arrow">→</span>
+    <span>Dashboard</span>
+  </div>
+
+  <h3>Layers</h3>
+  <table>
+    <thead>
+      <tr><th>Layer</th><th>Role</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Scraper</strong><br><code>scrapers/hungary_mekh.py</code></td>
+        <td>Downloads OData snapshots for demand and stocks; parses JSON into tidy frames.</td>
+      </tr>
+      <tr>
+        <td><strong>Reference</strong><br><code>reference/hungary.py</code></td>
+        <td>OData fetch/pagination, bio/non-bio rollups, JODI compare specs, display labels.</td>
+      </tr>
+      <tr>
+        <td><strong>Processor</strong><br><code>processors/hungary_mekh_demand.py</code></td>
+        <td>Canonical columns via <code>product_map.csv</code>; saves combined demand + stocks parquet.</td>
+      </tr>
+      <tr>
+        <td><strong>Update script</strong><br><code>scripts/update_hungary.py</code></td>
+        <td>CLI for bootstrap and monthly refresh.</td>
+      </tr>
+      <tr>
+        <td><strong>Notebook</strong><br><code>notebooks/22_hungary_demand_dashboard.ipynb</code></td>
+        <td>Charts: demand, seasonality, stocks, MEKH vs JODI, Kayrros jet. Reads parquet only.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="source">
+  <h2>2. Data source (MEKH TAB / OData)</h2>
+  <table>
+    <thead>
+      <tr><th>Item</th><th>Detail</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Portal</td>
+        <td>
+          <a href="https://stattab.mekh.hu/" target="_blank" rel="noopener">stattab.mekh.hu</a>
+          — MEKH TAB statistics app
+        </td>
+      </tr>
+      <tr>
+        <td>Demand report (UI)</td>
+        <td>
+          <a href="https://stattab.mekh.hu/#/generated-report/HaviOlajMerleg" target="_blank" rel="noopener">
+            HaviOlajMerleg
+          </a> — monthly oil balance
+        </td>
+      </tr>
+      <tr>
+        <td>Stocks report (UI)</td>
+        <td>
+          <a href="https://stattab.mekh.hu/#/generated-report/HaviOlajKeszlet" target="_blank" rel="noopener">
+            HaviOlajKeszlet
+          </a> — monthly closing stocks
+        </td>
+      </tr>
+      <tr>
+        <td>OData base</td>
+        <td><code>https://stattab.mekh.hu/odata/v4/public/</code></td>
+      </tr>
+      <tr>
+        <td>Native unit</td>
+        <td><strong>kt</strong> (kilotonnes)</td>
+      </tr>
+      <tr>
+        <td>Frequency</td>
+        <td>Monthly</td>
+      </tr>
+      <tr>
+        <td>History (typical)</td>
+        <td>Demand from 2008; stocks from 2013 (varies by product)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>Why OData instead of Excel?</strong>
+    The portal can export Excel, but OData returns the full history in one automated pull.
+    Pagination uses <code>$skip</code> (5,000-row pages; no reliable <code>@odata.nextLink</code>).
+  </div>
+</section>
+
+<section id="flows">
+  <h2>3. Demand vs stocks flows</h2>
+  <p>
+    MEKH publishes IEA-style balance tables. We store only the rows that map cleanly to
+    JODI-style demand and closing stocks — not the full balance (imports, refinery output, etc.).
+  </p>
+  <table>
+    <thead>
+      <tr><th>Dataset</th><th>OData entity</th><th>Flow code</th><th>English label</th><th><code>metric_type</code></th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Demand</td>
+        <td><code>HaviOlajMerleg</code></td>
+        <td><code>GDINCTRO</code></td>
+        <td>Gross inland deliveries (Observed)</td>
+        <td><code>TOTDEMO</code></td>
+      </tr>
+      <tr>
+        <td>Closing stocks</td>
+        <td><code>HaviOlajKeszlet</code></td>
+        <td><code>CSNATTER</code></td>
+        <td>Closing stock — national territory</td>
+        <td><code>CLOSTLV</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>Do not sum all <code>CS*</code> stock locations</strong>
+    MEKH splits closing stocks by territory (national, pipeline, holders, abroad, …).
+    Summing detail locations double-counts. <code>CSNATTER</code> alone matches JODI
+    <code>CLOSTLV</code> for Hungary within rounding.
+  </div>
+
+  <h3>Bio / non-bio rollups</h3>
+  <p>
+    OData returns leaf codes such as <code>NONBIOGASO</code> + <code>BIOGASOL</code>.
+    The parser rolls these into Excel-style aggregate natives (e.g.
+    <code>Total motor gasoline</code>) before writing parquet.
+  </p>
+</section>
+
+<section id="products">
+  <h2>4. Product mapping</h2>
+  <p>
+    Stored <code>product_native</code> labels match the MEKH Excel export. Canonical mapping
+    lives in <code>reference/product_map.csv</code> (Source = <code>MEKH</code>).
+  </p>
+  <table>
+    <thead>
+      <tr><th>MEKH native</th><th>Canonical (<code>product_canonical</code>)</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Natural gas liquids</td><td>LPG</td><td>Kept separate from LPG native in parquet</td></tr>
+      <tr><td>LPG</td><td>LPG</td><td></td></tr>
+      <tr><td>Naphtha</td><td>Naphtha</td><td></td></tr>
+      <tr><td>Total motor gasoline</td><td>Gasoline</td><td>Includes biogasoline component</td></tr>
+      <tr><td>Kerosene type jet fuel</td><td>Jet Fuel</td><td></td></tr>
+      <tr><td>Total gas/diesel oil</td><td>Diesel</td><td>Headline distillate; includes biodiesel</td></tr>
+      <tr><td>Fuel oil</td><td>Fuel Oil</td><td></td></tr>
+      <tr><td>Refinery gas</td><td>Others</td><td>Often zero on GID row</td></tr>
+      <tr><td>Petroleum coke</td><td>Petcoke</td><td></td></tr>
+      <tr><td>Other products</td><td>Others</td><td></td></tr>
+    </tbody>
+  </table>
+  <p class="muted">
+    JODI <code>ONONSPEC</code> ≈ MEKH petcoke + other products for stocks comparison.
+  </p>
+</section>
+
+<section id="layout">
+  <h2>5. Files and folders</h2>
+  <table>
+    <thead>
+      <tr><th>Path</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>data/raw/hungary/demand/gid_observed_odata.json</code></td>
+        <td>Cached OData pull for <code>GDINCTRO</code> (~2k rows).</td>
+      </tr>
+      <tr>
+        <td><code>data/raw/hungary/stocks/closing_stock_odata.json</code></td>
+        <td>Cached OData pull for <code>CSNATTER</code> (~2.5k rows).</td>
+      </tr>
+      <tr>
+        <td><code>data/processed/hungary/hungary_mekh_demand.parquet</code></td>
+        <td>Combined DB: <code>TOTDEMO</code> + <code>CLOSTLV</code> rows.</td>
+      </tr>
+      <tr>
+        <td><code>reference/product_map.csv</code></td>
+        <td>MEKH product → canonical category.</td>
+      </tr>
+      <tr>
+        <td><code>reference/inventory_sources.csv</code></td>
+        <td>Registers Hungary for consolidated inventory dashboard.</td>
+      </tr>
+      <tr>
+        <td><code>config/sources.yaml</code></td>
+        <td>Agency metadata and OData URLs.</td>
+      </tr>
+      <tr>
+        <td><code>docs/hungary_mekh_guide.html</code></td>
+        <td>This guide.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="update">
+  <h2>6. How to update data (cookbook)</h2>
+  <p>Run all commands from the <code>country_oil_scraper/</code> folder:</p>
+  <pre><code>cd country_oil_scraper</code></pre>
+
+  <table>
+    <thead>
+      <tr><th>Goal</th><th>Command</th><th>What happens</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>First-time setup</strong></td>
+        <td><pre><code>python scripts/update_hungary.py --bootstrap</code></pre></td>
+        <td>Downloads demand + stocks OData; builds parquet from scratch.</td>
+      </tr>
+      <tr>
+        <td><strong>Monthly refresh</strong></td>
+        <td><pre><code>python scripts/update_hungary.py</code></pre></td>
+        <td>Uses cached JSON if present; upserts into parquet. Use <code>--force</code> to re-fetch OData.</td>
+      </tr>
+      <tr>
+        <td>Force re-download</td>
+        <td><pre><code>python scripts/update_hungary.py --force</code></pre></td>
+        <td>Refreshes both OData snapshots from MEKH.</td>
+      </tr>
+      <tr>
+        <td>Offline re-parse</td>
+        <td><pre><code>python scripts/update_hungary.py --bootstrap --no-download</code></pre></td>
+        <td>Rebuilds parquet from local JSON caches only.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>After any update</strong>
+    Restart the notebook kernel and re-run from §1 in
+    <code>notebooks/22_hungary_demand_dashboard.ipynb</code>.
+  </div>
+
+  <h3>Typical log output</h3>
+  <pre><code>Built 3,038 rows, 2008-01-01 -> 2026-03-01, metrics=['CLOSTLV', 'TOTDEMO'], products=9</code></pre>
+
+  <h3>Also update JODI (for comparison charts)</h3>
+  <pre><code>python scripts/update_jodi.py</code></pre>
+
+  <h3>Tests</h3>
+  <pre><code>python -m pytest tests/test_hungary_mekh.py -q</code></pre>
+  <p class="muted">Tests hit live OData for demand/stocks fetch (requires network).</p>
+</section>
+
+<section id="notebook">
+  <h2>7. Demand dashboard notebook</h2>
+  <p><strong>File:</strong> <code>notebooks/22_hungary_demand_dashboard.ipynb</code></p>
+  <p class="muted">Regenerate empty skeleton: <code>python scripts/create_hungary_dashboard_notebook.py</code></p>
+  <table>
+    <thead>
+      <tr><th>Section</th><th>Content</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>§1 Setup</td><td>Load parquet; kt → kbd (demand) and kb (stocks).</td></tr>
+      <tr><td>§2 Headline</td><td>Total GID Observed demand (incl. naphtha, petcoke).</td></tr>
+      <tr><td>§3–§4</td><td>Native and canonical demand time series.</td></tr>
+      <tr><td>§5 Recent trends</td><td>Last 24 months MoM / YoY by product.</td></tr>
+      <tr><td>§6 Seasonality</td><td>Native or canonical year-over-year panels.</td></tr>
+      <tr><td>§7 MEKH vs JODI (demand)</td><td>HU / TOTDEMO / KBD small multiples.</td></tr>
+      <tr><td>§8 Jet vs Kayrros</td><td><code>Kerosene type jet fuel</code> vs Kayrros <code>scope='HU'</code>.</td></tr>
+      <tr><td>§9 Product stocks</td><td>CSNATTER closing levels in kb.</td></tr>
+      <tr><td>§10 MEKH vs JODI (stocks)</td><td>HU / CLOSTLV / KBBL comparison.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="jodi">
+  <h2>8. JODI and Kayrros comparisons</h2>
+
+  <h3>JODI</h3>
+  <ul>
+    <li>Country code: <code>HU</code></li>
+    <li>Demand flow: <code>TOTDEMO</code> — compare panels in <code>reference/hungary.py</code> (<code>JODI_COMPARE_SERIES</code>)</li>
+    <li>Stocks flow: <code>CLOSTLV</code> — same panel definitions</li>
+    <li>LPG panel sums MEKH <code>Natural gas liquids</code> + <code>LPG</code> for JODI compare only</li>
+    <li>Others panel sums petcoke + other products (maps to JODI <code>ONONSPEC</code>)</li>
+  </ul>
+
+  <h3>Kayrros jet fuel</h3>
+  <p>
+    Requires <code>kayros/jet_fuel/data/jet_fuel.duckdb</code> (sibling repo to
+    <code>country_oil_scraper</code>). Uses ISO country code <code>HU</code>.
+    Kayrros measures in-flight burn; MEKH reports product deliveries — expect level
+    differences, useful for direction and month-to-month changes.
+  </p>
+</section>
+
+<section id="code-map">
+  <h2>9. Code map</h2>
+  <table>
+    <thead>
+      <tr><th>File</th><th>Purpose</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>reference/hungary.py</code></td><td>OData client, rollups, JODI specs, <code>UNITS_KIND</code></td></tr>
+      <tr><td><code>scrapers/hungary_mekh.py</code></td><td><code>download_all()</code>, <code>parse_all()</code></td></tr>
+      <tr><td><code>processors/hungary_mekh_demand.py</code></td><td>Parquet persistence + canonical enrichment</td></tr>
+      <tr><td><code>scripts/update_hungary.py</code></td><td>CLI entry point</td></tr>
+      <tr><td><code>scripts/create_hungary_dashboard_notebook.py</code></td><td>Notebook generator</td></tr>
+      <tr><td><code>tests/test_hungary_mekh.py</code></td><td>OData parse + JODI parity spot checks</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="troubleshooting">
+  <h2>10. Troubleshooting</h2>
+
+  <h3><code>ValueError: No bbl/tonne factor for product_kind=...</code></h3>
+  <p>
+    Every <code>product_native</code> must appear in <code>reference/hungary.py</code>
+    → <code>UNITS_KIND</code> with a key from <code>analytics/units.py::BBL_PER_TONNE</code>
+    (e.g. <code>diesel</code>, not <code>distillate</code>).
+  </p>
+
+  <h3>OData returns 400 on filter</h3>
+  <p>
+    MEKH rejects some <code>$filter</code> syntax (e.g. <code>dimension_1 eq 'GDINCTRO'</code>).
+    The scraper uses <code>startswith(dimension_1,'…')</code> instead.
+  </p>
+
+  <h3>Partial OData download (~5,000 rows)</h3>
+  <p>
+    If row counts look truncated, check that <code>fetch_odata_rows</code> paginates with
+    increasing <code>$skip</code>. Stocks need ~10k rows across all months.
+  </p>
+
+  <h3>JODI vs MEKH level gaps</h3>
+  <ul>
+    <li><strong>Naphtha demand:</strong> MEKH GID can exceed JODI if petrochemical deliveries are treated differently.</li>
+    <li><strong>Jet fuel vs Kayrros:</strong> MEKH includes domestic aviation deliveries; Kayrros is departure-country flight burn.</li>
+    <li><strong>Timing:</strong> JODI often lags MEKH by one month.</li>
+  </ul>
+
+  <h3>Kayrros section skipped</h3>
+  <p>
+    Build or update the DuckDB under <code>../kayros/jet_fuel/data/jet_fuel.duckdb</code>
+    from the kayros jet_fuel project. Install <code>duckdb</code> in the notebook kernel env.
+  </p>
+</section>
+
+</div>
+
+<footer>
+  country_oil_scraper — Hungary MEKH pipeline documentation
+</footer>
+
+</body>
+</html>

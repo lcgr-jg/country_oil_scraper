@@ -1,0 +1,27 @@
+# =============================================================================,,,,,,
+# inventory_sources.csv — national closing-stock (CLOSTLV) country registry,,,,,,
+# =============================================================================,,,,,,
+#,,,,,,
+# Adding a country: append one row here. Requirements:,,,,,,
+#   - Processed parquet exists under data/processed/{parquet_subdir}/,,,,,,
+#   - Parquet has metric_type, product_canonical, date, value, unit columns,,
+#   - Rows with metric_type = CLOSTLV (or value in metric_type column below),,,,,,
+#,,,,,,
+# Countries without national stock data stay in the registry so pivot tables,,,,,,
+# show N/A rather than omitting the row. They simply contribute zero rows,,,,,,
+# until a stock scraper is wired up.,,,,,,
+#,,,,,,
+# sort_order controls row order in summary tables (lower = higher in table).,,,,,,
+# =============================================================================,,,,,,
+country_key,display_name,parquet_subdir,parquet_filename,metric_type,sort_order,notes
+italy,Italy,italy,italy_mase_consumption.parquet,CLOSTLV,10,Demand-only MASE source — no CLOSTLV rows yet
+spain,Spain,spain,spain_cores_consumption.parquet,CLOSTLV,20,Demand-only CORES source — no CLOSTLV rows yet
+korea,Korea,korea,korea_knoc.parquet,CLOSTLV,30,KNOC Petronet 석유제품재고 (native kb)
+japan,Japan,japan,japan_meti_consumption.parquet,CLOSTLV,40,METI 在庫 from 確報 (native kL/t)
+taiwan,Taiwan,taiwan,taiwan_moea_consumption.parquet,CLOSTLV,50,Demand-only MOEA source — no CLOSTLV rows yet
+thailand,Thailand,thailand,thailand_eppo_sales.parquet,CLOSTLV,60,Demand-only EPPO source — no CLOSTLV rows yet
+australia,Australia,australia,australia_petroleum_statistics.parquet,CLOSTLV,70,DCCEEW stock volume by product (native ML etc.)
+portugal,Portugal,portugal,portugal_dgeg_sales.parquet,CLOSTLV,80,Demand-only dgeg source no CLOSTLV
+uk,United Kingdom,uk,uk_energy_trends.parquet,CLOSTLV,90,DESNZ ET 3.11 product stocks (native kt)
+hungary,Hungary,hungary,hungary_mekh_demand.parquet,CLOSTLV,100,MEKH HaviOlajKeszlet CSNATTER (native kt)
+ukraine,Ukraine,ukraine,ukraine_sssu_fuel.parquet,CLOSTLV,110,SSSU fuel reserves; sparse post-2022 (native kt)

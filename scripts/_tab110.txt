@@ -1,0 +1,15 @@
+                                                                                                                 0                  1         2          3                                   4           5
+14                                                                                                             NaN                NaN       NaN        NaN                                 NaN         NaN
+15  Tablica 1.10. Zapasy komercyjne ropy naftowej i paliw\nTable 1.10.    Commercial stocks of crude oil and fuels                NaN       NaN        NaN                                 NaN         NaN
+16                                                                                                             NaN                NaN       NaN        NaN                                 NaN         NaN
+17                                                                                      ogółem kraj\ntotal country                NaN       NaN        NaN                                 NaN         NaN
+18                                                                                Wyszczególnienie \nSpecification           III 2025   II 2026   III 2026  Indeksy dynamiki\nDynamics indexes         NaN
+19                                                                                                             NaN                NaN       NaN        NaN                            III 2026    III 2026
+20                                                                                                             NaN                NaN       NaN        NaN                            III 2025     II 2026
+21                                                                                                             NaN  tys. ton\nktonnes       NaN        NaN                                   %         NaN
+22                                                                                        Ropa naftowa\n Crude oil          1898.5658  1860.888  1894.0679                            99.76309  101.783014
+23                                                                              Benzyny silnikowe\n Motor gasoline           237.8893  220.2464   221.7135                           93.200283  100.666118
+24                                                                                    Oleje napędowe\n Diesel oils           636.9464  929.1857  1007.6025                          158.192667  108.439303
+25                                                                                Lekki olej opałowy\n Heating oil            43.2697   70.6067    65.1996                          150.681886   92.341945
+26                                                                                  Ciężki olej opałowy\n Fuel oil            44.7306    57.574    50.4332                          112.748767   87.597179
+27                                                                                            Gaz ciekły LPG\n LPG            136.054  118.2563   131.2355                           96.458392  110.975483

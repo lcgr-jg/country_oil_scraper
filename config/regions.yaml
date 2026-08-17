@@ -1,0 +1,46 @@
+# Named country bundles for the demand dashboard (multi-country mode).
+# country_ids must match keys in config/countries.yaml.
+# Selecting a preset fills the country multiselect; you can add/remove countries after.
+
+regions:
+  europe:
+    display_name: Europe (warehouse countries)
+    country_ids:
+      - norway
+      - germany
+      - uk
+      - spain
+      - portugal
+      - poland
+      - hungary
+      - ukraine
+      - italy
+
+  asia_pacific:
+    display_name: Asia Pacific
+    country_ids:
+      - japan
+      - korea
+      - taiwan
+      - thailand
+      - india
+      - australia
+
+  all_enabled:
+    display_name: All enabled countries
+    country_ids:
+      - norway
+      - germany
+      - poland
+      - ukraine
+      - hungary
+      - korea
+      - portugal
+      - uk
+      - japan
+      - spain
+      - taiwan
+      - italy
+      - thailand
+      - australia
+      - india

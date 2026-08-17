@@ -1,0 +1,169 @@
+,date,country,country_name,source,metric_type,product_native,product,value,unit,is_provisional,source_file,updated_at,product_canonical,category
+0,2021-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Fuel oil,Fuel oil,95.3,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+1,2021-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Gas diesel,Gas diesel,333.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+2,2021-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),20.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+3,2021-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Motor gasoline,Motor gasoline,148.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+4,2021-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,15.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+5,2021-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,201.2,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+6,2021-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),10.6,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+7,2021-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,24.6,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+8,2021-02-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Fuel oil,Fuel oil,91.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+9,2021-02-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Gas diesel,Gas diesel,352.8,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+10,2021-02-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),20.5,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+11,2021-02-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Motor gasoline,Motor gasoline,146.6,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+12,2021-02-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,17.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+13,2021-02-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,206.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+14,2021-02-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),10.3,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+15,2021-02-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,25.5,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+16,2021-03-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Fuel oil,Fuel oil,89.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+17,2021-03-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Gas diesel,Gas diesel,384.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+18,2021-03-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),21.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+19,2021-03-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Motor gasoline,Motor gasoline,142.6,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+20,2021-03-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,6.3,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+21,2021-03-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,250.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+22,2021-03-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),11.8,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+23,2021-03-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,28.3,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+24,2021-04-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Fuel oil,Fuel oil,87.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+25,2021-04-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Gas diesel,Gas diesel,363.5,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+26,2021-04-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),22.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+27,2021-04-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Motor gasoline,Motor gasoline,139.8,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+28,2021-04-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,4.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+29,2021-04-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,352.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+30,2021-04-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),15.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+31,2021-04-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,32.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+32,2021-05-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Fuel oil,Fuel oil,87.6,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+33,2021-05-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Gas diesel,Gas diesel,350.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+34,2021-05-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),24.3,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+35,2021-05-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Motor gasoline,Motor gasoline,133.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+36,2021-05-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,3.2,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+37,2021-05-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,340.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+38,2021-05-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),14.2,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+39,2021-05-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,31.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+40,2021-06-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Fuel oil,Fuel oil,86.5,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+41,2021-06-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Gas diesel,Gas diesel,328.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+42,2021-06-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),19.2,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+43,2021-06-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Motor gasoline,Motor gasoline,124.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+44,2021-06-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,12.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+45,2021-06-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,298.2,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+46,2021-06-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),25.3,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+47,2021-06-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,32.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+48,2021-07-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Fuel oil,Fuel oil,82.5,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+49,2021-07-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Gas diesel,Gas diesel,309.8,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+50,2021-07-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),18.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+51,2021-07-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Motor gasoline,Motor gasoline,120.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+52,2021-07-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,15.2,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+53,2021-07-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,432.8,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+54,2021-07-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),27.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+55,2021-07-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,36.1,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+56,2021-08-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Fuel oil,Fuel oil,79.3,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+57,2021-08-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Gas diesel,Gas diesel,298.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+58,2021-08-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),19.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+59,2021-08-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Motor gasoline,Motor gasoline,123.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+60,2021-08-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,17.6,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+61,2021-08-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,419.2,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+62,2021-08-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),32.5,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+63,2021-08-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,33.2,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+64,2021-09-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Fuel oil,Fuel oil,76.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+65,2021-09-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Gas diesel,Gas diesel,312.6,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+66,2021-09-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),20.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+67,2021-09-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Motor gasoline,Motor gasoline,138.2,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+68,2021-09-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,14.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+69,2021-09-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,428.2,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+70,2021-09-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),27.1,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+71,2021-09-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,34.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+72,2021-10-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Fuel oil,Fuel oil,78.3,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+73,2021-10-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Gas diesel,Gas diesel,275.5,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+74,2021-10-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),19.6,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+75,2021-10-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Motor gasoline,Motor gasoline,124.3,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+76,2021-10-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,18.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+77,2021-10-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,509.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+78,2021-10-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),24.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+79,2021-10-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,34.1,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+80,2021-11-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Fuel oil,Fuel oil,74.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+81,2021-11-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Gas diesel,Gas diesel,281.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+82,2021-11-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),27.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+83,2021-11-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Motor gasoline,Motor gasoline,132.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+84,2021-11-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,24.2,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+85,2021-11-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,433.6,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+86,2021-11-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),30.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+87,2021-11-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,32.1,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+88,2021-12-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Fuel oil,Fuel oil,78.8,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+89,2021-12-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Gas diesel,Gas diesel,330.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+90,2021-12-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),19.3,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+91,2021-12-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Motor gasoline,Motor gasoline,132.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+92,2021-12-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,38.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+93,2021-12-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,314.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+94,2021-12-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),22.8,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+95,2021-12-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,30.1,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+96,2022-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Fuel oil,Fuel oil,79.5,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+97,2022-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Gas diesel,Gas diesel,565.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+98,2022-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),98.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+99,2022-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,CLOSTLV,Motor gasoline,Motor gasoline,280.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+100,2022-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,62.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+101,2022-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,218.1,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+102,2022-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),18.2,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+103,2022-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,21.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+104,2025-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,21.3,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+105,2025-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,174.6,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+106,2025-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),7.2,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+107,2025-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,17.1,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+108,2025-02-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,40.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+109,2025-02-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,167.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+110,2025-02-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),6.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+111,2025-02-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,16.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+112,2025-03-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,37.2,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+113,2025-03-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,227.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+114,2025-03-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),6.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+115,2025-03-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,18.8,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+116,2025-04-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,6.1,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+117,2025-04-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,261.5,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+118,2025-04-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),6.8,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+119,2025-04-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,19.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+120,2025-05-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,3.6,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+121,2025-05-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,238.6,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+122,2025-05-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),6.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+123,2025-05-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,20.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+124,2025-06-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,3.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+125,2025-06-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,220.8,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+126,2025-06-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),6.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+127,2025-06-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,20.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+128,2025-07-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,3.8,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+129,2025-07-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,273.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+130,2025-07-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),8.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+131,2025-07-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,21.6,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+132,2025-08-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,0.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+133,2025-08-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,293.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+134,2025-08-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),8.2,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+135,2025-08-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,20.5,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+136,2025-09-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,1.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+137,2025-09-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,322.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+138,2025-09-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),9.1,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+139,2025-09-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,21.2,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+140,2025-10-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,1.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+141,2025-10-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,314.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+142,2025-10-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),13.8,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+143,2025-10-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,21.6,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+144,2025-11-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,11.8,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+145,2025-11-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,314.8,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+146,2025-11-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),18.2,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+147,2025-11-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,20.5,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+148,2025-12-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,12.6,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+149,2025-12-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,301.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+150,2025-12-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),14.5,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+151,2025-12-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,20.5,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+152,2026-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,13.1,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+153,2026-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,304.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+154,2026-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),6.8,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+155,2026-01-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,28.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+156,2026-02-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,16.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+157,2026-02-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,305.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+158,2026-02-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),6.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+159,2026-02-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,29.1,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+160,2026-03-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,15.0,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+161,2026-03-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,292.3,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+162,2026-03-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),6.5,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+163,2026-03-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,36.5,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline
+164,2026-04-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Fuel oil,Fuel oil,6.7,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Fuel Oil,Fuel Oil
+165,2026-04-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Gas diesel,Gas diesel,310.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Diesel,Distillates
+166,2026-04-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Liquefied petroleum gases (LPG),Liquefied petroleum gases (LPG),6.4,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,LPG,LPG
+167,2026-04-01,UA,Ukraine,ukraine_sssu_fuel_usage_and_reserves,TOTDEMO,Motor gasoline,Motor gasoline,26.9,kt,False,fuel_usage_and_reserves_sdmx.csv,2026-06-24 10:42:57.955968+00:00,Gasoline,Gasoline

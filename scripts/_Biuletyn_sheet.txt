@@ -1,0 +1,34 @@
+,,,,,
+"Tablica 1.1. Produkcja paliw ciekłych 
+Table 1.1.    Production of liquid fuels",,,,,
+,,,,,
+,,,,,
+"Wyszczególnienie 
+Specification",III 2025,II 2026,III 2026,"Indeksy dynamiki
+Dynamics indexes",
+,,,,III 2026,III 2026
+,,,,III 2025,II 2026
+,"tys. ton
+ktonnes ",,,%,
+" Benzyny silnikowe 
+ (wraz z benzyną lotniczą)
+ Motor gasoline
+ (incl. aviation gasoline)",365.4975,364.58930000000004,400.363,109.53918973453992,109.812054275866
+" Oleje napędowe
+ Diesel oils",1176.3174,1169.2035,1314.6197,111.75722640845065,112.43720190711026
+" Lekki olej opałowy
+ Heating oil",45.9686,91.1515,52.9608,115.21081781912,58.101951147265815
+" Ciężki olej opałowy
+ Fuel oil",98.3944,118.8091,132.0525,134.20733293764687,111.14678926109195
+" Gaz ciekły LPG
+ LPG",45.2578,55.4877,49.6064,109.60850947240033,89.40071403211883
+,,,,,
+"Tablica 1.2. Import paliw ciekłych 
+Table 1.2.    Import of liquid fuels",,,,,
+,,,,,
+,,,,,
+"Wyszczególnienie 
+Specification",III 2025,II 2026,III 2026,"Indeksy dynamiki
+Dynamics indexes",
+,,,,III 2026,III 2026
+,,,,III 2025,II 2026

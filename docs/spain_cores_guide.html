@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spain CORES petroleum consumption — User Guide</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --card: #ffffff;
+      --text: #1a2332;
+      --muted: #5a6b7d;
+      --accent: #c41e3a;
+      --accent-soft: #fde8ec;
+      --border: #d8e0ea;
+      --code-bg: #eef2f7;
+      --warn-bg: #fff8e6;
+      --warn-border: #f0c040;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+    header {
+      background: linear-gradient(135deg, #7f1d1d 0%, #c41e3a 55%, #f59e0b 100%);
+      color: #fff;
+      padding: 2.5rem 2rem 2rem;
+    }
+    header h1 { margin: 0 0 0.5rem; font-size: 1.85rem; font-weight: 600; }
+    header p { margin: 0; opacity: 0.92; max-width: 52rem; }
+    .wrap {
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+    nav.toc {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    nav.toc h2 { margin: 0 0 0.75rem; font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    nav.toc ol { margin: 0; padding-left: 1.25rem; }
+    nav.toc a { color: var(--accent); text-decoration: none; }
+    nav.toc a:hover { text-decoration: underline; }
+    section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 1.5rem;
+    }
+    h2 { margin-top: 0; font-size: 1.35rem; border-bottom: 2px solid var(--accent-soft); padding-bottom: 0.4rem; }
+    h3 { font-size: 1.1rem; margin-top: 1.5rem; }
+    p { margin: 0.75rem 0; }
+    ul, ol { margin: 0.5rem 0; padding-left: 1.4rem; }
+    li { margin: 0.35rem 0; }
+    code, kbd {
+      font-family: Consolas, "Cascadia Mono", monospace;
+      font-size: 0.9em;
+      background: var(--code-bg);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+    }
+    pre {
+      background: #1e2936;
+      color: #e8eef5;
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+    pre code { background: none; padding: 0; color: inherit; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      margin: 1rem 0;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: var(--accent-soft); font-weight: 600; }
+    tr:nth-child(even) td { background: #fafbfd; }
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      align-items: center;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+    }
+    .flow span {
+      background: var(--accent-soft);
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+    }
+    .flow .arrow { background: none; border: none; color: var(--muted); padding: 0; }
+    .callout {
+      background: var(--warn-bg);
+      border-left: 4px solid var(--warn-border);
+      padding: 0.85rem 1rem;
+      margin: 1rem 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .callout strong { display: block; margin-bottom: 0.25rem; }
+    .muted { color: var(--muted); font-size: 0.92rem; }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      padding: 2rem 1rem;
+    }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Spain CORES demand data — guide</h1>
+  <p>
+    How CORES <em>Petroleum Product Consumption</em> flows into this project, how to refresh the database,
+    and how the demand dashboard notebook uses the results.
+  </p>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#overview">What the code does</a></li>
+    <li><a href="#source">Source workbook</a></li>
+    <li><a href="#layout">Files and folders</a></li>
+    <li><a href="#units">Units and products</a></li>
+    <li><a href="#update">How to update data (cookbook)</a></li>
+    <li><a href="#notebook">Demand dashboard notebook</a></li>
+    <li><a href="#jodi">JODI and Kayrros comparisons</a></li>
+    <li><a href="#code-map">Code map</a></li>
+    <li><a href="#troubleshooting">Troubleshooting</a></li>
+  </ol>
+</nav>
+
+<section id="overview">
+  <h2>1. What the code does</h2>
+  <p>
+    The Spain pipeline ingests <strong>monthly domestic petroleum product consumption</strong>
+    published by CORES (Corporación de Reservas Estratégicas de Productos Petrolíferos) on the
+    <a href="https://www.cores.es/en/estadisticas" target="_blank" rel="noopener">statistics page</a>.
+    The series is labelled <strong>Petroleum Product Consumption</strong> and is updated monthly as a single Excel file.
+  </p>
+
+  <div class="flow">
+    <span>CORES xlsx</span>
+    <span class="arrow">→</span>
+    <span>Parse (6 sheets)</span>
+    <span class="arrow">→</span>
+    <span>Parquet database</span>
+    <span class="arrow">→</span>
+    <span>Dashboard notebook</span>
+  </div>
+
+  <h3>Layers</h3>
+  <table>
+    <thead>
+      <tr><th>Layer</th><th>Role</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Scraper</strong><br><code>scrapers/spain_cores.py</code></td>
+        <td>Downloads <code>oil-products-consumption.xlsx</code> into <code>data/raw/spain/</code>; calls the parser.</td>
+      </tr>
+      <tr>
+        <td><strong>Reference</strong><br><code>reference/spain.py</code></td>
+        <td>Workbook parsing, JODI composite specs, seasonality rollups, display labels.</td>
+      </tr>
+      <tr>
+        <td><strong>Processor</strong><br><code>processors/spain_cores_consumption.py</code></td>
+        <td>Canonical columns via <code>product_map.csv</code>; saves <code>spain_cores_consumption.parquet</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>Update script</strong><br><code>scripts/update_spain.py</code></td>
+        <td>CLI you run after CORES publishes a new file.</td>
+      </tr>
+      <tr>
+        <td><strong>Notebook</strong><br><code>notebooks/17_spain_demand_dashboard.ipynb</code></td>
+        <td>Charts: headline, seasonality, CORES vs JODI, Kayrros jet. Reads parquet only.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="muted">
+    Unlike Korea (many CSV bundles), Spain is <strong>one workbook = full history</strong> (1996 → latest month).
+    Each monthly run re-downloads (or uses a cached copy of) the same filename and replaces overlapping rows in parquet.
+  </p>
+</section>
+
+<section id="source">
+  <h2>2. Source workbook</h2>
+  <table>
+    <thead>
+      <tr><th>Item</th><th>Detail</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>File</td>
+        <td><code>oil-products-consumption.xlsx</code></td>
+      </tr>
+      <tr>
+        <td>Direct URL</td>
+        <td>
+          <a href="https://www.cores.es/sites/default/files/archivos/estadisticas/oil-products-consumption.xlsx" target="_blank" rel="noopener">
+            cores.es …/oil-products-consumption.xlsx
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>Frequency</td>
+        <td>Monthly (typically updated around mid-month for the prior month)</td>
+      </tr>
+      <tr>
+        <td>Unit in file</td>
+        <td><strong>tonnes</strong> (<code>t</code> in parquet)</td>
+      </tr>
+      <tr>
+        <td>History</td>
+        <td>From January 1996; current vintage includes through the latest published month</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Sheets parsed</h3>
+  <p>Six product sheets are melted to long form. <code>Start</code> (metadata) and <code>All</code> (wide duplicate) are ignored.</p>
+  <table>
+    <thead>
+      <tr><th>Sheet</th><th>Stored lines (examples)</th><th>Excluded from storage</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>LPG</td>
+        <td>Bottled, Bulk, Road, Other LPG</td>
+        <td><code>Total</code></td>
+      </tr>
+      <tr>
+        <td>Gasoline</td>
+        <td>97/95/98 RON, biogasoline, blend, aviation, other</td>
+        <td><code>Subtotal road gasoline</code>, <code>Total</code></td>
+      </tr>
+      <tr>
+        <td>Gasoil</td>
+        <td>Road diesel, biodiesel lines, ag diesel, heating oil, other</td>
+        <td><code>Subtotal road diesel</code>, <code>Total</code></td>
+      </tr>
+      <tr>
+        <td>Kerosene</td>
+        <td>Jet, Other kerosene</td>
+        <td><code>Total</code></td>
+      </tr>
+      <tr>
+        <td>Fuel oil</td>
+        <td>No. 1, No. 2, low-sulphur, other</td>
+        <td><code>Total</code></td>
+      </tr>
+      <tr>
+        <td>Other products</td>
+        <td>Lubricants, asphalt, petcoke, others</td>
+        <td><code>Total</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>Native key format</strong>
+    Each stored row uses <code>{Sheet} | {column}</code>, e.g. <code>Gasoil | Road diesel</code>.
+    Totals and subtotals are tagged <code>[AGG]</code> in <code>reference/product_map.csv</code> and are not written to parquet.
+  </div>
+
+  <p class="muted">
+    Early years (especially 1996–1997) may have sparse sub-columns (NaN) on some sheets; those months simply omit rows for missing cells.
+  </p>
+</section>
+
+<section id="layout">
+  <h2>3. Files and folders</h2>
+  <table>
+    <thead>
+      <tr><th>Path</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>data/raw/spain/oil-products-consumption.xlsx</code></td>
+        <td>Downloaded CORES workbook (source of truth on disk).</td>
+      </tr>
+      <tr>
+        <td><code>data/processed/spain/spain_cores_consumption.parquet</code></td>
+        <td>Long-form DB: one row per month × product (~27 products × ~360 months).</td>
+      </tr>
+      <tr>
+        <td><code>reference/product_map.csv</code></td>
+        <td>Maps <code>product_native</code> → canonical category (rows with Source = CORES).</td>
+      </tr>
+      <tr>
+        <td><code>data/processed/jodi/jodi_secondary.parquet</code></td>
+        <td>JODI for cross-check (country <code>ES</code>, flow <code>TOTDEMO</code>).</td>
+      </tr>
+      <tr>
+        <td><code>config/sources.yaml</code></td>
+        <td>Metadata: agency, download URL, CLI notes.</td>
+      </tr>
+      <tr>
+        <td><code>docs/spain_cores_guide.html</code></td>
+        <td>This guide.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="units">
+  <h2>4. Units and products</h2>
+  <ul>
+    <li><strong>Native unit:</strong> <code>t</code> (tonnes, as published by CORES).</li>
+    <li><strong>Charts:</strong> converted to <code>kbd</code> via <code>kt</code> and <code>analytics.units.convert_series</code> (product-kind density).</li>
+    <li><strong>Metric type:</strong> <code>TOTDEMO</code> (domestic demand / consumption).</li>
+    <li><strong>Country code:</strong> <code>ES</code>.</li>
+    <li><strong>Provisional flag:</strong> currently <code>false</code> for all rows (CORES notes data are provisional in the file metadata; not month-level yet).</li>
+    <li><strong>Stored products:</strong> 27 detail lines (aggregates excluded).</li>
+    <li><strong>Headline total (notebook §2):</strong> sums end-use lines; excludes the “Other products” sheet (lubes, asphalt, coke, residual).</li>
+  </ul>
+</section>
+
+<section id="update">
+  <h2>5. How to update data (cookbook)</h2>
+  <p>Run all commands from the <code>country_oil_scraper/</code> folder:</p>
+  <pre><code>cd country_oil_scraper</code></pre>
+
+  <h3>What do you want to do?</h3>
+  <table>
+    <thead>
+      <tr><th>Goal</th><th>Command</th><th>What happens</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Monthly refresh</strong> (usual)</td>
+        <td><pre><code>python scripts/update_spain.py</code></pre></td>
+        <td>
+          Downloads xlsx if missing or size changed; parses full workbook;
+          upserts all month×product keys into parquet.
+        </td>
+      </tr>
+      <tr>
+        <td>Force re-download</td>
+        <td><pre><code>python scripts/update_spain.py --force</code></pre></td>
+        <td>Ignores cache and fetches a fresh copy from CORES.</td>
+      </tr>
+      <tr>
+        <td>Offline / manual file</td>
+        <td><pre><code>python scripts/update_spain.py --no-download --local-file data/raw/spain/oil-products-consumption.xlsx</code></pre></td>
+        <td>Parses your local copy without hitting the network.</td>
+      </tr>
+      <tr>
+        <td>First-time or full rebuild</td>
+        <td><pre><code>python scripts/update_spain.py --bootstrap</code></pre></td>
+        <td>Rebuilds parquet from one workbook (same parse as routine run).</td>
+      </tr>
+      <tr>
+        <td>No network, use cached xlsx</td>
+        <td><pre><code>python scripts/update_spain.py --no-download</code></pre></td>
+        <td>Uses latest file in <code>data/raw/spain/</code>; upserts if parquet exists.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>After any update</strong>
+    Restart the notebook kernel and re-run from §1 in
+    <code>notebooks/17_spain_demand_dashboard.ipynb</code>.
+  </div>
+
+  <h3>Log messages to watch for</h3>
+  <ul>
+    <li><code>Built 7,991 rows, 1996-01-01 -> 2026-03-01, 27 products</code> — typical bootstrap size (varies slightly with NaNs).</li>
+    <li><code>Upsert: N replaced, M appended</code> — revised months/products updated in parquet.</li>
+    <li><code>Using cached workbook</code> — skipped download (use <code>--force</code> after CORES update).</li>
+  </ul>
+
+  <h3>Also update JODI (for §7 charts)</h3>
+  <pre><code>python scripts/update_jodi.py</code></pre>
+  <p class="muted">JODI often lags national agencies by one month.</p>
+
+  <h3>Tests</h3>
+  <pre><code>python -m pytest tests/test_spain_cores.py -q</code></pre>
+  <p class="muted">Requires <code>data/raw/spain/oil-products-consumption.xlsx</code> present.</p>
+</section>
+
+<section id="notebook">
+  <h2>6. Demand dashboard notebook</h2>
+  <p><strong>File:</strong> <code>notebooks/17_spain_demand_dashboard.ipynb</code></p>
+  <p class="muted">Regenerate empty notebook skeleton: <code>python scripts/create_spain_dashboard_notebook.py</code></p>
+  <table>
+    <thead>
+      <tr><th>Section</th><th>Content</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>§1 Setup</td><td>Load parquet; tonnes → kbd; build headline and canonical frames.</td></tr>
+      <tr><td>§2 Headline</td><td>Total end-use demand (excl. Other products sheet).</td></tr>
+      <tr><td>§3 Native products</td><td>Time series for headline chart products (~23 lines).</td></tr>
+      <tr><td>§4 Canonical rollup</td><td>Panels by canonical product (Gasoline, Diesel, Jet fuel, …).</td></tr>
+      <tr><td>§5 Recent trends</td><td>Last 24 months: last kbd, MoM %, YoY % by product.</td></tr>
+      <tr><td>§6 Seasonality</td><td>Dropdown: <strong>sheet rollups</strong> (native) or canonical. Default: last 5 years + current year visible; older years legend-only.</td></tr>
+      <tr><td>§7 CORES vs JODI</td><td>Small-multiples grid, ES / TOTDEMO / KBD.</td></tr>
+      <tr><td>§8 Jet vs Kayrros</td><td><code>Kerosene | Jet</code> vs Kayrros <code>scope='Spain'</code>.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="jodi">
+  <h2>7. JODI and Kayrros comparisons</h2>
+
+  <h3>JODI (§7)</h3>
+  <p>Composites sum stored CORES subs before comparing to JODI. You can narrow natives later in <code>reference/spain.py</code> (<code>GASOLINE_JODI_NATIVES</code>, <code>GASOIL_JODI_NATIVES</code>, etc.).</p>
+  <table>
+    <thead>
+      <tr><th>Panel</th><th>CORES side</th><th>JODI code</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Gasoline</td><td>All stored gasoline-sheet lines (incl. bio, aviation)</td><td><code>GASOLINE</code></td></tr>
+      <tr><td>Gasoil / diesel</td><td>All stored gasoil-sheet lines (incl. biodiesel, heating)</td><td><code>GASDIES</code></td></tr>
+      <tr><td>Jet fuel</td><td><code>Kerosene | Jet</code></td><td><code>JETKERO</code></td></tr>
+      <tr><td>Other kerosene</td><td><code>Kerosene | Other kerosene</code></td><td><code>X_OTHKERO</code></td></tr>
+      <tr><td>LPG</td><td>All four LPG channels</td><td><code>LPG</code></td></tr>
+      <tr><td>Fuel oil</td><td>All four fuel-oil grades</td><td><code>RESFUEL</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>Kayrros (§8)</h3>
+  <ul>
+    <li>Requires <code>kayros/jet_fuel/data/jet_fuel.duckdb</code> (sibling repo under workspace).</li>
+    <li>Uses <code>get_consumption(scope_type='country', scope='Spain', …)</code>.</li>
+    <li>Compares flight-derived burn to CORES jet kerosene deliveries — not a strict identity.</li>
+  </ul>
+</section>
+
+<section id="code-map">
+  <h2>8. Code map (for developers)</h2>
+  <table>
+    <thead>
+      <tr><th>File</th><th>Key symbols</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>reference/spain.py</code></td>
+        <td><code>parse_cores_consumption_workbook</code>, <code>JODI_COMPARE_SERIES</code>, <code>seasonality_native_rollup</code>, <code>cores_series_for_jodi</code></td>
+      </tr>
+      <tr>
+        <td><code>scrapers/spain_cores.py</code></td>
+        <td><code>SpainCoresScraper.download</code>, <code>parse</code>, <code>DEFAULT_DOWNLOAD_URL</code></td>
+      </tr>
+      <tr>
+        <td><code>processors/spain_cores_consumption.py</code></td>
+        <td><code>build_from_historical</code>, <code>upsert</code>, <code>save</code></td>
+      </tr>
+      <tr>
+        <td><code>scripts/update_spain.py</code></td>
+        <td>CLI entrypoint</td>
+      </tr>
+      <tr>
+        <td><code>scripts/create_spain_dashboard_notebook.py</code></td>
+        <td>Regenerates dashboard .ipynb (no outputs)</td>
+      </tr>
+      <tr>
+        <td><code>tests/test_spain_cores.py</code></td>
+        <td>Parser and processor smoke tests</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="troubleshooting">
+  <h2>9. Troubleshooting</h2>
+  <table>
+    <thead>
+      <tr><th>Symptom</th><th>Likely cause</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>PermissionError</code> on xlsx</td>
+        <td>File open in Excel</td>
+        <td>Close workbook; re-run update</td>
+      </tr>
+      <tr>
+        <td>Notebook shows old data</td>
+        <td>Kernel not refreshed</td>
+        <td>Restart kernel; re-run from §1</td>
+      </tr>
+      <tr>
+        <td>No new month after update</td>
+        <td>Cached download</td>
+        <td><code>python scripts/update_spain.py --force</code></td>
+      </tr>
+      <tr>
+        <td>§7 JODI charts empty</td>
+        <td>Missing JODI parquet</td>
+        <td><code>python scripts/update_jodi.py</code></td>
+      </tr>
+      <tr>
+        <td>§8 Kayrros skipped</td>
+        <td>No DuckDB</td>
+        <td>Build <code>kayros/jet_fuel</code> database first</td>
+      </tr>
+      <tr>
+        <td>Seasonality too busy (native)</td>
+        <td>Old notebook with 27 panels</td>
+        <td>Re-run <code>create_spain_dashboard_notebook.py</code>; use sheet rollups view</td>
+      </tr>
+      <tr>
+        <td><code>cross_source_comparison_chart</code> TypeError</td>
+        <td>Wrong kwarg <code>date_col</code></td>
+        <td>Use <code>date_col_a</code> / <code>date_col_b</code> (fixed in current notebook)</td>
+      </tr>
+      <tr>
+        <td>Unknown product warnings on update</td>
+        <td>CORES added a new column</td>
+        <td>Add row to <code>product_map.csv</code> and <code>_STORED_NATIVES</code> in <code>reference/spain.py</code></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+</div>
+
+<footer>
+  Spain CORES guide · country_oil_scraper · internal use
+</footer>
+
+</body>
+</html>

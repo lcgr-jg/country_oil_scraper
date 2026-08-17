@@ -1,0 +1,61 @@
+,date,country,country_name,source,metric_type,product_native,product,value,unit,is_provisional,source_file,updated_at,product_canonical,category
+12314,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,CARICA PETROLCHIMICA NETTA,CARICA PETROLCHIMICA NETTA,72.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,Naphtha,Naphtha
+12315,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,CONSUMI E PERDITE DI RAFFINERIA,CONSUMI E PERDITE DI RAFFINERIA,260.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,Others,Others
+12316,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GASOLIO RISCALDAMENTO,GASOLIO RISCALDAMENTO,-9.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,,
+12317,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GASOLIO | AGRICOLO,GASOLIO | AGRICOLO,125.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,,
+12318,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GASOLIO | EXTRARETE,GASOLIO | EXTRARETE,822.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,,
+12319,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GASOLIO | GASOLIO RETE,GASOLIO | GASOLIO RETE,1254.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,,
+12320,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GASOLIO | MARINA,GASOLIO | MARINA,14.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,,
+12321,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GASOLIO | MOTORI,GASOLIO | MOTORI,1879.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,Diesel,Distillates
+12322,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GASOLIO | RISCALDAMENTO,GASOLIO | RISCALDAMENTO,40.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,,
+12323,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GASOLIO | TOTALE GASOLI,GASOLIO | TOTALE GASOLI,2058.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,Gasoil,Distillates
+12324,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GPL,GPL,300.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,LPG,LPG
+12325,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GPL | AUTOTRAZIONE,GPL | AUTOTRAZIONE,134.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,,
+12326,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GPL | COMBUSTIONE,GPL | COMBUSTIONE,166.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,,
+12327,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,LUBRIFICANTI MOTORI,LUBRIFICANTI MOTORI,21.1,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,,
+12328,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,LUBRIFICANTI TOTALE,LUBRIFICANTI TOTALE,40.6,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,Lubricants / Grease,Heavy byproducts
+12329,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,LUBRIFICANTI TOTALE | RETE,LUBRIFICANTI TOTALE | RETE,0.1,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,,
+12330,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,OLIO COMB.LE | A.T.Z.,OLIO COMB.LE | A.T.Z.,0.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,Fuel Oil,Fuel Oil
+12331,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,OLIO COMB.LE | B.T.Z.,OLIO COMB.LE | B.T.Z.,0.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,Fuel Oil,Fuel Oil
+12332,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,OLIO COMB.LE | TERMOELETTRICA,OLIO COMB.LE | TERMOELETTRICA,0.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,Fuel Oil,Fuel Oil
+12333,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,OLIO COMB.LE | TOTALE,OLIO COMB.LE | TOTALE,17.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,Fuel Oil,Fuel Oil
+12334,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,PETROLIO | TOTALE,PETROLIO | TOTALE,0.2,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,Kerosene,Kerosene
+12335,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,PRODUZIONE ENERGIA ELETTRICA E TERMICA,PRODUZIONE ENERGIA ELETTRICA E TERMICA,88.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,,
+12336,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,TOTALE CONSUMI,TOTALE CONSUMI,4390.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,,
+12337,2026-03-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,TOTALE VENDITE,TOTALE VENDITE,4033.0,kt,True,Consumi_Petrolio_2026_03.xls,2026-05-27 11:20:59.794632,,
+12338,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,ALTRI PRODOTTI,ALTRI PRODOTTI,89.2,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,Others,Others
+12339,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,BENZINA | AUTO TOTALE,BENZINA | AUTO TOTALE,795.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,Gasoline,Gasoline
+12340,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,BENZINA | EXTRARETE,BENZINA | EXTRARETE,193.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,
+12341,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,BENZINA | RETE TOTALE,BENZINA | RETE TOTALE,791.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,
+12342,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,BITUMI,BITUMI,160.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,Bitumen,Heavy byproducts
+12343,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,BUNKERS TOTALE,BUNKERS TOTALE,198.6,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,
+12344,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,BUNKERS | GASOLIO,BUNKERS | GASOLIO,86.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,Gasoil,Distillates
+12345,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,BUNKERS | LUBRIFICANTI,BUNKERS | LUBRIFICANTI,1.6,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,Lubricants / Grease,Heavy byproducts
+12346,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,BUNKERS | OLIO COMB.,BUNKERS | OLIO COMB.,111.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,Fuel Oil,Fuel Oil
+12347,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,CARBOTURBO | MILITARE,CARBOTURBO | MILITARE,3.5,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,
+12348,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,CARBOTURBO | TOTALE (A),CARBOTURBO | TOTALE (A),414.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,Jet Fuel,Kerosene
+12349,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,CARICA PETROLCHIMICA LORDA,CARICA PETROLCHIMICA LORDA,191.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,
+12350,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,CARICA PETROLCHIMICA NETTA,CARICA PETROLCHIMICA NETTA,90.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,Naphtha,Naphtha
+12351,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,CONSUMI E PERDITE DI RAFFINERIA,CONSUMI E PERDITE DI RAFFINERIA,266.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,Others,Others
+12352,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GASOLIO RISCALDAMENTO,GASOLIO RISCALDAMENTO,-4.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,
+12353,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GASOLIO | AGRICOLO,GASOLIO | AGRICOLO,154.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,
+12354,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GASOLIO | EXTRARETE,GASOLIO | EXTRARETE,819.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,
+12355,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GASOLIO | GASOLIO RETE,GASOLIO | GASOLIO RETE,1268.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,
+12356,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GASOLIO | MARINA,GASOLIO | MARINA,14.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,
+12357,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GASOLIO | MOTORI,GASOLIO | MOTORI,1873.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,Diesel,Distillates
+12358,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GASOLIO | RISCALDAMENTO,GASOLIO | RISCALDAMENTO,19.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,
+12359,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GASOLIO | TOTALE GASOLI,GASOLIO | TOTALE GASOLI,2060.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,Gasoil,Distillates
+12360,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GPL,GPL,236.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,LPG,LPG
+12361,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GPL | AUTOTRAZIONE,GPL | AUTOTRAZIONE,129.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,
+12362,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,GPL | COMBUSTIONE,GPL | COMBUSTIONE,107.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,
+12363,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,LUBRIFICANTI MOTORI,LUBRIFICANTI MOTORI,17.6,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,
+12364,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,LUBRIFICANTI TOTALE,LUBRIFICANTI TOTALE,35.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,Lubricants / Grease,Heavy byproducts
+12365,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,LUBRIFICANTI TOTALE | RETE,LUBRIFICANTI TOTALE | RETE,0.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,
+12366,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,OLIO COMB.LE | A.T.Z.,OLIO COMB.LE | A.T.Z.,0.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,Fuel Oil,Fuel Oil
+12367,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,OLIO COMB.LE | B.T.Z.,OLIO COMB.LE | B.T.Z.,0.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,Fuel Oil,Fuel Oil
+12368,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,OLIO COMB.LE | TERMOELETTRICA,OLIO COMB.LE | TERMOELETTRICA,0.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,Fuel Oil,Fuel Oil
+12369,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,OLIO COMB.LE | TOTALE,OLIO COMB.LE | TOTALE,24.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,Fuel Oil,Fuel Oil
+12370,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,PETROLIO | TOTALE,PETROLIO | TOTALE,0.2,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,Kerosene,Kerosene
+12371,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,PRODUZIONE ENERGIA ELETTRICA E TERMICA,PRODUZIONE ENERGIA ELETTRICA E TERMICA,99.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,
+12372,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,TOTALE CONSUMI,TOTALE CONSUMI,4471.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,
+12373,2026-04-01,IT,Italy,mase_consumi_petroliferi,TOTDEMO,TOTALE VENDITE,TOTALE VENDITE,4102.0,kt,True,Consumi_Petrolio_2026_04.xls,2026-05-27 11:20:59.889427,,

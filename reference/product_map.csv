@@ -1,0 +1,381 @@
+﻿# =============================================================================,,,,,,
+# product_map.csv  -  master native-product -> canonical-product mapping,,,,,,
+# =============================================================================,,,,,,
+#,,,,,,
+# Lines starting with '#' are documentation and are ignored by the loader,,,,,,
+# (reference/loaders.py uses pd.read_csv(..., comment='#')).,,,,,
+#,,,,,,
+# WHY THIS FILE EXISTS,,,,,,
+# --------------------,,,,,,
+# Each national agency (DCCEEW, PPAC, METI, JODI, ...) calls petroleum,,
+# products by different native names: 'HSD'," ""GASDIES"""," ""Diesel oil: total"".",,,,
+# This file maps every native name to ONE canonical category / sub-category,,,,,,
+# so cross-country queries can group on the canonical column instead of,,,,,,
+# juggling source-specific labels.,,,,,,
+#,,,,,,
+# COLUMN -> PARQUET MAPPING  (important: the CSV header names and the,,,,,,
+# parquet column names INTENTIONALLY DIFFER - see processors/*.py),,,,,,
+# -----------------------------------------------------------------,,,,,,
+#,,,,,,
+#     This CSV column   ->   Parquet column that carries the value,,,,,,
+#     -----------------------------------------------------------,,,,,,
+#     Product_name      ->   product_native (India) / product (Australia),,,,,,
+#                            / energy_product (JODI),,,,,,
+#     Category          ->   category,,,,,,
+#     Sub-category      ->   product_canonical,,,,,,
+#     Parent_product    ->   (kept in CSV only; useful for hierarchy,,,,,,
+#                            queries via reference.loaders.parent_product),,,,,,
+#     Product_details   ->   (kept in CSV only; carries the [TAG] vocab,,,,,,
+#                            and free-text notes),,,,,,
+#,,,,,,
+# Why the rename? Because pandas hates hyphens in column names ('Sub-category',,,,,,
+# would need backtick-quoting), and the parquet column 'product_canonical',,,,,
+# reads more naturally next to the native 'product' column. The CSV side,,,,,,
+# uses the original taxonomy terms; the parquet side uses pandas-friendly,,,,,,
+# names. Both are correct.,,,,,,
+#,,,,,,
+# PRODUCT_DETAILS [TAG] VOCABULARY,,,,,,
+# ---------------------------------,,,,,,
+#     [AGG]      Aggregate / total row. Sub-category='-' so it does NOT,,,,,,
+#                contribute to canonical sums. Example: JODI's TOTPRODS.,,,,,,
+#     [SUB]      A sub-product whose parent total is the primary. Use the,,,,,,
+#                parent (via Parent_product column) for cross-source sums.,,,,,,
+#     [MIXED]    Aggregate that spans canonical categories - cannot be,,,,,,
+#                cleanly attributed (e.g. Japan's 'Total Fuel Oil' =,,,,,,
+#                gasoil-like Fuel Oil A + heavy Fuel Oil B+C).,,,,,,
+#     [DERIVED]  Project-derived row computed in a processor. Example:,,,,,,
+#                X_OTHKERO = KEROSENE - JETKERO.,,,,,,
+#,,,,,,
+# ADDING A NEW SOURCE,,,,,,
+# -------------------,,,,,,
+# 1. Append rows here with a new Source value (e.g. 'OPEC'," ""EIA"").",,,,,
+# 2. Ensure each native name in your parquet has exactly one row.,,,,,,
+# 3. Use Category='-', Sub-category='-' and tag with [AGG] for total /,,,,,
+#    super-aggregate rows so they're correctly excluded from canonical,,,,,,
+#    sums.,,,,,,
+# 4. Drop reference.loaders' caches if running in a notebook:,,,,,,
+#        from reference import loaders,,,,,,
+#        loaders.load_product_map.cache_clear(),,,,,,
+#,,,,,,
+# =============================================================================,,,,,,
+Country,Source,Product_name,Category,Sub-category,Product_details,Parent_product
+International,JODI,LPG,LPG,LPG,,
+International,JODI,NAPHTHA,Naphtha,Naphtha,,
+International,JODI,GASOLINE,Gasoline,Gasoline,,
+International,JODI,KEROSENE,-,-,[AGG] Sum of X_OTHKERO + JETKERO; excluded from cross-country sums to avoid double-counting,
+International,JODI,JETKERO,Kerosene,Jet Fuel,[SUB] Sub of KEROSENE; pair with X_OTHKERO for the non-overlapping kerosene split,KEROSENE
+International,JODI,X_OTHKERO,Kerosene,Kerosene,[DERIVED] X_OTHKERO = KEROSENE - JETKERO; non-jet kerosene; computed in processors/jodi.py,KEROSENE
+International,JODI,GASDIES,Distillates,Diesel,,
+International,JODI,RESFUEL,Fuel Oil,Fuel Oil,,
+International,JODI,ONONSPEC,Others,Others,,
+International,JODI,TOTPRODS,-,-,[AGG] JODI super-aggregate of all products,
+India,PPAC,LPG,LPG,LPG,,
+India,PPAC,Naphtha,Naphtha,Naphtha,,
+India,PPAC,MS,Gasoline,Gasoline,,
+India,PPAC,SKO,Kerosene,Kerosene,,
+India,PPAC,ATF,Kerosene,Jet Fuel,,
+India,PPAC,HSD,Distillates,Diesel,,
+India,PPAC,LDO,Distillates,Gasoil,,
+India,PPAC,Lubricants & Greases,Heavy byproducts,Lubricants / Grease,,
+India,PPAC,FO & LSHS,Fuel Oil,Fuel Oil,,
+India,PPAC,Bitumen,Heavy byproducts,Bitumen,,
+India,PPAC,Petroleum coke,Heavy byproducts,Petcoke,,
+India,PPAC,Others,Others,Others,,
+India,PPAC,All Products total,-,-,[AGG] Country-wide consumption total,
+India,PPAC,All products total,-,-,[AGG] Variant spelling of 'All Products total' (lowercase p); appears in older sheets,
+India,PPAC,TOTAL,-,-,[AGG] Country-wide consumption total; alternative label from a separate table layout,
+Australia,DCCEEW,Regular (<95 RON),Gasoline,Gasoline,[SUB] <95 RON,Automotive gasoline total
+Australia,DCCEEW,Premium (95-97 RON),Gasoline,Gasoline,[SUB] 95-97 RON,Automotive gasoline total
+Australia,DCCEEW,Premium (98+ RON),Gasoline,Gasoline,[SUB] 98+ RON,Automotive gasoline total
+Australia,DCCEEW,Ethanol-blended fuel,Gasoline,Gasoline,[SUB] Ethanol 10% blend,Automotive gasoline total
+Australia,DCCEEW,Automotive gasoline total,-,-,[AGG] Sum of Regular/Premium/Ethanol subs; subs are primaries,
+Australia,DCCEEW,Diesel oil: total,Distillates,Diesel,,
+Australia,DCCEEW,Diesel oil: premium diesel,-,-,[SUB] Sub of Diesel oil: total; sparse pre-2024; total used as primary,Diesel oil: total
+Australia,DCCEEW,Aviation turbine fuel Domestic,Kerosene,Jet Fuel,[SUB] Domestic jet fuel,Aviation turbine fuel total
+Australia,DCCEEW,Aviation turbine fuel International,Kerosene,Jet Fuel,[SUB] International jet fuel,Aviation turbine fuel total
+Australia,DCCEEW,Aviation turbine fuel total,-,-,[AGG] Sum of Domestic + International; subs are primaries,
+Australia,DCCEEW,LPG Automotive use,LPG,LPG,[SUB] Automotive LPG,LPG total
+Australia,DCCEEW,LPG Non-automotive use,LPG,LPG,[SUB] Non-automotive LPG,LPG total
+Australia,DCCEEW,LPG total,-,-,[AGG] Sum of Automotive + Non-automotive; subs are primaries,
+Australia,DCCEEW,Aviation gasoline,Gasoline,Gasoline,Aviation Gasoline,
+Australia,DCCEEW,Fuel oil,Fuel Oil,Fuel Oil,Fuel Oil,
+Australia,DCCEEW,Lubricating oils & greases,Heavy byproducts,Lubricants / Grease,Lubricants / Grease,
+Australia,DCCEEW,Other products,Others,Others,Others,
+Australia,DCCEEW,Diesel oil,Distillates,Diesel,[PRIMARY] CLOSTLV stock sheet label; same series as Diesel oil: total,
+Australia,DCCEEW,Automotive gasoline,Gasoline,Gasoline,[PRIMARY] CLOSTLV stock sheet label; same as Automotive gasoline total,
+Australia,DCCEEW,Aviation turbine fuel,Kerosene,Jet Fuel,[PRIMARY] CLOSTLV stock sheet label; same as Aviation turbine fuel total,
+Australia,DCCEEW,LPG,LPG,LPG,[PRIMARY] CLOSTLV stock sheet label; same as LPG total,
+Australia,DCCEEW,"Lubricating oils, greases & basestocks",Heavy byproducts,Lubricants / Grease,[PRIMARY] CLOSTLV stock sheet label; demand sheet uses Lubricating oils & greases,
+Australia,DCCEEW,Crude oil and refinery feedstocks,-,-,[AGG] CLOSTLV stock sheet; crude/feedstock out of product scope,
+Australia,DCCEEW,Total stocks COE,-,-,[AGG] CLOSTLV country total; excluded from canonical sums,
+Thailand,EPPO,GASOLINE,-,-,[AGG] Sum of REGULAR + PREMIUM; subs are primaries,
+Thailand,EPPO, REGULAR,Gasoline,Gasoline,[SUB] Regular gasoline,GASOLINE
+Thailand,EPPO, PREMIUM,Gasoline,Gasoline,[AGG] Sum of GASOHOL + U95; subs are primaries,GASOLINE
+Thailand,EPPO,#NAME?,-,-,[SUB] Sub of Gasoline; Dropped bc not present n historical file; premium used as primary,
+Thailand,EPPO,0,-,-,[SUB] Sub of Gasoline; Dropped bc not present n historical file; premium used as primary,
+Thailand,EPPO,KEROSENE,Kerosene,Kerosene,,
+Thailand,EPPO,DIESEL  ,-,-,[AGG] Sum of HSD + LSD; subs are primaries,
+Thailand,EPPO, HSD,Distillates,Diesel,[SUB] High sulfur diesel,DIESEL  
+Thailand,EPPO, LSD,Distillates,Diesel,[SUB] Low sulfur diesel,DIESEL  
+Thailand,EPPO,J.P.,Kerosene,Jet Fuel,,
+Thailand,EPPO,FUEL OIL,Fuel Oil,Fuel Oil,[AGG] Sum of all grades; total used as primary,
+Thailand,EPPO, GRADE 1,-,-,[SUB] Sub of Fuel oil; Dropped bc not present n historical file; total used as primary,
+Thailand,EPPO, GRADE 2,-,-,[SUB] Sub of Fuel oil; Dropped bc not present n historical file; total used as primary,
+Thailand,EPPO, GRADE 3,-,-,[SUB] Sub of Fuel oil; Dropped bc not present n historical file; total used as primary,
+Thailand,EPPO, GRADE 4,-,-,[SUB] Sub of Fuel oil; Dropped bc not present n historical file; total used as primary,
+Thailand,EPPO, GRADE 5,-,-,[SUB] Sub of Fuel oil; Dropped bc not present n historical file; total used as primary,
+Thailand,EPPO,LPG,LPG,LPG,,
+Thailand,EPPO,TOTAL,-,-,[AGG] Country-wide consumption total; alternative label from a separate table layout,
+Italy,MASE,BENZINA | AUTO TOTALE,Gasoline,Gasoline,[AGG] Headline gasoline total; JODI GASOLINE compare,
+Italy,MASE,BENZINA | RETE TOTALE,-,-,[SUB] Retail network,BENZINA | AUTO TOTALE
+Italy,MASE,BENZINA | EXTRARETE,-,-,[SUB] Wholesale / extrarete,BENZINA | AUTO TOTALE
+Italy,MASE,BENZINA | RETE AUTOSTRADALE,-,-,[SUB] Motorway network; definitive footer section,BENZINA | AUTO TOTALE
+Italy,MASE,BENZINA | RETE AUTOSTRAD.,-,-,[SUB] Abbreviated motorway label in older files,BENZINA | AUTO TOTALE
+Italy,MASE,CARBOTURBO | TOTALE (A),Kerosene,Jet Fuel,[AGG] Headline jet total; JODI JETKERO compare,
+Italy,MASE,CARBOTURBO | CIVILE,-,-,[SUB] Civil aviation; definitive only,CARBOTURBO | TOTALE (A)
+Italy,MASE,CARBOTURBO | MILITARE,-,-,[SUB] Military aviation,CARBOTURBO | TOTALE (A)
+Italy,MASE,CARBOTURBO | TOTALE,-,-,[SUB] Preliminary alias when (A) suffix omitted,CARBOTURBO | TOTALE (A)
+Italy,MASE,CARBOT. | CIVILE,-,-,[SUB] Alias of CARBOTURBO | CIVILE in pre-2020 files,CARBOTURBO | TOTALE (A)
+Italy,MASE,CARBOT. | MILITARE,-,-,[SUB] Alias of CARBOTURBO | MILITARE in pre-2020 files,CARBOTURBO | TOTALE (A)
+Italy,MASE,CARBOT. | TOTALE (A),-,-,[SUB] Alias of CARBOTURBO | TOTALE (A) in pre-2020 files,CARBOTURBO | TOTALE (A)
+Italy,MASE,PETROLIO | TOTALE,Kerosene,Kerosene,[AGG] Minor other kerosene; not jet,
+Italy,MASE,GASOLIO | MOTORI,Distillates,Diesel,[AGG] Headline road diesel; JODI GASDIES compare,
+Italy,MASE,GASOLIO | GASOLIO RETE,-,-,[SUB] Retail diesel,GASOLIO | MOTORI
+Italy,MASE,GASOLIO | EXTRARETE,-,-,[SUB] Wholesale diesel,GASOLIO | MOTORI
+Italy,MASE,GASOLIO | RETE AUTOSTRADALE,-,-,[SUB] Motorway diesel; definitive footer,GASOLIO | MOTORI
+Italy,MASE,GASOLIO | RETE AUTOSTRAD.,-,-,[SUB] Abbreviated motorway diesel label,GASOLIO | MOTORI
+Italy,MASE,GASOLIO | TOTALE GASOLI,Distillates,Gasoil,[AGG] All gasoil uses combined,
+Italy,MASE,GASOLIO | RISCALDAMENTO,-,-,[SUB] Heating gasoil,GASOLIO | TOTALE GASOLI
+Italy,MASE,GASOLIO | TERMOELETTRICA,-,-,[SUB] Power-generation gasoil,GASOLIO | TOTALE GASOLI
+Italy,MASE,GASOLIO | TERMOELETTICA,-,-,[SUB] Abbreviated termoelettrica label,GASOLIO | TOTALE GASOLI
+Italy,MASE,GASOLIO | TERMOELETTR.,-,-,[SUB] Variant termoelettrica spelling,GASOLIO | TOTALE GASOLI
+Italy,MASE,GASOLIO RISCALDAMENTO,-,-,[SUB] Preliminary heating-oil stock delta; NOT GASOLIO | RISCALDAMENTO deliveries,DELTA SCORTE CONSUMATORI | GASOLIO RISCALDAMENTO
+Italy,MASE,OLIO COMBUSTIBILE,-,-,[SUB] Delta-scorte footer label; alias of OLIO COMBUSTIBILE,DELTA SCORTE CONSUMATORI | OLIO COMBUSTIBILE
+Italy,MASE,GASOLIO | AGRICOLO,-,-,[SUB] Agricultural diesel,GASOLIO | TOTALE GASOLI
+Italy,MASE,GASOLIO | MARINA,-,-,[SUB] Marine diesel,GASOLIO | TOTALE GASOLI
+Italy,MASE,GASOLIO | TOTALE,-,-,[SUB] Preliminary GASOLIO (°) total row; maps to TOTALE GASOLI,GASOLIO | TOTALE GASOLI
+Italy,MASE,OLIO COMB.LE | TOTALE,Fuel Oil,Fuel Oil,[AGG] Headline fuel-oil total,
+Italy,MASE,OLIO COMB.LE | A.T.Z.,Fuel Oil,Fuel Oil,[SUB] High-sulphur fuel oil grade,OLIO COMB.LE | TOTALE
+Italy,MASE,OLIO COMB.LE | B.T.Z. + FLUIDO,Fuel Oil,Fuel Oil,[SUB] Low-sulphur / fluid grade,OLIO COMB.LE | TOTALE
+Italy,MASE,OLIO COMB.LE | B.T.Z.,Fuel Oil,Fuel Oil,[SUB] Low-sulphur fuel-oil grade; definitive split row,OLIO COMB.LE | TOTALE
+Italy,MASE,OLIO COMB.LE | FLUIDO 3/5,Fuel Oil,Fuel Oil,[SUB] Fluid fuel-oil grade; definitive split row,OLIO COMB.LE | TOTALE
+Italy,MASE,OLIO COMB.LE | TERMOELETTRICA,Fuel Oil,Fuel Oil,[SUB] Power-generation fuel oil,OLIO COMB.LE | TOTALE
+Italy,MASE,OLIO COMB.LE | ALTRI USI,Fuel Oil,Fuel Oil,[SUB] Other fuel-oil uses,OLIO COMB.LE | TOTALE
+Italy,MASE,OLIO COMB. | TOTALE,Fuel Oil,Fuel Oil,[SUB] Alias of OLIO COMB.LE | TOTALE in older files,OLIO COMB.LE | TOTALE
+Italy,MASE,OLIO COMB. | A.T.Z.,Fuel Oil,Fuel Oil,[SUB] Alias in older files,OLIO COMB.LE | TOTALE
+Italy,MASE,OLIO COMB. | B.T.Z. + FLUIDO,Fuel Oil,Fuel Oil,[SUB] Alias in older files,OLIO COMB.LE | TOTALE
+Italy,MASE,OLIO COMB. | TERMOELETTRICA,Fuel Oil,Fuel Oil,[SUB] Alias in older files,OLIO COMB.LE | TOTALE
+Italy,MASE,OLIO COMB. | ALTRI USI,Fuel Oil,Fuel Oil,[SUB] Alias in older files,OLIO COMB.LE | TOTALE
+Italy,MASE,TOTALE O.C. ALTRI USI,Fuel Oil,Fuel Oil,[SUB] Preliminary alias of OLIO COMB.LE | TOTALE,OLIO COMB.LE | TOTALE
+Italy,MASE,GPL,LPG,LPG,[AGG] Headline LPG total,
+Italy,MASE,G.P.L.,LPG,LPG,[AGG] Alias of GPL in preliminary files,
+Italy,MASE,GPL | AUTOTRAZIONE,-,-,[SUB] Automotive LPG,GPL
+Italy,MASE,GPL | COMBUSTIONE,-,-,[SUB] Non-automotive LPG combustion,GPL
+Italy,MASE,LUBRIFICANTI TOTALE,Heavy byproducts,Lubricants / Grease,[AGG] Headline lubricants on main sheet,
+Italy,MASE,LUBRIFICANTI TOTALE | RETE,-,-,[SUB] Retail lubricants,LUBRIFICANTI TOTALE
+Italy,MASE,LUBRIFICANTI MOTORI,-,-,[SUB] Engine-oil subset; definitive/preliminary footer,LUBRIFICANTI TOTALE
+Italy,MASE,BITUMI,Heavy byproducts,Bitumen,[AGG] Bitumen,
+Italy,MASE,ALTRI PRODOTTI,Others,Others,[AGG] Residual other products bucket,
+Italy,MASE,TOTALE PRODOTTI PRINCIPALI,-,-,[AGG] Sum of main products; excluded from canonical sums,
+Italy,MASE,TOTALE VENDITE,-,-,[AGG] Preliminary headline total sales,
+Italy,MASE,TOTALE IMMISSIONI AL CONSUMO,-,-,[AGG] Total deliveries to consumption,
+Italy,MASE,TOTALE CONSUMI,-,-,[AGG] Preliminary grand total,
+Italy,MASE,TOTALE | CONSUMI,-,-,[AGG] Definitive footer total,
+Italy,MASE,BUNKERS | T O T A L E,-,-,[MIXED] Bunker total; excluded from domestic demand,
+Italy,MASE,BUNKERS TOTALE,-,-,[MIXED] Preliminary bunker total,
+Italy,MASE,BUNKERS | GASOLIO,-,-,[SUB] Bunker gasoil; add in JODI GASDIES composite only,GASOLIO | TOTALE GASOLI
+Italy,MASE,BUNKERS | OLIO COMB.LE,Fuel Oil,Fuel Oil,[SUB] Bunker fuel oil,OLIO COMB.LE | TOTALE
+Italy,MASE,BUNKERS | OLIO COMB.,Fuel Oil,Fuel Oil,[SUB] Abbreviated bunker fuel-oil label,OLIO COMB.LE | TOTALE
+Italy,MASE,BUNKERS | LUBRIFICANTI,Heavy byproducts,Lubricants / Grease,[SUB] Bunker lubricants,LUBRIFICANTI TOTALE
+Italy,MASE,CARICA PETROLCHIMICA NETTA,Naphtha,Naphtha,[AGG] Net petrochemical feedstock; not end-use demand,
+Italy,MASE,CARICA PETROLCHIMICA LORDA,-,-,[AGG] Gross petrochemical feedstock,
+Italy,MASE,CONSUMI E PERDITE DI RAFFINERIA,Others,Others,[SUB] Refinery losses; not domestic demand,ALTRI PRODOTTI
+Italy,MASE,CONSUMI PROD.NE EN. EL.,Others,Others,[SUB] Refinery own-use for power gen,ALTRI PRODOTTI
+Italy,MASE,PRODUZIONE ENERGIA ELETTRICA E TERMICA,-,-,[SUB] Preliminary refinery power-gen line,CONSUMI PROD.NE EN. EL.
+Italy,MASE,CONSUMI OLIO COMB. TERMOELETTRICA,Fuel Oil,Fuel Oil,[SUB] Preliminary OC power-gen line,OLIO COMB.LE | TOTALE
+Italy,MASE,DELTA SCORTE CONSUMATORI,-,-,[AGG] Consumer stock change; not consumption,
+Italy,MASE,DELTA SCORTE CONSUMATORI | GASOLIO RISCALDAMENTO,-,-,[SUB] Definitive heating-oil stock delta; add in JODI GASDIES composite,DELTA SCORTE CONSUMATORI
+Italy,MASE,DELTA SCORTE CONSUMATORI | OLIO COMBUSTIBILE,-,-,[SUB] Definitive fuel-oil stock delta; add in JODI RESFUEL composite,DELTA SCORTE CONSUMATORI
+Korea,KNOC,gasoline,Gasoline,Gasoline,[PRIMARY] JODI GASOLINE compare,
+Korea,KNOC,kerosene,Kerosene,Kerosene,[PRIMARY] JODI X_OTHKERO compare,
+Korea,KNOC,diesel,Distillates,Diesel,[PRIMARY] JODI GASDIES compare,
+Korea,KNOC,jet_fuel,Kerosene,Jet Fuel,[PRIMARY] JODI JETKERO + Kayrros compare,
+Korea,KNOC,lpg,LPG,LPG,[PRIMARY] JODI LPG compare,
+Korea,KNOC,naphtha,Naphtha,Naphtha,[PRIMARY] Petchem-heavy; exclude from end-use headline,
+Korea,KNOC,light_heavy_oil,Fuel Oil,Fuel Oil,[SUB] Part of JODI RESFUEL composite,
+Korea,KNOC,heavy_oil,Fuel Oil,Fuel Oil,[SUB] Part of JODI RESFUEL composite,
+Korea,KNOC,bunker_c,Fuel Oil,Fuel Oil,[SUB] Part of JODI RESFUEL composite,
+Korea,KNOC,byproduct_fuel_oil,Fuel Oil,Fuel Oil,[SUB] Part of JODI RESFUEL composite,
+Korea,KNOC,asphalt,Heavy byproducts,Bitumen,[PRIMARY] Construction bitumen,
+Korea,KNOC,lubricant,Heavy byproducts,Lubricants / Grease,[PRIMARY] Lubes,
+Korea,KNOC,solvent,Others,Others,[PRIMARY] Solvents,
+Korea,KNOC,other_products,Others,Others,[PRIMARY] Residual other products,
+Korea,KNOC,biofuel,Others,Others,[PRIMARY] Biofuel line (sparse from ~2023),
+Korea,KNOC,total,-,-,[AGG] Source-file total; excluded from canonical sums,
+Japan,METI,gasoline,Gasoline,Gasoline,,
+Japan,METI,naphtha,Naphtha,Naphtha,,
+Japan,METI,jet_fuel,Kerosene,Jet Fuel,,
+Japan,METI,kerosene,Kerosene,Kerosene,,
+Japan,METI,gas_oil,Distillates,Diesel,[PRIMARY] 軽油; JODI GASDIES compare (road diesel),
+Japan,METI,total_fuel_oil,-,-,[MIXED] METI 重油計 headline only; not a parsed monthly native row,
+Japan,METI,fuel_oil_a,Distillates,Gasoil,[SUB] Ａ重油; JODI GASDIES compare with gas_oil,total_fuel_oil
+Japan,METI,fuel_oil_bc,Fuel Oil,Fuel Oil,[SUB] Ｂ・Ｃ重油; JODI RESFUEL compare,total_fuel_oil
+Japan,METI,lubricating_oil,Heavy byproducts,Lubricants,,
+Japan,METI,asphalt,Heavy byproducts,Bitumen,,
+Japan,METI,grease,Heavy byproducts,Grease,,
+Japan,METI,paraffin_wax,Heavy byproducts,Wax,,
+Japan,METI,lpg,LPG,LPG,,
+Taiwan,MOEA,lpg,LPG,LPG,[PRIMARY] 液化石油氣,
+Taiwan,MOEA,naphtha,Naphtha,Naphtha,[PRIMARY] 石油腦,
+Taiwan,MOEA,gasoline,Gasoline,Gasoline,[PRIMARY] 車用汽油,
+Taiwan,MOEA,jet_fuel,Kerosene,Jet Fuel,[PRIMARY] 航空燃油,
+Taiwan,MOEA,diesel,Distillates,Diesel,[PRIMARY] 柴油,
+Taiwan,MOEA,fuel_oil,Fuel Oil,Fuel Oil,[PRIMARY] 燃料油,
+Taiwan,MOEA,others,Others,Others,[PRIMARY] 其他,
+Taiwan,MOEA,total,-,-,[AGG] 合計; excluded from headline sums,
+Spain,CORES,LPG | Bottled,LPG,LPG,[SUB] Bottled LPG,LPG | Total
+Spain,CORES,LPG | Bulk,LPG,LPG,[SUB] Bulk LPG,LPG | Total
+Spain,CORES,LPG | Road,LPG,LPG,[SUB] Road LPG,LPG | Total
+Spain,CORES,LPG | Other LPG,LPG,LPG,[SUB] Other LPG,LPG | Total
+Spain,CORES,LPG | Total,-,-,[AGG] Sheet total; not stored,
+Spain,CORES,Gasoline | Gasoline 97 RON,Gasoline,Gasoline,[SUB] 97 RON,Gasoline | Subtotal road gasoline
+Spain,CORES,Gasoline | Gasoline 95 RON,Gasoline,Gasoline,[SUB] 95 RON,Gasoline | Subtotal road gasoline
+Spain,CORES,Gasoline | Gasoline 98 RON,Gasoline,Gasoline,[SUB] 98 RON,Gasoline | Subtotal road gasoline
+Spain,CORES,Gasoline | Biogasoline,Gasoline,Gasoline,[SUB] Biogasoline,Gasoline | Subtotal road gasoline
+Spain,CORES,Gasoline | Biogasoline Blend,Gasoline,Gasoline,[SUB] Biogasoline blend,Gasoline | Subtotal road gasoline
+Spain,CORES,Gasoline | Aviation gasoline,Gasoline,Gasoline,[PRIMARY] Aviation gasoline,
+Spain,CORES,Gasoline | Other gasoline,Gasoline,Gasoline,[PRIMARY] Other gasoline,
+Spain,CORES,Gasoline | Subtotal road gasoline,-,-,[AGG] Road gasoline subtotal; not stored,
+Spain,CORES,Gasoline | Total,-,-,[AGG] Sheet total; not stored,
+Spain,CORES,Gasoil | Road diesel,Distillates,Diesel,[SUB] Road diesel,Gasoil | Subtotal road diesel
+Spain,CORES,Gasoil | Biodiesel (B100),Distillates,Diesel,[SUB] Biodiesel B100,Gasoil | Subtotal road diesel
+Spain,CORES,Gasoil | Biodiesel blend (1),Distillates,Diesel,[SUB] Biodiesel blend,Gasoil | Subtotal road diesel
+Spain,CORES,Gasoil | Agricultural diesel,Distillates,Diesel,[SUB] Agricultural diesel,Gasoil | Total
+Spain,CORES,Gasoil | Heating oil,Distillates,Gasoil,[SUB] Heating oil,Gasoil | Total
+Spain,CORES,Gasoil | Other gasoil,Distillates,Gasoil,[SUB] Other gasoil,Gasoil | Total
+Spain,CORES,Gasoil | Subtotal road diesel,-,-,[AGG] Road diesel subtotal; not stored,
+Spain,CORES,Gasoil | Total,-,-,[AGG] Sheet total; not stored,
+Spain,CORES,Kerosene | Jet,Kerosene,Jet Fuel,[PRIMARY] Jet kerosene,
+Spain,CORES,Kerosene | Other kerosene,Kerosene,Kerosene,[PRIMARY] Non-jet kerosene,
+Spain,CORES,Kerosene | Total,-,-,[AGG] Sheet total; not stored,
+Spain,CORES,Fuel oil | Fuel oil No. 1,Fuel Oil,Fuel Oil,[SUB] Fuel oil No. 1,Fuel oil | Total
+Spain,CORES,Fuel oil | Fuel oil No. 2,Fuel Oil,Fuel Oil,[SUB] Fuel oil No. 2,Fuel oil | Total
+Spain,CORES,Fuel oil | Low-sulphur fuel oil,Fuel Oil,Fuel Oil,[SUB] Low-sulphur fuel oil,Fuel oil | Total
+Spain,CORES,Fuel oil | Other fuel oil,Fuel Oil,Fuel Oil,[SUB] Other fuel oil,Fuel oil | Total
+Spain,CORES,Fuel oil | Total,-,-,[AGG] Sheet total; not stored,
+Spain,CORES,Other products | Lubricants,Heavy byproducts,Lubricants / Grease,[PRIMARY] Lubricants,
+Spain,CORES,Other products | Asphalt products,Heavy byproducts,Bitumen,[PRIMARY] Asphalt,
+Spain,CORES,Other products | Petroleum coke,Heavy byproducts,Petcoke,[PRIMARY] Petroleum coke,
+Spain,CORES,Other products | Others,Others,Others,[PRIMARY] Residual other products,
+Spain,CORES,Other products | Total,-,-,[AGG] Sheet total; not stored,
+Portugal,DGEG,Internal Market | Butane,LPG,LPG,[PRIMARY] Butane,
+Portugal,DGEG,Internal Market | Propane,LPG,LPG,[PRIMARY] Propane,
+Portugal,DGEG,Internal Market | LPG Auto,LPG,LPG,[PRIMARY] Autogas LPG,
+Portugal,DGEG,Internal Market | Gasoline ON98 (a),Gasoline,Gasoline,[PRIMARY] ON98,
+Portugal,DGEG,Internal Market | Gasoline ON95 (b),Gasoline,Gasoline,[PRIMARY] ON95,
+Portugal,DGEG,Internal Market | Gasoline super additive,Gasoline,Gasoline,[PRIMARY] Legacy super gasoline,
+Portugal,DGEG,Internal Market | Naphtha and Aromatics,Naphtha,Naphtha,[PRIMARY] Naphtha and aromatics,
+Portugal,DGEG,Internal Market | Oils (kerosene + fuel),Kerosene,Kerosene,[PRIMARY] Kerosene + lamp oil,
+Portugal,DGEG,Internal Market | Road diesel (c),Distillates,Diesel,[PRIMARY] Road diesel incl. biodiesel,
+Portugal,DGEG,Internal Market | Coloured diesel for heating purposes,Distillates,Gasoil,[PRIMARY] Heating coloured diesel,
+Portugal,DGEG,"Internal Market | Coloured diesel, except for heating purposes",Distillates,Gasoil,[PRIMARY] Non-heating coloured diesel,
+Portugal,DGEG,Internal Market | Coloured diesel (legacy),Distillates,Gasoil,[PRIMARY] Legacy combined coloured diesel,
+Portugal,DGEG,Internal Market | Thin low-sulphur fuel oil (<=1%),Fuel Oil,Fuel Oil,[PRIMARY] Thin LSFO,
+Portugal,DGEG,Internal Market | Thick low-sulphur fuel oil (<=1%),Fuel Oil,Fuel Oil,[PRIMARY] Thick LSFO,
+Portugal,DGEG,Internal Market | Petroleum coke,Heavy byproducts,Petcoke,[PRIMARY] Petroleum coke,
+Portugal,DGEG,Internal Market | Lubricants,Heavy byproducts,Lubricants / Grease,[PRIMARY] Lubricants,
+Portugal,DGEG,Internal Market | Asphalt,Heavy byproducts,Bitumen,[PRIMARY] Asphalt,
+Portugal,DGEG,Internal Market | Paraffins,Heavy byproducts,Wax,[PRIMARY] Paraffins,
+Portugal,DGEG,Internal Market | Solvents,Others,Others,[PRIMARY] Solvents,
+Portugal,DGEG,Marine Bunkers (e) | Diesel (f),Distillates,Diesel,[PRIMARY] Marine diesel,
+Portugal,DGEG,Marine Bunkers (e) | Coloured diesel,Distillates,Diesel,[PRIMARY] Marine coloured diesel,
+Portugal,DGEG,Marine Bunkers (e) | Marine fuel oil,Fuel Oil,Fuel Oil,[PRIMARY] Marine fuel oil,
+Portugal,DGEG,Marine Bunkers (e) | Thin fuel oil,Fuel Oil,Fuel Oil,[PRIMARY] Legacy marine thin fuel oil,
+Portugal,DGEG,Marine Bunkers (e) | Thick fuel oil,Fuel Oil,Fuel Oil,[PRIMARY] Legacy marine thick fuel oil,
+Portugal,DGEG,Marine Bunkers (e) | Lubricants,Heavy byproducts,Lubricants / Grease,[PRIMARY] Marine lubricants,
+Portugal,DGEG,Aviation | Aviation gasoline,Gasoline,Gasoline,[PRIMARY] Aviation gasoline,
+Portugal,DGEG,Aviation | Jet fuel,Kerosene,Jet Fuel,[PRIMARY] Jet fuel,
+UK,DESNZ,Butane and propane,LPG,LPG,[PRIMARY] ET 3.13 consumption,
+UK,DESNZ,Other petroleum gases,LPG,LPG,[PRIMARY] ET 3.13 ethane/OPG; maps with butane to LPG,
+UK,DESNZ,Naphtha [LDF],Naphtha,Naphtha,[PRIMARY] Refinery/petchem demand; included in headline total,
+UK,DESNZ,Petrol,Gasoline,Gasoline,[PRIMARY] ET 3.13 consumption; ET 3.11 CLOSTLV stocks,
+UK,DESNZ,Jet fuel,Kerosene,Jet Fuel,[PRIMARY] ET 3.13 consumption; ET 3.11 CLOSTLV stocks,
+UK,DESNZ,Burning oil,Kerosene,Kerosene,[PRIMARY] ET 3.13 consumption; ET 3.11 CLOSTLV stocks,
+UK,DESNZ,Road diesel,Distillates,Diesel,[PRIMARY] ET 3.13 road diesel,
+UK,DESNZ,Gas oil,Distillates,Gasoil,[PRIMARY] ET 3.13 heating/industrial gas oil,
+UK,DESNZ,Fuel oil,Fuel Oil,Fuel Oil,[PRIMARY] ET 3.13 fuel oil,
+UK,DESNZ,Lubricating oils,Heavy byproducts,Lubricants / Grease,[PRIMARY] ET 3.13 lubricants,
+UK,DESNZ,Bitumen,Heavy byproducts,Bitumen,[PRIMARY] ET 3.13 bitumen,
+UK,DESNZ,Total,-,-,[AGG] Official ET 3.13 inland total; used for derived Others only,
+UK,DESNZ,Other products (derived),Others,Others,[DERIVED] Total minus sum of 11 ET 3.13 product columns; reconciles to Total,
+UK,DESNZ,Diesel,Distillates,Diesel,[PRIMARY] ET 3.11 CLOSTLV road diesel stocks,
+UK,DESNZ,Other products,Others,Others,[PRIMARY] ET 3.11 CLOSTLV bundled residual stocks,
+UK,DESNZ,Total diesel/ gas oil stocks,-,-,[AGG] ET 3.11 diesel+gasoil subtotal; not stored,
+UK,DESNZ,Total kerosene stocks,-,-,[AGG] ET 3.11 jet+burning oil subtotal; not stored,
+UK,DESNZ,Total product stocks,-,-,[AGG] ET 3.11 product stocks total; not stored,
+Hungary,MEKH,Natural gas liquids,LPG,LPG,[PRIMARY] NGL; kept separate from LPG native,
+Hungary,MEKH,LPG,LPG,LPG,[PRIMARY] LPG,
+Hungary,MEKH,Naphtha,Naphtha,Naphtha,[PRIMARY] Naphtha,
+Hungary,MEKH,Total motor gasoline,Gasoline,Gasoline,[PRIMARY] MOTORGAS rollup incl. bio/non-bio,
+Hungary,MEKH,Kerosene type jet fuel,Kerosene,Jet Fuel,[PRIMARY] JETKERO rollup incl. bio/non-bio,
+Hungary,MEKH,Total gas/diesel oil,Distillates,Diesel,[PRIMARY] GASDIES rollup incl. bio/non-bio,
+Hungary,MEKH,Fuel oil,Fuel Oil,Fuel Oil,[PRIMARY] RESFUEL rollup incl. high/low sulphur,
+Hungary,MEKH,Refinery gas,Others,Others,[PRIMARY] Refinery gas; typically zero on GID,
+Hungary,MEKH,Petroleum coke,Heavy byproducts,Petcoke,[PRIMARY] Petroleum coke,
+Hungary,MEKH,Other products,Others,Others,[PRIMARY] Other secondary petroleum products,
+Ukraine,SSSU,Motor gasoline,Gasoline,Gasoline,[PRIMARY] SSSU fuel used + reserves; national Ukraine rows,
+Ukraine,SSSU,Gas diesel,Distillates,Diesel,[PRIMARY] SSSU gas/diesel; road+industrial combined,
+Ukraine,SSSU,Liquefied petroleum gases (LPG),LPG,LPG,[PRIMARY] SSSU LPG,
+Ukraine,SSSU,Fuel oil,Fuel Oil,Fuel Oil,[PRIMARY] SSSU fuel oil,
+Poland,ARE,Motor gasoline,Gasoline,Gasoline,[PRIMARY] Table 1.4 domestic consumption; Table 1.1 production,
+Poland,ARE,Diesel oils,Distillates,Diesel,[PRIMARY] Table 1.5 domestic consumption; Table 1.2 import,
+Poland,ARE,Heating oil,Distillates,Gasoil,[PRIMARY] Table 1.6 domestic consumption,
+Poland,ARE,Fuel oil,Fuel Oil,Fuel Oil,[PRIMARY] Table 1.7 domestic consumption,
+Poland,ARE,LPG,LPG,LPG,[PRIMARY] Table 1.8 domestic consumption,
+Norway,SSB,Motor gasoline,Gasoline,Gasoline,[PRIMARY] Table 3 monthly sales; JODI GASOLINE compare,
+Norway,SSB,"Auto diesel, dutiable",Distillates,Diesel,[PRIMARY] Dutiable road diesel; JODI GASDIES composite,
+Norway,SSB,"Auto diesel, free of duty",Distillates,Diesel,[PRIMARY] Duty-free auto diesel; JODI GASDIES composite,
+Norway,SSB,Marine gas oil and diesel,Distillates,Diesel,[PRIMARY] Marine distillate; JODI GASDIES composite,
+Norway,SSB,Light heating oils and kerosene for heating and lighting,Kerosene,Kerosene,[PRIMARY] Combined heating kero; JODI X_OTHKERO compare,
+Norway,SSB,Heating and lighting kerosene,Kerosene,Kerosene,[PRIMARY] Bridge-era heating kero; JODI X_OTHKERO compare,
+Norway,SSB,Light heating oils,Kerosene,Kerosene,[PRIMARY] Bridge-era light heating oils; kept separate for breakdown,
+Norway,SSB,Jet kerosene,Kerosene,Jet Fuel,[PRIMARY] JODI JETKERO compare,
+Norway,SSB,Heavy distillate and heavy fuel oil,Fuel Oil,Fuel Oil,[PRIMARY] JODI RESFUEL compare,
+Norway,SSB,Other petroleum products,Others,Others,[PRIMARY] Aviation gasoline + bitumen per SSB; JODI ONONSPEC compare,
+Norway,SSB,Diesel,Distillates,Diesel,[PRIMARY] Legacy 03687 combined diesel; JODI GASDIES composite,
+Norway,SSB,Other middle distillates,Distillates,Diesel,[PRIMARY] Legacy 03687 marine-like distillate; JODI GASDIES composite,
+Norway,SSB,Kerosene,Kerosene,Kerosene,[PRIMARY] Legacy 03687 kerosene; JODI X_OTHKERO compare,
+Germany,BAFA,Ottokraftstoff,Gasoline,Gasoline,[PRIMARY] Domestic deliveries; JODI GASOLINE compare,
+Germany,BAFA,Dieselkraftstoff,Distillates,Diesel,[PRIMARY] Domestic deliveries; JODI GASDIES compare,
+Germany,BAFA,"Heizöl, leicht",Distillates,Gasoil,[PRIMARY] Light heating oil,
+Germany,BAFA,"Heizöl, schwer",Fuel Oil,Fuel Oil,[PRIMARY] Heavy fuel oil; JODI RESFUEL compare,
+Germany,BAFA,Flüssiggas,LPG,LPG,[PRIMARY] LPG; JODI LPG compare,
+Germany,BAFA,Rohbenzin,Naphtha,Naphtha,[PRIMARY] Naphtha; JODI NAPHTHA compare,
+Germany,BAFA,"Flugturb.Kraftst.,schwer",Kerosene,Jet Fuel,[PRIMARY] Jet kerosene heavy; JODI JETKERO compare,
+Germany,BAFA,"Flugturb.Kraftst.,leicht",Kerosene,Jet Fuel,[PRIMARY] Jet kerosene light (often zero),
+Germany,BAFA,Benzinkomponenten,Gasoline,Gasoline,[PRIMARY] Gasoline blendstocks,
+Germany,BAFA,Bitumen,Heavy byproducts,Bitumen,[PRIMARY] Bitumen,
+Germany,BAFA,Petrolkoks,Heavy byproducts,Petcoke,[PRIMARY] Petroleum coke,
+Germany,BAFA,Raffineriegas,Others,Others,[PRIMARY] Refinery gas,
+Germany,BAFA,Schmierstoffe,Others,Lubes & greases,[PRIMARY] Lubricants total,
+Germany,BAFA,Raffinerieeinsatzmaterial,Others,Others,[PRIMARY] 2025+ feedstock regroup,
+Germany,BAFA,Mitteldestillatkomponenten,Distillates,Diesel,[PRIMARY] Middle distillate components (pre-2025),
+Germany,BAFA,HS-Komponenten,Fuel Oil,Fuel Oil,[PRIMARY] Heavy fuel oil components (pre-2025),
+Germany,BAFA,Spezialbenzin,Gasoline,Gasoline,[PRIMARY] Special / test gasoline group,
+Germany,BAFA,Testbenzin,Gasoline,Gasoline,[PRIMARY] White spirit,
+Germany,BAFA,Flugbenzin,Gasoline,Gasoline,[PRIMARY] Aviation gasoline,
+Germany,BAFA,Andere Leuchtöle,Kerosene,Kerosene,[PRIMARY] Other illuminating oils,
+Germany,BAFA,Andere Rückstände,Others,Others,[PRIMARY] Other residues,
+Germany,BAFA,"Wachse,Paraffine,Vaseline",Others,Others,[PRIMARY] Waxes / paraffins,
+Germany,BAFA,"Weitere, nicht aufgeführte Produkte",Others,Others,[PRIMARY] 2025+ other products rollup,
+Germany,BAFA,Mineralölprodukte,Others,Others,[PRIMARY] Products stock total (CLOSTLV),
+Germany,BAFA,Rohöl,Crude,Crude,[PRIMARY] Crude stock total (CLOSTLV),
+Germany,BAFA,Rohöl | deutsches,Crude,Crude,[PRIMARY] Domestic crude stock,
+Germany,BAFA,Rohöl | ausländisches,Crude,Crude,[PRIMARY] Foreign-origin crude stock,
+Germany,BAFA,Bioethanol,Others,Others,[PRIMARY] Bio blend component; not additive to Otto TOTDEMO,
+Germany,BAFA,Bioethanol an ETBE a),Others,Others,[PRIMARY] Bioethanol share of ETBE,
+Germany,BAFA,"Biodiesel (FAME), HVO, BTL",Distillates,Diesel,[PRIMARY] Bio blend aggregate; not additive to diesel TOTDEMO,
+Germany,BAFA,davon HVO,Distillates,Diesel,[PRIMARY] Of which HVO (2025+),
+Germany,BAFA,davon FAME,Distillates,Diesel,[PRIMARY] Of which FAME (2025+),
+Germany,BAFA,Bioheizöl,Distillates,Gasoil,[PRIMARY] Bio heating oil blend component,
+Germany,BAFA,Biokerosin,Kerosene,Jet Fuel,[PRIMARY] Bio jet blend component (sparse),

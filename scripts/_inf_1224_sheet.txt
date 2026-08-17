@@ -1,0 +1,20 @@
+"Tabela 1.1 Krajowy bilans energii elektrycznej  -  dane za miesiąc sprawozdawczy 1, 2)",,,,,,
+,,,,,,
+Wyszczególnienie,,,,grudzień,,Indeks dynamiki
+,,,,2023,2024.0,
+,,,,GWh,,%
+, PRZYCHÓD,,1.0,17127.7878,17286.047135,100.92399168443693
+,Produkcja ogółem  ,,2.0,15853.3148,15995.045135,100.8940107276492
+,     z tego: , elektrownie PW ,3.0,11359.486,11763.724,103.55859411244488
+,,    w tym: elektrownie cieplne konwencjonalne,4.0,10073.817,10716.736,106.38207940446011
+,, elektrownie niezależne 3),5.0,3028.994944,2777.720828,91.7043732113935
+,,    w tym: elektrownie cieplne konwencjonalne,6.0,242.337,290.061,119.6932371037027
+,,elektrownie przemysłowe 3) ,7.0,1464.833856,1453.600307,99.23311787517832
+,Import (pobór),,8.0,1274.473,1291.002,101.29692822052722
+, ROZCHÓD,,9.0,17127.7878,17286.047135,100.92399168443693
+,Zużycie ogółem,,10.0,15636.3488,15438.789135,98.73653582734097
+,    w tym: ,potrzeby energetyczne elektrowni PW ,11.0,1171.307,1153.993,98.52182220374334
+,,    z tego: na energię elektryczną,12.0,888.315,905.816,101.97013446806594
+,,                na produkcję ciepła,13.0,282.992,248.177,87.69753208571267
+,,potrzeby energetyczne elektrowni niezależnych ,14.0,45.105,47.64293,105.62671544174704
+,,potrzeby energetyczne elektrowni przemysłowych ,15.0,147.004,147.332,100.22312318032162

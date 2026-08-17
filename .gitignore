@@ -1,0 +1,53 @@
+# --- Secrets / local env ---
+.env
+.env.*
+!.env.example
+
+# --- Runtime data (rebuildable; do not push agency dumps) ---
+data/raw/
+data/processed/
+
+# Live warehouse rebuild; dated backups under backups/ are tracked on purpose
+data/warehouse/**
+!data/warehouse/backups/
+!data/warehouse/backups/**
+!data/warehouse/README.md
+
+# Ad-hoc CSVs at data root (if any)
+data/*.csv
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+.env/
+
+# --- Test / type / lint caches ---
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# --- Scratch / probe leftovers (keep scripts; drop dumps) ---
+are_debug.txt
+hungary_cells.txt
+*_debug.txt
+data/**/_probe*
+*.log

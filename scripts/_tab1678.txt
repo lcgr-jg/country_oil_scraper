@@ -1,0 +1,12 @@
+1: Tablica 1.6. Sprzedaż i zużycie krajowe lekkiego oleju opałowego
+Table 1.6.    Sales and domestic co | [nan, nan, nan]
+15:  Zużycie krajowe
+ Domestic consumption | [49.0547, 87.41509999999998, 50.78850000000003]
+16: Tablica 1.7. Sprzedaż i zużycie krajowe ciężkiego oleju opałowego
+Table 1.7.    Sales and domestic c | [nan, nan, nan]
+29:  Zużycie krajowe
+ Domestic consumption | [21.269000000000005, 13.750099999999996, 16.401300000000006]
+30: Tablica 1.8. Sprzedaż i zużycie krajowe gazu ciekłego LPG
+Table 1.8.    Sales and domestic consumpti | [nan, nan, nan]
+43:  Zużycie krajowe
+ Domestic consumption | [203.93799999999993, 216.85040000000004, 218.04559999999992]

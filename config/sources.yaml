@@ -1,0 +1,558 @@
+# Registry of petroleum data sources by country
+# Each source defines: url, method, format, frequency, notes
+
+india:
+  agency: PPAC (Petroleum Planning & Analysis Cell)
+  agency_url: https://ppac.gov.in
+  datasets:
+
+    products_wise_consumption:
+      description: >
+        Monthly domestic consumption of petroleum products (LPG, MS, HSD, ATF, 
+        Naphtha, SKO, FO/LSHS, LDO, Bitumen, Petcoke, Others).
+        Units: '000 Metric Tonnes. Reported by fiscal year (Apr-Mar).
+      page_url: https://ppac.gov.in/consumption/products-wise
+      access_method: ajax  # Table populated via JS; needs session + POST
+      # The AJAX endpoint likely hits something like:
+      #   POST ppac.gov.in/api/consumption/products-wise
+      #   params: year=2024-2025, unit=quantity
+      # TODO: capture exact endpoint via browser DevTools (Network tab)
+      fallback_method: excel_download  # "Download Historical Report" behind captcha
+      format: html_table / xlsx
+      frequency: monthly
+      unit: "'000 MT"
+      notes: >
+        Historical report download requires free registration + CAPTCHA.
+        Current report (single year) may be available without login.
+
+    state_wise_consumption:
+      description: >
+        Annual state-wise domestic sales/consumption of petroleum products.
+        Breakdown by product and Indian state/UT.
+      page_url: https://ppac.gov.in/consumption/state-wise
+      access_method: direct_download
+      download_url: https://ppac.gov.in/uploads/page-images/1747633531_Statewise_Sales-POL_Consumption_Final.xlsx
+      format: xlsx
+      frequency: annual (updated periodically)
+      unit: "'000 MT or TMT"
+      notes: >
+        Single Excel file with multiple sheets. No login required.
+        URL may change when file is updated — scraper should check page 
+        for latest link.
+
+    pmuy_connections:
+      description: >
+        State-wise PMUY (Pradhan Mantri Ujjwala Yojana) LPG connection data.
+        Tracks free LPG connections given to BPL households by state and OMC.
+      page_url: https://ppac.gov.in/consumption/state-wise-pmuy-data
+      access_method: direct_download
+      download_url: https://ppac.gov.in/uploads/page-images/1747729722_pumy-connection.xlsx
+      format: xlsx
+      frequency: periodic (updated quarterly or so)
+      unit: number of connections (lakhs or absolute)
+      notes: >
+        Relevant for understanding LPG demand drivers.
+        PMUY = structural demand growth for Indian LPG.
+
+    pt_consumption:
+      description: >
+        Monthly domestic consumption of petroleum products (LPG, MS, HSD, ATF,
+        Naphtha, SKO, FO/LSHS, LDO, Lubricants & Greases, Bitumen, Petcoke, Others).
+        One sheet per fiscal year (Apr-Mar). Units: '000 Metric Tonnes.
+      page_url: https://ppac.gov.in/consumption/products-wise
+      access_method: direct_download
+      # Filename changes when PPAC refreshes the file — scraper re-scrapes page each run.
+      # Update download_url here whenever manual bootstrap is needed.
+      download_url: https://ppac.gov.in/download.php?file=reports/1778131889_PT_Consumption.xlsx
+      url_pattern: "PT_Consumption.xlsx"
+      format: xlsx
+      frequency: monthly
+      unit: "'000 MT"
+      notes: >
+        The download URL contains a Unix timestamp that changes on each PPAC update.
+        The scraper searches the products-wise page for any href matching
+        url_pattern before falling back to download_url.
+
+    pt_trade:
+      description: >
+        Combined product import and export (crude + products) by month.
+        One sheet per fiscal year in the historical workbook; current-year
+        single sheet. Units: '000 Metric Tonnes (TMT). Manual bootstrap under
+        data/raw/india/trade/.
+      access_method: manual
+      format: xlsx / xls
+      frequency: monthly
+      unit: "'000 MT"
+      notes: >
+        Parser: reference/india.parse_pt_trade_workbook. Exports sit below the
+        PRODUCT EXPORT header on the same sheet as imports.
+
+    pt_production:
+      description: >
+        Refinery production of petroleum products (monthwise sheets).
+        MS-VI/MS Others and HSD-VI/HSD Others are rolled up to MS/HSD; FO+LSHS
+        combined. Manual bootstrap under data/raw/india/production/.
+      access_method: manual
+      format: xls
+      frequency: monthly
+      unit: "'000 MT"
+      notes: >
+        Parser: reference/india.parse_pt_production_workbook. Maps to JODI REFGROUT.
+
+jodi:
+  agency: JODI (Joint Organisations Data Initiative)
+  agency_url: https://www.jodidata.org
+  # JODI is a multilateral oil/gas data initiative coordinated by the IEF.
+  # We treat it as a "country" entry inside this framework so it slots into
+  # the existing scraper / processor pattern without special-casing.
+  datasets:
+
+    secondary:
+      description: >
+        JODI-Oil World Database — Extended Secondary CSV (refined products).
+        One annual CSV per year (2002-current) plus a year-to-date file for
+        the current year. Rows are country × month × product × flow × unit.
+        OBS_VALUE special strings: '-' = not reported, 'x' = not applicable,
+        'N/A' = data unavailable. ASSESSMENT_CODE: 1 = blue (final),
+        2 = yellow (estimate), 3 = white (missing/not reported).
+      page_url: https://www.jodidata.org/oil/database/data-downloads.aspx
+      access_method: direct_download
+      # URL pattern verified 2026-05.
+      # Historical years use a bare YYYY.csv filename; the current
+      # year-to-date file is prefixed with the dataset name.
+      historical_url_pattern: https://www.jodidata.org/_resources/files/downloads/oil-data/annual-csv/secondary/{year}.csv
+      current_year_url_pattern: https://www.jodidata.org/_resources/files/downloads/oil-data/annual-csv/secondary/secondaryyear{year}.csv
+      format: csv
+      frequency: monthly (annual file refreshed each month)
+      unit: KBBL / KBD / KTONS / KL / CONVBBL (per row)
+      notes: >
+        First downloaded year was bootstrapped manually into
+        data/raw/jodi/secondary_jodi/. Going forward the scraper saves
+        new files to data/raw/jodi/secondary/<YYYY>.csv.
+
+    primary:
+      description: >
+        JODI-Oil World Database — Extended Primary CSV (crude oil & NGLs).
+        Same shape and conventions as the secondary dataset.
+      page_url: https://www.jodidata.org/oil/database/data-downloads.aspx
+      access_method: direct_download
+      historical_url_pattern: https://www.jodidata.org/_resources/files/downloads/oil-data/annual-csv/primary/{year}.csv
+      current_year_url_pattern: https://www.jodidata.org/_resources/files/downloads/oil-data/annual-csv/primary/primaryyear{year}.csv
+      format: csv
+      frequency: monthly (annual file refreshed each month)
+      unit: KBBL / KBD / KTONS / KL / CONVBBL (per row)
+      notes: >
+        New downloads saved to data/raw/jodi/primary/<YYYY>.csv.
+
+australia:
+  agency: Department of Climate Change, Energy, the Environment and Water (DCCEEW)
+  agency_url: https://www.energy.gov.au
+  datasets:
+
+    petroleum_statistics:
+      description: >
+        Monthly Australian Petroleum Statistics — production, refining,
+        sales by product and state, imports and exports by country and value.
+        Source file is a 26-sheet Excel workbook with separate tabs per topic
+        (Petroleum production, Refinery production, Sales of products,
+        Sales by state and territory, Imports volume, Imports value,
+        Imports volume by country, Imports value by country, Exports volume,
+        Exports value, etc.).
+      page_url_template: https://www.energy.gov.au/publications/australian-petroleum-statistics-{year}
+      access_method: direct_download
+      url_pattern: ".xlsx"
+      format: xlsx
+      frequency: monthly
+      unit: "ML (volume) / various (value)"
+      notes: >
+        The publications page URL contains the calendar year. The scraper
+        discovers the working URL each run (current year first, previous
+        year as fallback for the early-January gap before DCCEEW launches
+        the new year's page). The first .xlsx link on the page is always
+        the latest monthly extract — older yearly publications appear
+        lower on the page but link to OTHER publication pages, not xlsx
+        files.
+
+        WAF: energy.gov.au sits behind a bot-protection layer that does
+        TLS fingerprinting and silently stalls plain python-requests
+        connections (we confirmed this with scripts/scrape_australia_v0.py
+        from a clean network — only this site was blocked). The scraper
+        uses curl_cffi to perform the TLS handshake byte-for-byte like
+        Chrome. The impersonation profile (e.g. "chrome131") is set in
+        the scraper class itself; you may need to bump it forward if a
+        future Chrome release breaks the current profile.
+
+        Files are saved with the server-provided filename (which already
+        contains the publication month, e.g. "..._february_2026.xlsx"),
+        and the scraper skips re-downloading if a same-size local copy
+        exists. Pass force=True to override the cache.
+
+thailand:
+  agency: Energy Policy and Planning Office (EPPO)
+  agency_url: https://www.eppo.go.th
+  datasets:
+    petroleum_sales:
+      description: >
+        Table 2.3-4 — Sale of Petroleum Products (barrels/day). Domestic sales
+        by product; historical monthly series plus rolling current snapshot.
+      page_url: https://www.eppo.go.th/data-energy-statistic/energy-statistic/oil-energy-stat/petroleum/
+      access_method: direct_download
+      format: xls
+      frequency: monthly
+      unit: bbl/d
+      download_urls:
+        current: https://www.eppo.go.th/wp-content/uploads/2026/04/T02_03_04.xls
+        historical: https://www.eppo.go.th/wp-content/uploads/2026/04/T02_03_04-1.xls
+      notes: >
+        Two workbooks: T02_03_04-1.xls (1986-2024 monthly wide) and T02_03_04.xls
+        (current snapshot). EPPO also publishes .xlsx copies locally; parsers accept
+        both. Jan-Mar 2025 imputed from Q1 3-month average (is_provisional).
+        Run: python scripts/update_thailand.py  (monthly refresh; downloads by default)
+        or:  python scripts/update_thailand.py --bootstrap  (full rebuild)
+        Offline: python scripts/update_thailand.py --no-download
+
+italy:
+  agency: MASE (Ministero dell'ambiente e della sicurezza energetica)
+  agency_url: https://sisen.mase.gov.it/dgsaie/consumi-petroliferi
+  datasets:
+    consumi_definitivi:
+      description: >
+        Final (definitivi) annual petroleum consumption workbooks with monthly
+        rows within each calendar year. One file per year from 2002–2025.
+        Filename pattern: Consumi_Petroliferi_Definitivi_ANNO.xls[x]
+        (.xls through 2019, .xlsx from 2020).
+      page_url: https://sisen.mase.gov.it/dgsaie/consumi-petroliferi
+      access_method: cmis_api
+      cmis_folder: /sg_dgsaie/consumi_petroliferi/definitivi/
+      format: xls/xlsx
+      frequency: annual
+      unit: unknown  # Phase 2 — inspect workbook headers
+      notes: >
+        Files are listed via the public CMIS REST API (no auth for reads).
+        Bootstrap: python scripts/update_italy.py --bootstrap
+
+    consumi_preconsuntivi:
+      description: >
+        Preliminary (preconsuntivi) monthly petroleum consumption workbooks.
+        One file per month from 2022 onward. Filename pattern usually
+        Consumi_Petrolio_YYYY_MM.xls (2024_03 uses Petroliferi typo).
+      page_url: https://sisen.mase.gov.it/dgsaie/consumi-petroliferi
+      access_method: cmis_api
+      cmis_folder_template: /sg_dgsaie/consumi_petroliferi/preconsuntivi/{year}/
+      format: xls
+      frequency: monthly
+      unit: unknown  # Phase 2
+      notes: >
+        Routine refresh downloads only the latest month by lastModificationDate.
+        Run: python scripts/update_italy.py
+
+korea:
+  agency: KNOC (Korea National Oil Corporation) / MOTIE
+  agency_url: https://www.knoc.co.kr
+  petronet_url: https://www.petronet.co.kr/v4/sub.jsp
+  datasets:
+    petroleum_consumption:
+      description: >
+        제품별소비 — monthly petroleum product consumption by product.
+        Petronet menu KDCQ0200; English headers on auto-download, Korean on older manual files.
+      page_url: https://www.petronet.co.kr/v4/sub.jsp
+      menu_ids:
+        fmuId: KDDQSTAT
+        smuId: KDCQ01
+        tmuId: KDCQ0200
+      excel_url: https://www.petronet.co.kr/v4/excel/KDCQ0200_x.jsp
+      access_method: scrape
+      format: csv
+      frequency: monthly
+      unit: kbpm
+      notes: >
+        Routine (incremental): python scripts/update_korea.py
+        Force re-download: python scripts/update_korea.py --force
+        Full history download: python scripts/update_korea.py --bootstrap
+        Re-parse all local bundles: python scripts/update_korea.py --reparse-all
+        Repair truncated CSVs: python scripts/update_korea.py --repair-gaps
+      processed_output: data/processed/korea/korea_knoc.parquet
+    petroleum_stocks:
+      description: >
+        석유제품재고 — monthly petroleum product closing stocks by product.
+        Petronet menu KDSQ0200; same wide CSV layout as consumption.
+      page_url: https://www.petronet.co.kr/v4/sub.jsp
+      menu_ids:
+        fmuId: KDDQSTAT
+        smuId: KDPQ02
+        tmuId: KDSQ0200
+      excel_url: https://www.petronet.co.kr/v4/excel/KDSQ0200_x.jsp
+      access_method: scrape
+      format: csv
+      frequency: monthly
+      unit: kb
+      raw_subdir: stocks
+      notes: >
+        Raw bundles live under data/raw/korea/stocks/.
+        Consumption + stocks merge into data/processed/korea/korea_knoc.parquet.
+
+taiwan:
+  agency: MOEA Energy Administration (E-STATE-STAT)
+  agency_url: https://ea01.moeaea.gov.tw
+  datasets:
+    petroleum_consumption:
+      description: >
+        Table 5-04 Petroleum Products Consumption (按油品別). Monthly product
+        breakdown in ktoe (千公噸油當量). Workbook also carries annual totals
+        2007–2024; parser imputes flat monthly rows until true monthly history
+        is available.
+      page_url: https://ea01.moeaea.gov.tw/a0303/02/en/newest/monthly/?tab=Oil
+      # SPA metadata; excel paths under tabs.Oil.attachment[].formats.excel
+      monthly_api_url: https://ea01.moeaea.gov.tw/a0303/02/api/pages/en/newest/monthly
+      download_api_pattern: /api/files/m_5-04*.xlsx
+      access_method: curl_cffi
+      format: xlsx
+      frequency: monthly
+      unit: ktoe
+      notes: >
+        Discovery uses monthly_api_url JSON (HTML no longer embeds xlsx links).
+        Run: python scripts/update_taiwan.py
+        Bootstrap: python scripts/update_taiwan.py --bootstrap
+        Force re-download: python scripts/update_taiwan.py --force
+        Offline: python scripts/update_taiwan.py --no-download --bootstrap
+        TLS: verify=False on some corporate networks (MOEA cert chain).
+
+japan:
+  agency: METI (Ministry of Economy, Trade and Industry) / ANRE
+  agency_url: https://www.meti.go.jp/statistics/tyo/sekiyuka/index.html
+  user_guide: docs/japan_meti_guide.html
+  datasets:
+    domestic_sales:
+      description: >
+        Monthly petroleum product domestic sales (国内向販売) from METI petroleum
+        statistics. 速報 (preliminary, ~M+1) from sekiyuso/result.html; 確報
+        (final, ~M+2) monthly 製品月表 xlsx from sekiyuka index. Values in kL
+        except LPG/asphalt/grease/paraffin in tonnes.
+      kakuhou_page_url: https://www.meti.go.jp/statistics/tyo/sekiyuka/index.html
+      sokuhou_result_url: https://www.meti.go.jp/statistics/tyo/sekiyuso/result.html
+      access_method: curl_cffi
+      format: xlsx
+      frequency: monthly
+      unit: kL / t (LPG and heavy byproducts)
+      notes: >
+        Run: python scripts/update_japan.py  (速報 JP + EN index + last 6 確報 months)
+        English 速報 (full supply matrix incl. inventories): METI English sekiyuso index.
+        Bootstrap: python scripts/update_japan.py --bootstrap
+        (downloads 年報 xlsx 2020–2024 for monthly history + 確報 index + 速報)
+        Rebuild local only: python scripts/update_japan.py --bootstrap --no-download
+        Headline totals include naphtha (overall industrial + transport demand).
+        User guide: docs/japan_meti_guide.html
+
+spain:
+  agency: CORES (Corporación de Reservas Estratégicas de Productos Petrolíferos)
+  agency_url: https://www.cores.es
+  user_guide: docs/spain_cores_guide.html
+  datasets:
+    petroleum_consumption:
+      description: >
+        Petroleum Product Consumption — monthly domestic consumption by product
+        and sub-product (LPG, gasoline, gasoil, kerosene, fuel oil, other products).
+        One xlsx with full history from 1996; unit tonnes.
+      page_url: https://www.cores.es/en/estadisticas
+      download_url: https://www.cores.es/sites/default/files/archivos/estadisticas/oil-products-consumption.xlsx
+      access_method: direct_download
+      format: xlsx
+      frequency: monthly
+      unit: t
+      notes: >
+        Run: python scripts/update_spain.py
+        Bootstrap: python scripts/update_spain.py --bootstrap
+        Offline: python scripts/update_spain.py --no-download --bootstrap
+        Dashboard: notebooks/17_spain_demand_dashboard.ipynb
+
+portugal:
+  agency: DGEG (Direção-Geral de Energia e Geologia)
+  agency_url: https://www.dgeg.gov.pt
+  datasets:
+    monthly_sales:
+      description: >
+        Monthly Sales of Oil Products in Portugal — domestic sales by product
+        and market segment (internal market, marine bunkers, aviation). One
+        workbook per calendar year; unit tonnes.
+      page_url: https://www.dgeg.gov.pt/en/statistics/energy-statistics/oil-and-related-products/monthly-sales/
+      access_method: scrape
+      format: xlsx / xls
+      frequency: monthly
+      unit: t
+      notes: >
+        Run: python scripts/update_portugal.py
+        Bootstrap since 2006: python scripts/update_portugal.py --bootstrap --download-history
+        Offline bootstrap: python scripts/update_portugal.py --bootstrap --no-download
+        Dashboard: notebooks/20_portugal_demand_dashboard.ipynb
+
+uk:
+  agency: DESNZ (Department for Energy Security and Net Zero)
+  agency_url: https://www.gov.uk/government/organisations/department-for-energy-security-and-net-zero
+  datasets:
+    energy_trends_oil_products:
+      description: >
+        Energy Trends consolidated ODS — ET 3.13 inland consumption and ET 3.11
+        petroleum product closing stocks. Monthly thousand tonnes (kt).
+      page_url: https://www.gov.uk/government/statistics/oil-and-oil-products-section-3-energy-trends
+      access_method: scrape
+      format: ods
+      frequency: monthly
+      unit: kt
+      notes: >
+        Run: python scripts/update_uk.py --bootstrap
+        Offline: python scripts/update_uk.py --bootstrap --no-download
+        Incremental: python scripts/update_uk.py
+        Local file: python scripts/update_uk.py --local-file data/raw/uk/<file>.ods
+        Dashboard: notebooks/21_uk_demand_dashboard.ipynb
+      processed_output: data/processed/uk/uk_energy_trends.parquet
+
+hungary:
+  agency: MEKH (Hungarian Energy and Public Utility Regulatory Authority)
+  agency_url: https://www.mekh.hu
+  datasets:
+    oil_balance_demand:
+      description: >
+        Monthly oil balance (HaviOlajMerleg) — Gross inland deliveries (Observed)
+        by product. IEA-style balance; demand proxy for domestic consumption.
+      page_url: https://stattab.mekh.hu/#/generated-report/HaviOlajMerleg
+      access_method: odata
+      odata_url: https://stattab.mekh.hu/odata/v4/public/HaviOlajMerleg
+      format: json (OData v4)
+      frequency: monthly
+      unit: kt
+      notes: >
+        Run: python scripts/update_hungary.py --bootstrap
+        Incremental: python scripts/update_hungary.py
+        Offline: python scripts/update_hungary.py --bootstrap --no-download
+        Routine runs always re-fetch fixed-name OData snapshots (use
+        --no-download to keep a local cache).
+        Dashboard: notebooks/22_hungary_demand_dashboard.ipynb
+        Guide: docs/hungary_mekh_guide.html
+      processed_output: data/processed/hungary/hungary_mekh_demand.parquet
+
+    oil_balance_stocks:
+      description: >
+        Monthly oil product closing stocks (HaviOlajKeszlet) — national territory
+        (CSNATTER). Same product rollup as demand; unit kt.
+      page_url: https://stattab.mekh.hu/#/generated-report/HaviOlajKeszlet
+      access_method: odata
+      odata_url: https://stattab.mekh.hu/odata/v4/public/HaviOlajKeszlet
+      format: json (OData v4)
+      frequency: monthly
+      unit: kt
+      notes: >
+        Stored in the same parquet as demand (metric_type CLOSTLV).
+        Flow code CSNATTER matches JODI CLOSTLV within rounding.
+        Guide: docs/hungary_mekh_guide.html
+
+poland:
+  agency: ARE (Energy Market Agency / Agencja Rynku Energii)
+  agency_url: https://www.are.waw.pl
+  datasets:
+    liquid_fuels:
+      description: >
+        Statistical Information on the Liquid Fuels Market — monthly Biuletyn
+        workbooks. Production, import, domestic consumption, and commercial
+        stocks by refined product. Unit kt (tys. ton). Crude excluded.
+      page_url: https://www.are.waw.pl/pl/badania-statystyczne/wynikowe-informacje-statystyczne
+      access_method: scrape
+      format: xls
+      frequency: monthly
+      unit: kt
+      notes: >
+        Run: python scripts/update_poland.py
+        Bootstrap all linked bulletins: python scripts/update_poland.py --bootstrap --download-history
+        Offline bootstrap: python scripts/update_poland.py --bootstrap --no-download
+        Incremental: python scripts/update_poland.py
+        Dashboard: notebooks/24_poland_demand_dashboard.ipynb
+      processed_output: data/processed/poland/poland_are_liquid_fuels.parquet
+
+ukraine:
+  agency: SSSU (State Statistics Service of Ukraine)
+  agency_url: https://stat.gov.ua/en
+  datasets:
+    fuel_usage_and_reserves:
+      description: >
+        Monthly fuel usage and end-of-month reserves by region and fuel type.
+        National Ukraine rows for four petroleum products; unit thousands of tonnes (kt).
+      page_url: https://stat.gov.ua/en/explorer?md5=51fc52d6499adbd528265700e7ffdb7e
+      access_method: sdmx_api
+      sdmx_dataflow: SSSU/DF_FUEL_USAGE_AND_RESERVES_M/2.0.0
+      format: csv (SDMX-CSV or Data Bank wide export)
+      frequency: monthly
+      unit: kt
+      notes: >
+        Run: python scripts/update_ukraine.py --bootstrap
+        Incremental: python scripts/update_ukraine.py
+        Offline: python scripts/update_ukraine.py --bootstrap --no-download
+        SDMX API: https://stat.gov.ua/en/development-api/sdmx-api-v3
+        Routine runs always re-fetch the fixed-name SDMX snapshot (use
+        --no-download to keep a local cache).
+        Series starts 2021; demand gaps and stock cessation from Feb 2022 reflect
+        war-related reporting breaks (Crimea/Donbas exclusions documented by SSSU).
+        Dashboard: notebooks/23_ukraine_demand_dashboard.ipynb
+      processed_output: data/processed/ukraine/ukraine_sssu_fuel.parquet
+
+germany:
+  agency: BAFA (Bundesamt für Wirtschaft und Ausfuhrkontrolle)
+  agency_url: https://www.bafa.de
+  datasets:
+    amtliche_mineraloeldaten:
+      description: >
+        Amtliche Mineralöldaten — monthly domestic deliveries
+        (Inlandsablieferungen), closing stocks (Eigentumsendbestand), and
+        bio blending (Beimischung). Native unit tonnes. Files are XLSX or
+        PDF (payload often mislabeled as .pdf).
+      page_url: https://www.bafa.de/DE/Energie/Rohstoffe/Mineraloelstatistik/mineraloel_node.html
+      infothek_url: https://www.bafa.de/SiteGlobals/Forms/Suche/Infothek/Infothek_Formular.html?templateQueryString=Amtliche+Daten+Mineral%C3%B6l&documentType_=type_statistic
+      access_method: scrape
+      format: xlsx / pdf
+      frequency: monthly
+      unit: t
+      notes: >
+        Run bootstrap: python scripts/update_germany.py --bootstrap --download-history
+        Incremental: python scripts/update_germany.py
+        Offline: python scripts/update_germany.py --bootstrap --no-download
+        History from 2019-12; 2026+ Infothek slugs omit zero-padded months.
+        Exploration: notebooks/27_germany_bafa_exploration.ipynb
+      processed_output: data/processed/germany/germany_bafa_demand.parquet
+
+norway:
+  agency: SSB (Statistics Norway)
+  agency_url: https://www.ssb.no
+  datasets:
+    monthly_product_sales:
+      description: >
+        Table 3 — monthly sales of petroleum products and liquid biofuels by
+        product. Preliminary figures; million litres (ML). Demand metric uses
+        deliveries of petroleum products (incl. bio components).
+      page_url: https://www.ssb.no/en/energi-og-industri/olje-og-gass/statistikk/sal-av-petroleumsprodukt
+      access_method: pxweb_api_v2
+      statbank_tables:
+        current: "13585"
+        bridge: "11174"
+        legacy: "03687"
+      format: csv (API) / xlsx (page export)
+      frequency: monthly
+      unit: ML
+      notes: >
+        Run: python scripts/update_norway.py
+        Full history bootstrap: python scripts/update_norway.py --bootstrap
+        Incremental: python scripts/update_norway.py
+        Offline: python scripts/update_norway.py --no-download --local-file <xlsx>
+        Monthly series excludes LPG/lubricants; diesel/marine monthly figures
+        revised from 2020 onward (not comparable to pre-2020 monthly).
+        JODI kerosene compare uses X_OTHKERO vs heating kerosene (not combined kero).
+        Dashboard: notebooks/25_norway_demand_dashboard.ipynb
+      processed_output: data/processed/norway/norway_ssb_sales.parquet
+
+# Template for adding new countries:
+# brazil:
+#   agency: ANP (Agência Nacional do Petróleo)
+#   agency_url: https://www.gov.br/anp
+#   datasets:
+#     monthly_production:
+#       description: ...
+#       page_url: ...
+#       access_method: direct_download / api / scrape
+#       ...

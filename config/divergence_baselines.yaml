@@ -1,0 +1,14 @@
+# Known structural gaps between sources (methodology differences, not data errors).
+# Used by analytics.core.divergences to separate stable offsets from episodic shifts.
+#
+# gap_pct: typical (official - benchmark) / benchmark * 100 over stable periods
+# note: displayed in the dashboard as context
+
+baselines: []
+# Example (uncomment and tune after review):
+# - country_code: "NO"
+#   product_canonical: Jet fuel
+#   official_source: norway_ssb_petroleum_sales
+#   benchmark_source: Kayrros
+#   gap_pct: -15.0
+#   note: "Kayrros tracks in-flight burn; SSB reports product sales — expect a level gap."

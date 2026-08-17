@@ -1,0 +1,382 @@
+# =============================================================================
+# Canonical metric vocabulary for the country_oil_scraper project.
+# =============================================================================
+#
+# Every row in the unified database has a `metric_type` column whose value
+# MUST appear as a key under `canonical:` below. This decouples the source's
+# native terminology (e.g. Australia's "Sales of products", India's "Sales")
+# from the canonical name used for cross-country queries.
+#
+# Codes are JODI-aligned where possible (see
+# https://www.jodidata.org/oil/dictionary.aspx for definitions). Codes
+# prefixed with X_ are project-specific extensions for concepts JODI does
+# not publish (e.g. days-of-stock-cover).
+#
+# Phase status (Phase 4c complete - 2026-05):
+#   - Cached Python access to this file lives in `reference/loaders.py`.
+#     Use `canonical_metric(native_label, source)` to look up a code.
+#   - Australia scraper writes the canonical codes directly.
+#   - India processor (Phase 4b) writes the canonical `metric_type`
+#     column. PPAC has no native metric label per row, so the value is
+#     hardcoded to TOTDEMO with a comment pointing back to this file -
+#     see the `ppac_pt_consumption:` block below for rationale.
+#   - JODI processor (Phase 4c) writes the canonical `metric_type`
+#     column for BOTH primary and secondary. JODI's vocabulary IS the
+#     canonical vocabulary, so the mapping is identity - listed
+#     explicitly so the loader can validate completeness.
+#     Product canonicalisation is asymmetric: secondary rows get
+#     `product_canonical` / `category` from product_map.csv, primary
+#     rows stay NaN by design (crude isn't in scope for product_map).
+
+canonical:
+
+  # ---- Supply side ---------------------------------------------------------
+  INDPROD:
+    description: >
+      Indigenous production. Crude oil, condensate, NGL, natural gas, etc.
+      extracted within the reporting country. Excludes refining output.
+    typical_units: [ML, Mm3, kt, bbl]
+    notes: JODI primary code. Direct match.
+
+  REFGROUT:
+    description: >
+      Refinery gross output. Volume of refined products produced by
+      domestic refineries. Excludes refinery fuel/loss.
+    typical_units: [ML, kt]
+    notes: JODI secondary code. Australia's "Refinery production" sheet.
+
+  REFINOBS:
+    description: >
+      Refinery intake observed. Volume of crude oil and refinery
+      feedstocks delivered to refineries for processing. Distinct from
+      REFGROUT (which is output) - this is input. The two diverge by
+      refinery fuel/loss (typically ~5-10%) and any intermediate stock
+      changes.
+    typical_units: [ML, kt, bbl]
+    notes: >
+      JODI primary code. In Australia's "Refinery production" sheet,
+      the "Total input" column maps to REFINOBS (not REFGROUT) - that
+      column measures crude flowing IN, not products flowing OUT.
+
+  TOTIMPSB:
+    description: Total imports (sub-batch level).
+    typical_units: [ML, kt, bbl]
+    notes: JODI code shared by primary and secondary datasets.
+
+  # ---- Demand side ---------------------------------------------------------
+  TOTDEMO:
+    description: >
+      Total demand observed - product deliveries to the domestic market.
+      In JODI terminology, this is the closest proxy for national
+      consumption (after accounting for stock changes).
+    typical_units: [ML, kt, bbl/d]
+    notes: >
+      JODI secondary code. Australia's "Sales of products" sheet.
+      Thailand EPPO Table 2.3-4 also maps here (native unit bbl/d).
+
+  TOTEXPSB:
+    description: Total exports (sub-batch level).
+    typical_units: [ML, kt, bbl]
+    notes: JODI code shared by primary and secondary datasets.
+
+  # ---- Inventory -----------------------------------------------------------
+  CLOSTLV:
+    description: >
+      Closing stock level - inventory held at end of reporting period.
+      Includes refinery stocks, primary stocks, and where measurable,
+      stocks in transit.
+    typical_units: [ML, kt, bbl]
+    notes: JODI code shared by primary and secondary datasets.
+
+  BIOBLEND:
+    description: >
+      Biofuel blend *components* reported separately from blended product
+      deliveries (e.g. BAFA Beimischung — bioethanol, FAME, HVO). Use for
+      substitution analysis; do not add to TOTDEMO diesel/gasoline totals.
+    typical_units: [t, kt]
+    notes: Agency-specific; not a JODI flow code.
+
+  STOCKCH:
+    description: >
+      Stock change over the reporting period: closing stocks minus opening
+      stocks. Positive means a stock build, negative a draw. Always
+      derivable from CLOSTLV via month-over-month diff, but JODI also
+      publishes the value directly so the figure can be cross-checked.
+    typical_units: [ML, kt, bbl]
+    notes: JODI code shared by primary and secondary datasets.
+
+  # ---- Balance / residual --------------------------------------------------
+  STATDIFF:
+    description: >
+      Statistical difference. The unexplained residual between reported
+      supply (production + imports + receipts + transfers - exports) and
+      reported disposition (demand + stock change). Large absolute values
+      flag underlying data quality issues rather than economic activity.
+    typical_units: [ML, kt, bbl]
+    notes: JODI code shared by primary and secondary datasets.
+
+  # ---- JODI secondary-specific (product side) ------------------------------
+  IPTRANSF:
+    description: >
+      Interproduct transfers received. A refined product reclassified
+      INTO this product from another category (e.g. naphtha reclassified
+      as a gasoline blending component is a gasoline IPTRANSF). Mirror of
+      PTRANSF.
+    typical_units: [ML, kt, bbl]
+    notes: >
+      JODI secondary code only. Most national agencies don't report
+      interproduct transfers separately - they net them into demand.
+
+  PTRANSF:
+    description: >
+      Interproduct transfers delivered. A refined product reclassified
+      OUT of this product into another category. Mirror of IPTRANSF.
+    typical_units: [ML, kt, bbl]
+    notes: JODI secondary code only.
+
+  RECEIPTS:
+    description: >
+      Receipts from other sources. Refined product volumes received from
+      non-refinery sources - biofuels (ethanol/biodiesel blended into
+      gasoline/diesel), recycled or recovered hydrocarbons, hydrogen, etc.
+    typical_units: [ML, kt, bbl]
+    notes: >
+      JODI secondary code only. Cross-source comparable for biofuel
+      blending studies (countries with mandates show large gasoline /
+      diesel RECEIPTS).
+
+  # ---- JODI primary-specific (crude side) ----------------------------------
+  DIRECUSE:
+    description: >
+      Direct use of crude oil bypassing the refinery (burning crude
+      directly for power, or using crude as petrochemical feedstock).
+      Rare; published mostly as a near-zero residual.
+    typical_units: [ML, kt, bbl]
+    notes: JODI primary code only.
+
+  OSOURCES:
+    description: >
+      Receipts of crude from other sources - refinery feedstocks,
+      additives, oxygenates, and similar non-indigenous, non-imported
+      inputs to the crude balance.
+    typical_units: [ML, kt, bbl]
+    notes: JODI primary code only.
+
+  TRANSBAK:
+    description: >
+      Backflows and trans-shipments of crude. Crude moved across the
+      reporting boundary for transit (not consumption) or returned from
+      downstream processing for re-classification.
+    typical_units: [ML, kt, bbl]
+    notes: JODI primary code only.
+
+  # ---- Project-specific extensions (X_ prefix) -----------------------------
+  X_STKCOVER:
+    description: >
+      Stock cover in days - derived ratio of closing stocks to daily
+      consumption rate. JODI does not publish this directly (consumers
+      compute it themselves), but DCCEEW publishes it pre-computed for
+      Australia in the "Consumption cover" sheet.
+    typical_units: [days]
+    notes: Project extension. Australia-only for now.
+
+  X_REFINSHARE_INDIG:
+    description: >
+      Share of refinery intake that is indigenous crude (versus imported).
+      Useful for tracking national refining self-sufficiency. Computed
+      by the source; not a direct measurement. Australia's value is
+      historically 20-40%, declining as domestic crude production winds
+      down and refineries import more.
+    typical_units: ["%"]
+    notes: >
+      Project extension. Australia-only for now. JODI does not publish
+      this ratio directly - consumers can compute it from INDPROD,
+      TOTIMPSB, and REFINOBS if needed for cross-country comparison.
+
+
+# =============================================================================
+# Per-source mappings: native source label -> canonical code
+# =============================================================================
+#
+# Populated incrementally. When a scraper produces a row, the processor
+# uses these mappings to fill the `metric_type` column. If a source's
+# native term is missing from its block here, the processor should raise
+# rather than silently drop the row.
+#
+# In Phase 2b, only `dceew_petroleum_statistics` has populated mappings.
+# Phase 4 will populate the rest.
+
+source_mappings:
+
+  dceew_petroleum_statistics:
+    # Australia (DCCEEW). One entry per sheet we extract.
+    # The scrapers/australia_apstat.py SHEETS_CONFIG also has per-column
+    # overrides for the Refinery production sheet (Total input -> REFINOBS,
+    # Percentage indigenous -> X_REFINSHARE_INDIG) - documented here for
+    # cross-reference.
+    "Sales of products":         TOTDEMO
+    "Petroleum production":      INDPROD
+    "Refinery production":       REFGROUT     # most columns; see overrides
+    "Imports volume":            TOTIMPSB
+    "Exports volume":            TOTEXPSB
+    "Stock volume by product":   CLOSTLV
+    "Consumption cover":         X_STKCOVER
+
+  ppac_pt_consumption:
+    # India (PPAC). Phase 4b complete - resolved 2026-05.
+    #
+    # PPAC's "PT Consumption" tables publish product deliveries only,
+    # so every row in the unified database maps to TOTDEMO. There is
+    # no per-product variation here, so the processor
+    # (processors/india_pt_consumption.py) hardcodes
+    #     df["metric_type"] = "TOTDEMO"
+    # rather than doing a per-row lookup via this block. The entry is
+    # kept here for documentation and as the single point of truth if
+    # the policy ever changes.
+    #
+    # If PPAC later splits its data into multiple metrics (e.g. adds a
+    # production view), add the native-label -> code pairs below and
+    # update the processor to look them up.
+    # _default:                  TOTDEMO
+
+  jodi_primary:
+    # JODI primary (crude oil & condensate). Phase 4c complete - 2026-05.
+    #
+    # JODI's vocabulary IS the canonical vocabulary - every native
+    # flow_breakdown code maps to a canonical code of the same name. The
+    # mapping is listed here explicitly (rather than implied) so the
+    # loader can validate completeness: if JODI adds a new flow code in
+    # a future release, the processor's lookup will raise KeyError and
+    # this block must be updated.
+    INDPROD:    INDPROD
+    REFINOBS:   REFINOBS
+    TOTIMPSB:   TOTIMPSB
+    TOTEXPSB:   TOTEXPSB
+    CLOSTLV:    CLOSTLV
+    STOCKCH:    STOCKCH
+    STATDIFF:   STATDIFF
+    DIRECUSE:   DIRECUSE
+    OSOURCES:   OSOURCES
+    TRANSBAK:   TRANSBAK
+
+  jodi_secondary:
+    # JODI secondary (refined products). Phase 4c complete - 2026-05.
+    # Identity mapping; see jodi_primary above for rationale.
+    REFGROUT:   REFGROUT
+    TOTDEMO:    TOTDEMO
+    TOTIMPSB:   TOTIMPSB
+    TOTEXPSB:   TOTEXPSB
+    CLOSTLV:    CLOSTLV
+    STOCKCH:    STOCKCH
+    STATDIFF:   STATDIFF
+    IPTRANSF:   IPTRANSF
+    PTRANSF:    PTRANSF
+    RECEIPTS:   RECEIPTS
+
+  eppo_petroleum_sales:
+    # Thailand (EPPO). Table 2.3-4 — Sale of Petroleum Products (barrels/day).
+    # Source: https://www.eppo.go.th/index.php/en/en-energystatistics/petroleum-statistic
+    #
+    # EPPO publishes domestic sales volumes only (no production / trade balance
+    # in this table), so every row maps to TOTDEMO. The processor
+    # (processors/thailand_eppo_sales.py) hardcodes metric_type = TOTDEMO
+    # like PPAC; this block is the single point of truth for documentation.
+    #
+    # Native unit is barrels/day (equivalent to kbd for analytics).
+    "Sale of Petroleum Products":  TOTDEMO
+
+  mase_consumi_petroliferi:
+    # Italy (MASE). Consumi petroliferi — definitive + preliminary workbooks.
+    # Source: https://sisen.mase.gov.it/dgsaie/consumi-petroliferi
+    #
+    # Native unit is thousands of tonnes (kt). All parsed rows use metric_type
+    # TOTDEMO. Italy-specific JODI compare composites (gasoil + bunker + stock
+    # delta; scattered fuel-oil rows) live in reference/italy.py — not here.
+    "Consumi petroliferi":  TOTDEMO
+
+  korea_petroleum_consumption:
+    # Korea (KNOC / MOTIE). 제품별소비 — product-by-product consumption CSV.
+    # Native unit is thousand barrels per calendar month (kbpm); see
+    # reference/korea.py and analytics.units (kbpm -> kbd via days-in-month).
+    # Processor hardcodes metric_type = TOTDEMO (domestic consumption).
+    "Product consumption":  TOTDEMO
+
+  korea_petroleum_stocks:
+    # Korea (KNOC / MOTIE). 석유제품재고 — product closing stocks CSV.
+    # Native unit is thousand barrels (kb) at month-end; metric_type CLOSTLV.
+    "Product stocks":  CLOSTLV
+
+  taiwan_petroleum_consumption:
+    # Taiwan (MOEA / E-STATE-STAT). Table 5-04 petroleum products consumption
+    # (按油品別). Native unit ktoe (千公噸油當量). Annual rows 2007–2024 are
+    # expanded to flat monthly imputations in reference/taiwan.py.
+    "Petroleum Products Consumption":  TOTDEMO
+
+  spain_petroleum_consumption:
+    # Spain (CORES). Petroleum Product Consumption — monthly tonnes.
+    # Processor hardcodes metric_type = TOTDEMO. JODI composites in reference/spain.py.
+    "Petroleum Product Consumption":  TOTDEMO
+
+  portugal_petroleum_sales:
+    # Portugal (DGEG). Monthly Sales of Oil Products — monthly tonnes.
+    # Processor hardcodes metric_type = TOTDEMO. JODI composites in reference/portugal.py.
+    "Monthly Sales":  TOTDEMO
+
+  uk_energy_trends_consumption:
+    # UK (DESNZ). ET 3.13 deliveries for inland consumption — monthly thousand tonnes (kt).
+    # Processor sets metric_type = TOTDEMO. Derived Others in reference/uk.py.
+    "Deliveries for inland consumption":  TOTDEMO
+
+  uk_energy_trends_stocks:
+    # UK (DESNZ). ET 3.11 petroleum product closing stocks — monthly kt.
+    "Petroleum product stocks":  CLOSTLV
+
+  japan_meti_domestic_sales:
+    # Japan (METI). 確報 製品月表 supply-balance columns per product block.
+    # Native unit kL (tonnes for LPG / asphalt / grease / paraffin). 年報 + 速報
+    # publish domestic sales (TOTDEMO) only; other flows come from 確報 history.
+    "Production":       INDPROD
+    "Import":           TOTIMPSB
+    "Domestic sales":   TOTDEMO
+    "Export":           TOTEXPSB
+    "Inventory":        CLOSTLV
+
+  mekh_oil_balance_demand:
+    # Hungary (MEKH). HaviOlajMerleg — Gross inland deliveries (Observed) only.
+    # Native unit kt. OData leaf codes rolled to Excel-style product natives in
+    # reference/hungary.py before canonical mapping.
+    "Gross inland deliveries (Observed)":  TOTDEMO
+
+  mekh_oil_balance_stocks:
+    # Hungary (MEKH). HaviOlajKeszlet — Closing stock, national territory (CSNATTER).
+    "Closing stock - national territory":  CLOSTLV
+
+  sssu_fuel_usage_and_reserves:
+    # Ukraine (SSSU). DF_FUEL_USAGE_AND_RESERVES_M — monthly kt (thousands of tonnes).
+    # National Ukraine rows; four petroleum products. Gaps from Feb 2022 are real
+    # (war / confidentiality), not parser artefacts.
+    "Fuel used":  TOTDEMO
+    "Fuel reserves at the end of the reporting month":  CLOSTLV
+
+  are_liquid_fuels:
+    # Poland (ARE). Biuletyn liquid fuels market — monthly kt (tys. ton).
+    # Parser (reference/poland.py) hardcodes metric_type per table block;
+    # refined products only (crude excluded).
+    "Domestic consumption":  TOTDEMO
+    "Production":            REFGROUT
+    "Import":                TOTIMPSB
+    "Commercial stocks":     CLOSTLV
+
+  norway_ssb_petroleum_sales:
+    # Norway (SSB). Table 3 monthly product sales — million litres (ML).
+    # Processor hardcodes metric_type = TOTDEMO. Value column is petroleum
+    # incl. bio components on 13585 (see reference/norway.py).
+    "Monthly product sales":  TOTDEMO
+
+  bafa_mineraloel:
+    # Germany (BAFA). Amtliche Mineralöldaten — monthly tonnes.
+    # Parser hardcodes metric_type per section (§6 / §8 / §9 or Tab 6c/8/9).
+    # BIOBLEND is blend *components*; do not add to TOTDEMO diesel/gasoline.
+    "Inlandsablieferungen":              TOTDEMO
+    "Eigentumsendbestand":               CLOSTLV
+    "Beimischung von Biozusatzstoffen":  BIOBLEND

@@ -1,0 +1,93 @@
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+
+JODI_PARQUET = PROJECT_ROOT / "data" / "processed" / "jodi" / "jodi_secondary.parquet"
+if not JODI_PARQUET.exists():
+    print("[skip] JODI parquet missing")
+else:
+    jodi = pd.read_parquet(JODI_PARQUET)
+    jodi["date"] = pd.to_datetime(jodi["date"])
+    jodi_kr = jodi[
+        (jodi["ref_area"] == "KR")
+        & (jodi["flow_breakdown"] == "TOTDEMO")
+        & (jodi["unit_measure"] == "KBD")
+    ]
+
+    # --- KNOC totals ---
+    knoc_headline_total = (
+        headline.groupby("date", as_index=False)["value_kbd"].sum()
+        .rename(columns={"value_kbd": "knoc_kbd"})
+    )
+    knoc_all_total = (
+        demand[demand["product_native"] != "total"]
+        .groupby("date", as_index=False)["value_kbd"]
+        .sum()
+        .rename(columns={"value_kbd": "knoc_all_kbd"})
+    )
+
+    # KNOC sum of §7-compare products (same scope as product panels)
+    knoc_cmp_parts = []
+    for key in JODI_COMPARE_SERIES:
+        s = knoc_series_for_jodi(demand, key, value_col="value_kbd")
+        if not s.empty:
+            knoc_cmp_parts.append(s.set_index("date")["value_kbd"])
+    knoc_compare_total = (
+        pd.concat(knoc_cmp_parts, axis=1)
+        .sum(axis=1)
+        .reset_index()
+        .rename(columns={0: "knoc_kbd"})
+    )
+
+    # --- JODI totals ---
+    jodi_codes = [spec.jodi_energy_product for spec in JODI_COMPARE_SERIES.values()]
+    jodi_compare_total = (
+        jodi_kr[jodi_kr["energy_product"].isin(jodi_codes)]
+        .groupby("date", as_index=False)["obs_value"]
+        .sum()
+        .rename(columns={"obs_value": "jodi_kbd"})
+    )
+    jodi_totprods = (
+        jodi_kr[jodi_kr["energy_product"] == "TOTPRODS"][["date", "obs_value"]]
+        .rename(columns={"obs_value": "jodi_kbd"})
+    )
+
+    # --- Plot 1: comparable (§7 scope) ---
+    cmp = knoc_compare_total.merge(jodi_compare_total, on="date", how="inner")
+    fig1 = go.Figure()
+    fig1.add_trace(go.Scatter(
+        x=cmp["date"], y=cmp["knoc_kbd"], name="KNOC (§7 product set)", line=dict(color="#1f77b4")
+    ))
+    fig1.add_trace(go.Scatter(
+        x=cmp["date"], y=cmp["jodi_kbd"], name="JODI (§7 product set)", line=dict(color="#ff7f0e")
+    ))
+    fig1.update_layout(
+        title="Total demand — KNOC vs JODI (same six products as §7, kbd)",
+        yaxis_title="kbd", template="plotly_white", hovermode="x unified", height=420,
+    )
+    fig1.show()
+
+    # Gap stats (last 24 months)
+    cutoff = cmp["date"].max() - pd.DateOffset(months=23)
+    m = cmp[cmp["date"] >= cutoff]
+    gap = (m["knoc_kbd"] - m["jodi_kbd"]).abs().mean()
+    print(f"Comparable total — mean |gap| (24m): {gap:,.1f} kbd ({gap / m['jodi_kbd'].mean() * 100:.1f}% of JODI)")
+
+    # --- Plot 2: broad (TOTPRODS vs KNOC all products) ---
+    broad = knoc_all_total.merge(jodi_totprods, on="date", how="inner")
+    fig2 = go.Figure()
+    fig2.add_trace(go.Scatter(
+        x=broad["date"], y=broad["knoc_all_kbd"], name="KNOC (all parquet products)", line=dict(color="#1f77b4")
+    ))
+    fig2.add_trace(go.Scatter(
+        x=broad["date"], y=broad["jodi_kbd"], name="JODI TOTPRODS", line=dict(color="#ff7f0e")
+    ))
+    fig2.update_layout(
+        title="Broad total — KNOC (all products) vs JODI TOTPRODS (kbd)",
+        yaxis_title="kbd", template="plotly_white", hovermode="x unified", height=420,
+    )
+    fig2.show()
+
+    m2 = broad[broad["date"] >= cutoff]
+    gap2 = (m2["knoc_all_kbd"] - m2["jodi_kbd"]).abs().mean()
+    print(f"Broad total — mean |gap| (24m): {gap2:,.1f} kbd ({gap2 / m2['jodi_kbd'].mean() * 100:.1f}% of JODI)")
+    print("Note: KNOC still excludes some JODI buckets (e.g. ONONSPEC); naphtha is in KNOC all but not in headline.")
