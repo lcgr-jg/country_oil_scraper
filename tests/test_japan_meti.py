@@ -36,7 +36,7 @@ PROBE = Path(__file__).resolve().parents[1] / "data" / "raw" / "japan" / "_probe
 def kakuhou_path() -> Path:
     p = PROBE / "se202603kakji.xlsx"
     if not p.exists():
-        pytest.skip("probe xlsx missing — run scripts/_probe_meti.py once")
+        pytest.skip("probe xlsx missing — run scripts/scratch/_probe_meti.py once")
     return p
 
 

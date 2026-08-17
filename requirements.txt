@@ -1,3 +1,6 @@
+# Prefer: pip install -e ".[dev,orchestration]"  (see pyproject.toml)
+# This file remains for quick ``pip install -r requirements.txt`` installs.
+
 requests>=2.31
 # curl_cffi: requests-compatible client that performs the TLS handshake using
 # Chrome's exact algorithm ordering. Required by scrapers/australia_apstat.py
@@ -20,3 +23,4 @@ matplotlib>=3.8
 streamlit>=1.28
 duckdb>=1.0
 pytest>=7.0
+prefect>=3.0

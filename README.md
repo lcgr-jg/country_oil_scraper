@@ -4,6 +4,19 @@ Modular framework for scraping petroleum data from national statistical agencies
 starting with India's PPAC (Petroleum Planning & Analysis Cell). Designed for
 eventual comparison against JODI (Joint Organisations Data Initiative).
 
+## Setup
+
+From the repo root (Python 3.10+):
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -e ".[dev,orchestration]"
+```
+
+Or: `pip install -r requirements.txt` (includes Prefect). Editable install is preferred
+so `scrapers` / `pipelines` / `orchestration` import cleanly.
+
 ## Architecture
 
 See **[ARCHITECTURE.md](ARCHITECTURE.md)** for the scraper / processor / update-script
@@ -14,32 +27,51 @@ country_oil_scraper/
 ├── config/sources.yaml        # Registry of all data sources per country
 ├── scrapers/                  # download() + parse() — source-native tidy data
 ├── processors/                # load / upsert / save + canonical mapping
-├── scripts/update_*.py        # CLI orchestration per country
+├── pipelines/                 # Shared registry + run_update() API
+├── orchestration/             # Prefect flows (local; Cloud-ready later)
+├── scripts/update_*.py        # Per-country CLIs (still supported)
+├── scripts/run_pipeline.py    # Unified CLI over the registry
+├── scripts/scratch/           # One-off probes (not scheduled)
 ├── reference/                 # product_map.csv, metric_types.yaml
-├── data/raw/{country}/        # Downloaded files as-is
-├── data/processed/{country}/  # Parquet databases
+├── data/raw/{country}/        # Downloaded files as-is (gitignored)
+├── data/processed/{country}/  # Parquet databases (gitignored)
+├── data/warehouse/backups/    # Dated DuckDB snapshots (tracked)
 ├── docs/                      # User guides (HTML)
 └── notebooks/                 # Exploration and prototyping
 ```
 
 **Quick rule:** parsing lives in scrapers; database persistence and canonical
-columns live in processors.
+columns live in processors. Scheduling goes through `pipelines` / Prefect, not
+notebooks or `scripts/scratch/`.
 
 ## Central warehouse & dashboard
 
-Fourteen countries are wired into a local **DuckDB warehouse** and a **Streamlit**
-dashboard (`config/countries.yaml`). Country ETL still runs via the existing
-`scripts/update_*.py` flow; consolidation reads those parquets into one file for
+Countries are wired into a local **DuckDB warehouse** and a **Streamlit**
+dashboard (`config/countries.yaml`). Country ETL runs via update scripts (or the
+unified pipeline CLI); consolidation reads those parquets into one file for
 charts, JODI cross-checks, Kayrros jet, and CSV/HTML export.
+
+Dated warehouse backups live under `data/warehouse/backups/` (committed on
+purpose). The live `oil_demand.duckdb` is gitignored — rebuild anytime with
+consolidate.
 
 ### 1. Refresh country parquets (as needed)
 
-Run the relevant update script when source data changes, e.g.:
+Per-country scripts still work:
 
 ```powershell
 python scripts/update_norway.py
 python scripts/update_india_pt_consumption.py
 python scripts/update_jodi.py
+```
+
+Or use the registry (same underlying scripts):
+
+```powershell
+python scripts/run_pipeline.py list
+python scripts/run_pipeline.py norway
+python scripts/run_pipeline.py norway -- --force
+python scripts/run_pipeline.py all --consolidate
 ```
 
 ### 2. Build the warehouse
@@ -70,10 +102,22 @@ optional JODI / Kayrros / seasonality panels. At the bottom of the page:
 - **Download data (CSV)** — per-dataset CSVs or a ZIP bundle
 - **Download HTML snapshot** — static export of the current charts and tables
 
-### 4. Optional: schedule consolidation (Windows)
+### 4. Optional: Prefect (local)
+
+After `pip install -e ".[orchestration]"`:
+
+```powershell
+python -c "from orchestration.flows import update_one; update_one('norway')"
+python -c "from orchestration.flows import update_and_consolidate; update_and_consolidate(['norway','germany'])"
+```
+
+Flows call the same `pipelines.run_update` / consolidate entrypoints. Run them
+from your machine first; Prefect Cloud is optional later (same flows + a worker).
+
+### 5. Optional: schedule consolidation (Windows)
 
 To refresh the warehouse nightly after update scripts finish, use Task Scheduler
-to run (adjust paths to your clone):
+or a Prefect deployment to run (adjust paths to your clone):
 
 ```powershell
 cd "C:\path\to\country_oil_scraper"

@@ -51,3 +51,6 @@ hungary_cells.txt
 *_debug.txt
 data/**/_probe*
 *.log
+
+# Prefect local / ephemeral
+.prefect/

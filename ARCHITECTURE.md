@@ -92,6 +92,19 @@ exactly (e.g. `"italy"` → `data/raw/italy/`).
    (See JODI and India for this pattern.)
 4. **One update script per country** that delegates to the processor for anything
    beyond a simple download-only phase.
+5. **Register the pipeline** in `pipelines/registry.py` so
+   `scripts/run_pipeline.py` and Prefect (`orchestration/flows.py`) can schedule
+   it. Do not put probes in `scripts/` — use `scripts/scratch/` or notebooks.
+
+## Scheduling entrypoints
+
+| Layer | Role |
+|-------|------|
+| `scripts/update_{country}.py` | Per-source CLI (argparse, country-specific flags) |
+| `pipelines/registry.py` + `runner.py` | Stable IDs → scripts; `run_update` / `run_consolidate` |
+| `orchestration/flows.py` | Prefect flows wrapping the runner (local first) |
+
+Production schedules should call the registry/Prefect layer, not notebooks.
 
 ## Per-country reference
 
