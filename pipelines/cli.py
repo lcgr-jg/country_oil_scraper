@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import argparse
+import json
 import logging
 import sys
 
 from pipelines.registry import PIPELINES, list_pipeline_ids
-from pipelines.runner import run_consolidate, run_many, run_update
+from pipelines.runner import run_consolidate, run_many, run_update, run_update_with_status
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -27,6 +28,11 @@ def main(argv: list[str] | None = None) -> None:
         "--stop-on-error",
         action="store_true",
         help="With 'all', stop at the first failing pipeline",
+    )
+    parser.add_argument(
+        "--with-status",
+        action="store_true",
+        help="Print JSON status (updated/unchanged/error) after a single pipeline run",
     )
     parser.add_argument(
         "script_args",
@@ -60,6 +66,15 @@ def main(argv: list[str] | None = None) -> None:
         if args.consolidate and not (failed and args.stop_on_error):
             run_consolidate()
         if failed:
+            sys.exit(1)
+        return
+
+    if args.with_status:
+        result = run_update_with_status(target, forwarded)
+        print(json.dumps(result.to_dict(), indent=2))
+        if args.consolidate and result.status != "error":
+            run_consolidate()
+        if result.status == "error":
             sys.exit(1)
         return
 

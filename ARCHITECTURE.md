@@ -101,10 +101,13 @@ exactly (e.g. `"italy"` → `data/raw/italy/`).
 | Layer | Role |
 |-------|------|
 | `scripts/update_{country}.py` | Per-source CLI (argparse, country-specific flags) |
-| `pipelines/registry.py` + `runner.py` | Stable IDs → scripts; `run_update` / `run_consolidate` |
+| `pipelines/registry.py` + `runner.py` | Stable IDs → scripts; `run_update_with_status` |
 | `orchestration/flows.py` | Prefect flows wrapping the runner (local first) |
+| `scripts/serve_weekday_polls.py` | Serves Norway/Germany weekday poll deployments |
 
-Production schedules should call the registry/Prefect layer, not notebooks.
+Poll outcomes are `updated` / `unchanged` / `error` / `unknown` (parquet fingerprint
+before vs after). Production schedules should call the registry/Prefect layer, not
+notebooks.
 
 ## Per-country reference
 

@@ -104,15 +104,41 @@ optional JODI / Kayrros / seasonality panels. At the bottom of the page:
 
 ### 4. Optional: Prefect (local)
 
-After `pip install -e ".[orchestration]"`:
+After `pip install -e ".[orchestration]"` (or install into your Coding `.venv`):
 
 ```powershell
-python -c "from orchestration.flows import update_one; update_one('norway')"
-python -c "from orchestration.flows import update_and_consolidate; update_and_consolidate(['norway','germany'])"
+# Terminal A — UI
+prefect server start
+# open http://127.0.0.1:4200
+
+# Ad hoc one-country run (shows updated/unchanged in the flow result)
+python -c "from orchestration.flows import update_one; print(update_one('norway'))"
+
+# Or CLI with JSON status
+python scripts/run_pipeline.py norway --with-status
 ```
 
-Flows call the same `pipelines.run_update` / consolidate entrypoints. Run them
-from your machine first; Prefect Cloud is optional later (same flows + a worker).
+**Weekday polling** — Prefect does not know agency calendars;
+it runs a check Mon–Fri **04:00 Europe/London** (slow hours). Unchanged polls are success, not failure.
+If the PC is asleep at that time, the run waits until wake (keep `serve_weekday_polls.py` running):
+
+```powershell
+# Terminal B — keep this process alive (schedules + runs the deployments)
+python scripts/serve_weekday_polls.py
+```
+
+Edit `POLL_COUNTRIES` in that script to add markets (ids from `python scripts/run_pipeline.py list`).
+Restart the serve process after editing.
+
+In the UI: **Deployments** should list `norway-weekday-poll` and `germany-weekday-poll`.
+Use **Run** once to verify without waiting for cron. Flow result includes
+`status: updated | unchanged | error`.
+
+`update_and_consolidate` skips warehouse rebuild when every country is unchanged
+(unless you pass `consolidate_only_if_updated=False`).
+
+Flows call the same `pipelines.run_update_with_status` entrypoints. Prefect Cloud
+is optional later (same flows + a worker).
 
 ### 5. Optional: schedule consolidation (Windows)
 

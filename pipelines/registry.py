@@ -23,37 +23,114 @@ class Pipeline:
     # When True, include in the default "update all countries" Prefect flow.
     # JODI is separate (benchmark source, not a national agency).
     default_batch: bool = True
+    # Relative to data/processed/ — used to detect updated vs unchanged after a poll.
+    # None → status "unknown" on success (e.g. multi-file JODI).
+    parquet_rel_path: str | None = None
+    date_column: str = "date"
 
 
 # Keys are what you pass to run_update("norway") / Prefect.
+# parquet_rel_path mirrors config/countries.yaml where applicable.
 PIPELINES: dict[str, Pipeline] = {
     p.id: p
     for p in [
-        Pipeline("australia", "update_australia.py", "Australia APSTAT petroleum statistics"),
-        Pipeline("germany", "update_germany.py", "Germany BAFA mineral oil data"),
-        Pipeline("hungary", "update_hungary.py", "Hungary MEKH demand + stocks"),
+        Pipeline(
+            "australia",
+            "update_australia.py",
+            "Australia APSTAT petroleum statistics",
+            parquet_rel_path="australia/australia_petroleum_statistics.parquet",
+        ),
+        Pipeline(
+            "germany",
+            "update_germany.py",
+            "Germany BAFA mineral oil data",
+            parquet_rel_path="germany/germany_bafa_demand.parquet",
+        ),
+        Pipeline(
+            "hungary",
+            "update_hungary.py",
+            "Hungary MEKH demand + stocks",
+            parquet_rel_path="hungary/hungary_mekh_demand.parquet",
+        ),
         Pipeline(
             "india",
             "update_india_pt_consumption.py",
             "India PPAC product consumption",
+            parquet_rel_path="india/india_pt_consumption.parquet",
         ),
-        Pipeline("italy", "update_italy.py", "Italy MASE consumption"),
-        Pipeline("japan", "update_japan.py", "Japan METI consumption"),
+        Pipeline(
+            "italy",
+            "update_italy.py",
+            "Italy MASE consumption",
+            parquet_rel_path="italy/italy_mase_consumption.parquet",
+        ),
+        Pipeline(
+            "japan",
+            "update_japan.py",
+            "Japan METI consumption",
+            parquet_rel_path="japan/japan_meti_consumption.parquet",
+        ),
         Pipeline(
             "jodi",
             "update_jodi.py",
             "JODI World Database (primary + secondary)",
             default_batch=False,
+            parquet_rel_path=None,
         ),
-        Pipeline("korea", "update_korea.py", "Korea KNOC / Petronet"),
-        Pipeline("norway", "update_norway.py", "Norway SSB petroleum sales"),
-        Pipeline("poland", "update_poland.py", "Poland ARE liquid fuels"),
-        Pipeline("portugal", "update_portugal.py", "Portugal DGEG sales"),
-        Pipeline("spain", "update_spain.py", "Spain CORES consumption"),
-        Pipeline("taiwan", "update_taiwan.py", "Taiwan MOEA consumption"),
-        Pipeline("thailand", "update_thailand.py", "Thailand EPPO sales"),
-        Pipeline("uk", "update_uk.py", "UK DESNZ energy trends"),
-        Pipeline("ukraine", "update_ukraine.py", "Ukraine SSSU fuel"),
+        Pipeline(
+            "korea",
+            "update_korea.py",
+            "Korea KNOC / Petronet",
+            parquet_rel_path="korea/korea_knoc.parquet",
+        ),
+        Pipeline(
+            "norway",
+            "update_norway.py",
+            "Norway SSB petroleum sales",
+            parquet_rel_path="norway/norway_ssb_sales.parquet",
+        ),
+        Pipeline(
+            "poland",
+            "update_poland.py",
+            "Poland ARE liquid fuels",
+            parquet_rel_path="poland/poland_are_liquid_fuels.parquet",
+        ),
+        Pipeline(
+            "portugal",
+            "update_portugal.py",
+            "Portugal DGEG sales",
+            parquet_rel_path="portugal/portugal_dgeg_sales.parquet",
+        ),
+        Pipeline(
+            "spain",
+            "update_spain.py",
+            "Spain CORES consumption",
+            parquet_rel_path="spain/spain_cores_consumption.parquet",
+        ),
+        Pipeline(
+            "taiwan",
+            "update_taiwan.py",
+            "Taiwan MOEA consumption",
+            parquet_rel_path="taiwan/taiwan_moea_consumption.parquet",
+        ),
+        Pipeline(
+            "thailand",
+            "update_thailand.py",
+            "Thailand EPPO sales",
+            parquet_rel_path="thailand/thailand_eppo_sales.parquet",
+        ),
+        Pipeline(
+            "uk",
+            "update_uk.py",
+            "UK DESNZ energy trends",
+            parquet_rel_path="uk/uk_energy_trends.parquet",
+        ),
+        Pipeline(
+            "ukraine",
+            "update_ukraine.py",
+            "Ukraine SSSU fuel",
+            parquet_rel_path="ukraine/ukraine_sssu_fuel.parquet",
+        ),
     ]
 }
 
