@@ -2348,6 +2348,425 @@ def plot_product_change_bars(
     return fig
 
 
+_POS = "#2ca02c"
+_NEG = "#d62728"
+_TOTAL = "#4472C4"
+
+
+def plot_signed_hbar_pair(
+    df: pd.DataFrame,
+    *,
+    label_col: str,
+    yoy_col: str = "yoy_change",
+    mom_col: str = "mom_change",
+    title: str,
+    unit: str = "kb/d",
+    sort_by: str = "yoy_change",
+    figsize: tuple[float, float] | None = None,
+    pos_color: str = _POS,
+    neg_color: str = _NEG,
+) -> plt.Figure:
+    """Shared-y YoY | MoM horizontal bars (country or product contributions)."""
+    plot_df = df.sort_values(sort_by)
+    n = max(len(plot_df), 1)
+    if figsize is None:
+        figsize = (14, max(4.5, n * 0.28))
+    fig, axes = plt.subplots(1, 2, figsize=figsize, sharey=True)
+    for ax, col, subtitle in zip(
+        axes,
+        [yoy_col, mom_col],
+        [f"YoY contribution ({unit})", f"MoM contribution ({unit})"],
+    ):
+        colors = [neg_color if v < 0 else pos_color for v in plot_df[col].fillna(0)]
+        ax.barh(plot_df[label_col], plot_df[col], color=colors)
+        ax.axvline(0, color="black", linewidth=0.8)
+        ax.set_title(subtitle)
+        ax.set_xlabel(unit)
+    fig.suptitle(title, y=1.02)
+    fig.tight_layout()
+    return fig
+
+
+def _waterfall_on_ax(
+    ax: plt.Axes,
+    labels: list[str],
+    values: list[float],
+    title: str,
+    *,
+    pos_color: str = _POS,
+    neg_color: str = _NEG,
+    total_color: str = _TOTAL,
+) -> None:
+    """Draw a single waterfall on ``ax`` with a closing Total bar."""
+    cum = 0.0
+    xs: list[int] = []
+    bottoms: list[float] = []
+    heights: list[float] = []
+    colors: list[str] = []
+    for val in values:
+        xs.append(len(xs))
+        if val >= 0:
+            bottoms.append(cum)
+            heights.append(val)
+        else:
+            bottoms.append(cum + val)
+            heights.append(-val)
+        colors.append(pos_color if val >= 0 else neg_color)
+        cum += val
+    ax.bar(xs, heights, bottom=bottoms, color=colors, edgecolor="white", linewidth=0.5)
+    t = len(labels)
+    if cum >= 0:
+        ax.bar(t, cum, bottom=0, color=total_color, edgecolor="white")
+    else:
+        ax.bar(t, -cum, bottom=cum, color=total_color, edgecolor="white")
+    ax.set_xticks(list(range(t + 1)))
+    ax.set_xticklabels([*labels, "Total"], rotation=45, ha="right")
+    ax.set_title(title)
+    ax.axhline(0, color="black", linewidth=0.8)
+
+
+def plot_country_waterfalls(
+    contrib: pd.DataFrame,
+    *,
+    title: str,
+    unit: str = "kb/d",
+    country_col: str = "country",
+    yoy_col: str = "yoy_change",
+    mom_col: str = "mom_change",
+    figsize: tuple[float, float] = (16, 6),
+) -> plt.Figure:
+    """Paired YoY / MoM waterfalls of country contributions → Total."""
+    wf_yoy = contrib.sort_values(yoy_col)
+    wf_mom = contrib.sort_values(mom_col)
+    fig, axes = plt.subplots(1, 2, figsize=figsize)
+    _waterfall_on_ax(
+        axes[0],
+        wf_yoy[country_col].tolist(),
+        wf_yoy[yoy_col].fillna(0).tolist(),
+        f"YoY total {wf_yoy[yoy_col].sum():,.0f} {unit}",
+    )
+    _waterfall_on_ax(
+        axes[1],
+        wf_mom[country_col].tolist(),
+        wf_mom[mom_col].fillna(0).tolist(),
+        f"MoM total {wf_mom[mom_col].sum():,.0f} {unit}",
+    )
+    for ax in axes:
+        ax.set_ylabel(unit)
+    fig.suptitle(title, y=1.02)
+    fig.tight_layout()
+    return fig
+
+
+def country_contrib_matrix(
+    geography: str,
+    product_codes: list[str] | pd.Series,
+    *,
+    lag_months: int = DRIVER_LAG_MONTHS,
+    metric: str = "demand",
+    value_col: str = "yoy_change",
+) -> pd.DataFrame:
+    """Wide country × product matrix of contribution changes (for heatmaps)."""
+    frames: list[pd.DataFrame] = []
+    for code in product_codes:
+        tbl = build_country_contribution_table(
+            geography, str(code), lag_months=lag_months, metric=metric
+        )
+        if tbl.empty:
+            continue
+        part = tbl[["country", value_col]].copy()
+        part["product_code"] = str(code)
+        frames.append(part)
+    if not frames:
+        return pd.DataFrame()
+    long = pd.concat(frames, ignore_index=True)
+    return long.pivot(index="country", columns="product_code", values=value_col)
+
+
+def plot_country_product_heatmap(
+    matrix: pd.DataFrame,
+    *,
+    title: str,
+    cbar_label: str,
+) -> plt.Figure:
+    """RdYlGn diverging heatmap of country × product changes."""
+    fig, ax = plt.subplots(
+        figsize=(
+            max(10, 0 if matrix.empty else len(matrix.columns) * 1.1),
+            max(6, 0 if matrix.empty else len(matrix) * 0.35),
+        )
+    )
+    _draw_country_product_heatmap(ax, matrix, title=title, cbar_label=cbar_label)
+    fig.tight_layout()
+    return fig
+
+
+def plot_country_product_heatmap_pair(
+    yoy_matrix: pd.DataFrame,
+    mom_matrix: pd.DataFrame,
+    *,
+    title: str,
+    unit: str = "kb/d",
+) -> plt.Figure:
+    """YoY | MoM country×product heatmaps side by side (shared colour scale)."""
+    from matplotlib.colors import TwoSlopeNorm
+
+    # Align rows/cols so cells are comparable across panels.
+    countries = sorted(
+        set(yoy_matrix.index.tolist()) | set(mom_matrix.index.tolist())
+    )
+    products = list(
+        dict.fromkeys([*yoy_matrix.columns.tolist(), *mom_matrix.columns.tolist()])
+    )
+    yoy = yoy_matrix.reindex(index=countries, columns=products)
+    mom = mom_matrix.reindex(index=countries, columns=products)
+
+    finite = np.concatenate(
+        [
+            yoy.to_numpy(dtype=float).ravel(),
+            mom.to_numpy(dtype=float).ravel(),
+        ]
+    )
+    finite = finite[np.isfinite(finite)]
+    vmax = float(np.nanmax(np.abs(finite))) if finite.size else 1.0
+    if vmax == 0:
+        vmax = 1.0
+    norm = TwoSlopeNorm(vmin=-vmax, vcenter=0, vmax=vmax)
+
+    n_rows = max(len(countries), 1)
+    n_cols = max(len(products), 1)
+    fig, axes = plt.subplots(
+        1,
+        2,
+        figsize=(max(16, n_cols * 2.0), max(6, n_rows * 0.35)),
+        sharey=True,
+    )
+    im = None
+    for ax, matrix, subtitle in zip(
+        axes,
+        [yoy, mom],
+        [f"YoY change ({unit})", f"MoM change ({unit})"],
+    ):
+        im = _draw_country_product_heatmap(
+            ax,
+            matrix,
+            title=subtitle,
+            cbar_label="",
+            norm=norm,
+            draw_cbar=False,
+        )
+    if im is not None:
+        cbar = fig.colorbar(im, ax=axes.ravel().tolist(), shrink=0.8, pad=0.02)
+        cbar.set_label(f"Change ({unit})")
+    fig.suptitle(title, y=1.02)
+    fig.tight_layout()
+    return fig
+
+
+def _draw_country_product_heatmap(
+    ax: plt.Axes,
+    matrix: pd.DataFrame,
+    *,
+    title: str,
+    cbar_label: str,
+    norm=None,
+    draw_cbar: bool = True,
+):
+    """Paint one heatmap onto ``ax``; returns the AxesImage (or None if empty)."""
+    from matplotlib.colors import TwoSlopeNorm
+
+    if matrix.empty:
+        ax.text(0.5, 0.5, "No data", ha="center", va="center", transform=ax.transAxes)
+        ax.set_title(title)
+        ax.axis("off")
+        return None
+
+    col_labels = [_product_label(c) for c in matrix.columns]
+    row_labels = matrix.index.tolist()
+    data = matrix.to_numpy(dtype=float)
+    if norm is None:
+        finite = data[np.isfinite(data)]
+        vmax = float(np.nanmax(np.abs(finite))) if finite.size else 1.0
+        if vmax == 0:
+            vmax = 1.0
+        norm = TwoSlopeNorm(vmin=-vmax, vcenter=0, vmax=vmax)
+    im = ax.imshow(data, aspect="auto", cmap="RdYlGn", norm=norm)
+    ax.set_xticks(np.arange(len(col_labels)))
+    ax.set_xticklabels(col_labels, rotation=45, ha="right")
+    ax.set_yticks(np.arange(len(row_labels)))
+    ax.set_yticklabels(row_labels)
+    ax.set_title(title)
+    if draw_cbar:
+        cbar = ax.figure.colorbar(im, ax=ax, shrink=0.8)
+        cbar.set_label(cbar_label)
+    return im
+
+
+def plot_seasonal_vs_sequential(
+    summary: pd.DataFrame,
+    *,
+    title: str,
+    unit: str = "kb/d",
+    level_col: str = "level_kb_d",
+    yoy_col: str = "yoy_change",
+    mom_col: str = "mom_change",
+    code_col: str = "product_code",
+    figsize: tuple[float, float] = (9, 7),
+) -> plt.Figure:
+    """Bubble scatter: MoM (x) vs YoY (y), sized by level."""
+    fig, ax = plt.subplots(figsize=figsize)
+    sizes = summary[level_col].clip(lower=1) / 80.0
+    ax.scatter(
+        summary[mom_col],
+        summary[yoy_col],
+        s=sizes,
+        c=summary[yoy_col],
+        cmap="RdYlGn",
+        alpha=0.85,
+        edgecolors="black",
+        linewidths=0.5,
+    )
+    for _, row in summary.iterrows():
+        ax.annotate(
+            str(row[code_col]),
+            (row[mom_col], row[yoy_col]),
+            textcoords="offset points",
+            xytext=(4, 4),
+            fontsize=9,
+        )
+    ax.axhline(0, color="black", linewidth=0.8)
+    ax.axvline(0, color="black", linewidth=0.8)
+    ax.set_xlabel(f"MoM change ({unit})")
+    ax.set_ylabel(f"YoY change ({unit})")
+    ax.set_title(title)
+    fig.tight_layout()
+    return fig
+
+
+def plot_level_vs_5y_band(
+    summary: pd.DataFrame,
+    *,
+    title: str = "Current vs 5y min / median / max",
+    unit: str = "kb/d",
+    product_col: str = "product",
+    level_col: str = "level_kb_d",
+) -> plt.Figure:
+    """Horizontal range plot: 5y band + median tick + current level."""
+    band = summary.reset_index(drop=True)
+    y = np.arange(len(band))
+    fig, ax = plt.subplots(figsize=(10, max(5, len(band) * 0.45)))
+    for i, row in band.iterrows():
+        ax.hlines(
+            i,
+            row["hist_5y_min"],
+            row["hist_5y_max"],
+            color="#cccccc",
+            linewidth=10,
+            zorder=1,
+        )
+        ax.scatter(
+            row["hist_5y_median"], i, marker="|", color="black", s=120, zorder=2
+        )
+        ax.scatter(
+            row[level_col],
+            i,
+            color="#1f77b4",
+            s=70,
+            zorder=3,
+            label="Current" if i == 0 else "",
+        )
+    ax.set_yticks(y)
+    ax.set_yticklabels(band[product_col])
+    ax.set_xlabel(f"Level ({unit})")
+    ax.set_title(title)
+    ax.legend(loc="lower right")
+    fig.tight_layout()
+    return fig
+
+
+def plot_who_drives_yoy(
+    geography: str,
+    product_codes: list[str],
+    *,
+    metric: str = "demand",
+    lag_months: int = DRIVER_LAG_MONTHS,
+    title: str,
+    figsize: tuple[float, float] = (14, 10),
+    pos_color: str = _POS,
+    neg_color: str = _NEG,
+) -> plt.Figure:
+    """2×2 (or fewer) country YoY-share panels for the given products."""
+    n = len(product_codes)
+    rows = 2 if n > 2 else 1
+    cols = 2 if n > 1 else 1
+    fig, axes = plt.subplots(rows, cols, figsize=figsize, squeeze=False)
+    for ax, code in zip(axes.flat, product_codes):
+        tbl = build_country_contribution_table(
+            geography, code, lag_months=lag_months, metric=metric
+        )
+        if tbl.empty:
+            ax.set_visible(False)
+            continue
+        tbl = tbl.sort_values("yoy_share_pct")
+        colors = [
+            neg_color if v < 0 else pos_color for v in tbl["yoy_share_pct"].fillna(0)
+        ]
+        ax.barh(tbl["country"], tbl["yoy_share_pct"], color=colors)
+        ax.axvline(0, color="black", linewidth=0.8)
+        ax.set_xlabel("YoY share of panel change (%)")
+        ax.set_title(_product_label(code))
+    for ax in axes.flat[n:]:
+        ax.set_visible(False)
+    fig.suptitle(title, y=1.01)
+    fig.tight_layout()
+    return fig
+
+
+def plot_top_countries_trends(
+    geography: str,
+    product: str,
+    contrib: pd.DataFrame,
+    *,
+    metric: str = "demand",
+    lag_months: int = DRIVER_LAG_MONTHS,
+    n_countries: int = 5,
+    months: int = 24,
+    unit: str = "kb/d",
+    title: str | None = None,
+) -> plt.Figure:
+    """2×3 small multiples: top-N countries by level + regional total."""
+    geo_label = resolve_geography(geography)[1]
+    top = contrib.nlargest(n_countries, "level_kb_d")
+    fig, axes = plt.subplots(2, 3, figsize=(15, 8))
+    for ax, (_, row) in zip(axes.flat, top.iterrows()):
+        iso = str(row["ref_area"])
+        ts = get_dashboard_series(
+            product, iso, metric, lag_months=lag_months
+        ).tail(months)
+        ax.plot(ts["date"], ts["value"], color="#1f77b4")
+        ax.set_title(row["country"])
+        ax.set_ylabel(unit)
+        ax.tick_params(axis="x", rotation=45)
+
+    regional_ts = get_dashboard_series(
+        product, geography, metric, lag_months=lag_months
+    ).tail(months)
+    axes.flat[5].plot(
+        regional_ts["date"], regional_ts["value"], color=_TOTAL, linewidth=2
+    )
+    axes.flat[5].set_title(f"{geo_label} total")
+    axes.flat[5].set_ylabel(unit)
+    axes.flat[5].tick_params(axis="x", rotation=45)
+
+    fig.suptitle(
+        title
+        or f"{_product_label(product)} — last {months} months ({METRIC_LABELS.get(metric, metric)})",
+        y=1.02,
+    )
+    fig.tight_layout()
+    return fig
+
+
 __all__ = [
     "PRODUCTS_PRIMARY",
     "PRODUCTS_SECONDARY",
@@ -2386,6 +2805,15 @@ __all__ = [
     "build_common_panel",
     "build_product_change_summary",
     "plot_product_change_bars",
+    "plot_signed_hbar_pair",
+    "plot_country_waterfalls",
+    "country_contrib_matrix",
+    "plot_country_product_heatmap",
+    "plot_country_product_heatmap_pair",
+    "plot_seasonal_vs_sequential",
+    "plot_level_vs_5y_band",
+    "plot_who_drives_yoy",
+    "plot_top_countries_trends",
     "build_country_contribution_table",
     "build_country_product_breakdown",
     "style_regional_driver_summary",

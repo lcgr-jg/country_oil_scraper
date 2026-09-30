@@ -33,6 +33,15 @@ from warehouse.registry import (
     list_countries,
     project_root,
 )
+from reference.eurostat_oilm import (
+    MASTER_PARQUET_REL,
+    MASTER_STOCKS_PARQUET_REL,
+    SOURCE_ID as EUROSTAT_SOURCE_ID,
+    EUROSTAT_STOCKS_METRIC,
+    EUROSTAT_STOCKS_SOURCE,
+    SIEC_TO_KIND,
+    country_id_to_geo,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -93,6 +102,24 @@ def warehouse_needs_rebuild(
             )
             return True
 
+    euro_path = project_root() / "data" / "processed" / MASTER_PARQUET_REL
+    if euro_path.exists() and euro_path.stat().st_mtime > wh_mtime:
+        logger.info(
+            "Warehouse stale: %s is newer than %s",
+            euro_path.name,
+            warehouse_path.name,
+        )
+        return True
+
+    stocks_path = project_root() / "data" / "processed" / MASTER_STOCKS_PARQUET_REL
+    if stocks_path.exists() and stocks_path.stat().st_mtime > wh_mtime:
+        logger.info(
+            "Warehouse stale: %s is newer than %s",
+            stocks_path.name,
+            warehouse_path.name,
+        )
+        return True
+
     if include_kayrros:
         kay_path = kayrros_db_path()
         if kay_path.exists() and kay_path.stat().st_mtime > wh_mtime:
@@ -150,11 +177,32 @@ def consolidate(
 
     ingested_at = datetime.now(tz=UTC)
     obs_frames: list[pd.DataFrame] = []
+    eurostat_master = _load_eurostat_master()
 
     for cfg in enabled:
-        official = _load_official_parquet(cfg, ingested_at)
-        if not official.empty:
-            obs_frames.append(official)
+        national = _load_official_parquet(cfg, ingested_at)
+        eurostat = _eurostat_slice_for_country(cfg, eurostat_master, ingested_at)
+
+        # Eurostat-primary countries: YAML parquet is already Eurostat — do not
+        # duplicate the companion slice.
+        if _is_eurostat_primary(cfg, national):
+            if not national.empty:
+                obs_frames.append(national)
+        else:
+            national, eurostat = _assign_freshness_tiers(national, eurostat)
+            if not national.empty:
+                obs_frames.append(national)
+            if not eurostat.empty:
+                obs_frames.append(eurostat)
+                logger.info(
+                    "%s tiers: national=%s eurostat=%s (max %s vs %s)",
+                    cfg.country_id,
+                    national["source_tier"].iloc[0] if not national.empty else None,
+                    eurostat["source_tier"].iloc[0] if not eurostat.empty else None,
+                    national["date"].max() if not national.empty else None,
+                    eurostat["date"].max() if not eurostat.empty else None,
+                )
+
         if include_kayrros and cfg.kayrros_enabled:
             kay = load_kayrros_observations(
                 cfg.country_code,
@@ -168,6 +216,10 @@ def consolidate(
         jodi = _load_jodi_for_countries(enabled, ingested_at)
         if not jodi.empty:
             obs_frames.append(jodi)
+
+    stocks = _load_eurostat_stocks_for_countries(enabled, ingested_at)
+    if not stocks.empty:
+        obs_frames.append(stocks)
 
     observations = (
         pd.concat(obs_frames, ignore_index=True)
@@ -198,6 +250,162 @@ def consolidate(
     return warehouse_path
 
 
+def _load_eurostat_stocks_for_countries(
+    countries: list[CountryConfig],
+    ingested_at: datetime,
+) -> pd.DataFrame:
+    """
+    Load closing-stock splits as benchmark inventory rows (metric CLOSTLV).
+
+    Never enters demand aggregates (those filter TOTDEMO / official demand).
+    """
+    path = project_root() / "data" / "processed" / MASTER_STOCKS_PARQUET_REL
+    if not path.exists():
+        logger.warning("Eurostat stocks parquet missing — skip (%s)", path)
+        return pd.DataFrame(columns=_OBS_COLUMNS)
+
+    master = pd.read_parquet(path)
+    master["date"] = pd.to_datetime(master["date"])
+    if master.empty:
+        return pd.DataFrame(columns=_OBS_COLUMNS)
+
+    frames: list[pd.DataFrame] = []
+    for cfg in countries:
+        geo = country_id_to_geo(cfg.country_id) or cfg.country_code
+        sl = master[master["country"].astype(str).str.upper() == str(geo).upper()].copy()
+        if sl.empty and "geo" in master.columns:
+            sl = master[master["geo"].astype(str).str.upper() == str(geo).upper()].copy()
+        if sl.empty:
+            continue
+
+        # Density from SIEC (embedded in product_native as flow|siec).
+        if "siec" in sl.columns:
+            siec = sl["siec"].astype(str)
+        else:
+            siec = sl["product_native"].astype(str).str.split("|").str[-1]
+        product_kind = siec.map(SIEC_TO_KIND)
+
+        value = pd.to_numeric(sl["value"], errors="coerce")
+        value_kbd = convert_series(
+            value,
+            "kt",
+            "kbd",
+            product_kind=product_kind,
+            date=sl["date"],
+        )
+        frames.append(
+            pd.DataFrame(
+                {
+                    "country_code": cfg.country_code,
+                    "country_name": cfg.display_name,
+                    "scope_type": "country",
+                    "date": pd.to_datetime(sl["date"]).dt.normalize(),
+                    "source": EUROSTAT_STOCKS_SOURCE,
+                    "source_tier": "benchmark",
+                    "metric_type": EUROSTAT_STOCKS_METRIC,
+                    "product_native": sl["product_native"].astype(str),
+                    "product_canonical": sl.get("product_canonical"),
+                    "category": sl.get("category"),
+                    "compare_panel": None,
+                    "value_native": value,
+                    "unit_native": "kt",
+                    "value_kbd": value_kbd,
+                    "is_provisional": sl.get("is_provisional", False),
+                    "ingested_at": ingested_at,
+                }
+            )
+        )
+
+    if not frames:
+        return pd.DataFrame(columns=_OBS_COLUMNS)
+    out = pd.concat(frames, ignore_index=True)
+    logger.info(
+        "Eurostat stocks loaded: %s rows across %s countries",
+        f"{len(out):,}",
+        out["country_code"].nunique(),
+    )
+    return out
+
+
+def _is_eurostat_primary(cfg: CountryConfig, loaded: pd.DataFrame) -> bool:
+    if cfg.official_source_label.strip().lower() == "eurostat":
+        return True
+    if loaded.empty:
+        return False
+    return str(loaded["source"].dropna().iloc[0]) == EUROSTAT_SOURCE_ID
+
+
+def _assign_freshness_tiers(
+    national: pd.DataFrame,
+    eurostat: pd.DataFrame,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Fresher max(date) wins official; the other becomes benchmark.
+
+    Tie (or national-only lead) → keep national as official so product detail
+    wins when lag is equal.
+    """
+    if national.empty and eurostat.empty:
+        return national, eurostat
+    if national.empty:
+        out = eurostat.copy()
+        out["source_tier"] = "official"
+        return national, out
+    if eurostat.empty:
+        out = national.copy()
+        out["source_tier"] = "official"
+        return out, eurostat
+
+    n = national.copy()
+    e = eurostat.copy()
+    if e["date"].max() > n["date"].max():
+        e["source_tier"] = "official"
+        n["source_tier"] = "benchmark"
+    else:
+        n["source_tier"] = "official"
+        e["source_tier"] = "benchmark"
+    return n, e
+
+
+def _load_eurostat_master() -> pd.DataFrame:
+    path = project_root() / "data" / "processed" / MASTER_PARQUET_REL
+    if not path.exists():
+        logger.warning("Eurostat master parquet missing — skip companion tiers (%s)", path)
+        return pd.DataFrame()
+    df = pd.read_parquet(path)
+    df["date"] = pd.to_datetime(df["date"])
+    return df
+
+
+def _eurostat_slice_for_country(
+    cfg: CountryConfig,
+    master: pd.DataFrame,
+    ingested_at: datetime,
+) -> pd.DataFrame:
+    if master.empty:
+        return pd.DataFrame(columns=_OBS_COLUMNS)
+    geo = country_id_to_geo(cfg.country_id) or cfg.country_code
+    sl = master[master["country"].astype(str).str.upper() == str(geo).upper()].copy()
+    if sl.empty and "geo" in master.columns:
+        sl = master[master["geo"].astype(str).str.upper() == str(geo).upper()].copy()
+    if sl.empty:
+        return pd.DataFrame(columns=_OBS_COLUMNS)
+
+    # Build observation rows using Eurostat reference hooks.
+    from warehouse.registry import import_reference_module
+
+    ref = import_reference_module("reference.eurostat_oilm")
+    return _frame_from_official_df(
+        sl,
+        cfg,
+        ref=ref,
+        source_id=EUROSTAT_SOURCE_ID,
+        source_tier="benchmark",  # overwritten by freshness assigner
+        ingested_at=ingested_at,
+        country_code_override=cfg.country_code,
+    )
+
+
 def _load_official_parquet(cfg: CountryConfig, ingested_at: datetime) -> pd.DataFrame:
     path = cfg.parquet_path
     if not path.exists():
@@ -210,6 +418,28 @@ def _load_official_parquet(cfg: CountryConfig, ingested_at: datetime) -> pd.Data
 
     ref = load_reference(cfg)
     df = pd.read_parquet(path)
+    df["date"] = pd.to_datetime(df["date"])
+    return _frame_from_official_df(
+        df,
+        cfg,
+        ref=ref,
+        source_id=resolve_source_id(cfg, ref) if ref is not None else cfg.country_id,
+        source_tier="official",
+        ingested_at=ingested_at,
+    )
+
+
+def _frame_from_official_df(
+    df: pd.DataFrame,
+    cfg: CountryConfig,
+    *,
+    ref: object | None,
+    source_id: str,
+    source_tier: str,
+    ingested_at: datetime,
+    country_code_override: str | None = None,
+) -> pd.DataFrame:
+    df = df.copy()
     df["date"] = pd.to_datetime(df["date"])
     df = normalize_official_frame(df, cfg)
     before = len(df)
@@ -225,6 +455,9 @@ def _load_official_parquet(cfg: CountryConfig, ingested_at: datetime) -> pd.Data
         return pd.DataFrame(columns=_OBS_COLUMNS)
 
     unit_native = resolve_unit_native(cfg, ref)
+    # Eurostat companion / primary always stores kt even when YAML has no override.
+    if unit_native is None and source_id == EUROSTAT_SOURCE_ID:
+        unit_native = "kt"
     if unit_native is None and "unit" in df.columns and df["unit"].notna().any():
         unit_series = df["unit"].astype(str)
     else:
@@ -234,14 +467,18 @@ def _load_official_parquet(cfg: CountryConfig, ingested_at: datetime) -> pd.Data
     if units_kind is not None:
         product_kind = df["product_native"].map(units_kind)
     elif ref is not None:
-        source_id = resolve_source_id(cfg, ref)
         mapping = PRODUCT_KIND_MAP.get(source_id, {})
         product_kind = df["product_native"].map(lambda x: mapping.get(x))
     else:
         product_kind = None
 
-    source_id = resolve_source_id(cfg, ref) if ref is not None else cfg.country_id
-    country_code = getattr(ref, "COUNTRY_CODE", cfg.country_code) if ref is not None else cfg.country_code
+    country_code = (
+        country_code_override
+        or (getattr(ref, "COUNTRY_CODE", cfg.country_code) if ref is not None else cfg.country_code)
+    )
+    # Never use the shared Eurostat module's placeholder COUNTRY_CODE="EU".
+    if country_code == "EU":
+        country_code = cfg.country_code
     country_name = cfg.display_name
 
     prep, prep_unit = prepare_values_for_conversion(df, unit_series)
@@ -263,7 +500,7 @@ def _load_official_parquet(cfg: CountryConfig, ingested_at: datetime) -> pd.Data
             "scope_type": "country",
             "date": df["date"].dt.normalize(),
             "source": source_id,
-            "source_tier": "official",
+            "source_tier": source_tier,
             "metric_type": df["metric_type"],
             "product_native": df["product_native"].astype(str),
             "product_canonical": df.get("product_canonical"),

@@ -78,6 +78,10 @@ _SOURCE_KEY_TO_CSV: dict[str, str] = {
     "portugal_petroleum_sales": "DGEG",
     "uk_energy_trends_consumption": "DESNZ",
     "uk_energy_trends_stocks": "DESNZ",
+    "china_sci_consumption": "SCI",
+    "us_eia_product_supplied": "EIA",
+    "eurostat_oilm": "Eurostat",
+    "eurostat_oilm_stocks": "Eurostat",
 }
 
 CANONICAL_KIND_LABEL: dict[str, str] = {

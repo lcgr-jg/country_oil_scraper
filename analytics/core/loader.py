@@ -90,6 +90,24 @@ def load_demand_canonical(
     return out
 
 
+_EUROSTAT_SOURCE = "eurostat_oilm"
+_NON_NATIONAL_SOURCES = frozenset({_EUROSTAT_SOURCE, "JODI", "Kayrros"})
+
+# National compare_panel labels that should match Eurostat / JODI panel names.
+_PANEL_ALIASES: dict[str, str] = {
+    "Gasoil / diesel": "Diesel",
+    "Gasoil/diesel": "Diesel",
+    "Gas/diesel oil": "Diesel",
+}
+
+
+def _normalize_panel_name(panel: object) -> object:
+    if panel is None or (isinstance(panel, float) and pd.isna(panel)):
+        return panel
+    key = str(panel).strip()
+    return _PANEL_ALIASES.get(key, key)
+
+
 def load_jodi_compare_panels(
     country_id: str,
     *,
@@ -99,11 +117,16 @@ def load_jodi_compare_panels(
     Return (official_panels, jodi_panels, panel_order) for cross-source charts.
     """
     cfg = get_country(country_id)
-    ref = load_reference(cfg)
     demand = load_official_demand(country_id, warehouse_path=warehouse_path)
+    from warehouse.country_hooks import load_reference_for_official_source
+
+    ref = load_reference_for_official_source(cfg, demand)
     jodi = load_observations(
         country_id, source_tier="benchmark", warehouse_path=warehouse_path
     )
+    # Benchmark tier can also hold Eurostat/national fallbacks — keep JODI only here.
+    if not jodi.empty and "source" in jodi.columns:
+        jodi = jodi[jodi["source"].astype(str) == "JODI"].copy()
 
     official = build_official_jodi_panels(demand, cfg, ref=ref)
     panel_order = list(getattr(ref, "JODI_COMPARE_PANEL_ORDER", ())) if ref else []
@@ -120,6 +143,69 @@ def load_jodi_compare_panels(
         panels = sorted(present)
 
     return official, jodi_panels, panels
+
+
+def _roll_compare_panels(obs: pd.DataFrame) -> pd.DataFrame:
+    """Sum warehouse rows that already carry ``compare_panel`` labels."""
+    if obs.empty or "compare_panel" not in obs.columns:
+        return pd.DataFrame(columns=["date", "panel", "value_kbd", "is_provisional"])
+    sl = obs[obs["compare_panel"].notna()].copy()
+    if sl.empty:
+        return pd.DataFrame(columns=["date", "panel", "value_kbd", "is_provisional"])
+    sl["compare_panel"] = sl["compare_panel"].map(_normalize_panel_name)
+    return (
+        sl.groupby(["date", "compare_panel"], as_index=False)
+        .agg(
+            value_kbd=("value_kbd", "sum"),
+            is_provisional=("is_provisional", "max"),
+        )
+        .rename(columns={"compare_panel": "panel"})
+        .sort_values("date")
+    )
+
+
+def load_eurostat_compare_panels(
+    country_id: str,
+    *,
+    warehouse_path: Optional[Path] = None,
+) -> tuple[pd.DataFrame, pd.DataFrame, list[str], str]:
+    """
+    Return (national_panels, eurostat_panels, panel_order, national_label).
+
+    Pulls both sources from any warehouse tier so the overlay still works when
+    freshness has flipped which one is ``official``. Eurostat-only countries
+    return empty national panels (no overlay).
+    """
+    from reference.eurostat_oilm import JODI_COMPARE_PANEL_ORDER as EURO_PANELS
+
+    cfg = get_country(country_id)
+    all_obs = load_observations(
+        country_id, source_tier="all", warehouse_path=warehouse_path
+    )
+    empty = pd.DataFrame(columns=["date", "panel", "value_kbd", "is_provisional"])
+    if all_obs.empty or "source" not in all_obs.columns:
+        return empty, empty, [], cfg.official_source_label
+
+    src = all_obs["source"].astype(str)
+    euro_obs = all_obs[src == _EUROSTAT_SOURCE].copy()
+    national_obs = all_obs[~src.isin(_NON_NATIONAL_SOURCES)].copy()
+
+    national = _roll_compare_panels(national_obs)
+    eurostat = _roll_compare_panels(euro_obs)
+    if national.empty or eurostat.empty:
+        return national, eurostat, [], cfg.official_source_label
+
+    # Prefer a human label from the national agency YAML when present.
+    national_label = cfg.official_source_label
+    if national_label.strip().lower() == "eurostat" and not national_obs.empty:
+        # Shouldn't happen for dual-source countries; fall back to source id.
+        national_label = str(national_obs["source"].dropna().iloc[0])
+
+    present = set(national["panel"].tolist()) & set(eurostat["panel"].tolist())
+    panels = [p for p in EURO_PANELS if p in present]
+    if not panels:
+        panels = sorted(present)
+    return national, eurostat, panels, national_label
 
 
 def load_kayrros_series(

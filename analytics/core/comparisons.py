@@ -1,4 +1,4 @@
-"""Cross-source comparison helpers (official vs JODI vs Kayrros)."""
+"""Cross-source comparison helpers (official vs JODI vs Kayrros vs Eurostat)."""
 
 from __future__ import annotations
 
@@ -35,6 +35,32 @@ def build_jodi_comparison_figure(
         value_col_b="value_kbd",
         label_a=label_official,
         label_b="JODI",
+        title=title,
+        units_label="kbd",
+    )
+
+
+def build_eurostat_comparison_figure(
+    national: pd.DataFrame,
+    eurostat: pd.DataFrame,
+    panels: list[str],
+    *,
+    label_national: str,
+    title: str,
+) -> Optional[go.Figure]:
+    """National agency vs Eurostat GID_OBS on shared compare panels."""
+    if national.empty or eurostat.empty or not panels:
+        return None
+    return cross_source_comparison_chart(
+        df_a=national,
+        df_b=eurostat,
+        products=panels,
+        product_col_a="panel",
+        product_col_b="panel",
+        value_col_a="value_kbd",
+        value_col_b="value_kbd",
+        label_a=label_national,
+        label_b="Eurostat",
         title=title,
         units_label="kbd",
     )

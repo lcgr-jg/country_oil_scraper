@@ -31,6 +31,7 @@ if str(_ROOT) not in sys.path:
 from analytics import seasonality_by_year_chart  # noqa: E402
 from analytics.core import (  # noqa: E402
     available_months,
+    build_eurostat_comparison_figure,
     build_jodi_comparison_figure,
     build_kayrros_jet_figure,
     build_trading_notes,
@@ -43,6 +44,7 @@ from analytics.core import (  # noqa: E402
     warehouse_status,
 )
 from analytics.core.dashboard_copy import (
+    eurostat_compare_caption,
     jodi_compare_caption,
     kayrros_jet_caption,
     seasonality_caption,
@@ -57,7 +59,7 @@ from analytics.core.multi_country import (  # noqa: E402
 )
 from warehouse.country_hooks import (
     call_seasonality_chart_inputs,
-    load_reference,
+    load_reference_for_official_source,
     resolve_jet_product_native,
 )
 from warehouse.consolidate import ensure_warehouse  # noqa: E402
@@ -111,6 +113,8 @@ def _build_csv_export_bundle(
     canonical_by_country: pd.DataFrame | None = None,
     demand_by_country: pd.DataFrame | None = None,
     country_drivers: pd.DataFrame | None = None,
+    national_eurostat: pd.DataFrame | None = None,
+    eurostat: pd.DataFrame | None = None,
     multi_country: bool = False,
 ) -> dict[str, pd.DataFrame]:
     """Datasets available for CSV / ZIP download for the active country or bundle."""
@@ -144,6 +148,18 @@ def _build_csv_export_bundle(
     if not jodi.empty:
         exports["jodi_benchmark"] = _select_columns(
             jodi.assign(source="JODI"),
+            compare_cols,
+        )
+    if national_eurostat is not None and not national_eurostat.empty:
+        exports["eurostat_national_panels"] = _select_columns(
+            national_eurostat.assign(
+                source=getattr(cfg, "official_source_label", "national")
+            ),
+            compare_cols,
+        )
+    if eurostat is not None and not eurostat.empty:
+        exports["eurostat_panels"] = _select_columns(
+            eurostat.assign(source="Eurostat"),
             compare_cols,
         )
     if not official_jet.empty:
@@ -393,6 +409,8 @@ def _render_csv_downloads(
             "headline_total": "Headline total (canonical sum)",
             "jodi_official_panels": "JODI compare — official panels",
             "jodi_benchmark": "JODI compare — JODI panels",
+            "eurostat_national_panels": "Eurostat compare — national panels",
+            "eurostat_panels": "Eurostat compare — Eurostat panels",
             "official_jet": "Official jet fuel series",
             "kayrros_jet": "Kayrros jet fuel",
             "mom_yoy": "MoM / YoY change table",
@@ -508,13 +526,16 @@ def main() -> None:
 
         bundle_label = multi_country_display_name(country_ids)
         cfg = get_country(country_id)
-        ref_mod = load_reference(cfg) if not multi_country else None
 
         frames = _load_bundle_frames(tuple(sorted(country_ids)))
         demand = frames["demand"]
         if demand.empty:
             st.error(f"No official demand in warehouse for {bundle_label}.")
             st.stop()
+
+        ref_mod = (
+            load_reference_for_official_source(cfg, demand) if not multi_country else None
+        )
 
         reporting = frames.get("reporting") if multi_country else None
         month_source = (
@@ -587,6 +608,15 @@ def main() -> None:
         )
 
         show_jodi = st.checkbox("JODI comparison", value=True)
+        show_eurostat = st.checkbox(
+            "Eurostat comparison",
+            value=not multi_country,
+            disabled=multi_country,
+            help=(
+                "National agency vs Eurostat GID_OBS on shared panels. "
+                "Single-country only."
+            ),
+        )
         show_kayrros = st.checkbox(
             "Kayrros (jet)",
             value=True,
@@ -635,8 +665,14 @@ def main() -> None:
                 f"(through {reporting['balanced_through_label']})."
             )
     else:
+        live_src = (
+            str(demand["source"].dropna().iloc[0])
+            if not demand.empty and "source" in demand.columns
+            else cfg.official_source_label
+        )
         st.caption(
-            f"Official source: {cfg.official_source_label} · "
+            f"Configured agency: {cfg.official_source_label} · "
+            f"Live official tier: {live_src} · "
             f"Metric: {cfg.demand_metric_type} · Unit: kbd"
         )
 
@@ -644,6 +680,12 @@ def main() -> None:
     official_jodi = frames["official_jodi"]
     jodi = frames["jodi"]
     jodi_panels = frames["jodi_panels"]
+    national_euro = frames.get("national_eurostat", pd.DataFrame())
+    eurostat = frames.get("eurostat", pd.DataFrame())
+    eurostat_panels = frames.get("eurostat_panels", [])
+    eurostat_national_label = frames.get(
+        "eurostat_national_label", cfg.official_source_label
+    )
     kayrros = frames["kayrros"]
     official_jet = frames.get("official_jet", pd.DataFrame())
     if official_jet is None or (isinstance(official_jet, pd.DataFrame) and official_jet.empty):
@@ -877,6 +919,29 @@ def main() -> None:
             _track_figure(fig_jodi, snapshot_figures)
             st.plotly_chart(fig_jodi, use_container_width=True)
 
+    # ── Eurostat (national companion) ─────────────────────────────────────
+    if show_eurostat and not multi_country:
+        st.markdown("### National vs Eurostat")
+        st.caption(eurostat_compare_caption(country_id, ref_mod))
+        fig_euro = build_eurostat_comparison_figure(
+            national_euro,
+            eurostat,
+            list(eurostat_panels),
+            label_national=str(eurostat_national_label or cfg.official_source_label),
+            title=(
+                f"{display_title} TOTDEMO — "
+                f"{eurostat_national_label or cfg.official_source_label} vs Eurostat (kbd)"
+            ),
+        )
+        if fig_euro is None:
+            st.info(
+                "Eurostat comparison unavailable "
+                "(no national companion, missing Eurostat rows, or no shared panels)."
+            )
+        else:
+            _track_figure(fig_euro, snapshot_figures)
+            st.plotly_chart(fig_euro, use_container_width=True)
+
     # ── Kayrros ───────────────────────────────────────────────────────────
     if show_kayrros:
         st.markdown("### Jet fuel vs Kayrros")
@@ -973,6 +1038,8 @@ def main() -> None:
         canonical_by_country=canonical_by_country if multi_country else None,
         demand_by_country=demand_by_country if multi_country else None,
         country_drivers=country_drivers_export if multi_country else None,
+        national_eurostat=national_euro if show_eurostat else pd.DataFrame(),
+        eurostat=eurostat if show_eurostat else pd.DataFrame(),
         multi_country=multi_country,
     )
     _render_csv_downloads(

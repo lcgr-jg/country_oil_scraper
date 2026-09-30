@@ -1,0 +1,812 @@
+﻿[
+  {
+    "file": "data\\processed\\australia\\australia_petroleum_statistics.parquet",
+    "rows": 15744,
+    "cols": [
+      "date",
+      "country",
+      "country_name",
+      "source",
+      "metric_type",
+      "product_native",
+      "product",
+      "value",
+      "unit",
+      "source_file",
+      "updated_at",
+      "product_canonical",
+      "category"
+    ],
+    "date_min": "2010-07-01",
+    "date_max": "2026-06-01",
+    "metric_types": [
+      "CLOSTLV",
+      "INDPROD",
+      "REFGROUT",
+      "REFINOBS",
+      "TOTDEMO",
+      "TOTEXPSB",
+      "TOTIMPSB",
+      "X_REFINSHARE_INDIG",
+      "X_STKCOVER"
+    ],
+    "n_products": 42,
+    "sample_products": [
+      "Automotive gasoline",
+      "Automotive gasoline total",
+      "Aviation gasoline",
+      "Aviation turbine fuel",
+      "Aviation turbine fuel Domestic",
+      "Aviation turbine fuel International",
+      "Aviation turbine fuel total",
+      "Bitumen"
+    ],
+    "units": [
+      "%",
+      "ML",
+      "Mm3",
+      "days"
+    ]
+  },
+  {
+    "file": "data\\processed\\china\\china_sci_consumption.parquet",
+    "rows": 680,
+    "cols": [
+      "date",
+      "country",
+      "country_name",
+      "source",
+      "metric_type",
+      "product_native",
+      "product",
+      "value",
+      "unit",
+      "is_provisional",
+      "source_file",
+      "updated_at",
+      "product_canonical",
+      "category"
+    ],
+    "date_min": "2021-01-01",
+    "date_max": "2026-08-01",
+    "metric_types": [
+      "TOTDEMO"
+    ],
+    "n_products": 10,
+    "sample_products": [
+      "Diesel",
+      "Gasoline",
+      "Jet fuel (domestic)",
+      "Jet fuel (international)",
+      "Jet fuel (total)",
+      "Kerosene",
+      "Naphtha",
+      "Residue"
+    ],
+    "units": [
+      "kt"
+    ]
+  },
+  {
+    "file": "data\\processed\\eurostat\\eurostat_oilm_demand.parquet",
+    "rows": 53330,
+    "cols": [
+      "date",
+      "country",
+      "country_name",
+      "source",
+      "metric_type",
+      "product_native",
+      "product",
+      "value",
+      "unit",
+      "is_provisional",
+      "source_file",
+      "updated_at",
+      "product_canonical",
+      "category",
+      "geo",
+      "country_id"
+    ],
+    "date_min": "2008-01-01",
+    "date_max": "2026-07-01",
+    "metric_types": [
+      "TOTDEMO"
+    ],
+    "n_products": 8,
+    "sample_products": [
+      "O4630",
+      "O4640",
+      "O4652",
+      "O4661",
+      "O4671",
+      "O46711",
+      "O46712",
+      "O4680"
+    ],
+    "units": [
+      "kt"
+    ]
+  },
+  {
+    "file": "data\\processed\\germany\\germany_bafa_demand.parquet",
+    "rows": 3339,
+    "cols": [
+      "date",
+      "country",
+      "country_name",
+      "source",
+      "metric_type",
+      "product_native",
+      "product",
+      "value",
+      "unit",
+      "is_provisional",
+      "source_file",
+      "updated_at",
+      "product_canonical",
+      "category"
+    ],
+    "date_min": "2019-12-01",
+    "date_max": "2026-05-01",
+    "metric_types": [
+      "BIOBLEND",
+      "CLOSTLV",
+      "TOTDEMO"
+    ],
+    "n_products": 34,
+    "sample_products": [
+      "Andere Leucht\u00f6le",
+      "Andere R\u00fcckst\u00e4nde",
+      "Benzinkomponenten",
+      "Biodiesel (FAME), HVO, BTL",
+      "Bioethanol",
+      "Bioethanol an ETBE a)",
+      "Bioheiz\u00f6l",
+      "Biokerosin"
+    ],
+    "units": [
+      "t"
+    ]
+  },
+  {
+    "file": "data\\processed\\hungary\\hungary_mekh_demand.parquet",
+    "rows": 3131,
+    "cols": [
+      "date",
+      "country",
+      "country_name",
+      "source",
+      "metric_type",
+      "product_native",
+      "product",
+      "value",
+      "unit",
+      "is_provisional",
+      "source_file",
+      "updated_at",
+      "product_canonical",
+      "category"
+    ],
+    "date_min": "2008-01-01",
+    "date_max": "2026-05-01",
+    "metric_types": [
+      "CLOSTLV",
+      "TOTDEMO"
+    ],
+    "n_products": 9,
+    "sample_products": [
+      "Fuel oil",
+      "Kerosene type jet fuel",
+      "LPG",
+      "Naphtha",
+      "Natural gas liquids",
+      "Other products",
+      "Petroleum coke",
+      "Total gas/diesel oil"
+    ],
+    "units": [
+      "kt"
+    ]
+  },
+  {
+    "file": "data\\processed\\india\\india_pt_consumption.parquet",
+    "rows": 4432,
+    "cols": [
+      "date",
+      "calendar_year",
+      "calendar_month",
+      "month_name",
+      "product",
+      "product_canonical",
+      "category",
+      "metric_type",
+      "unit_measure",
+      "value_000mt",
+      "is_total_row",
+      "fiscal_year",
+      "fiscal_month",
+      "source_file",
+      "updated_at"
+    ],
+    "date_min": "1998-04-01",
+    "date_max": "2026-08-01",
+    "metric_types": [
+      "TOTDEMO"
+    ],
+    "n_products": 15,
+    "sample_products": [
+      "ATF",
+      "All Products total",
+      "All products total",
+      "Bitumen",
+      "FO & LSHS",
+      "HSD",
+      "LDO",
+      "LPG"
+    ],
+    "units": [
+      "kt"
+    ]
+  },
+  {
+    "file": "data\\processed\\italy\\italy_mase_consumption.parquet",
+    "rows": 12482,
+    "cols": [
+      "date",
+      "country",
+      "country_name",
+      "source",
+      "metric_type",
+      "product_native",
+      "product",
+      "value",
+      "unit",
+      "is_provisional",
+      "source_file",
+      "updated_at",
+      "product_canonical",
+      "category"
+    ],
+    "date_min": "2002-01-01",
+    "date_max": "2026-07-01",
+    "metric_types": [
+      "TOTDEMO"
+    ],
+    "n_products": 52,
+    "sample_products": [
+      "ALTRI PRODOTTI",
+      "BENZINA | AUTO TOTALE",
+      "BENZINA | EXTRARETE",
+      "BENZINA | RETE AUTOSTRAD.",
+      "BENZINA | RETE AUTOSTRADALE",
+      "BENZINA | RETE TOTALE",
+      "BITUMI",
+      "BUNKERS TOTALE"
+    ],
+    "units": [
+      "kt"
+    ]
+  },
+  {
+    "file": "data\\processed\\japan\\japan_meti_consumption.parquet",
+    "rows": 4266,
+    "cols": [
+      "date",
+      "country",
+      "country_name",
+      "source",
+      "metric_type",
+      "product_native",
+      "product",
+      "value",
+      "unit",
+      "is_provisional",
+      "source_file",
+      "updated_at",
+      "product_canonical",
+      "category"
+    ],
+    "date_min": "2007-01-01",
+    "date_max": "2026-06-01",
+    "metric_types": [
+      "CLOSTLV",
+      "INDPROD",
+      "TOTDEMO",
+      "TOTEXPSB",
+      "TOTIMPSB"
+    ],
+    "n_products": 12,
+    "sample_products": [
+      "asphalt",
+      "fuel_oil_a",
+      "fuel_oil_bc",
+      "gas_oil",
+      "gasoline",
+      "grease",
+      "jet_fuel",
+      "kerosene"
+    ],
+    "units": [
+      "kL",
+      "t"
+    ]
+  },
+  {
+    "file": "data\\processed\\jodi\\jodi_primary.parquet",
+    "rows": 6898800,
+    "cols": [
+      "date",
+      "year",
+      "month",
+      "ref_area",
+      "country_name",
+      "energy_product",
+      "product_canonical",
+      "category",
+      "flow_breakdown",
+      "metric_type",
+      "unit_measure",
+      "obs_value",
+      "value_status",
+      "assessment_code",
+      "assessment_label",
+      "dataset",
+      "source_file",
+      "updated_at"
+    ],
+    "date_min": "2002-01-01",
+    "date_max": "2026-06-01",
+    "metric_types": [
+      "CLOSTLV",
+      "DIRECUSE",
+      "INDPROD",
+      "OSOURCES",
+      "REFINOBS",
+      "STATDIFF",
+      "STOCKCH",
+      "TOTEXPSB",
+      "TOTIMPSB",
+      "TRANSBAK"
+    ],
+    "units": [
+      "CONVBBL",
+      "KBBL",
+      "KBD",
+      "KL",
+      "KTONS"
+    ]
+  },
+  {
+    "file": "data\\processed\\jodi\\jodi_secondary.parquet",
+    "rows": 15537937,
+    "cols": [
+      "date",
+      "year",
+      "month",
+      "ref_area",
+      "country_name",
+      "energy_product",
+      "product_canonical",
+      "category",
+      "flow_breakdown",
+      "metric_type",
+      "unit_measure",
+      "obs_value",
+      "value_status",
+      "assessment_code",
+      "assessment_label",
+      "dataset",
+      "source_file",
+      "updated_at"
+    ],
+    "date_min": "2002-01-01",
+    "date_max": "2026-06-01",
+    "metric_types": [
+      "CLOSTLV",
+      "IPTRANSF",
+      "PTRANSF",
+      "RECEIPTS",
+      "REFGROUT",
+      "STATDIFF",
+      "STOCKCH",
+      "TOTDEMO",
+      "TOTEXPSB",
+      "TOTIMPSB"
+    ],
+    "units": [
+      "CONVBBL",
+      "KBBL",
+      "KBD",
+      "KL",
+      "KTONS"
+    ]
+  },
+  {
+    "file": "data\\processed\\korea\\korea_knoc.parquet",
+    "rows": 8355,
+    "cols": [
+      "date",
+      "country",
+      "country_name",
+      "source",
+      "metric_type",
+      "product_native",
+      "product",
+      "value",
+      "unit",
+      "is_provisional",
+      "source_file",
+      "updated_at",
+      "product_canonical",
+      "category"
+    ],
+    "date_min": "1992-01-01",
+    "date_max": "2026-06-01",
+    "metric_types": [
+      "CLOSTLV",
+      "TOTDEMO"
+    ],
+    "n_products": 15,
+    "sample_products": [
+      "asphalt",
+      "biofuel",
+      "bunker_c",
+      "byproduct_fuel_oil",
+      "diesel",
+      "gasoline",
+      "heavy_oil",
+      "jet_fuel"
+    ],
+    "units": [
+      "kb",
+      "kbpm"
+    ]
+  },
+  {
+    "file": "data\\processed\\norway\\norway_ssb_sales.parquet",
+    "rows": 2799,
+    "cols": [
+      "date",
+      "country",
+      "country_name",
+      "source",
+      "metric_type",
+      "product_native",
+      "product",
+      "value",
+      "unit",
+      "is_provisional",
+      "source_file",
+      "updated_at",
+      "product_canonical",
+      "category"
+    ],
+    "date_min": "1995-01-01",
+    "date_max": "2026-05-01",
+    "metric_types": [
+      "TOTDEMO"
+    ],
+    "n_products": 13,
+    "sample_products": [
+      "Auto diesel, dutiable",
+      "Auto diesel, free of duty",
+      "Diesel",
+      "Heating and lighting kerosene",
+      "Heavy distillate and heavy fuel oil",
+      "Jet kerosene",
+      "Kerosene",
+      "Light heating oils"
+    ],
+    "units": [
+      "ML"
+    ]
+  },
+  {
+    "file": "data\\processed\\poland\\poland_are_liquid_fuels.parquet",
+    "rows": 450,
+    "cols": [
+      "date",
+      "country",
+      "country_name",
+      "source",
+      "metric_type",
+      "product_native",
+      "product",
+      "value",
+      "unit",
+      "is_provisional",
+      "source_file",
+      "updated_at",
+      "product_canonical",
+      "category"
+    ],
+    "date_min": "2024-02-01",
+    "date_max": "2026-06-01",
+    "metric_types": [
+      "CLOSTLV",
+      "REFGROUT",
+      "TOTDEMO",
+      "TOTIMPSB"
+    ],
+    "n_products": 5,
+    "sample_products": [
+      "Diesel oils",
+      "Fuel oil",
+      "Heating oil",
+      "LPG",
+      "Motor gasoline"
+    ],
+    "units": [
+      "kt"
+    ]
+  },
+  {
+    "file": "data\\processed\\portugal\\portugal_dgeg_sales.parquet",
+    "rows": 4889,
+    "cols": [
+      "date",
+      "country",
+      "country_name",
+      "source",
+      "metric_type",
+      "product_native",
+      "product",
+      "value",
+      "unit",
+      "is_provisional",
+      "source_file",
+      "updated_at",
+      "product_canonical",
+      "category"
+    ],
+    "date_min": "2006-01-01",
+    "date_max": "2026-07-01",
+    "metric_types": [
+      "TOTDEMO"
+    ],
+    "n_products": 26,
+    "sample_products": [
+      "Aviation | Aviation gasoline",
+      "Aviation | Jet fuel",
+      "Internal Market | Asphalt",
+      "Internal Market | Butane",
+      "Internal Market | Coloured diesel for heating purposes",
+      "Internal Market | Coloured diesel, except for heating purposes",
+      "Internal Market | Gasoline ON95 (b)",
+      "Internal Market | Gasoline ON98 (a)"
+    ],
+    "units": [
+      "t"
+    ]
+  },
+  {
+    "file": "data\\processed\\spain\\spain_cores_consumption.parquet",
+    "rows": 8078,
+    "cols": [
+      "date",
+      "country",
+      "country_name",
+      "source",
+      "metric_type",
+      "product_native",
+      "product",
+      "value",
+      "unit",
+      "is_provisional",
+      "source_file",
+      "updated_at",
+      "product_canonical",
+      "category"
+    ],
+    "date_min": "1996-01-01",
+    "date_max": "2026-07-01",
+    "metric_types": [
+      "TOTDEMO"
+    ],
+    "n_products": 27,
+    "sample_products": [
+      "Fuel oil | Fuel oil No. 1",
+      "Fuel oil | Fuel oil No. 2",
+      "Fuel oil | Low-sulphur fuel oil",
+      "Fuel oil | Other fuel oil",
+      "Gasoil | Agricultural diesel",
+      "Gasoil | Biodiesel (B100)",
+      "Gasoil | Biodiesel blend (1)",
+      "Gasoil | Heating oil"
+    ],
+    "units": [
+      "t"
+    ]
+  },
+  {
+    "file": "data\\processed\\taiwan\\taiwan_moea_consumption.parquet",
+    "rows": 1638,
+    "cols": [
+      "date",
+      "country",
+      "country_name",
+      "source",
+      "metric_type",
+      "product_native",
+      "product",
+      "value",
+      "unit",
+      "is_provisional",
+      "source_file",
+      "updated_at",
+      "product_canonical",
+      "category"
+    ],
+    "date_min": "2007-01-01",
+    "date_max": "2026-06-01",
+    "metric_types": [
+      "TOTDEMO"
+    ],
+    "n_products": 7,
+    "sample_products": [
+      "diesel",
+      "fuel_oil",
+      "gasoline",
+      "jet_fuel",
+      "lpg",
+      "naphtha",
+      "others"
+    ],
+    "units": [
+      "ktoe"
+    ]
+  },
+  {
+    "file": "data\\processed\\thailand\\thailand_eppo_sales.parquet",
+    "rows": 3760,
+    "cols": [
+      "date",
+      "country",
+      "country_name",
+      "source",
+      "metric_type",
+      "product_native",
+      "product",
+      "value",
+      "unit",
+      "is_provisional",
+      "source_file",
+      "updated_at",
+      "product_canonical",
+      "category"
+    ],
+    "date_min": "1986-01-01",
+    "date_max": "2026-06-01",
+    "metric_types": [
+      "TOTDEMO"
+    ],
+    "n_products": 8,
+    "sample_products": [
+      " HSD",
+      " LSD",
+      " PREMIUM",
+      " REGULAR",
+      "FUEL OIL",
+      "J.P.",
+      "KEROSENE",
+      "LPG"
+    ],
+    "units": [
+      "bbl/d"
+    ]
+  },
+  {
+    "file": "data\\processed\\uk\\uk_energy_trends.parquet",
+    "rows": 5676,
+    "cols": [
+      "date",
+      "country",
+      "country_name",
+      "source",
+      "metric_type",
+      "product_native",
+      "product",
+      "value",
+      "unit",
+      "is_provisional",
+      "source_file",
+      "updated_at",
+      "product_canonical",
+      "category"
+    ],
+    "date_min": "1995-01-01",
+    "date_max": "2026-06-01",
+    "metric_types": [
+      "CLOSTLV",
+      "TOTDEMO"
+    ],
+    "n_products": 14,
+    "sample_products": [
+      "Bitumen",
+      "Burning oil",
+      "Butane and propane",
+      "Diesel",
+      "Fuel oil",
+      "Gas oil",
+      "Jet fuel",
+      "Lubricating oils"
+    ],
+    "units": [
+      "kt"
+    ]
+  },
+  {
+    "file": "data\\processed\\ukraine\\ukraine_sssu_fuel.parquet",
+    "rows": 176,
+    "cols": [
+      "date",
+      "country",
+      "country_name",
+      "source",
+      "metric_type",
+      "product_native",
+      "product",
+      "value",
+      "unit",
+      "is_provisional",
+      "source_file",
+      "updated_at",
+      "product_canonical",
+      "category"
+    ],
+    "date_min": "2021-01-01",
+    "date_max": "2026-06-01",
+    "metric_types": [
+      "CLOSTLV",
+      "TOTDEMO"
+    ],
+    "n_products": 4,
+    "sample_products": [
+      "Fuel oil",
+      "Gas diesel",
+      "Liquefied petroleum gases (LPG)",
+      "Motor gasoline"
+    ],
+    "units": [
+      "kt"
+    ]
+  },
+  {
+    "file": "data\\processed\\us\\us_eia_product_supplied.parquet",
+    "rows": 564,
+    "cols": [
+      "date",
+      "country",
+      "country_name",
+      "source",
+      "metric_type",
+      "product_native",
+      "product",
+      "value",
+      "unit",
+      "is_provisional",
+      "source_file",
+      "updated_at",
+      "product_canonical",
+      "category"
+    ],
+    "date_min": "2018-12-01",
+    "date_max": "2026-09-01",
+    "metric_types": [
+      "TOTDEMO"
+    ],
+    "n_products": 6,
+    "sample_products": [
+      "Distillates",
+      "Gasoline",
+      "Jet/Kero",
+      "Other Oil",
+      "Resid",
+      "Total oil demand"
+    ],
+    "units": [
+      "kbd"
+    ]
+  }
+]

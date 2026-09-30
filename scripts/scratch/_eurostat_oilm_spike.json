@@ -1,0 +1,4651 @@
+{
+  "generated": "2026-09-11T16:44:56.681502+00:00",
+  "dataset": "nrg_cb_oilm",
+  "balance": "GID_OBS",
+  "unit_native": "THS_T",
+  "product_map": [
+    {
+      "siec": "O4652",
+      "label": "Motor gasoline",
+      "product_canonical": "Gasoline",
+      "product_kind": "gasoline"
+    },
+    {
+      "siec": "O4671",
+      "label": "Gas oil and diesel oil",
+      "product_canonical": "Diesel",
+      "product_kind": "diesel"
+    },
+    {
+      "siec": "O46711",
+      "label": "Road diesel",
+      "product_canonical": "Diesel",
+      "product_kind": "diesel"
+    },
+    {
+      "siec": "O46712",
+      "label": "Heating and other gasoil",
+      "product_canonical": "Gasoil",
+      "product_kind": "diesel"
+    },
+    {
+      "siec": "O4661",
+      "label": "Kerosene-type jet fuel",
+      "product_canonical": "Jet fuel",
+      "product_kind": "jet"
+    },
+    {
+      "siec": "O4680",
+      "label": "Fuel oil",
+      "product_canonical": "Fuel oil",
+      "product_kind": "fuel_oil"
+    },
+    {
+      "siec": "O4630",
+      "label": "LPG",
+      "product_canonical": "LPG",
+      "product_kind": "lpg"
+    },
+    {
+      "siec": "O4640",
+      "label": "Naphtha",
+      "product_canonical": "Naphtha",
+      "product_kind": "naphtha"
+    }
+  ],
+  "de_bafa_compare": [
+    {
+      "siec": "O4652",
+      "label": "Motor gasoline",
+      "bafa_natives": [
+        "Benzinkomponenten",
+        "Ottokraftstoff"
+      ],
+      "n": 65,
+      "start": "2020-01",
+      "end": "2026-05",
+      "med_pct": 0.0,
+      "corr": 0.967,
+      "es_med_kbd": 455.6,
+      "bafa_med_kbd": 458.6,
+      "chart": [
+        {
+          "date": "2022-01",
+          "eurostat_kbd": 411.3,
+          "bafa_kbd": 411.3
+        },
+        {
+          "date": "2022-02",
+          "eurostat_kbd": 458.3,
+          "bafa_kbd": 458.3
+        },
+        {
+          "date": "2022-03",
+          "eurostat_kbd": 451.5,
+          "bafa_kbd": 451.5
+        },
+        {
+          "date": "2022-04",
+          "eurostat_kbd": 444.4,
+          "bafa_kbd": 444.4
+        },
+        {
+          "date": "2022-05",
+          "eurostat_kbd": 425.5,
+          "bafa_kbd": 425.5
+        },
+        {
+          "date": "2022-06",
+          "eurostat_kbd": 543.1,
+          "bafa_kbd": 543.1
+        },
+        {
+          "date": "2022-07",
+          "eurostat_kbd": 480.2,
+          "bafa_kbd": 480.2
+        },
+        {
+          "date": "2022-08",
+          "eurostat_kbd": 514.6,
+          "bafa_kbd": 514.6
+        },
+        {
+          "date": "2022-09",
+          "eurostat_kbd": 412.7,
+          "bafa_kbd": 412.7
+        },
+        {
+          "date": "2022-10",
+          "eurostat_kbd": 441.6,
+          "bafa_kbd": 441.6
+        },
+        {
+          "date": "2022-11",
+          "eurostat_kbd": 462.1,
+          "bafa_kbd": 462.1
+        },
+        {
+          "date": "2022-12",
+          "eurostat_kbd": 429.6,
+          "bafa_kbd": 429.6
+        },
+        {
+          "date": "2023-01",
+          "eurostat_kbd": 411.4,
+          "bafa_kbd": 411.4
+        },
+        {
+          "date": "2023-02",
+          "eurostat_kbd": 460.5,
+          "bafa_kbd": 460.5
+        },
+        {
+          "date": "2023-03",
+          "eurostat_kbd": 458.6,
+          "bafa_kbd": 458.6
+        },
+        {
+          "date": "2023-04",
+          "eurostat_kbd": 434.6,
+          "bafa_kbd": 434.6
+        },
+        {
+          "date": "2023-05",
+          "eurostat_kbd": 470.6,
+          "bafa_kbd": 470.6
+        },
+        {
+          "date": "2023-06",
+          "eurostat_kbd": 471.8,
+          "bafa_kbd": 471.8
+        },
+        {
+          "date": "2023-07",
+          "eurostat_kbd": 459.0,
+          "bafa_kbd": 459.0
+        },
+        {
+          "date": "2023-08",
+          "eurostat_kbd": 465.2,
+          "bafa_kbd": 465.2
+        },
+        {
+          "date": "2023-09",
+          "eurostat_kbd": 484.5,
+          "bafa_kbd": 484.5
+        },
+        {
+          "date": "2023-10",
+          "eurostat_kbd": 483.6,
+          "bafa_kbd": 483.6
+        },
+        {
+          "date": "2023-11",
+          "eurostat_kbd": 455.8,
+          "bafa_kbd": 455.8
+        },
+        {
+          "date": "2023-12",
+          "eurostat_kbd": 446.7,
+          "bafa_kbd": 446.7
+        },
+        {
+          "date": "2024-01",
+          "eurostat_kbd": 407.1,
+          "bafa_kbd": 423.4
+        },
+        {
+          "date": "2024-02",
+          "eurostat_kbd": 444.6,
+          "bafa_kbd": 452.2
+        },
+        {
+          "date": "2024-03",
+          "eurostat_kbd": 446.5,
+          "bafa_kbd": 458.5
+        },
+        {
+          "date": "2024-04",
+          "eurostat_kbd": 474.5,
+          "bafa_kbd": 493.6
+        },
+        {
+          "date": "2024-05",
+          "eurostat_kbd": 481.5,
+          "bafa_kbd": 499.6
+        },
+        {
+          "date": "2024-06",
+          "eurostat_kbd": 467.3,
+          "bafa_kbd": 488.4
+        },
+        {
+          "date": "2024-07",
+          "eurostat_kbd": 489.3,
+          "bafa_kbd": 520.4
+        },
+        {
+          "date": "2024-08",
+          "eurostat_kbd": 455.6,
+          "bafa_kbd": 507.4
+        },
+        {
+          "date": "2024-09",
+          "eurostat_kbd": 450.6,
+          "bafa_kbd": 491.1
+        },
+        {
+          "date": "2024-10",
+          "eurostat_kbd": 446.2,
+          "bafa_kbd": 463.6
+        },
+        {
+          "date": "2024-11",
+          "eurostat_kbd": 457.2,
+          "bafa_kbd": 473.1
+        },
+        {
+          "date": "2024-12",
+          "eurostat_kbd": 411.4,
+          "bafa_kbd": 451.9
+        },
+        {
+          "date": "2026-01",
+          "eurostat_kbd": 357.6,
+          "bafa_kbd": 358.2
+        },
+        {
+          "date": "2026-02",
+          "eurostat_kbd": 400.2,
+          "bafa_kbd": 399.3
+        },
+        {
+          "date": "2026-03",
+          "eurostat_kbd": 356.2,
+          "bafa_kbd": 356.2
+        },
+        {
+          "date": "2026-04",
+          "eurostat_kbd": 397.7,
+          "bafa_kbd": 397.7
+        },
+        {
+          "date": "2026-05",
+          "eurostat_kbd": 434.5,
+          "bafa_kbd": 434.5
+        }
+      ]
+    },
+    {
+      "siec": "O4671",
+      "label": "Gas oil and diesel oil",
+      "bafa_natives": [
+        "Dieselkraftstoff",
+        "Heiz\u00f6l, leicht"
+      ],
+      "n": 77,
+      "start": "2020-01",
+      "end": "2026-05",
+      "med_pct": -1.9,
+      "corr": 0.995,
+      "es_med_kbd": 941.2,
+      "bafa_med_kbd": 930.6,
+      "chart": [
+        {
+          "date": "2022-01",
+          "eurostat_kbd": 872.4,
+          "bafa_kbd": 852.5
+        },
+        {
+          "date": "2022-02",
+          "eurostat_kbd": 974.1,
+          "bafa_kbd": 930.6
+        },
+        {
+          "date": "2022-03",
+          "eurostat_kbd": 1024.9,
+          "bafa_kbd": 1016.4
+        },
+        {
+          "date": "2022-04",
+          "eurostat_kbd": 902.1,
+          "bafa_kbd": 882.0
+        },
+        {
+          "date": "2022-05",
+          "eurostat_kbd": 896.4,
+          "bafa_kbd": 873.7
+        },
+        {
+          "date": "2022-06",
+          "eurostat_kbd": 957.0,
+          "bafa_kbd": 938.8
+        },
+        {
+          "date": "2022-07",
+          "eurostat_kbd": 998.5,
+          "bafa_kbd": 981.1
+        },
+        {
+          "date": "2022-08",
+          "eurostat_kbd": 1070.9,
+          "bafa_kbd": 1057.8
+        },
+        {
+          "date": "2022-09",
+          "eurostat_kbd": 1006.0,
+          "bafa_kbd": 990.8
+        },
+        {
+          "date": "2022-10",
+          "eurostat_kbd": 970.2,
+          "bafa_kbd": 953.1
+        },
+        {
+          "date": "2022-11",
+          "eurostat_kbd": 1040.6,
+          "bafa_kbd": 1021.5
+        },
+        {
+          "date": "2022-12",
+          "eurostat_kbd": 1005.1,
+          "bafa_kbd": 985.1
+        },
+        {
+          "date": "2023-01",
+          "eurostat_kbd": 820.1,
+          "bafa_kbd": 784.9
+        },
+        {
+          "date": "2023-02",
+          "eurostat_kbd": 977.6,
+          "bafa_kbd": 958.2
+        },
+        {
+          "date": "2023-03",
+          "eurostat_kbd": 1002.0,
+          "bafa_kbd": 983.1
+        },
+        {
+          "date": "2023-04",
+          "eurostat_kbd": 883.5,
+          "bafa_kbd": 867.7
+        },
+        {
+          "date": "2023-05",
+          "eurostat_kbd": 974.3,
+          "bafa_kbd": 959.3
+        },
+        {
+          "date": "2023-06",
+          "eurostat_kbd": 930.0,
+          "bafa_kbd": 914.2
+        },
+        {
+          "date": "2023-07",
+          "eurostat_kbd": 875.7,
+          "bafa_kbd": 860.6
+        },
+        {
+          "date": "2023-08",
+          "eurostat_kbd": 888.2,
+          "bafa_kbd": 871.3
+        },
+        {
+          "date": "2023-09",
+          "eurostat_kbd": 902.6,
+          "bafa_kbd": 887.8
+        },
+        {
+          "date": "2023-10",
+          "eurostat_kbd": 984.6,
+          "bafa_kbd": 964.1
+        },
+        {
+          "date": "2023-11",
+          "eurostat_kbd": 998.6,
+          "bafa_kbd": 991.0
+        },
+        {
+          "date": "2023-12",
+          "eurostat_kbd": 958.7,
+          "bafa_kbd": 938.3
+        },
+        {
+          "date": "2024-01",
+          "eurostat_kbd": 813.8,
+          "bafa_kbd": 795.4
+        },
+        {
+          "date": "2024-02",
+          "eurostat_kbd": 867.3,
+          "bafa_kbd": 830.0
+        },
+        {
+          "date": "2024-03",
+          "eurostat_kbd": 842.8,
+          "bafa_kbd": 814.7
+        },
+        {
+          "date": "2024-04",
+          "eurostat_kbd": 914.5,
+          "bafa_kbd": 872.1
+        },
+        {
+          "date": "2024-05",
+          "eurostat_kbd": 855.1,
+          "bafa_kbd": 820.7
+        },
+        {
+          "date": "2024-06",
+          "eurostat_kbd": 929.6,
+          "bafa_kbd": 889.1
+        },
+        {
+          "date": "2024-07",
+          "eurostat_kbd": 921.6,
+          "bafa_kbd": 889.2
+        },
+        {
+          "date": "2024-08",
+          "eurostat_kbd": 917.1,
+          "bafa_kbd": 900.0
+        },
+        {
+          "date": "2024-09",
+          "eurostat_kbd": 979.7,
+          "bafa_kbd": 973.8
+        },
+        {
+          "date": "2024-10",
+          "eurostat_kbd": 982.5,
+          "bafa_kbd": 957.6
+        },
+        {
+          "date": "2024-11",
+          "eurostat_kbd": 929.5,
+          "bafa_kbd": 905.3
+        },
+        {
+          "date": "2024-12",
+          "eurostat_kbd": 832.4,
+          "bafa_kbd": 835.9
+        },
+        {
+          "date": "2025-01",
+          "eurostat_kbd": 805.3,
+          "bafa_kbd": 769.1
+        },
+        {
+          "date": "2025-02",
+          "eurostat_kbd": 917.0,
+          "bafa_kbd": 883.7
+        },
+        {
+          "date": "2025-03",
+          "eurostat_kbd": 935.9,
+          "bafa_kbd": 948.5
+        },
+        {
+          "date": "2025-04",
+          "eurostat_kbd": 941.2,
+          "bafa_kbd": 930.6
+        },
+        {
+          "date": "2025-05",
+          "eurostat_kbd": 895.6,
+          "bafa_kbd": 883.8
+        },
+        {
+          "date": "2025-06",
+          "eurostat_kbd": 845.6,
+          "bafa_kbd": 836.0
+        },
+        {
+          "date": "2025-07",
+          "eurostat_kbd": 917.0,
+          "bafa_kbd": 907.5
+        },
+        {
+          "date": "2025-08",
+          "eurostat_kbd": 842.0,
+          "bafa_kbd": 841.3
+        },
+        {
+          "date": "2025-09",
+          "eurostat_kbd": 982.8,
+          "bafa_kbd": 972.0
+        },
+        {
+          "date": "2025-10",
+          "eurostat_kbd": 973.0,
+          "bafa_kbd": 956.8
+        },
+        {
+          "date": "2025-11",
+          "eurostat_kbd": 897.0,
+          "bafa_kbd": 887.1
+        },
+        {
+          "date": "2025-12",
+          "eurostat_kbd": 906.1,
+          "bafa_kbd": 894.0
+        },
+        {
+          "date": "2026-01",
+          "eurostat_kbd": 776.6,
+          "bafa_kbd": 775.1
+        },
+        {
+          "date": "2026-02",
+          "eurostat_kbd": 830.9,
+          "bafa_kbd": 829.1
+        },
+        {
+          "date": "2026-03",
+          "eurostat_kbd": 733.5,
+          "bafa_kbd": 737.0
+        },
+        {
+          "date": "2026-04",
+          "eurostat_kbd": 684.9,
+          "bafa_kbd": 681.0
+        },
+        {
+          "date": "2026-05",
+          "eurostat_kbd": 728.6,
+          "bafa_kbd": 728.6
+        }
+      ]
+    },
+    {
+      "siec": "O46711",
+      "label": "Road diesel",
+      "bafa_natives": [
+        "Dieselkraftstoff"
+      ],
+      "n": 77,
+      "start": "2020-01",
+      "end": "2026-05",
+      "med_pct": 0.0,
+      "corr": 0.994,
+      "es_med_kbd": 690.2,
+      "bafa_med_kbd": 687.0,
+      "chart": [
+        {
+          "date": "2022-01",
+          "eurostat_kbd": 637.8,
+          "bafa_kbd": 637.8
+        },
+        {
+          "date": "2022-02",
+          "eurostat_kbd": 678.8,
+          "bafa_kbd": 678.8
+        },
+        {
+          "date": "2022-03",
+          "eurostat_kbd": 742.7,
+          "bafa_kbd": 742.7
+        },
+        {
+          "date": "2022-04",
+          "eurostat_kbd": 680.7,
+          "bafa_kbd": 680.7
+        },
+        {
+          "date": "2022-05",
+          "eurostat_kbd": 643.9,
+          "bafa_kbd": 643.9
+        },
+        {
+          "date": "2022-06",
+          "eurostat_kbd": 760.2,
+          "bafa_kbd": 760.2
+        },
+        {
+          "date": "2022-07",
+          "eurostat_kbd": 728.7,
+          "bafa_kbd": 728.7
+        },
+        {
+          "date": "2022-08",
+          "eurostat_kbd": 797.5,
+          "bafa_kbd": 797.5
+        },
+        {
+          "date": "2022-09",
+          "eurostat_kbd": 687.0,
+          "bafa_kbd": 687.0
+        },
+        {
+          "date": "2022-10",
+          "eurostat_kbd": 682.7,
+          "bafa_kbd": 682.7
+        },
+        {
+          "date": "2022-11",
+          "eurostat_kbd": 760.1,
+          "bafa_kbd": 760.1
+        },
+        {
+          "date": "2022-12",
+          "eurostat_kbd": 695.7,
+          "bafa_kbd": 695.7
+        },
+        {
+          "date": "2023-01",
+          "eurostat_kbd": 576.1,
+          "bafa_kbd": 576.0
+        },
+        {
+          "date": "2023-02",
+          "eurostat_kbd": 681.9,
+          "bafa_kbd": 681.8
+        },
+        {
+          "date": "2023-03",
+          "eurostat_kbd": 720.6,
+          "bafa_kbd": 720.6
+        },
+        {
+          "date": "2023-04",
+          "eurostat_kbd": 629.5,
+          "bafa_kbd": 629.5
+        },
+        {
+          "date": "2023-05",
+          "eurostat_kbd": 705.1,
+          "bafa_kbd": 705.0
+        },
+        {
+          "date": "2023-06",
+          "eurostat_kbd": 694.4,
+          "bafa_kbd": 694.3
+        },
+        {
+          "date": "2023-07",
+          "eurostat_kbd": 669.9,
+          "bafa_kbd": 669.8
+        },
+        {
+          "date": "2023-08",
+          "eurostat_kbd": 690.2,
+          "bafa_kbd": 690.2
+        },
+        {
+          "date": "2023-09",
+          "eurostat_kbd": 698.0,
+          "bafa_kbd": 698.0
+        },
+        {
+          "date": "2023-10",
+          "eurostat_kbd": 710.1,
+          "bafa_kbd": 710.0
+        },
+        {
+          "date": "2023-11",
+          "eurostat_kbd": 727.4,
+          "bafa_kbd": 727.3
+        },
+        {
+          "date": "2023-12",
+          "eurostat_kbd": 658.8,
+          "bafa_kbd": 658.7
+        },
+        {
+          "date": "2024-01",
+          "eurostat_kbd": 544.4,
+          "bafa_kbd": 546.9
+        },
+        {
+          "date": "2024-02",
+          "eurostat_kbd": 644.7,
+          "bafa_kbd": 648.0
+        },
+        {
+          "date": "2024-03",
+          "eurostat_kbd": 651.8,
+          "bafa_kbd": 639.2
+        },
+        {
+          "date": "2024-04",
+          "eurostat_kbd": 710.7,
+          "bafa_kbd": 688.2
+        },
+        {
+          "date": "2024-05",
+          "eurostat_kbd": 648.8,
+          "bafa_kbd": 634.3
+        },
+        {
+          "date": "2024-06",
+          "eurostat_kbd": 690.4,
+          "bafa_kbd": 665.3
+        },
+        {
+          "date": "2024-07",
+          "eurostat_kbd": 712.9,
+          "bafa_kbd": 696.9
+        },
+        {
+          "date": "2024-08",
+          "eurostat_kbd": 662.4,
+          "bafa_kbd": 666.6
+        },
+        {
+          "date": "2024-09",
+          "eurostat_kbd": 703.1,
+          "bafa_kbd": 700.1
+        },
+        {
+          "date": "2024-10",
+          "eurostat_kbd": 687.5,
+          "bafa_kbd": 684.1
+        },
+        {
+          "date": "2024-11",
+          "eurostat_kbd": 675.0,
+          "bafa_kbd": 670.5
+        },
+        {
+          "date": "2024-12",
+          "eurostat_kbd": 586.9,
+          "bafa_kbd": 610.0
+        },
+        {
+          "date": "2025-01",
+          "eurostat_kbd": 588.6,
+          "bafa_kbd": 576.0
+        },
+        {
+          "date": "2025-02",
+          "eurostat_kbd": 679.9,
+          "bafa_kbd": 668.0
+        },
+        {
+          "date": "2025-03",
+          "eurostat_kbd": 697.3,
+          "bafa_kbd": 725.6
+        },
+        {
+          "date": "2025-04",
+          "eurostat_kbd": 714.5,
+          "bafa_kbd": 718.7
+        },
+        {
+          "date": "2025-05",
+          "eurostat_kbd": 663.6,
+          "bafa_kbd": 662.5
+        },
+        {
+          "date": "2025-06",
+          "eurostat_kbd": 632.3,
+          "bafa_kbd": 633.1
+        },
+        {
+          "date": "2025-07",
+          "eurostat_kbd": 717.9,
+          "bafa_kbd": 720.1
+        },
+        {
+          "date": "2025-08",
+          "eurostat_kbd": 666.6,
+          "bafa_kbd": 677.2
+        },
+        {
+          "date": "2025-09",
+          "eurostat_kbd": 743.7,
+          "bafa_kbd": 744.4
+        },
+        {
+          "date": "2025-10",
+          "eurostat_kbd": 724.1,
+          "bafa_kbd": 716.5
+        },
+        {
+          "date": "2025-11",
+          "eurostat_kbd": 679.3,
+          "bafa_kbd": 679.0
+        },
+        {
+          "date": "2025-12",
+          "eurostat_kbd": 663.9,
+          "bafa_kbd": 665.7
+        },
+        {
+          "date": "2026-01",
+          "eurostat_kbd": 562.5,
+          "bafa_kbd": 562.5
+        },
+        {
+          "date": "2026-02",
+          "eurostat_kbd": 623.6,
+          "bafa_kbd": 623.5
+        },
+        {
+          "date": "2026-03",
+          "eurostat_kbd": 596.4,
+          "bafa_kbd": 599.9
+        },
+        {
+          "date": "2026-04",
+          "eurostat_kbd": 592.0,
+          "bafa_kbd": 587.9
+        },
+        {
+          "date": "2026-05",
+          "eurostat_kbd": 649.3,
+          "bafa_kbd": 649.3
+        }
+      ]
+    },
+    {
+      "siec": "O46712",
+      "label": "Heating and other gasoil",
+      "bafa_natives": [
+        "Heiz\u00f6l, leicht"
+      ],
+      "n": 77,
+      "start": "2020-01",
+      "end": "2026-05",
+      "med_pct": -6.8,
+      "corr": 0.995,
+      "es_med_kbd": 245.5,
+      "bafa_med_kbd": 227.5,
+      "chart": [
+        {
+          "date": "2022-01",
+          "eurostat_kbd": 234.6,
+          "bafa_kbd": 214.7
+        },
+        {
+          "date": "2022-02",
+          "eurostat_kbd": 295.3,
+          "bafa_kbd": 251.8
+        },
+        {
+          "date": "2022-03",
+          "eurostat_kbd": 282.3,
+          "bafa_kbd": 273.7
+        },
+        {
+          "date": "2022-04",
+          "eurostat_kbd": 221.4,
+          "bafa_kbd": 201.3
+        },
+        {
+          "date": "2022-05",
+          "eurostat_kbd": 252.4,
+          "bafa_kbd": 229.7
+        },
+        {
+          "date": "2022-06",
+          "eurostat_kbd": 196.8,
+          "bafa_kbd": 178.6
+        },
+        {
+          "date": "2022-07",
+          "eurostat_kbd": 269.8,
+          "bafa_kbd": 252.5
+        },
+        {
+          "date": "2022-08",
+          "eurostat_kbd": 273.4,
+          "bafa_kbd": 260.3
+        },
+        {
+          "date": "2022-09",
+          "eurostat_kbd": 319.0,
+          "bafa_kbd": 303.8
+        },
+        {
+          "date": "2022-10",
+          "eurostat_kbd": 287.5,
+          "bafa_kbd": 270.3
+        },
+        {
+          "date": "2022-11",
+          "eurostat_kbd": 280.5,
+          "bafa_kbd": 261.4
+        },
+        {
+          "date": "2022-12",
+          "eurostat_kbd": 309.4,
+          "bafa_kbd": 289.5
+        },
+        {
+          "date": "2023-01",
+          "eurostat_kbd": 243.9,
+          "bafa_kbd": 208.9
+        },
+        {
+          "date": "2023-02",
+          "eurostat_kbd": 295.7,
+          "bafa_kbd": 276.3
+        },
+        {
+          "date": "2023-03",
+          "eurostat_kbd": 281.3,
+          "bafa_kbd": 262.5
+        },
+        {
+          "date": "2023-04",
+          "eurostat_kbd": 254.0,
+          "bafa_kbd": 238.2
+        },
+        {
+          "date": "2023-05",
+          "eurostat_kbd": 269.2,
+          "bafa_kbd": 254.3
+        },
+        {
+          "date": "2023-06",
+          "eurostat_kbd": 235.6,
+          "bafa_kbd": 219.9
+        },
+        {
+          "date": "2023-07",
+          "eurostat_kbd": 205.8,
+          "bafa_kbd": 190.7
+        },
+        {
+          "date": "2023-08",
+          "eurostat_kbd": 198.0,
+          "bafa_kbd": 181.1
+        },
+        {
+          "date": "2023-09",
+          "eurostat_kbd": 204.6,
+          "bafa_kbd": 189.8
+        },
+        {
+          "date": "2023-10",
+          "eurostat_kbd": 274.6,
+          "bafa_kbd": 254.1
+        },
+        {
+          "date": "2023-11",
+          "eurostat_kbd": 271.2,
+          "bafa_kbd": 263.7
+        },
+        {
+          "date": "2023-12",
+          "eurostat_kbd": 299.9,
+          "bafa_kbd": 279.6
+        },
+        {
+          "date": "2024-01",
+          "eurostat_kbd": 269.5,
+          "bafa_kbd": 248.5
+        },
+        {
+          "date": "2024-02",
+          "eurostat_kbd": 222.6,
+          "bafa_kbd": 182.0
+        },
+        {
+          "date": "2024-03",
+          "eurostat_kbd": 190.9,
+          "bafa_kbd": 175.5
+        },
+        {
+          "date": "2024-04",
+          "eurostat_kbd": 203.8,
+          "bafa_kbd": 183.9
+        },
+        {
+          "date": "2024-05",
+          "eurostat_kbd": 206.3,
+          "bafa_kbd": 186.4
+        },
+        {
+          "date": "2024-06",
+          "eurostat_kbd": 239.2,
+          "bafa_kbd": 223.8
+        },
+        {
+          "date": "2024-07",
+          "eurostat_kbd": 208.8,
+          "bafa_kbd": 192.3
+        },
+        {
+          "date": "2024-08",
+          "eurostat_kbd": 254.7,
+          "bafa_kbd": 233.4
+        },
+        {
+          "date": "2024-09",
+          "eurostat_kbd": 276.6,
+          "bafa_kbd": 273.7
+        },
+        {
+          "date": "2024-10",
+          "eurostat_kbd": 295.0,
+          "bafa_kbd": 273.5
+        },
+        {
+          "date": "2024-11",
+          "eurostat_kbd": 254.4,
+          "bafa_kbd": 234.8
+        },
+        {
+          "date": "2024-12",
+          "eurostat_kbd": 245.5,
+          "bafa_kbd": 225.8
+        },
+        {
+          "date": "2025-01",
+          "eurostat_kbd": 216.6,
+          "bafa_kbd": 193.1
+        },
+        {
+          "date": "2025-02",
+          "eurostat_kbd": 237.1,
+          "bafa_kbd": 215.8
+        },
+        {
+          "date": "2025-03",
+          "eurostat_kbd": 238.7,
+          "bafa_kbd": 222.9
+        },
+        {
+          "date": "2025-04",
+          "eurostat_kbd": 226.8,
+          "bafa_kbd": 211.9
+        },
+        {
+          "date": "2025-05",
+          "eurostat_kbd": 232.0,
+          "bafa_kbd": 221.3
+        },
+        {
+          "date": "2025-06",
+          "eurostat_kbd": 213.4,
+          "bafa_kbd": 202.9
+        },
+        {
+          "date": "2025-07",
+          "eurostat_kbd": 199.1,
+          "bafa_kbd": 187.4
+        },
+        {
+          "date": "2025-08",
+          "eurostat_kbd": 175.4,
+          "bafa_kbd": 164.1
+        },
+        {
+          "date": "2025-09",
+          "eurostat_kbd": 239.1,
+          "bafa_kbd": 227.5
+        },
+        {
+          "date": "2025-10",
+          "eurostat_kbd": 248.9,
+          "bafa_kbd": 240.2
+        },
+        {
+          "date": "2025-11",
+          "eurostat_kbd": 217.6,
+          "bafa_kbd": 208.0
+        },
+        {
+          "date": "2025-12",
+          "eurostat_kbd": 242.3,
+          "bafa_kbd": 228.3
+        },
+        {
+          "date": "2026-01",
+          "eurostat_kbd": 214.1,
+          "bafa_kbd": 212.6
+        },
+        {
+          "date": "2026-02",
+          "eurostat_kbd": 207.3,
+          "bafa_kbd": 205.6
+        },
+        {
+          "date": "2026-03",
+          "eurostat_kbd": 137.1,
+          "bafa_kbd": 137.2
+        },
+        {
+          "date": "2026-04",
+          "eurostat_kbd": 92.9,
+          "bafa_kbd": 93.1
+        },
+        {
+          "date": "2026-05",
+          "eurostat_kbd": 79.3,
+          "bafa_kbd": 79.3
+        }
+      ]
+    },
+    {
+      "siec": "O4661",
+      "label": "Kerosene-type jet fuel",
+      "bafa_natives": [
+        "Flugturb.Kraftst.,leicht",
+        "Flugturb.Kraftst.,schwer"
+      ],
+      "n": 77,
+      "start": "2020-01",
+      "end": "2026-05",
+      "med_pct": 0.0,
+      "corr": 0.997,
+      "es_med_kbd": 183.2,
+      "bafa_med_kbd": 183.7,
+      "chart": [
+        {
+          "date": "2022-01",
+          "eurostat_kbd": 147.3,
+          "bafa_kbd": 147.3
+        },
+        {
+          "date": "2022-02",
+          "eurostat_kbd": 168.2,
+          "bafa_kbd": 168.2
+        },
+        {
+          "date": "2022-03",
+          "eurostat_kbd": 160.6,
+          "bafa_kbd": 160.6
+        },
+        {
+          "date": "2022-04",
+          "eurostat_kbd": 193.7,
+          "bafa_kbd": 193.7
+        },
+        {
+          "date": "2022-05",
+          "eurostat_kbd": 192.0,
+          "bafa_kbd": 192.0
+        },
+        {
+          "date": "2022-06",
+          "eurostat_kbd": 211.6,
+          "bafa_kbd": 211.6
+        },
+        {
+          "date": "2022-07",
+          "eurostat_kbd": 220.8,
+          "bafa_kbd": 220.8
+        },
+        {
+          "date": "2022-08",
+          "eurostat_kbd": 222.7,
+          "bafa_kbd": 222.7
+        },
+        {
+          "date": "2022-09",
+          "eurostat_kbd": 216.1,
+          "bafa_kbd": 216.1
+        },
+        {
+          "date": "2022-10",
+          "eurostat_kbd": 241.5,
+          "bafa_kbd": 241.5
+        },
+        {
+          "date": "2022-11",
+          "eurostat_kbd": 180.8,
+          "bafa_kbd": 180.8
+        },
+        {
+          "date": "2022-12",
+          "eurostat_kbd": 209.0,
+          "bafa_kbd": 209.0
+        },
+        {
+          "date": "2023-01",
+          "eurostat_kbd": 178.5,
+          "bafa_kbd": 178.5
+        },
+        {
+          "date": "2023-02",
+          "eurostat_kbd": 181.0,
+          "bafa_kbd": 181.1
+        },
+        {
+          "date": "2023-03",
+          "eurostat_kbd": 184.3,
+          "bafa_kbd": 184.3
+        },
+        {
+          "date": "2023-04",
+          "eurostat_kbd": 201.2,
+          "bafa_kbd": 201.3
+        },
+        {
+          "date": "2023-05",
+          "eurostat_kbd": 198.2,
+          "bafa_kbd": 198.2
+        },
+        {
+          "date": "2023-06",
+          "eurostat_kbd": 220.0,
+          "bafa_kbd": 220.0
+        },
+        {
+          "date": "2023-07",
+          "eurostat_kbd": 230.6,
+          "bafa_kbd": 230.6
+        },
+        {
+          "date": "2023-08",
+          "eurostat_kbd": 226.7,
+          "bafa_kbd": 226.8
+        },
+        {
+          "date": "2023-09",
+          "eurostat_kbd": 232.2,
+          "bafa_kbd": 232.2
+        },
+        {
+          "date": "2023-10",
+          "eurostat_kbd": 226.8,
+          "bafa_kbd": 226.8
+        },
+        {
+          "date": "2023-11",
+          "eurostat_kbd": 203.6,
+          "bafa_kbd": 203.6
+        },
+        {
+          "date": "2023-12",
+          "eurostat_kbd": 186.7,
+          "bafa_kbd": 186.7
+        },
+        {
+          "date": "2024-01",
+          "eurostat_kbd": 155.8,
+          "bafa_kbd": 172.9
+        },
+        {
+          "date": "2024-02",
+          "eurostat_kbd": 162.5,
+          "bafa_kbd": 175.8
+        },
+        {
+          "date": "2024-03",
+          "eurostat_kbd": 168.4,
+          "bafa_kbd": 178.1
+        },
+        {
+          "date": "2024-04",
+          "eurostat_kbd": 195.3,
+          "bafa_kbd": 207.6
+        },
+        {
+          "date": "2024-05",
+          "eurostat_kbd": 197.7,
+          "bafa_kbd": 210.9
+        },
+        {
+          "date": "2024-06",
+          "eurostat_kbd": 225.2,
+          "bafa_kbd": 221.4
+        },
+        {
+          "date": "2024-07",
+          "eurostat_kbd": 224.3,
+          "bafa_kbd": 224.7
+        },
+        {
+          "date": "2024-08",
+          "eurostat_kbd": 227.3,
+          "bafa_kbd": 222.0
+        },
+        {
+          "date": "2024-09",
+          "eurostat_kbd": 224.7,
+          "bafa_kbd": 227.5
+        },
+        {
+          "date": "2024-10",
+          "eurostat_kbd": 222.6,
+          "bafa_kbd": 217.9
+        },
+        {
+          "date": "2024-11",
+          "eurostat_kbd": 192.1,
+          "bafa_kbd": 188.1
+        },
+        {
+          "date": "2024-12",
+          "eurostat_kbd": 183.2,
+          "bafa_kbd": 180.4
+        },
+        {
+          "date": "2025-01",
+          "eurostat_kbd": 167.7,
+          "bafa_kbd": 170.6
+        },
+        {
+          "date": "2025-02",
+          "eurostat_kbd": 157.9,
+          "bafa_kbd": 162.5
+        },
+        {
+          "date": "2025-03",
+          "eurostat_kbd": 176.8,
+          "bafa_kbd": 180.3
+        },
+        {
+          "date": "2025-04",
+          "eurostat_kbd": 208.3,
+          "bafa_kbd": 211.5
+        },
+        {
+          "date": "2025-05",
+          "eurostat_kbd": 209.6,
+          "bafa_kbd": 214.4
+        },
+        {
+          "date": "2025-06",
+          "eurostat_kbd": 217.3,
+          "bafa_kbd": 219.9
+        },
+        {
+          "date": "2025-07",
+          "eurostat_kbd": 232.2,
+          "bafa_kbd": 235.2
+        },
+        {
+          "date": "2025-08",
+          "eurostat_kbd": 220.3,
+          "bafa_kbd": 226.3
+        },
+        {
+          "date": "2025-09",
+          "eurostat_kbd": 214.5,
+          "bafa_kbd": 226.1
+        },
+        {
+          "date": "2025-10",
+          "eurostat_kbd": 214.8,
+          "bafa_kbd": 217.6
+        },
+        {
+          "date": "2025-11",
+          "eurostat_kbd": 193.2,
+          "bafa_kbd": 195.5
+        },
+        {
+          "date": "2025-12",
+          "eurostat_kbd": 181.6,
+          "bafa_kbd": 183.7
+        },
+        {
+          "date": "2026-01",
+          "eurostat_kbd": 166.8,
+          "bafa_kbd": 166.8
+        },
+        {
+          "date": "2026-02",
+          "eurostat_kbd": 169.7,
+          "bafa_kbd": 169.7
+        },
+        {
+          "date": "2026-03",
+          "eurostat_kbd": 177.9,
+          "bafa_kbd": 178.0
+        },
+        {
+          "date": "2026-04",
+          "eurostat_kbd": 208.0,
+          "bafa_kbd": 208.0
+        },
+        {
+          "date": "2026-05",
+          "eurostat_kbd": 210.4,
+          "bafa_kbd": 210.4
+        }
+      ]
+    },
+    {
+      "siec": "O4680",
+      "label": "Fuel oil",
+      "bafa_natives": [
+        "Heiz\u00f6l, schwer"
+      ],
+      "n": 77,
+      "start": "2020-01",
+      "end": "2026-05",
+      "med_pct": -48.6,
+      "corr": 0.636,
+      "es_med_kbd": 33.5,
+      "bafa_med_kbd": 17.7,
+      "chart": [
+        {
+          "date": "2022-01",
+          "eurostat_kbd": 57.5,
+          "bafa_kbd": 33.0
+        },
+        {
+          "date": "2022-02",
+          "eurostat_kbd": 40.5,
+          "bafa_kbd": 21.5
+        },
+        {
+          "date": "2022-03",
+          "eurostat_kbd": 35.0,
+          "bafa_kbd": 16.5
+        },
+        {
+          "date": "2022-04",
+          "eurostat_kbd": 39.0,
+          "bafa_kbd": 21.8
+        },
+        {
+          "date": "2022-05",
+          "eurostat_kbd": 42.1,
+          "bafa_kbd": 24.2
+        },
+        {
+          "date": "2022-06",
+          "eurostat_kbd": 37.0,
+          "bafa_kbd": 11.9
+        },
+        {
+          "date": "2022-07",
+          "eurostat_kbd": 38.2,
+          "bafa_kbd": 17.8
+        },
+        {
+          "date": "2022-08",
+          "eurostat_kbd": 28.6,
+          "bafa_kbd": 12.4
+        },
+        {
+          "date": "2022-09",
+          "eurostat_kbd": 30.1,
+          "bafa_kbd": 18.9
+        },
+        {
+          "date": "2022-10",
+          "eurostat_kbd": 20.5,
+          "bafa_kbd": 2.1
+        },
+        {
+          "date": "2022-11",
+          "eurostat_kbd": 28.1,
+          "bafa_kbd": 6.0
+        },
+        {
+          "date": "2022-12",
+          "eurostat_kbd": 25.8,
+          "bafa_kbd": 8.7
+        },
+        {
+          "date": "2023-01",
+          "eurostat_kbd": 21.1,
+          "bafa_kbd": 9.0
+        },
+        {
+          "date": "2023-02",
+          "eurostat_kbd": 25.0,
+          "bafa_kbd": 9.0
+        },
+        {
+          "date": "2023-03",
+          "eurostat_kbd": 21.8,
+          "bafa_kbd": 1.2
+        },
+        {
+          "date": "2023-04",
+          "eurostat_kbd": 29.9,
+          "bafa_kbd": 12.8
+        },
+        {
+          "date": "2023-05",
+          "eurostat_kbd": 34.6,
+          "bafa_kbd": 14.0
+        },
+        {
+          "date": "2023-06",
+          "eurostat_kbd": 30.6,
+          "bafa_kbd": 17.7
+        },
+        {
+          "date": "2023-07",
+          "eurostat_kbd": 25.2,
+          "bafa_kbd": 11.6
+        },
+        {
+          "date": "2023-08",
+          "eurostat_kbd": 22.8,
+          "bafa_kbd": 10.6
+        },
+        {
+          "date": "2023-09",
+          "eurostat_kbd": 10.4,
+          "bafa_kbd": 5.7
+        },
+        {
+          "date": "2023-10",
+          "eurostat_kbd": 20.1,
+          "bafa_kbd": 8.9
+        },
+        {
+          "date": "2023-11",
+          "eurostat_kbd": 47.2,
+          "bafa_kbd": 27.0
+        },
+        {
+          "date": "2023-12",
+          "eurostat_kbd": 39.0,
+          "bafa_kbd": 15.4
+        },
+        {
+          "date": "2024-01",
+          "eurostat_kbd": 26.8,
+          "bafa_kbd": 5.9
+        },
+        {
+          "date": "2024-02",
+          "eurostat_kbd": 23.0,
+          "bafa_kbd": 11.1
+        },
+        {
+          "date": "2024-03",
+          "eurostat_kbd": 18.8,
+          "bafa_kbd": 0.9
+        },
+        {
+          "date": "2024-04",
+          "eurostat_kbd": 24.8,
+          "bafa_kbd": 10.8
+        },
+        {
+          "date": "2024-05",
+          "eurostat_kbd": 24.4,
+          "bafa_kbd": 3.9
+        },
+        {
+          "date": "2024-06",
+          "eurostat_kbd": 37.2,
+          "bafa_kbd": 18.8
+        },
+        {
+          "date": "2024-07",
+          "eurostat_kbd": 26.1,
+          "bafa_kbd": 14.2
+        },
+        {
+          "date": "2024-08",
+          "eurostat_kbd": 31.5,
+          "bafa_kbd": 12.7
+        },
+        {
+          "date": "2024-09",
+          "eurostat_kbd": 26.5,
+          "bafa_kbd": 10.8
+        },
+        {
+          "date": "2024-10",
+          "eurostat_kbd": 20.7,
+          "bafa_kbd": 11.2
+        },
+        {
+          "date": "2024-11",
+          "eurostat_kbd": 32.9,
+          "bafa_kbd": 23.0
+        },
+        {
+          "date": "2024-12",
+          "eurostat_kbd": 33.8,
+          "bafa_kbd": 20.1
+        },
+        {
+          "date": "2025-01",
+          "eurostat_kbd": 24.3,
+          "bafa_kbd": 20.1
+        },
+        {
+          "date": "2025-02",
+          "eurostat_kbd": 32.3,
+          "bafa_kbd": 26.7
+        },
+        {
+          "date": "2025-03",
+          "eurostat_kbd": 23.8,
+          "bafa_kbd": 20.0
+        },
+        {
+          "date": "2025-04",
+          "eurostat_kbd": 34.7,
+          "bafa_kbd": 17.7
+        },
+        {
+          "date": "2025-05",
+          "eurostat_kbd": 41.1,
+          "bafa_kbd": 23.7
+        },
+        {
+          "date": "2025-06",
+          "eurostat_kbd": 36.8,
+          "bafa_kbd": 21.5
+        },
+        {
+          "date": "2025-07",
+          "eurostat_kbd": 33.5,
+          "bafa_kbd": 18.7
+        },
+        {
+          "date": "2025-08",
+          "eurostat_kbd": 34.0,
+          "bafa_kbd": 19.4
+        },
+        {
+          "date": "2025-09",
+          "eurostat_kbd": 26.7,
+          "bafa_kbd": 17.9
+        },
+        {
+          "date": "2025-10",
+          "eurostat_kbd": 31.8,
+          "bafa_kbd": 19.5
+        },
+        {
+          "date": "2025-11",
+          "eurostat_kbd": 29.9,
+          "bafa_kbd": 18.0
+        },
+        {
+          "date": "2025-12",
+          "eurostat_kbd": 20.7,
+          "bafa_kbd": 16.0
+        },
+        {
+          "date": "2026-01",
+          "eurostat_kbd": 17.3,
+          "bafa_kbd": 24.3
+        },
+        {
+          "date": "2026-02",
+          "eurostat_kbd": 15.5,
+          "bafa_kbd": 22.9
+        },
+        {
+          "date": "2026-03",
+          "eurostat_kbd": 16.4,
+          "bafa_kbd": 16.4
+        },
+        {
+          "date": "2026-04",
+          "eurostat_kbd": 10.8,
+          "bafa_kbd": 10.8
+        },
+        {
+          "date": "2026-05",
+          "eurostat_kbd": 12.5,
+          "bafa_kbd": 12.5
+        }
+      ]
+    },
+    {
+      "siec": "O4630",
+      "label": "LPG",
+      "bafa_natives": [
+        "Fl\u00fcssiggas"
+      ],
+      "n": 77,
+      "start": "2020-01",
+      "end": "2026-05",
+      "med_pct": 0.0,
+      "corr": 0.964,
+      "es_med_kbd": 104.2,
+      "bafa_med_kbd": 105.6,
+      "chart": [
+        {
+          "date": "2022-01",
+          "eurostat_kbd": 111.2,
+          "bafa_kbd": 111.2
+        },
+        {
+          "date": "2022-02",
+          "eurostat_kbd": 124.3,
+          "bafa_kbd": 124.3
+        },
+        {
+          "date": "2022-03",
+          "eurostat_kbd": 113.9,
+          "bafa_kbd": 113.9
+        },
+        {
+          "date": "2022-04",
+          "eurostat_kbd": 122.4,
+          "bafa_kbd": 122.4
+        },
+        {
+          "date": "2022-05",
+          "eurostat_kbd": 115.0,
+          "bafa_kbd": 115.0
+        },
+        {
+          "date": "2022-06",
+          "eurostat_kbd": 117.9,
+          "bafa_kbd": 117.9
+        },
+        {
+          "date": "2022-07",
+          "eurostat_kbd": 113.8,
+          "bafa_kbd": 113.8
+        },
+        {
+          "date": "2022-08",
+          "eurostat_kbd": 94.5,
+          "bafa_kbd": 94.5
+        },
+        {
+          "date": "2022-09",
+          "eurostat_kbd": 100.2,
+          "bafa_kbd": 100.2
+        },
+        {
+          "date": "2022-10",
+          "eurostat_kbd": 76.9,
+          "bafa_kbd": 76.9
+        },
+        {
+          "date": "2022-11",
+          "eurostat_kbd": 93.5,
+          "bafa_kbd": 93.5
+        },
+        {
+          "date": "2022-12",
+          "eurostat_kbd": 99.2,
+          "bafa_kbd": 99.2
+        },
+        {
+          "date": "2023-01",
+          "eurostat_kbd": 95.6,
+          "bafa_kbd": 95.6
+        },
+        {
+          "date": "2023-02",
+          "eurostat_kbd": 88.7,
+          "bafa_kbd": 88.7
+        },
+        {
+          "date": "2023-03",
+          "eurostat_kbd": 107.6,
+          "bafa_kbd": 107.6
+        },
+        {
+          "date": "2023-04",
+          "eurostat_kbd": 102.2,
+          "bafa_kbd": 102.2
+        },
+        {
+          "date": "2023-05",
+          "eurostat_kbd": 111.7,
+          "bafa_kbd": 111.7
+        },
+        {
+          "date": "2023-06",
+          "eurostat_kbd": 107.1,
+          "bafa_kbd": 107.1
+        },
+        {
+          "date": "2023-07",
+          "eurostat_kbd": 109.2,
+          "bafa_kbd": 109.2
+        },
+        {
+          "date": "2023-08",
+          "eurostat_kbd": 108.6,
+          "bafa_kbd": 108.6
+        },
+        {
+          "date": "2023-09",
+          "eurostat_kbd": 91.5,
+          "bafa_kbd": 91.5
+        },
+        {
+          "date": "2023-10",
+          "eurostat_kbd": 69.1,
+          "bafa_kbd": 69.1
+        },
+        {
+          "date": "2023-11",
+          "eurostat_kbd": 72.6,
+          "bafa_kbd": 72.6
+        },
+        {
+          "date": "2023-12",
+          "eurostat_kbd": 87.8,
+          "bafa_kbd": 87.8
+        },
+        {
+          "date": "2024-01",
+          "eurostat_kbd": 96.1,
+          "bafa_kbd": 99.1
+        },
+        {
+          "date": "2024-02",
+          "eurostat_kbd": 115.5,
+          "bafa_kbd": 122.3
+        },
+        {
+          "date": "2024-03",
+          "eurostat_kbd": 108.6,
+          "bafa_kbd": 115.2
+        },
+        {
+          "date": "2024-04",
+          "eurostat_kbd": 122.0,
+          "bafa_kbd": 128.1
+        },
+        {
+          "date": "2024-05",
+          "eurostat_kbd": 111.5,
+          "bafa_kbd": 115.7
+        },
+        {
+          "date": "2024-06",
+          "eurostat_kbd": 110.3,
+          "bafa_kbd": 112.1
+        },
+        {
+          "date": "2024-07",
+          "eurostat_kbd": 104.2,
+          "bafa_kbd": 110.9
+        },
+        {
+          "date": "2024-08",
+          "eurostat_kbd": 92.7,
+          "bafa_kbd": 94.6
+        },
+        {
+          "date": "2024-09",
+          "eurostat_kbd": 89.9,
+          "bafa_kbd": 98.2
+        },
+        {
+          "date": "2024-10",
+          "eurostat_kbd": 86.4,
+          "bafa_kbd": 92.2
+        },
+        {
+          "date": "2024-11",
+          "eurostat_kbd": 86.3,
+          "bafa_kbd": 94.0
+        },
+        {
+          "date": "2024-12",
+          "eurostat_kbd": 85.8,
+          "bafa_kbd": 90.4
+        },
+        {
+          "date": "2025-01",
+          "eurostat_kbd": 84.3,
+          "bafa_kbd": 93.2
+        },
+        {
+          "date": "2025-02",
+          "eurostat_kbd": 86.9,
+          "bafa_kbd": 96.2
+        },
+        {
+          "date": "2025-03",
+          "eurostat_kbd": 86.9,
+          "bafa_kbd": 106.9
+        },
+        {
+          "date": "2025-04",
+          "eurostat_kbd": 86.3,
+          "bafa_kbd": 109.9
+        },
+        {
+          "date": "2025-05",
+          "eurostat_kbd": 85.3,
+          "bafa_kbd": 86.0
+        },
+        {
+          "date": "2025-06",
+          "eurostat_kbd": 87.4,
+          "bafa_kbd": 87.9
+        },
+        {
+          "date": "2025-07",
+          "eurostat_kbd": 92.5,
+          "bafa_kbd": 93.2
+        },
+        {
+          "date": "2025-08",
+          "eurostat_kbd": 99.4,
+          "bafa_kbd": 101.5
+        },
+        {
+          "date": "2025-09",
+          "eurostat_kbd": 86.1,
+          "bafa_kbd": 86.8
+        },
+        {
+          "date": "2025-10",
+          "eurostat_kbd": 80.0,
+          "bafa_kbd": 78.9
+        },
+        {
+          "date": "2025-11",
+          "eurostat_kbd": 76.0,
+          "bafa_kbd": 79.3
+        },
+        {
+          "date": "2025-12",
+          "eurostat_kbd": 86.0,
+          "bafa_kbd": 86.5
+        },
+        {
+          "date": "2026-01",
+          "eurostat_kbd": 85.5,
+          "bafa_kbd": 85.5
+        },
+        {
+          "date": "2026-02",
+          "eurostat_kbd": 91.8,
+          "bafa_kbd": 91.8
+        },
+        {
+          "date": "2026-03",
+          "eurostat_kbd": 82.2,
+          "bafa_kbd": 82.2
+        },
+        {
+          "date": "2026-04",
+          "eurostat_kbd": 81.4,
+          "bafa_kbd": 81.4
+        },
+        {
+          "date": "2026-05",
+          "eurostat_kbd": 96.4,
+          "bafa_kbd": 96.4
+        }
+      ]
+    },
+    {
+      "siec": "O4640",
+      "label": "Naphtha",
+      "bafa_natives": [
+        "Rohbenzin"
+      ],
+      "n": 77,
+      "start": "2020-01",
+      "end": "2026-05",
+      "med_pct": 0.0,
+      "corr": 0.985,
+      "es_med_kbd": 297.3,
+      "bafa_med_kbd": 298.2,
+      "chart": [
+        {
+          "date": "2022-01",
+          "eurostat_kbd": 378.5,
+          "bafa_kbd": 378.5
+        },
+        {
+          "date": "2022-02",
+          "eurostat_kbd": 394.7,
+          "bafa_kbd": 394.7
+        },
+        {
+          "date": "2022-03",
+          "eurostat_kbd": 330.1,
+          "bafa_kbd": 330.1
+        },
+        {
+          "date": "2022-04",
+          "eurostat_kbd": 353.2,
+          "bafa_kbd": 353.2
+        },
+        {
+          "date": "2022-05",
+          "eurostat_kbd": 355.3,
+          "bafa_kbd": 355.3
+        },
+        {
+          "date": "2022-06",
+          "eurostat_kbd": 332.8,
+          "bafa_kbd": 332.8
+        },
+        {
+          "date": "2022-07",
+          "eurostat_kbd": 290.2,
+          "bafa_kbd": 290.2
+        },
+        {
+          "date": "2022-08",
+          "eurostat_kbd": 269.5,
+          "bafa_kbd": 269.5
+        },
+        {
+          "date": "2022-09",
+          "eurostat_kbd": 241.2,
+          "bafa_kbd": 241.2
+        },
+        {
+          "date": "2022-10",
+          "eurostat_kbd": 248.3,
+          "bafa_kbd": 248.3
+        },
+        {
+          "date": "2022-11",
+          "eurostat_kbd": 291.7,
+          "bafa_kbd": 291.7
+        },
+        {
+          "date": "2022-12",
+          "eurostat_kbd": 266.3,
+          "bafa_kbd": 266.3
+        },
+        {
+          "date": "2023-01",
+          "eurostat_kbd": 277.6,
+          "bafa_kbd": 277.6
+        },
+        {
+          "date": "2023-02",
+          "eurostat_kbd": 313.4,
+          "bafa_kbd": 313.4
+        },
+        {
+          "date": "2023-03",
+          "eurostat_kbd": 298.0,
+          "bafa_kbd": 298.0
+        },
+        {
+          "date": "2023-04",
+          "eurostat_kbd": 305.2,
+          "bafa_kbd": 305.2
+        },
+        {
+          "date": "2023-05",
+          "eurostat_kbd": 264.1,
+          "bafa_kbd": 264.1
+        },
+        {
+          "date": "2023-06",
+          "eurostat_kbd": 260.7,
+          "bafa_kbd": 260.7
+        },
+        {
+          "date": "2023-07",
+          "eurostat_kbd": 242.4,
+          "bafa_kbd": 242.4
+        },
+        {
+          "date": "2023-08",
+          "eurostat_kbd": 231.8,
+          "bafa_kbd": 231.8
+        },
+        {
+          "date": "2023-09",
+          "eurostat_kbd": 220.3,
+          "bafa_kbd": 220.3
+        },
+        {
+          "date": "2023-10",
+          "eurostat_kbd": 242.7,
+          "bafa_kbd": 242.7
+        },
+        {
+          "date": "2023-11",
+          "eurostat_kbd": 223.6,
+          "bafa_kbd": 223.6
+        },
+        {
+          "date": "2023-12",
+          "eurostat_kbd": 256.1,
+          "bafa_kbd": 256.1
+        },
+        {
+          "date": "2024-01",
+          "eurostat_kbd": 273.5,
+          "bafa_kbd": 236.4
+        },
+        {
+          "date": "2024-02",
+          "eurostat_kbd": 315.7,
+          "bafa_kbd": 298.7
+        },
+        {
+          "date": "2024-03",
+          "eurostat_kbd": 335.7,
+          "bafa_kbd": 335.7
+        },
+        {
+          "date": "2024-04",
+          "eurostat_kbd": 391.9,
+          "bafa_kbd": 392.0
+        },
+        {
+          "date": "2024-05",
+          "eurostat_kbd": 316.5,
+          "bafa_kbd": 316.5
+        },
+        {
+          "date": "2024-06",
+          "eurostat_kbd": 292.4,
+          "bafa_kbd": 291.8
+        },
+        {
+          "date": "2024-07",
+          "eurostat_kbd": 303.1,
+          "bafa_kbd": 302.9
+        },
+        {
+          "date": "2024-08",
+          "eurostat_kbd": 279.0,
+          "bafa_kbd": 278.7
+        },
+        {
+          "date": "2024-09",
+          "eurostat_kbd": 237.9,
+          "bafa_kbd": 246.8
+        },
+        {
+          "date": "2024-10",
+          "eurostat_kbd": 270.4,
+          "bafa_kbd": 269.9
+        },
+        {
+          "date": "2024-11",
+          "eurostat_kbd": 282.6,
+          "bafa_kbd": 277.3
+        },
+        {
+          "date": "2024-12",
+          "eurostat_kbd": 287.3,
+          "bafa_kbd": 287.4
+        },
+        {
+          "date": "2025-01",
+          "eurostat_kbd": 323.4,
+          "bafa_kbd": 332.2
+        },
+        {
+          "date": "2025-02",
+          "eurostat_kbd": 304.4,
+          "bafa_kbd": 317.9
+        },
+        {
+          "date": "2025-03",
+          "eurostat_kbd": 293.3,
+          "bafa_kbd": 299.8
+        },
+        {
+          "date": "2025-04",
+          "eurostat_kbd": 328.3,
+          "bafa_kbd": 332.7
+        },
+        {
+          "date": "2025-05",
+          "eurostat_kbd": 289.1,
+          "bafa_kbd": 289.1
+        },
+        {
+          "date": "2025-06",
+          "eurostat_kbd": 276.9,
+          "bafa_kbd": 283.6
+        },
+        {
+          "date": "2025-07",
+          "eurostat_kbd": 270.5,
+          "bafa_kbd": 292.8
+        },
+        {
+          "date": "2025-08",
+          "eurostat_kbd": 287.7,
+          "bafa_kbd": 317.4
+        },
+        {
+          "date": "2025-09",
+          "eurostat_kbd": 278.2,
+          "bafa_kbd": 278.3
+        },
+        {
+          "date": "2025-10",
+          "eurostat_kbd": 298.2,
+          "bafa_kbd": 298.2
+        },
+        {
+          "date": "2025-11",
+          "eurostat_kbd": 265.9,
+          "bafa_kbd": 265.9
+        },
+        {
+          "date": "2025-12",
+          "eurostat_kbd": 269.5,
+          "bafa_kbd": 269.5
+        },
+        {
+          "date": "2026-01",
+          "eurostat_kbd": 340.0,
+          "bafa_kbd": 340.0
+        },
+        {
+          "date": "2026-02",
+          "eurostat_kbd": 349.0,
+          "bafa_kbd": 349.0
+        },
+        {
+          "date": "2026-03",
+          "eurostat_kbd": 302.6,
+          "bafa_kbd": 302.6
+        },
+        {
+          "date": "2026-04",
+          "eurostat_kbd": 322.4,
+          "bafa_kbd": 322.4
+        },
+        {
+          "date": "2026-05",
+          "eurostat_kbd": 301.6,
+          "bafa_kbd": 301.6
+        }
+      ]
+    }
+  ],
+  "freshness": [
+    {
+      "geo": "DE",
+      "eurostat_latest": "2026-06",
+      "warehouse_latest": "2026-05",
+      "warehouse_source": "BAFA",
+      "lead": "eurostat"
+    },
+    {
+      "geo": "FR",
+      "eurostat_latest": "2026-06",
+      "warehouse_latest": null,
+      "warehouse_source": null,
+      "lead": "eurostat_only"
+    },
+    {
+      "geo": "NL",
+      "eurostat_latest": "2026-06",
+      "warehouse_latest": null,
+      "warehouse_source": null,
+      "lead": "eurostat_only"
+    },
+    {
+      "geo": "ES",
+      "eurostat_latest": "2026-06",
+      "warehouse_latest": "2026-07",
+      "warehouse_source": "CORES",
+      "lead": "official"
+    },
+    {
+      "geo": "IT",
+      "eurostat_latest": "2026-06",
+      "warehouse_latest": "2026-07",
+      "warehouse_source": "MASE",
+      "lead": "official"
+    },
+    {
+      "geo": "PL",
+      "eurostat_latest": "2026-06",
+      "warehouse_latest": "2026-06",
+      "warehouse_source": "ARE",
+      "lead": "tie"
+    },
+    {
+      "geo": "PT",
+      "eurostat_latest": "2026-06",
+      "warehouse_latest": "2026-07",
+      "warehouse_source": "DGEG",
+      "lead": "official"
+    },
+    {
+      "geo": "HU",
+      "eurostat_latest": "2026-06",
+      "warehouse_latest": "2026-05",
+      "warehouse_source": "MEKH",
+      "lead": "eurostat"
+    },
+    {
+      "geo": "NO",
+      "eurostat_latest": "2026-06",
+      "warehouse_latest": "2026-05",
+      "warehouse_source": "SSB",
+      "lead": "eurostat"
+    },
+    {
+      "geo": "BE",
+      "eurostat_latest": "2026-07",
+      "warehouse_latest": null,
+      "warehouse_source": null,
+      "lead": "eurostat_only"
+    },
+    {
+      "geo": "AT",
+      "eurostat_latest": "2026-07",
+      "warehouse_latest": null,
+      "warehouse_source": null,
+      "lead": "eurostat_only"
+    },
+    {
+      "geo": "SE",
+      "eurostat_latest": "2026-06",
+      "warehouse_latest": null,
+      "warehouse_source": null,
+      "lead": "eurostat_only"
+    }
+  ],
+  "warehouse_freshness": {
+    "germany": {
+      "display_name": "Germany",
+      "official_source": "BAFA",
+      "geo": "DE",
+      "latest_month": "2026-05",
+      "latest_date": "2026-05-01",
+      "n_rows": 1424
+    },
+    "norway": {
+      "display_name": "Norway",
+      "official_source": "SSB",
+      "geo": "NO",
+      "latest_month": "2026-05",
+      "latest_date": "2026-05-01",
+      "n_rows": 2799
+    },
+    "poland": {
+      "display_name": "Poland",
+      "official_source": "ARE",
+      "geo": "PL",
+      "latest_month": "2026-06",
+      "latest_date": "2026-06-01",
+      "n_rows": 125
+    },
+    "ukraine": {
+      "display_name": "Ukraine",
+      "official_source": "SSSU",
+      "geo": "UA",
+      "latest_month": "2026-06",
+      "latest_date": "2026-06-01",
+      "n_rows": 124
+    },
+    "hungary": {
+      "display_name": "Hungary",
+      "official_source": "MEKH",
+      "geo": "HU",
+      "latest_month": "2026-05",
+      "latest_date": "2026-05-01",
+      "n_rows": 1692
+    },
+    "korea": {
+      "display_name": "Korea",
+      "official_source": "KNOC",
+      "geo": null,
+      "latest_month": "2026-06",
+      "latest_date": "2026-06-01",
+      "n_rows": 4902
+    },
+    "portugal": {
+      "display_name": "Portugal",
+      "official_source": "DGEG",
+      "geo": "PT",
+      "latest_month": "2026-07",
+      "latest_date": "2026-07-01",
+      "n_rows": 4889
+    },
+    "uk": {
+      "display_name": "United Kingdom",
+      "official_source": "DESNZ",
+      "geo": "UK",
+      "latest_month": "2026-06",
+      "latest_date": "2026-06-01",
+      "n_rows": 4104
+    },
+    "japan": {
+      "display_name": "Japan",
+      "official_source": "METI",
+      "geo": null,
+      "latest_month": "2026-06",
+      "latest_date": "2026-06-01",
+      "n_rows": 2808
+    },
+    "spain": {
+      "display_name": "Spain",
+      "official_source": "CORES",
+      "geo": "ES",
+      "latest_month": "2026-07",
+      "latest_date": "2026-07-01",
+      "n_rows": 8078
+    },
+    "taiwan": {
+      "display_name": "Taiwan",
+      "official_source": "MOEA",
+      "geo": null,
+      "latest_month": "2026-06",
+      "latest_date": "2026-06-01",
+      "n_rows": 1638
+    },
+    "italy": {
+      "display_name": "Italy",
+      "official_source": "MASE",
+      "geo": "IT",
+      "latest_month": "2026-07",
+      "latest_date": "2026-07-01",
+      "n_rows": 12482
+    },
+    "thailand": {
+      "display_name": "Thailand",
+      "official_source": "EPPO",
+      "geo": null,
+      "latest_month": "2026-06",
+      "latest_date": "2026-06-01",
+      "n_rows": 3760
+    },
+    "australia": {
+      "display_name": "Australia",
+      "official_source": "DCCEEW",
+      "geo": null,
+      "latest_month": "2026-06",
+      "latest_date": "2026-06-01",
+      "n_rows": 3456
+    },
+    "india": {
+      "display_name": "India",
+      "official_source": "PPAC",
+      "geo": null,
+      "latest_month": "2026-08",
+      "latest_date": "2026-08-01",
+      "n_rows": 4084
+    },
+    "china": {
+      "display_name": "China",
+      "official_source": "SCI",
+      "geo": null,
+      "latest_month": "2026-08",
+      "latest_date": "2026-08-01",
+      "n_rows": 680
+    },
+    "us": {
+      "display_name": "United States",
+      "official_source": "EIA",
+      "geo": null,
+      "latest_month": "2026-09",
+      "latest_date": "2026-09-01",
+      "n_rows": 564
+    }
+  },
+  "latest_levels": [
+    {
+      "geo": "DE",
+      "month": "2026-06",
+      "siec": "O4630",
+      "label": "LPG",
+      "canonical": "LPG",
+      "kbd": 81.3,
+      "kt": 210.3
+    },
+    {
+      "geo": "DE",
+      "month": "2026-06",
+      "siec": "O4640",
+      "label": "Naphtha",
+      "canonical": "Naphtha",
+      "kbd": 231.9,
+      "kt": 781.7
+    },
+    {
+      "geo": "DE",
+      "month": "2026-06",
+      "siec": "O4652",
+      "label": "Motor gasoline",
+      "canonical": "Gasoline",
+      "kbd": 453.8,
+      "kt": 1601.5
+    },
+    {
+      "geo": "DE",
+      "month": "2026-06",
+      "siec": "O4661",
+      "label": "Kerosene-type jet fuel",
+      "canonical": "Jet fuel",
+      "kbd": 173.1,
+      "kt": 654.7
+    },
+    {
+      "geo": "DE",
+      "month": "2026-06",
+      "siec": "O4671",
+      "label": "Gas oil and diesel oil",
+      "canonical": "Diesel",
+      "kbd": 794.0,
+      "kt": 3192.9
+    },
+    {
+      "geo": "DE",
+      "month": "2026-06",
+      "siec": "O46711",
+      "label": "Road diesel",
+      "canonical": "Diesel",
+      "kbd": 678.2,
+      "kt": 2727.5
+    },
+    {
+      "geo": "DE",
+      "month": "2026-06",
+      "siec": "O46712",
+      "label": "Heating and other gasoil",
+      "canonical": "Gasoil",
+      "kbd": 115.7,
+      "kt": 465.4
+    },
+    {
+      "geo": "DE",
+      "month": "2026-06",
+      "siec": "O4680",
+      "label": "Fuel oil",
+      "canonical": "Fuel oil",
+      "kbd": 15.6,
+      "kt": 70.1
+    },
+    {
+      "geo": "FR",
+      "month": "2026-06",
+      "siec": "O4630",
+      "label": "LPG",
+      "canonical": "LPG",
+      "kbd": 93.2,
+      "kt": 241.0
+    },
+    {
+      "geo": "FR",
+      "month": "2026-06",
+      "siec": "O4640",
+      "label": "Naphtha",
+      "canonical": "Naphtha",
+      "kbd": 110.4,
+      "kt": 372.0
+    },
+    {
+      "geo": "FR",
+      "month": "2026-06",
+      "siec": "O4652",
+      "label": "Motor gasoline",
+      "canonical": "Gasoline",
+      "kbd": 313.6,
+      "kt": 1107.0
+    },
+    {
+      "geo": "FR",
+      "month": "2026-06",
+      "siec": "O4661",
+      "label": "Kerosene-type jet fuel",
+      "canonical": "Jet fuel",
+      "kbd": 183.4,
+      "kt": 694.0
+    },
+    {
+      "geo": "FR",
+      "month": "2026-06",
+      "siec": "O4671",
+      "label": "Gas oil and diesel oil",
+      "canonical": "Diesel",
+      "kbd": 726.4,
+      "kt": 2921.0
+    },
+    {
+      "geo": "FR",
+      "month": "2026-06",
+      "siec": "O46711",
+      "label": "Road diesel",
+      "canonical": "Diesel",
+      "kbd": 671.2,
+      "kt": 2699.0
+    },
+    {
+      "geo": "FR",
+      "month": "2026-06",
+      "siec": "O46712",
+      "label": "Heating and other gasoil",
+      "canonical": "Gasoil",
+      "kbd": 55.2,
+      "kt": 222.0
+    },
+    {
+      "geo": "FR",
+      "month": "2026-06",
+      "siec": "O4680",
+      "label": "Fuel oil",
+      "canonical": "Fuel oil",
+      "kbd": 11.8,
+      "kt": 53.0
+    },
+    {
+      "geo": "NL",
+      "month": "2026-06",
+      "siec": "O4630",
+      "label": "LPG",
+      "canonical": "LPG",
+      "kbd": 103.0,
+      "kt": 266.3
+    },
+    {
+      "geo": "NL",
+      "month": "2026-06",
+      "siec": "O4640",
+      "label": "Naphtha",
+      "canonical": "Naphtha",
+      "kbd": 159.0,
+      "kt": 536.0
+    },
+    {
+      "geo": "NL",
+      "month": "2026-06",
+      "siec": "O4652",
+      "label": "Motor gasoline",
+      "canonical": "Gasoline",
+      "kbd": 99.7,
+      "kt": 352.0
+    },
+    {
+      "geo": "NL",
+      "month": "2026-06",
+      "siec": "O4661",
+      "label": "Kerosene-type jet fuel",
+      "canonical": "Jet fuel",
+      "kbd": 81.8,
+      "kt": 309.5
+    },
+    {
+      "geo": "NL",
+      "month": "2026-06",
+      "siec": "O4671",
+      "label": "Gas oil and diesel oil",
+      "canonical": "Diesel",
+      "kbd": 100.3,
+      "kt": 403.2
+    },
+    {
+      "geo": "NL",
+      "month": "2026-06",
+      "siec": "O46711",
+      "label": "Road diesel",
+      "canonical": "Diesel",
+      "kbd": 94.5,
+      "kt": 380.1
+    },
+    {
+      "geo": "NL",
+      "month": "2026-06",
+      "siec": "O46712",
+      "label": "Heating and other gasoil",
+      "canonical": "Gasoil",
+      "kbd": 5.8,
+      "kt": 23.1
+    },
+    {
+      "geo": "NL",
+      "month": "2026-06",
+      "siec": "O4680",
+      "label": "Fuel oil",
+      "canonical": "Fuel oil",
+      "kbd": 0.4,
+      "kt": 2.0
+    }
+  ],
+  "charts": {
+    "gasoline": {
+      "DE": [
+        {
+          "date": "2022-01",
+          "kbd": 411.3
+        },
+        {
+          "date": "2022-02",
+          "kbd": 458.3
+        },
+        {
+          "date": "2022-03",
+          "kbd": 451.5
+        },
+        {
+          "date": "2022-04",
+          "kbd": 444.4
+        },
+        {
+          "date": "2022-05",
+          "kbd": 425.5
+        },
+        {
+          "date": "2022-06",
+          "kbd": 543.1
+        },
+        {
+          "date": "2022-07",
+          "kbd": 480.2
+        },
+        {
+          "date": "2022-08",
+          "kbd": 514.6
+        },
+        {
+          "date": "2022-09",
+          "kbd": 412.7
+        },
+        {
+          "date": "2022-10",
+          "kbd": 441.6
+        },
+        {
+          "date": "2022-11",
+          "kbd": 462.1
+        },
+        {
+          "date": "2022-12",
+          "kbd": 429.6
+        },
+        {
+          "date": "2023-01",
+          "kbd": 411.4
+        },
+        {
+          "date": "2023-02",
+          "kbd": 460.5
+        },
+        {
+          "date": "2023-03",
+          "kbd": 458.6
+        },
+        {
+          "date": "2023-04",
+          "kbd": 434.6
+        },
+        {
+          "date": "2023-05",
+          "kbd": 470.6
+        },
+        {
+          "date": "2023-06",
+          "kbd": 471.8
+        },
+        {
+          "date": "2023-07",
+          "kbd": 459.0
+        },
+        {
+          "date": "2023-08",
+          "kbd": 465.2
+        },
+        {
+          "date": "2023-09",
+          "kbd": 484.5
+        },
+        {
+          "date": "2023-10",
+          "kbd": 483.6
+        },
+        {
+          "date": "2023-11",
+          "kbd": 455.8
+        },
+        {
+          "date": "2023-12",
+          "kbd": 446.7
+        },
+        {
+          "date": "2024-01",
+          "kbd": 407.1
+        },
+        {
+          "date": "2024-02",
+          "kbd": 444.6
+        },
+        {
+          "date": "2024-03",
+          "kbd": 446.5
+        },
+        {
+          "date": "2024-04",
+          "kbd": 474.5
+        },
+        {
+          "date": "2024-05",
+          "kbd": 481.5
+        },
+        {
+          "date": "2024-06",
+          "kbd": 467.3
+        },
+        {
+          "date": "2024-07",
+          "kbd": 489.3
+        },
+        {
+          "date": "2024-08",
+          "kbd": 455.6
+        },
+        {
+          "date": "2024-09",
+          "kbd": 450.6
+        },
+        {
+          "date": "2024-10",
+          "kbd": 446.2
+        },
+        {
+          "date": "2024-11",
+          "kbd": 457.2
+        },
+        {
+          "date": "2024-12",
+          "kbd": 411.4
+        },
+        {
+          "date": "2025-01",
+          "kbd": 393.8
+        },
+        {
+          "date": "2025-02",
+          "kbd": 407.1
+        },
+        {
+          "date": "2025-03",
+          "kbd": 390.9
+        },
+        {
+          "date": "2025-04",
+          "kbd": 423.8
+        },
+        {
+          "date": "2025-05",
+          "kbd": 468.5
+        },
+        {
+          "date": "2025-06",
+          "kbd": 375.4
+        },
+        {
+          "date": "2025-07",
+          "kbd": 470.4
+        },
+        {
+          "date": "2025-08",
+          "kbd": 457.4
+        },
+        {
+          "date": "2025-09",
+          "kbd": 478.2
+        },
+        {
+          "date": "2025-10",
+          "kbd": 481.8
+        },
+        {
+          "date": "2025-11",
+          "kbd": 479.4
+        },
+        {
+          "date": "2025-12",
+          "kbd": 481.8
+        },
+        {
+          "date": "2026-01",
+          "kbd": 357.6
+        },
+        {
+          "date": "2026-02",
+          "kbd": 400.2
+        },
+        {
+          "date": "2026-03",
+          "kbd": 356.2
+        },
+        {
+          "date": "2026-04",
+          "kbd": 397.7
+        },
+        {
+          "date": "2026-05",
+          "kbd": 434.5
+        },
+        {
+          "date": "2026-06",
+          "kbd": 453.8
+        }
+      ],
+      "FR": [
+        {
+          "date": "2022-01",
+          "kbd": 188.1
+        },
+        {
+          "date": "2022-02",
+          "kbd": 215.5
+        },
+        {
+          "date": "2022-03",
+          "kbd": 219.6
+        },
+        {
+          "date": "2022-04",
+          "kbd": 230.3
+        },
+        {
+          "date": "2022-05",
+          "kbd": 238.5
+        },
+        {
+          "date": "2022-06",
+          "kbd": 250.5
+        },
+        {
+          "date": "2022-07",
+          "kbd": 253.4
+        },
+        {
+          "date": "2022-08",
+          "kbd": 261.9
+        },
+        {
+          "date": "2022-09",
+          "kbd": 258.1
+        },
+        {
+          "date": "2022-10",
+          "kbd": 221.0
+        },
+        {
+          "date": "2022-11",
+          "kbd": 233.8
+        },
+        {
+          "date": "2022-12",
+          "kbd": 237.7
+        },
+        {
+          "date": "2023-01",
+          "kbd": 222.1
+        },
+        {
+          "date": "2023-02",
+          "kbd": 220.4
+        },
+        {
+          "date": "2023-03",
+          "kbd": 235.5
+        },
+        {
+          "date": "2023-04",
+          "kbd": 234.9
+        },
+        {
+          "date": "2023-05",
+          "kbd": 252.3
+        },
+        {
+          "date": "2023-06",
+          "kbd": 275.1
+        },
+        {
+          "date": "2023-07",
+          "kbd": 264.0
+        },
+        {
+          "date": "2023-08",
+          "kbd": 272.8
+        },
+        {
+          "date": "2023-09",
+          "kbd": 254.4
+        },
+        {
+          "date": "2023-10",
+          "kbd": 250.6
+        },
+        {
+          "date": "2023-11",
+          "kbd": 232.1
+        },
+        {
+          "date": "2023-12",
+          "kbd": 241.6
+        },
+        {
+          "date": "2024-01",
+          "kbd": 232.2
+        },
+        {
+          "date": "2024-02",
+          "kbd": 237.1
+        },
+        {
+          "date": "2024-03",
+          "kbd": 243.8
+        },
+        {
+          "date": "2024-04",
+          "kbd": 267.8
+        },
+        {
+          "date": "2024-05",
+          "kbd": 268.2
+        },
+        {
+          "date": "2024-06",
+          "kbd": 263.2
+        },
+        {
+          "date": "2024-07",
+          "kbd": 303.0
+        },
+        {
+          "date": "2024-08",
+          "kbd": 290.6
+        },
+        {
+          "date": "2024-09",
+          "kbd": 266.3
+        },
+        {
+          "date": "2024-10",
+          "kbd": 272.5
+        },
+        {
+          "date": "2024-11",
+          "kbd": 250.2
+        },
+        {
+          "date": "2024-12",
+          "kbd": 268.7
+        },
+        {
+          "date": "2025-01",
+          "kbd": 251.7
+        },
+        {
+          "date": "2025-02",
+          "kbd": 260.2
+        },
+        {
+          "date": "2025-03",
+          "kbd": 252.0
+        },
+        {
+          "date": "2025-04",
+          "kbd": 293.2
+        },
+        {
+          "date": "2025-05",
+          "kbd": 274.7
+        },
+        {
+          "date": "2025-06",
+          "kbd": 300.9
+        },
+        {
+          "date": "2025-07",
+          "kbd": 313.7
+        },
+        {
+          "date": "2025-08",
+          "kbd": 292.3
+        },
+        {
+          "date": "2025-09",
+          "kbd": 286.7
+        },
+        {
+          "date": "2025-10",
+          "kbd": 286.3
+        },
+        {
+          "date": "2025-11",
+          "kbd": 251.9
+        },
+        {
+          "date": "2025-12",
+          "kbd": 293.7
+        },
+        {
+          "date": "2026-01",
+          "kbd": 244.3
+        },
+        {
+          "date": "2026-02",
+          "kbd": 265.9
+        },
+        {
+          "date": "2026-03",
+          "kbd": 271.5
+        },
+        {
+          "date": "2026-04",
+          "kbd": 293.0
+        },
+        {
+          "date": "2026-05",
+          "kbd": 255.0
+        },
+        {
+          "date": "2026-06",
+          "kbd": 313.6
+        }
+      ],
+      "NL": [
+        {
+          "date": "2022-01",
+          "kbd": 77.2
+        },
+        {
+          "date": "2022-02",
+          "kbd": 88.4
+        },
+        {
+          "date": "2022-03",
+          "kbd": 84.5
+        },
+        {
+          "date": "2022-04",
+          "kbd": 95.4
+        },
+        {
+          "date": "2022-05",
+          "kbd": 94.2
+        },
+        {
+          "date": "2022-06",
+          "kbd": 91.7
+        },
+        {
+          "date": "2022-07",
+          "kbd": 86.3
+        },
+        {
+          "date": "2022-08",
+          "kbd": 85.6
+        },
+        {
+          "date": "2022-09",
+          "kbd": 96.4
+        },
+        {
+          "date": "2022-10",
+          "kbd": 93.7
+        },
+        {
+          "date": "2023-01",
+          "kbd": 96.2
+        },
+        {
+          "date": "2023-02",
+          "kbd": 102.9
+        },
+        {
+          "date": "2023-03",
+          "kbd": 107.0
+        },
+        {
+          "date": "2023-04",
+          "kbd": 107.0
+        },
+        {
+          "date": "2023-05",
+          "kbd": 97.3
+        },
+        {
+          "date": "2023-06",
+          "kbd": 109.9
+        },
+        {
+          "date": "2023-07",
+          "kbd": 87.8
+        },
+        {
+          "date": "2023-08",
+          "kbd": 89.4
+        },
+        {
+          "date": "2023-09",
+          "kbd": 95.0
+        },
+        {
+          "date": "2023-10",
+          "kbd": 93.0
+        },
+        {
+          "date": "2023-11",
+          "kbd": 98.6
+        },
+        {
+          "date": "2023-12",
+          "kbd": 98.4
+        },
+        {
+          "date": "2024-01",
+          "kbd": 102.3
+        },
+        {
+          "date": "2024-02",
+          "kbd": 104.4
+        },
+        {
+          "date": "2024-03",
+          "kbd": 102.0
+        },
+        {
+          "date": "2024-04",
+          "kbd": 104.4
+        },
+        {
+          "date": "2024-05",
+          "kbd": 101.8
+        },
+        {
+          "date": "2024-06",
+          "kbd": 101.8
+        },
+        {
+          "date": "2024-07",
+          "kbd": 103.3
+        },
+        {
+          "date": "2024-08",
+          "kbd": 94.3
+        },
+        {
+          "date": "2024-09",
+          "kbd": 100.5
+        },
+        {
+          "date": "2024-10",
+          "kbd": 106.8
+        },
+        {
+          "date": "2024-11",
+          "kbd": 103.2
+        },
+        {
+          "date": "2024-12",
+          "kbd": 102.1
+        },
+        {
+          "date": "2025-01",
+          "kbd": 94.9
+        },
+        {
+          "date": "2025-02",
+          "kbd": 99.1
+        },
+        {
+          "date": "2025-03",
+          "kbd": 96.8
+        },
+        {
+          "date": "2025-04",
+          "kbd": 100.5
+        },
+        {
+          "date": "2025-05",
+          "kbd": 101.5
+        },
+        {
+          "date": "2025-06",
+          "kbd": 101.0
+        },
+        {
+          "date": "2025-07",
+          "kbd": 99.5
+        },
+        {
+          "date": "2025-08",
+          "kbd": 89.5
+        },
+        {
+          "date": "2025-09",
+          "kbd": 102.0
+        },
+        {
+          "date": "2025-10",
+          "kbd": 103.9
+        },
+        {
+          "date": "2025-11",
+          "kbd": 102.1
+        },
+        {
+          "date": "2025-12",
+          "kbd": 107.7
+        },
+        {
+          "date": "2026-01",
+          "kbd": 89.7
+        },
+        {
+          "date": "2026-02",
+          "kbd": 99.5
+        },
+        {
+          "date": "2026-03",
+          "kbd": 101.8
+        },
+        {
+          "date": "2026-04",
+          "kbd": 94.8
+        },
+        {
+          "date": "2026-05",
+          "kbd": 92.4
+        },
+        {
+          "date": "2026-06",
+          "kbd": 99.7
+        }
+      ]
+    },
+    "gas_diesel": {
+      "DE": [
+        {
+          "date": "2022-01",
+          "kbd": 872.4
+        },
+        {
+          "date": "2022-02",
+          "kbd": 974.1
+        },
+        {
+          "date": "2022-03",
+          "kbd": 1024.9
+        },
+        {
+          "date": "2022-04",
+          "kbd": 902.1
+        },
+        {
+          "date": "2022-05",
+          "kbd": 896.4
+        },
+        {
+          "date": "2022-06",
+          "kbd": 957.0
+        },
+        {
+          "date": "2022-07",
+          "kbd": 998.5
+        },
+        {
+          "date": "2022-08",
+          "kbd": 1070.9
+        },
+        {
+          "date": "2022-09",
+          "kbd": 1006.0
+        },
+        {
+          "date": "2022-10",
+          "kbd": 970.2
+        },
+        {
+          "date": "2022-11",
+          "kbd": 1040.6
+        },
+        {
+          "date": "2022-12",
+          "kbd": 1005.1
+        },
+        {
+          "date": "2023-01",
+          "kbd": 820.1
+        },
+        {
+          "date": "2023-02",
+          "kbd": 977.6
+        },
+        {
+          "date": "2023-03",
+          "kbd": 1002.0
+        },
+        {
+          "date": "2023-04",
+          "kbd": 883.5
+        },
+        {
+          "date": "2023-05",
+          "kbd": 974.3
+        },
+        {
+          "date": "2023-06",
+          "kbd": 930.0
+        },
+        {
+          "date": "2023-07",
+          "kbd": 875.7
+        },
+        {
+          "date": "2023-08",
+          "kbd": 888.2
+        },
+        {
+          "date": "2023-09",
+          "kbd": 902.6
+        },
+        {
+          "date": "2023-10",
+          "kbd": 984.6
+        },
+        {
+          "date": "2023-11",
+          "kbd": 998.6
+        },
+        {
+          "date": "2023-12",
+          "kbd": 958.7
+        },
+        {
+          "date": "2024-01",
+          "kbd": 813.8
+        },
+        {
+          "date": "2024-02",
+          "kbd": 867.3
+        },
+        {
+          "date": "2024-03",
+          "kbd": 842.8
+        },
+        {
+          "date": "2024-04",
+          "kbd": 914.5
+        },
+        {
+          "date": "2024-05",
+          "kbd": 855.1
+        },
+        {
+          "date": "2024-06",
+          "kbd": 929.6
+        },
+        {
+          "date": "2024-07",
+          "kbd": 921.6
+        },
+        {
+          "date": "2024-08",
+          "kbd": 917.1
+        },
+        {
+          "date": "2024-09",
+          "kbd": 979.7
+        },
+        {
+          "date": "2024-10",
+          "kbd": 982.5
+        },
+        {
+          "date": "2024-11",
+          "kbd": 929.5
+        },
+        {
+          "date": "2024-12",
+          "kbd": 832.4
+        },
+        {
+          "date": "2025-01",
+          "kbd": 805.3
+        },
+        {
+          "date": "2025-02",
+          "kbd": 917.0
+        },
+        {
+          "date": "2025-03",
+          "kbd": 935.9
+        },
+        {
+          "date": "2025-04",
+          "kbd": 941.2
+        },
+        {
+          "date": "2025-05",
+          "kbd": 895.6
+        },
+        {
+          "date": "2025-06",
+          "kbd": 845.6
+        },
+        {
+          "date": "2025-07",
+          "kbd": 917.0
+        },
+        {
+          "date": "2025-08",
+          "kbd": 842.0
+        },
+        {
+          "date": "2025-09",
+          "kbd": 982.8
+        },
+        {
+          "date": "2025-10",
+          "kbd": 973.0
+        },
+        {
+          "date": "2025-11",
+          "kbd": 897.0
+        },
+        {
+          "date": "2025-12",
+          "kbd": 906.1
+        },
+        {
+          "date": "2026-01",
+          "kbd": 776.6
+        },
+        {
+          "date": "2026-02",
+          "kbd": 830.9
+        },
+        {
+          "date": "2026-03",
+          "kbd": 733.5
+        },
+        {
+          "date": "2026-04",
+          "kbd": 684.9
+        },
+        {
+          "date": "2026-05",
+          "kbd": 728.6
+        },
+        {
+          "date": "2026-06",
+          "kbd": 794.0
+        }
+      ],
+      "FR": [
+        {
+          "date": "2022-01",
+          "kbd": 802.1
+        },
+        {
+          "date": "2022-02",
+          "kbd": 904.8
+        },
+        {
+          "date": "2022-03",
+          "kbd": 878.1
+        },
+        {
+          "date": "2022-04",
+          "kbd": 810.7
+        },
+        {
+          "date": "2022-05",
+          "kbd": 799.9
+        },
+        {
+          "date": "2022-06",
+          "kbd": 825.3
+        },
+        {
+          "date": "2022-07",
+          "kbd": 812.4
+        },
+        {
+          "date": "2022-08",
+          "kbd": 777.8
+        },
+        {
+          "date": "2022-09",
+          "kbd": 965.8
+        },
+        {
+          "date": "2022-10",
+          "kbd": 833.1
+        },
+        {
+          "date": "2022-11",
+          "kbd": 839.0
+        },
+        {
+          "date": "2022-12",
+          "kbd": 815.5
+        },
+        {
+          "date": "2023-01",
+          "kbd": 779.2
+        },
+        {
+          "date": "2023-02",
+          "kbd": 831.5
+        },
+        {
+          "date": "2023-03",
+          "kbd": 862.5
+        },
+        {
+          "date": "2023-04",
+          "kbd": 743.3
+        },
+        {
+          "date": "2023-05",
+          "kbd": 771.3
+        },
+        {
+          "date": "2023-06",
+          "kbd": 854.4
+        },
+        {
+          "date": "2023-07",
+          "kbd": 794.9
+        },
+        {
+          "date": "2023-08",
+          "kbd": 741.9
+        },
+        {
+          "date": "2023-09",
+          "kbd": 793.0
+        },
+        {
+          "date": "2023-10",
+          "kbd": 829.5
+        },
+        {
+          "date": "2023-11",
+          "kbd": 777.1
+        },
+        {
+          "date": "2023-12",
+          "kbd": 754.9
+        },
+        {
+          "date": "2024-01",
+          "kbd": 753.0
+        },
+        {
+          "date": "2024-02",
+          "kbd": 756.0
+        },
+        {
+          "date": "2024-03",
+          "kbd": 735.9
+        },
+        {
+          "date": "2024-04",
+          "kbd": 794.2
+        },
+        {
+          "date": "2024-05",
+          "kbd": 724.3
+        },
+        {
+          "date": "2024-06",
+          "kbd": 754.7
+        },
+        {
+          "date": "2024-07",
+          "kbd": 828.8
+        },
+        {
+          "date": "2024-08",
+          "kbd": 737.3
+        },
+        {
+          "date": "2024-09",
+          "kbd": 812.9
+        },
+        {
+          "date": "2024-10",
+          "kbd": 824.7
+        },
+        {
+          "date": "2024-11",
+          "kbd": 716.2
+        },
+        {
+          "date": "2024-12",
+          "kbd": 706.8
+        },
+        {
+          "date": "2025-01",
+          "kbd": 726.3
+        },
+        {
+          "date": "2025-02",
+          "kbd": 758.5
+        },
+        {
+          "date": "2025-03",
+          "kbd": 724.3
+        },
+        {
+          "date": "2025-04",
+          "kbd": 792.7
+        },
+        {
+          "date": "2025-05",
+          "kbd": 714.5
+        },
+        {
+          "date": "2025-06",
+          "kbd": 789.8
+        },
+        {
+          "date": "2025-07",
+          "kbd": 766.9
+        },
+        {
+          "date": "2025-08",
+          "kbd": 647.8
+        },
+        {
+          "date": "2025-09",
+          "kbd": 773.6
+        },
+        {
+          "date": "2025-10",
+          "kbd": 790.3
+        },
+        {
+          "date": "2025-11",
+          "kbd": 668.2
+        },
+        {
+          "date": "2025-12",
+          "kbd": 749.1
+        },
+        {
+          "date": "2026-01",
+          "kbd": 660.1
+        },
+        {
+          "date": "2026-02",
+          "kbd": 711.1
+        },
+        {
+          "date": "2026-03",
+          "kbd": 698.4
+        },
+        {
+          "date": "2026-04",
+          "kbd": 680.1
+        },
+        {
+          "date": "2026-05",
+          "kbd": 589.8
+        },
+        {
+          "date": "2026-06",
+          "kbd": 726.4
+        }
+      ],
+      "NL": [
+        {
+          "date": "2022-01",
+          "kbd": 103.5
+        },
+        {
+          "date": "2022-02",
+          "kbd": 122.4
+        },
+        {
+          "date": "2022-03",
+          "kbd": 130.0
+        },
+        {
+          "date": "2022-04",
+          "kbd": 132.9
+        },
+        {
+          "date": "2022-05",
+          "kbd": 129.2
+        },
+        {
+          "date": "2022-06",
+          "kbd": 127.3
+        },
+        {
+          "date": "2022-07",
+          "kbd": 116.8
+        },
+        {
+          "date": "2022-08",
+          "kbd": 109.2
+        },
+        {
+          "date": "2022-09",
+          "kbd": 132.1
+        },
+        {
+          "date": "2022-10",
+          "kbd": 122.8
+        },
+        {
+          "date": "2023-01",
+          "kbd": 112.4
+        },
+        {
+          "date": "2023-02",
+          "kbd": 119.4
+        },
+        {
+          "date": "2023-03",
+          "kbd": 124.7
+        },
+        {
+          "date": "2023-04",
+          "kbd": 124.0
+        },
+        {
+          "date": "2023-05",
+          "kbd": 126.4
+        },
+        {
+          "date": "2023-06",
+          "kbd": 143.4
+        },
+        {
+          "date": "2023-07",
+          "kbd": 103.5
+        },
+        {
+          "date": "2023-08",
+          "kbd": 98.9
+        },
+        {
+          "date": "2023-09",
+          "kbd": 112.3
+        },
+        {
+          "date": "2023-10",
+          "kbd": 121.9
+        },
+        {
+          "date": "2023-11",
+          "kbd": 121.4
+        },
+        {
+          "date": "2023-12",
+          "kbd": 116.5
+        },
+        {
+          "date": "2024-01",
+          "kbd": 120.7
+        },
+        {
+          "date": "2024-02",
+          "kbd": 113.3
+        },
+        {
+          "date": "2024-03",
+          "kbd": 121.8
+        },
+        {
+          "date": "2024-04",
+          "kbd": 119.9
+        },
+        {
+          "date": "2024-05",
+          "kbd": 119.7
+        },
+        {
+          "date": "2024-06",
+          "kbd": 111.6
+        },
+        {
+          "date": "2024-07",
+          "kbd": 115.6
+        },
+        {
+          "date": "2024-08",
+          "kbd": 99.3
+        },
+        {
+          "date": "2024-09",
+          "kbd": 117.0
+        },
+        {
+          "date": "2024-10",
+          "kbd": 125.2
+        },
+        {
+          "date": "2024-11",
+          "kbd": 116.3
+        },
+        {
+          "date": "2024-12",
+          "kbd": 107.2
+        },
+        {
+          "date": "2025-01",
+          "kbd": 96.0
+        },
+        {
+          "date": "2025-02",
+          "kbd": 104.5
+        },
+        {
+          "date": "2025-03",
+          "kbd": 109.6
+        },
+        {
+          "date": "2025-04",
+          "kbd": 114.6
+        },
+        {
+          "date": "2025-05",
+          "kbd": 108.0
+        },
+        {
+          "date": "2025-06",
+          "kbd": 108.7
+        },
+        {
+          "date": "2025-07",
+          "kbd": 110.5
+        },
+        {
+          "date": "2025-08",
+          "kbd": 91.1
+        },
+        {
+          "date": "2025-09",
+          "kbd": 108.0
+        },
+        {
+          "date": "2025-10",
+          "kbd": 111.8
+        },
+        {
+          "date": "2025-11",
+          "kbd": 103.9
+        },
+        {
+          "date": "2025-12",
+          "kbd": 104.7
+        },
+        {
+          "date": "2026-01",
+          "kbd": 90.8
+        },
+        {
+          "date": "2026-02",
+          "kbd": 108.1
+        },
+        {
+          "date": "2026-03",
+          "kbd": 102.5
+        },
+        {
+          "date": "2026-04",
+          "kbd": 100.8
+        },
+        {
+          "date": "2026-05",
+          "kbd": 93.2
+        },
+        {
+          "date": "2026-06",
+          "kbd": 100.3
+        }
+      ]
+    },
+    "jet": {
+      "DE": [
+        {
+          "date": "2022-01",
+          "kbd": 147.3
+        },
+        {
+          "date": "2022-02",
+          "kbd": 168.2
+        },
+        {
+          "date": "2022-03",
+          "kbd": 160.6
+        },
+        {
+          "date": "2022-04",
+          "kbd": 193.7
+        },
+        {
+          "date": "2022-05",
+          "kbd": 192.0
+        },
+        {
+          "date": "2022-06",
+          "kbd": 211.6
+        },
+        {
+          "date": "2022-07",
+          "kbd": 220.8
+        },
+        {
+          "date": "2022-08",
+          "kbd": 222.7
+        },
+        {
+          "date": "2022-09",
+          "kbd": 216.1
+        },
+        {
+          "date": "2022-10",
+          "kbd": 241.5
+        },
+        {
+          "date": "2022-11",
+          "kbd": 180.8
+        },
+        {
+          "date": "2022-12",
+          "kbd": 209.0
+        },
+        {
+          "date": "2023-01",
+          "kbd": 178.5
+        },
+        {
+          "date": "2023-02",
+          "kbd": 181.0
+        },
+        {
+          "date": "2023-03",
+          "kbd": 184.3
+        },
+        {
+          "date": "2023-04",
+          "kbd": 201.2
+        },
+        {
+          "date": "2023-05",
+          "kbd": 198.2
+        },
+        {
+          "date": "2023-06",
+          "kbd": 220.0
+        },
+        {
+          "date": "2023-07",
+          "kbd": 230.6
+        },
+        {
+          "date": "2023-08",
+          "kbd": 226.7
+        },
+        {
+          "date": "2023-09",
+          "kbd": 232.2
+        },
+        {
+          "date": "2023-10",
+          "kbd": 226.8
+        },
+        {
+          "date": "2023-11",
+          "kbd": 203.6
+        },
+        {
+          "date": "2023-12",
+          "kbd": 186.7
+        },
+        {
+          "date": "2024-01",
+          "kbd": 155.8
+        },
+        {
+          "date": "2024-02",
+          "kbd": 162.5
+        },
+        {
+          "date": "2024-03",
+          "kbd": 168.4
+        },
+        {
+          "date": "2024-04",
+          "kbd": 195.3
+        },
+        {
+          "date": "2024-05",
+          "kbd": 197.7
+        },
+        {
+          "date": "2024-06",
+          "kbd": 225.2
+        },
+        {
+          "date": "2024-07",
+          "kbd": 224.3
+        },
+        {
+          "date": "2024-08",
+          "kbd": 227.3
+        },
+        {
+          "date": "2024-09",
+          "kbd": 224.7
+        },
+        {
+          "date": "2024-10",
+          "kbd": 222.6
+        },
+        {
+          "date": "2024-11",
+          "kbd": 192.1
+        },
+        {
+          "date": "2024-12",
+          "kbd": 183.2
+        },
+        {
+          "date": "2025-01",
+          "kbd": 167.7
+        },
+        {
+          "date": "2025-02",
+          "kbd": 157.9
+        },
+        {
+          "date": "2025-03",
+          "kbd": 176.8
+        },
+        {
+          "date": "2025-04",
+          "kbd": 208.3
+        },
+        {
+          "date": "2025-05",
+          "kbd": 209.6
+        },
+        {
+          "date": "2025-06",
+          "kbd": 217.3
+        },
+        {
+          "date": "2025-07",
+          "kbd": 232.2
+        },
+        {
+          "date": "2025-08",
+          "kbd": 220.3
+        },
+        {
+          "date": "2025-09",
+          "kbd": 214.5
+        },
+        {
+          "date": "2025-10",
+          "kbd": 214.8
+        },
+        {
+          "date": "2025-11",
+          "kbd": 193.2
+        },
+        {
+          "date": "2025-12",
+          "kbd": 181.6
+        },
+        {
+          "date": "2026-01",
+          "kbd": 166.8
+        },
+        {
+          "date": "2026-02",
+          "kbd": 169.7
+        },
+        {
+          "date": "2026-03",
+          "kbd": 177.9
+        },
+        {
+          "date": "2026-04",
+          "kbd": 208.0
+        },
+        {
+          "date": "2026-05",
+          "kbd": 210.4
+        },
+        {
+          "date": "2026-06",
+          "kbd": 173.1
+        }
+      ],
+      "FR": [
+        {
+          "date": "2022-01",
+          "kbd": 90.8
+        },
+        {
+          "date": "2022-02",
+          "kbd": 91.2
+        },
+        {
+          "date": "2022-03",
+          "kbd": 97.7
+        },
+        {
+          "date": "2022-04",
+          "kbd": 104.9
+        },
+        {
+          "date": "2022-05",
+          "kbd": 118.7
+        },
+        {
+          "date": "2022-06",
+          "kbd": 118.2
+        },
+        {
+          "date": "2022-07",
+          "kbd": 138.4
+        },
+        {
+          "date": "2022-08",
+          "kbd": 181.1
+        },
+        {
+          "date": "2022-09",
+          "kbd": 132.2
+        },
+        {
+          "date": "2022-10",
+          "kbd": 97.0
+        },
+        {
+          "date": "2022-11",
+          "kbd": 133.0
+        },
+        {
+          "date": "2022-12",
+          "kbd": 136.3
+        },
+        {
+          "date": "2023-01",
+          "kbd": 133.8
+        },
+        {
+          "date": "2023-02",
+          "kbd": 142.7
+        },
+        {
+          "date": "2023-03",
+          "kbd": 130.7
+        },
+        {
+          "date": "2023-04",
+          "kbd": 136.1
+        },
+        {
+          "date": "2023-05",
+          "kbd": 154.5
+        },
+        {
+          "date": "2023-06",
+          "kbd": 163.9
+        },
+        {
+          "date": "2023-07",
+          "kbd": 177.0
+        },
+        {
+          "date": "2023-08",
+          "kbd": 179.8
+        },
+        {
+          "date": "2023-09",
+          "kbd": 163.4
+        },
+        {
+          "date": "2023-10",
+          "kbd": 163.5
+        },
+        {
+          "date": "2023-11",
+          "kbd": 143.3
+        },
+        {
+          "date": "2023-12",
+          "kbd": 152.5
+        },
+        {
+          "date": "2024-01",
+          "kbd": 136.6
+        },
+        {
+          "date": "2024-02",
+          "kbd": 141.6
+        },
+        {
+          "date": "2024-03",
+          "kbd": 147.1
+        },
+        {
+          "date": "2024-04",
+          "kbd": 161.0
+        },
+        {
+          "date": "2024-05",
+          "kbd": 157.8
+        },
+        {
+          "date": "2024-06",
+          "kbd": 173.7
+        },
+        {
+          "date": "2024-07",
+          "kbd": 183.7
+        },
+        {
+          "date": "2024-08",
+          "kbd": 187.0
+        },
+        {
+          "date": "2024-09",
+          "kbd": 171.8
+        },
+        {
+          "date": "2024-10",
+          "kbd": 164.2
+        },
+        {
+          "date": "2024-11",
+          "kbd": 142.7
+        },
+        {
+          "date": "2024-12",
+          "kbd": 152.7
+        },
+        {
+          "date": "2025-01",
+          "kbd": 148.9
+        },
+        {
+          "date": "2025-02",
+          "kbd": 152.1
+        },
+        {
+          "date": "2025-03",
+          "kbd": 156.6
+        },
+        {
+          "date": "2025-04",
+          "kbd": 174.7
+        },
+        {
+          "date": "2025-05",
+          "kbd": 175.2
+        },
+        {
+          "date": "2025-06",
+          "kbd": 185.0
+        },
+        {
+          "date": "2025-07",
+          "kbd": 192.9
+        },
+        {
+          "date": "2025-08",
+          "kbd": 192.4
+        },
+        {
+          "date": "2025-09",
+          "kbd": 183.4
+        },
+        {
+          "date": "2025-10",
+          "kbd": 180.9
+        },
+        {
+          "date": "2025-11",
+          "kbd": 157.3
+        },
+        {
+          "date": "2025-12",
+          "kbd": 165.3
+        },
+        {
+          "date": "2026-01",
+          "kbd": 155.0
+        },
+        {
+          "date": "2026-02",
+          "kbd": 163.1
+        },
+        {
+          "date": "2026-03",
+          "kbd": 161.9
+        },
+        {
+          "date": "2026-04",
+          "kbd": 175.3
+        },
+        {
+          "date": "2026-05",
+          "kbd": 170.6
+        },
+        {
+          "date": "2026-06",
+          "kbd": 183.4
+        }
+      ],
+      "NL": [
+        {
+          "date": "2022-01",
+          "kbd": 54.5
+        },
+        {
+          "date": "2022-02",
+          "kbd": 56.1
+        },
+        {
+          "date": "2022-03",
+          "kbd": 61.1
+        },
+        {
+          "date": "2022-04",
+          "kbd": 66.3
+        },
+        {
+          "date": "2022-05",
+          "kbd": 70.7
+        },
+        {
+          "date": "2022-06",
+          "kbd": 72.8
+        },
+        {
+          "date": "2022-07",
+          "kbd": 76.5
+        },
+        {
+          "date": "2022-08",
+          "kbd": 76.4
+        },
+        {
+          "date": "2022-09",
+          "kbd": 75.4
+        },
+        {
+          "date": "2022-10",
+          "kbd": 72.4
+        },
+        {
+          "date": "2023-01",
+          "kbd": 61.6
+        },
+        {
+          "date": "2023-02",
+          "kbd": 64.0
+        },
+        {
+          "date": "2023-03",
+          "kbd": 66.3
+        },
+        {
+          "date": "2023-04",
+          "kbd": 72.9
+        },
+        {
+          "date": "2023-05",
+          "kbd": 74.5
+        },
+        {
+          "date": "2023-06",
+          "kbd": 77.5
+        },
+        {
+          "date": "2023-07",
+          "kbd": 79.5
+        },
+        {
+          "date": "2023-08",
+          "kbd": 79.5
+        },
+        {
+          "date": "2023-09",
+          "kbd": 79.4
+        },
+        {
+          "date": "2023-10",
+          "kbd": 77.3
+        },
+        {
+          "date": "2023-11",
+          "kbd": 68.2
+        },
+        {
+          "date": "2023-12",
+          "kbd": 69.4
+        },
+        {
+          "date": "2024-01",
+          "kbd": 69.1
+        },
+        {
+          "date": "2024-02",
+          "kbd": 71.8
+        },
+        {
+          "date": "2024-03",
+          "kbd": 72.9
+        },
+        {
+          "date": "2024-04",
+          "kbd": 75.9
+        },
+        {
+          "date": "2024-05",
+          "kbd": 77.6
+        },
+        {
+          "date": "2024-06",
+          "kbd": 79.9
+        },
+        {
+          "date": "2024-07",
+          "kbd": 83.2
+        },
+        {
+          "date": "2024-08",
+          "kbd": 73.8
+        },
+        {
+          "date": "2024-09",
+          "kbd": 82.3
+        },
+        {
+          "date": "2024-10",
+          "kbd": 80.2
+        },
+        {
+          "date": "2024-11",
+          "kbd": 72.5
+        },
+        {
+          "date": "2024-12",
+          "kbd": 72.0
+        },
+        {
+          "date": "2025-01",
+          "kbd": 67.8
+        },
+        {
+          "date": "2025-02",
+          "kbd": 72.2
+        },
+        {
+          "date": "2025-03",
+          "kbd": 74.3
+        },
+        {
+          "date": "2025-04",
+          "kbd": 78.9
+        },
+        {
+          "date": "2025-05",
+          "kbd": 75.8
+        },
+        {
+          "date": "2025-06",
+          "kbd": 80.3
+        },
+        {
+          "date": "2025-07",
+          "kbd": 84.2
+        },
+        {
+          "date": "2025-08",
+          "kbd": 84.6
+        },
+        {
+          "date": "2025-09",
+          "kbd": 81.5
+        },
+        {
+          "date": "2025-10",
+          "kbd": 79.5
+        },
+        {
+          "date": "2025-11",
+          "kbd": 74.0
+        },
+        {
+          "date": "2025-12",
+          "kbd": 73.9
+        },
+        {
+          "date": "2026-01",
+          "kbd": 67.2
+        },
+        {
+          "date": "2026-02",
+          "kbd": 73.7
+        },
+        {
+          "date": "2026-03",
+          "kbd": 75.3
+        },
+        {
+          "date": "2026-04",
+          "kbd": 81.3
+        },
+        {
+          "date": "2026-05",
+          "kbd": 79.8
+        },
+        {
+          "date": "2026-06",
+          "kbd": 81.8
+        }
+      ]
+    }
+  },
+  "eurostat_coverage_geos": [
+    "AT",
+    "BE",
+    "DE",
+    "ES",
+    "FR",
+    "HU",
+    "IT",
+    "NL",
+    "NO",
+    "PL",
+    "PT",
+    "SE"
+  ]
+}

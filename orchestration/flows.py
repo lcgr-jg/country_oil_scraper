@@ -60,15 +60,43 @@ def consolidate_task(extra_args: list[str] | None = None) -> str:
 
 @flow(name="update-one", persist_result=True, log_prints=True)
 def update_one(
-    pipeline_id: str, extra_args: list[str] | None = None
+    pipeline_id: str,
+    extra_args: list[str] | None = None,
+    *,
+    consolidate_if_updated: bool = True,
+    consolidate_args: list[str] | None = None,
 ) -> dict[str, Any]:
-    """Refresh a single pipeline (e.g. norway). Returns status payload."""
+    """Refresh a single pipeline (e.g. norway).
+
+    When ``consolidate_if_updated`` is True (default) and the poll status is
+    ``updated``, rebuild the DuckDB warehouse so the dashboard picks up new data.
+    Unchanged / unknown polls skip consolidate.
+    """
+    run_logger = get_run_logger()
     payload = update_pipeline_task(pipeline_id, extra_args)
     print(  # also lands in UI when log_prints=True
         f"POLL RESULT {payload.get('pipeline_id')} "
         f"status={payload.get('status')} "
         f"max_date={payload.get('max_date_before')}→{payload.get('max_date_after')}"
     )
+
+    status = payload.get("status")
+    if consolidate_if_updated and status == "updated":
+        run_logger.info(
+            "New data for %s — running consolidate_warehouse", pipeline_id
+        )
+        print(f"CONSOLIDATE triggered by {pipeline_id} (status=updated)")
+        try:
+            payload["consolidate"] = consolidate_task(consolidate_args)
+        except Exception as exc:  # noqa: BLE001 — keep poll result; surface consolidate error
+            run_logger.exception("Consolidate failed after %s update", pipeline_id)
+            payload["consolidate"] = f"error: {exc}"
+    elif consolidate_if_updated:
+        payload["consolidate"] = f"skipped (status={status})"
+        run_logger.info("Skip consolidate for %s (status=%s)", pipeline_id, status)
+    else:
+        payload["consolidate"] = "skipped (consolidate_if_updated=False)"
+
     return payload
 
 

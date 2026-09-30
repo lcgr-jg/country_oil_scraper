@@ -92,10 +92,21 @@ def _ref_caption(ref_mod: Any | None, attr: str) -> str | None:
     return str(val).strip() if val else None
 
 
+_DEFAULT_EUROSTAT = (
+    "National agency vs Eurostat nrg_cb_oilm GID_OBS on shared product panels "
+    "(kbd). Both series stay in the warehouse; the fresher one is tagged "
+    "official for aggregates — this chart always shows both for level checks."
+)
+
+
 def jodi_compare_caption(country_id: str, ref_mod: Any | None = None) -> str:
     return _ref_caption(ref_mod, "JODI_COMPARE_CAPTION") or _JODI_BY_COUNTRY.get(
         country_id, _DEFAULT_JODI
     )
+
+
+def eurostat_compare_caption(country_id: str, ref_mod: Any | None = None) -> str:
+    return _ref_caption(ref_mod, "EUROSTAT_COMPARE_CAPTION") or _DEFAULT_EUROSTAT
 
 
 def kayrros_jet_caption(country_id: str, ref_mod: Any | None = None) -> str:
@@ -114,6 +125,7 @@ def seasonality_caption(country_id: str, ref_mod: Any | None = None) -> str:
 
 
 __all__ = [
+    "eurostat_compare_caption",
     "jodi_compare_caption",
     "kayrros_jet_caption",
     "seasonality_caption",

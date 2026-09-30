@@ -9,6 +9,7 @@ import pandas as pd
 
 from analytics.core.loader import (
     load_demand_canonical,
+    load_eurostat_compare_panels,
     load_jodi_compare_panels,
     load_kayrros_series,
     load_official_demand,
@@ -298,6 +299,9 @@ def load_country_bundle(country_ids: list[str]) -> dict[str, object]:
         demand = load_official_demand(cid)
         demand_canonical = load_demand_canonical(cid)
         official_jodi, jodi, jodi_panels = load_jodi_compare_panels(cid)
+        national_euro, eurostat, euro_panels, euro_national_label = (
+            load_eurostat_compare_panels(cid)
+        )
         kayrros = load_kayrros_series(cid, product_canonical="Jet fuel")
         cfg = get_country(cid)
         ref = load_reference(cfg)
@@ -315,6 +319,10 @@ def load_country_bundle(country_ids: list[str]) -> dict[str, object]:
             "official_jodi": official_jodi,
             "jodi": jodi,
             "jodi_panels": jodi_panels,
+            "national_eurostat": national_euro,
+            "eurostat": eurostat,
+            "eurostat_panels": euro_panels,
+            "eurostat_national_label": euro_national_label,
             "kayrros": kayrros,
             "official_jet": official_jet,
             "demand_by_country": pd.DataFrame(),
@@ -336,6 +344,10 @@ def load_country_bundle(country_ids: list[str]) -> dict[str, object]:
         "official_jodi": official_jodi,
         "jodi": jodi,
         "jodi_panels": jodi_panels,
+        "national_eurostat": pd.DataFrame(),
+        "eurostat": pd.DataFrame(),
+        "eurostat_panels": [],
+        "eurostat_national_label": "",
         "kayrros": kayrros,
         "official_jet": official_jet,
         "demand_by_country": demand,

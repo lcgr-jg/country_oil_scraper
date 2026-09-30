@@ -1,6 +1,7 @@
 """Analytics core — warehouse-backed demand metrics and comparisons."""
 
 from analytics.core.comparisons import (
+    build_eurostat_comparison_figure,
     build_jodi_comparison_figure,
     build_kayrros_jet_figure,
     median_gap_pct,
@@ -12,6 +13,7 @@ from analytics.core.divergences import (
 )
 from analytics.core.loader import (
     load_demand_canonical,
+    load_eurostat_compare_panels,
     load_jodi_compare_panels,
     load_kayrros_series,
     load_observations,
@@ -29,6 +31,7 @@ from warehouse.country_hooks import call_seasonality_chart_inputs
 
 __all__ = [
     "available_months",
+    "build_eurostat_comparison_figure",
     "build_jodi_comparison_figure",
     "build_kayrros_jet_figure",
     "build_trading_notes",
@@ -38,6 +41,7 @@ __all__ = [
     "format_divergence_notes",
     "headline_total",
     "load_demand_canonical",
+    "load_eurostat_compare_panels",
     "load_jodi_compare_panels",
     "load_kayrros_series",
     "load_observations",

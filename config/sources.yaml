@@ -546,6 +546,140 @@ norway:
         Dashboard: notebooks/25_norway_demand_dashboard.ipynb
       processed_output: data/processed/norway/norway_ssb_sales.parquet
 
+china:
+  agency: SCI99 (SCI China Oil & Chemical Industry Data)
+  agency_url: https://www.sci99.com
+  datasets:
+    national_consumption:
+      description: >
+        National monthly petroleum product consumption (kt) from the SCI
+        datapack, plus kerosene refueling (jet domestic / international /
+        total). Not scraped here — reads sci_api cache frames
+        consumption_national and kerosene_refueling_national.
+        Derived X_OTHKERO = Kerosene − Jet fuel (domestic).
+      access_method: sci_api_cache
+      format: parquet (sci_api/data/cache/<stamp>/)
+      frequency: monthly
+      unit: kt
+      notes: >
+        Prerequisite: python sci_api/fetch_data.py --history
+        Run: python scripts/update_china.py --bootstrap
+        Incremental: python scripts/update_china.py
+        Explicit stamp: python scripts/update_china.py --cache-dir ../sci_api/data/cache/20260911
+        JODI overlay: SCI Kerosene vs CN KEROSENE (China has no JETKERO).
+        Canonical: Gasoline, Diesel, Jet Fuel (total), X_OTHKERO, Naphtha, Fuel Oil;
+        VGO and headline Kerosene excluded from canonical sums.
+      processed_output: data/processed/china/china_sci_consumption.parquet
+
+us:
+  agency: EIA (U.S. Energy Information Administration)
+  agency_url: https://www.eia.gov
+  datasets:
+    weekly_product_supplied:
+      description: >
+        Weekly Petroleum Status Report product supplied (kb/d) for gasoline,
+        distillates, jet/kero, resid, other oil, plus total oil demand
+        (WRPUPUS2). Not scraped here — reads doe_fundamental_dashboard
+        eia_weekly.sqlite and converts weeks to calendar-month kb/d by
+        attributing each week’s daily rate across Mon–Fri week days, summing
+        kb in the month, then dividing by days-in-month.
+      access_method: eia_sqlite
+      format: sqlite (doe_fundamental_dashboard/data/eia_weekly.sqlite)
+      frequency: weekly source → monthly warehouse
+      unit: kbd
+      notes: >
+        Prerequisite: sync EIA weekly store in doe_fundamental_dashboard.
+        Run: python scripts/update_us.py --bootstrap
+        Incremental: python scripts/update_us.py
+        Explicit db: python scripts/update_us.py --sqlite ../doe_fundamental_dashboard/data/eia_weekly.sqlite
+        Canonical: Gasoline, Diesel (Distillates), Jet Fuel, Fuel Oil.
+        Other Oil and Total oil demand are native-only ([AGG]).
+        JODI overlay: GASOLINE, GASDIES, JETKERO, RESFUEL.
+      processed_output: data/processed/us/us_eia_product_supplied.parquet
+
+eurostat:
+  agency: Eurostat
+  agency_url: https://ec.europa.eu/eurostat
+  datasets:
+    oilm_gid_obs:
+      description: >
+        Monthly gross inland deliveries (GID_OBS) from nrg_cb_oilm for oil
+        products (gasoline, gas/diesel oil, jet, fuel oil, LPG, naphtha).
+        Covers EU + neighbours. Used as official for geos without a national
+        scraper, and as a freshness-ranked companion (official vs benchmark)
+        where a national parquet already exists.
+      page_url: https://ec.europa.eu/eurostat/databrowser/view/nrg_cb_oilm/default/table?lang=en
+      access_method: eurostat_sdmx_api
+      format: SDMX TSV / JSON-stat
+      frequency: monthly (~55 day lag)
+      unit: thousand tonnes (kt)
+      notes: >
+        Run: python scripts/update_eurostat.py --bootstrap
+        Subset: python scripts/update_eurostat.py --geos FR,NL,DE
+        Master: data/processed/eurostat/eurostat_oilm_demand.parquet
+        Per-country slices: data/processed/<id>/<id>_eurostat_oilm.parquet
+        Stocks sibling nrg_stk_oilm is not wired here.
+      processed_output: data/processed/eurostat/eurostat_oilm_demand.parquet
+
+    oilm_closing_stocks:
+      description: >
+        Monthly closing oil stock levels (nrg_stk_oilm): headline STK_CL plus
+        all STKCL_* splits (EU emergency/SPR, national territory, held abroad,
+        bonded, major consumers, pipeline/vessels, etc.). Openings omitted.
+      page_url: https://ec.europa.eu/eurostat/databrowser/view/nrg_stk_oilm/default/table?lang=en
+      access_method: eurostat_sdmx_api
+      format: SDMX TSV
+      frequency: monthly
+      unit: thousand tonnes (kt)
+      notes: >
+        Run: python scripts/update_eurostat.py --stocks-only
+        Or both demand+stocks: python scripts/update_eurostat.py --bootstrap
+        Master: data/processed/eurostat/eurostat_oilm_stocks.parquet
+        Warehouse metric_type=CLOSTLV, source_tier=benchmark (not in demand sums).
+        product_native encodes stk_flow|siec; category=stock_bucket.
+      processed_output: data/processed/eurostat/eurostat_oilm_stocks.parquet
+
+eu_oil_bulletin:
+  agency: European Commission (DG Energy) — Weekly Oil Bulletin
+  agency_url: https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en
+  datasets:
+
+    prices_history:
+      description: >
+        Weekly consumer prices of petroleum products (Euro-super 95,
+        automotive gas oil, heating gas oil, fuel oils, motor LPG) with
+        and without taxes, plus VAT / excise / other indirect taxes and
+        annual consumption. Historical workbook from 2005 onwards.
+      page_url: https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en
+      access_method: direct_download
+      filename_hint: Weekly_Oil_Bulletin_Prices_History
+      format: xlsx
+      frequency: weekly (history file refreshed each bulletin)
+      unit: "EUR/1000l (liquids); EUR/t (fuel oils); VAT %"
+      notes: >
+        Run: python scripts/update_eu_oil_bulletin.py
+        Offline: python scripts/update_eu_oil_bulletin.py --no-download
+        Catalog: https://data.europa.eu/data/datasets/eu-oil-bulletin?locale=en
+        Prices parquet: data/processed/eu_oil_bulletin/eu_oil_bulletin_prices.parquet
+        Join monthly demand via Eurostat / national TOTDEMO (bulletin
+        Consumption sheet is annual only).
+      processed_output: data/processed/eu_oil_bulletin/eu_oil_bulletin_prices.parquet
+
+    duties_taxes:
+      description: >
+        Standalone duties and taxes workbook (VAT, excise, other). The
+        history workbook already embeds the same sheets; this file is
+        downloaded as a backup / cross-check.
+      page_url: https://energy.ec.europa.eu/data-and-analysis/weekly-oil-bulletin_en
+      access_method: direct_download
+      filename_hint: Oil_Bulletin_Duties_and_taxes
+      format: xlsx
+      frequency: updated with each bulletin
+      unit: "% / national currency per unit"
+      notes: >
+        Optional; skipped with --skip-duties. Tax series used in analysis
+        come from the history workbook parse.
+
 # Template for adding new countries:
 # brazil:
 #   agency: ANP (Agência Nacional do Petróleo)

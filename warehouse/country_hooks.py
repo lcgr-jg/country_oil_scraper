@@ -21,6 +21,24 @@ def load_reference(cfg: CountryConfig) -> Any | None:
     return import_reference_module(cfg.reference_module)
 
 
+def load_reference_for_official_source(
+    cfg: CountryConfig,
+    official: pd.DataFrame,
+) -> Any | None:
+    """
+    Prefer Eurostat hooks when the fresher official tier is Eurostat.
+
+    Dual-source countries keep their national ``reference_module`` in YAML for
+    BAFA/CORES-specific helpers; seasonality / JODI native maps must follow
+    whichever source currently owns ``source_tier=official``.
+    """
+    if official is not None and not official.empty:
+        src = str(official["source"].dropna().iloc[0]) if "source" in official.columns else ""
+        if src == "eurostat_oilm":
+            return import_reference_module("reference.eurostat_oilm")
+    return load_reference(cfg)
+
+
 def resolve_jodi_ref_area(cfg: CountryConfig, ref: Any | None = None) -> str:
     if cfg.jodi_ref_area:
         return cfg.jodi_ref_area
@@ -73,6 +91,9 @@ def resolve_unit_native(cfg: CountryConfig, ref: Any | None = None) -> Optional[
         "MOEA_UNIT_NATIVE",
         "EPPO_UNIT_NATIVE",
         "METI_UNIT_KL",
+        "EUROSTAT_UNIT_NATIVE",
+        "SCI_UNIT_NATIVE",
+        "EIA_UNIT_NATIVE",
     ):
         val = getattr(ref, attr, None)
         if val:

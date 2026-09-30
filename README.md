@@ -130,9 +130,10 @@ python scripts/serve_weekday_polls.py
 Edit `POLL_COUNTRIES` in that script to add markets (ids from `python scripts/run_pipeline.py list`).
 Restart the serve process after editing.
 
-In the UI: **Deployments** should list `norway-weekday-poll` and `germany-weekday-poll`.
-Use **Run** once to verify without waiting for cron. Flow result includes
-`status: updated | unchanged | error`.
+In the UI: **Deployments** lists one `*-weekday-poll` per country in
+`POLL_COUNTRIES`. Use **Run** once to verify without waiting for cron. Flow
+result includes `status: updated | unchanged | error` and `consolidate:`
+(`warehouse` if new data, or `skipped (status=…)` otherwise).
 
 `update_and_consolidate` skips warehouse rebuild when every country is unchanged
 (unless you pass `consolidate_only_if_updated=False`).

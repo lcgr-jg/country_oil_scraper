@@ -193,6 +193,60 @@ canonical:
       this ratio directly - consumers can compute it from INDPROD,
       TOTIMPSB, and REFINOBS if needed for cross-country comparison.
 
+  X_PRICE_WITH_TAX:
+    description: >
+      Retail consumer price inclusive of duties and taxes (EC Oil Bulletin).
+      Liquids typically EUR per 1000 litres; fuel oils EUR per tonne.
+    typical_units: ["EUR/1000l", "EUR/t"]
+    notes: Project extension. Weekly Oil Bulletin "Prices with taxes".
+
+  X_PRICE_WO_TAX:
+    description: >
+      Retail consumer price exclusive of duties and taxes (EC Oil Bulletin).
+    typical_units: ["EUR/1000l", "EUR/t"]
+    notes: Project extension. Weekly Oil Bulletin "Prices wo taxes".
+
+  X_TAX_WEDGE:
+    description: >
+      Implied tax take per unit = price with taxes minus price without taxes.
+      Derived in the Oil Bulletin processor; not published as a separate sheet.
+    typical_units: ["EUR/1000l", "EUR/t"]
+    notes: Project extension. Derived metric.
+
+  X_VAT_RATE:
+    description: VAT rate (%) on petroleum products from the Oil Bulletin.
+    typical_units: ["%"]
+    notes: Project extension. Effective-date series (not weekly).
+
+  X_EXCISE:
+    description: >
+      Excise duty in national currency per unit (1000 l or t) from the
+      Oil Bulletin. Convert via X_FX_TO_EUR when comparing across countries.
+    typical_units: ["national_currency/unit"]
+    notes: Project extension. Effective-date series.
+
+  X_OTHER_INDIRECT_TAX:
+    description: >
+      Other indirect taxes (carbon, storage, etc.) in national currency
+      per unit from the Oil Bulletin.
+    typical_units: ["national_currency/unit"]
+    notes: Project extension. Effective-date series.
+
+  X_FX_TO_EUR:
+    description: >
+      Exchange rate used in the Oil Bulletin: EUR per 1 unit of national
+      currency (so local_price * FX ≈ EUR price).
+    typical_units: ["EUR_per_national_currency"]
+    notes: Project extension. Weekly alongside prices.
+
+  X_BULLETIN_CONSUMPTION:
+    description: >
+      Annual product consumption (kt) published inside the Oil Bulletin
+      history workbook. Prefer Eurostat / national monthly TOTDEMO for
+      elasticity work; this series is for cross-checks only.
+    typical_units: [kt]
+    notes: Project extension. Annual frequency.
+
 
 # =============================================================================
 # Per-source mappings: native source label -> canonical code

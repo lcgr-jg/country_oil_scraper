@@ -123,12 +123,19 @@ notebooks.
 | Hungary | `hungary_mekh.py` | `hungary_mekh_demand.py` | OData JSON snapshots (demand + stocks) |
 | Ukraine | `ukraine_sssu.py` | `ukraine_sssu_fuel.py` | SDMX CSV + Data Bank wide exports |
 | Norway | `norway_ssb.py` | `norway_ssb_sales.py` | StatBank API stitch 03687 + 11174 + 13585 |
+| China | *(none — sci_api cache)* | `china_sci_consumption.py` | Reads `sci_api/data/cache`; derives `X_OTHKERO` |
+| United States | *(none — EIA sqlite)* | `us_eia_product_supplied.py` | Reads `doe_fundamental_dashboard` weekly sqlite → monthly kb/d |
 
 ### Known deviations
 
 - **Thailand** puts multi-file stitching (`build_monthly_series`, `stitch_monthly`)
   in the scraper rather than the processor. New countries should prefer the
   processor-side loop (JODI/India style).
+- **China** has no scraper in this repo: national consumption is fetched by
+  ``sci_api`` and reshaped here into the warehouse parquet schema.
+- **United States** has no scraper here either: weekly product supplied is
+  stored by ``doe_fundamental_dashboard`` and converted to monthly kb/d
+  (day-attributed week volumes ÷ days-in-month).
 - **`BaseScraper.run()`** combines download → parse → save processed parquet
   without a processor. This is a convenience path for prototyping; production
   pipelines use processors instead.

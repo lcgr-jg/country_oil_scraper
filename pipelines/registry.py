@@ -41,6 +41,31 @@ PIPELINES: dict[str, Pipeline] = {
             parquet_rel_path="australia/australia_petroleum_statistics.parquet",
         ),
         Pipeline(
+            "china",
+            "update_china.py",
+            "China SCI national consumption (sci_api cache)",
+            parquet_rel_path="china/china_sci_consumption.parquet",
+        ),
+        Pipeline(
+            "us",
+            "update_us.py",
+            "US EIA weekly product supplied (monthly kb/d)",
+            parquet_rel_path="us/us_eia_product_supplied.parquet",
+        ),
+        Pipeline(
+            "eurostat",
+            "update_eurostat.py",
+            "Eurostat nrg_cb_oilm GID_OBS (all geos; freshness-ranked vs nationals)",
+            parquet_rel_path="eurostat/eurostat_oilm_demand.parquet",
+        ),
+        Pipeline(
+            "eu_oil_bulletin",
+            "update_eu_oil_bulletin.py",
+            "EC Weekly Oil Bulletin prices with/without taxes + duties",
+            default_batch=False,
+            parquet_rel_path="eu_oil_bulletin/eu_oil_bulletin_prices.parquet",
+        ),
+        Pipeline(
             "germany",
             "update_germany.py",
             "Germany BAFA mineral oil data",

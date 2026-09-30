@@ -26,16 +26,31 @@ def norway_parquet_path() -> Path:
 
 def test_countries_registry():
     countries = list_countries()
-    assert len(countries) == 14
+    assert len(countries) >= 40
     assert any(c.country_id == "norway" for c in countries)
     assert any(c.country_id == "thailand" for c in countries)
     assert any(c.country_id == "india" for c in countries)
+    assert any(c.country_id == "china" for c in countries)
+    assert any(c.country_id == "us" for c in countries)
+    assert any(c.country_id == "france" for c in countries)
+    assert any(c.country_id == "netherlands" for c in countries)
+    china = get_country("china")
+    assert china.country_code == "CN"
+    assert china.jodi_ref_area == "CN"
+    assert china.reference_module == "reference.china"
+    us = get_country("us")
+    assert us.country_code == "US"
+    assert us.jodi_ref_area == "US"
+    assert us.unit_native == "kbd"
     norway = get_country("norway")
     assert norway.country_code == "NO"
     assert norway.jodi_ref_area == "NO"
     italy = get_country("italy")
     assert italy.jodi_ref_area == "IT"
     assert italy.reference_module == "reference.italy"
+    france = get_country("france")
+    assert france.official_source_label == "Eurostat"
+    assert france.reference_module == "reference.eurostat_oilm"
 
 
 def test_consolidate_norway(tmp_path: Path, norway_parquet_path: Path):
@@ -189,21 +204,24 @@ def test_consolidate_india_excludes_total_rows(tmp_path: Path):
             WHERE country_code = 'IN' AND source_tier = 'official'
             """
         ).fetchone()[0]
-        assert n == 4048
+        assert n == 4092
     finally:
         con.close()
 
 
 def test_seasonality_hooks_polished_countries():
-    from warehouse.country_hooks import call_seasonality_chart_inputs, load_reference
+    from warehouse.country_hooks import (
+        call_seasonality_chart_inputs,
+        load_reference_for_official_source,
+    )
     from analytics.core.loader import load_demand_canonical, load_official_demand
 
-    for cid in ("india", "thailand", "australia", "italy"):
-        ref = load_reference(get_country(cid))
-        assert hasattr(ref, "seasonality_chart_inputs")
+    for cid in ("india", "thailand", "australia", "italy", "germany", "france"):
         demand = load_official_demand(cid)
         if demand.empty:
             pytest.skip(f"No demand for {cid}")
+        ref = load_reference_for_official_source(get_country(cid), demand)
+        assert hasattr(ref, "seasonality_chart_inputs")
         canon = load_demand_canonical(cid)
         df, col, products, labels, _suffix = call_seasonality_chart_inputs(
             ref.seasonality_chart_inputs,
@@ -401,14 +419,14 @@ def test_multi_country_reporting_and_no_duplicate_headline():
 
     ids = ["japan", "korea", "taiwan", "thailand", "india", "australia"]
     meta = reporting_metadata(ids)
-    assert meta["balanced_through_label"] == "2026-04"
+    assert meta["balanced_through_label"] == "2026-06"
     assert len(meta["by_country"]) == 6
 
     agg = aggregate_demand_canonical(ids)
     h = headline_total(agg)
     dup = h.groupby(pd.to_datetime(h["date"]).dt.to_period("M")).size()
     assert dup.max() == 1
-    assert pd.to_datetime(h["date"]).max().strftime("%Y-%m") == "2026-04"
+    assert pd.to_datetime(h["date"]).max().strftime("%Y-%m") == "2026-06"
 
 
 def test_multi_country_country_drivers():

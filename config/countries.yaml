@@ -271,3 +271,421 @@ countries:
     unit_native: kt
     product_column: product
     value_column: value_000mt
+
+  china:
+    display_name: China
+    country_code: "CN"
+    enabled: true
+    official_source_label: SCI
+    parquet:
+      rel_path: china/china_sci_consumption.parquet
+    reference_module: reference.china
+    jodi_ref_area: "CN"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "Jet fuel (total)"
+
+  us:
+    display_name: United States
+    country_code: "US"
+    enabled: true
+    official_source_label: EIA
+    parquet:
+      rel_path: us/us_eia_product_supplied.parquet
+    reference_module: reference.us
+    jodi_ref_area: "US"
+    demand_metric_type: TOTDEMO
+    unit_native: kbd
+    jet_product_native: "Jet/Kero"
+
+  albania:
+    display_name: Albania
+    country_code: "AL"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: albania/albania_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "AL"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  austria:
+    display_name: Austria
+    country_code: "AT"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: austria/austria_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "AT"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  belgium:
+    display_name: Belgium
+    country_code: "BE"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: belgium/belgium_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "BE"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  bulgaria:
+    display_name: Bulgaria
+    country_code: "BG"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: bulgaria/bulgaria_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "BG"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  croatia:
+    display_name: Croatia
+    country_code: "HR"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: croatia/croatia_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "HR"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  cyprus:
+    display_name: Cyprus
+    country_code: "CY"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: cyprus/cyprus_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "CY"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  czechia:
+    display_name: Czechia
+    country_code: "CZ"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: czechia/czechia_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "CZ"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  denmark:
+    display_name: Denmark
+    country_code: "DK"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: denmark/denmark_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "DK"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  estonia:
+    display_name: Estonia
+    country_code: "EE"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: estonia/estonia_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "EE"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  finland:
+    display_name: Finland
+    country_code: "FI"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: finland/finland_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "FI"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  france:
+    display_name: France
+    country_code: "FR"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: france/france_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "FR"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  georgia:
+    display_name: Georgia
+    country_code: "GE"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: georgia/georgia_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "GE"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  greece:
+    display_name: Greece
+    country_code: "EL"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: greece/greece_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "EL"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  ireland:
+    display_name: Ireland
+    country_code: "IE"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: ireland/ireland_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "IE"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  latvia:
+    display_name: Latvia
+    country_code: "LV"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: latvia/latvia_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "LV"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  lithuania:
+    display_name: Lithuania
+    country_code: "LT"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: lithuania/lithuania_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "LT"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  luxembourg:
+    display_name: Luxembourg
+    country_code: "LU"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: luxembourg/luxembourg_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "LU"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  malta:
+    display_name: Malta
+    country_code: "MT"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: malta/malta_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "MT"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  moldova:
+    display_name: Moldova
+    country_code: "MD"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: moldova/moldova_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "MD"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  montenegro:
+    display_name: Montenegro
+    country_code: "ME"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: montenegro/montenegro_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "ME"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  netherlands:
+    display_name: Netherlands
+    country_code: "NL"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: netherlands/netherlands_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "NL"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  north_macedonia:
+    display_name: North Macedonia
+    country_code: "MK"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: north_macedonia/north_macedonia_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "MK"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  romania:
+    display_name: Romania
+    country_code: "RO"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: romania/romania_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "RO"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  serbia:
+    display_name: Serbia
+    country_code: "RS"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: serbia/serbia_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "RS"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  slovakia:
+    display_name: Slovakia
+    country_code: "SK"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: slovakia/slovakia_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "SK"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  slovenia:
+    display_name: Slovenia
+    country_code: "SI"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: slovenia/slovenia_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "SI"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  sweden:
+    display_name: Sweden
+    country_code: "SE"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: sweden/sweden_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "SE"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+
+
+  turkiye:
+    display_name: Türkiye
+    country_code: "TR"
+    enabled: true
+    official_source_label: Eurostat
+    parquet:
+      rel_path: turkiye/turkiye_eurostat_oilm.parquet
+    reference_module: reference.eurostat_oilm
+    jodi_ref_area: "TR"
+    demand_metric_type: TOTDEMO
+    unit_native: kt
+    jet_product_native: "O4661"
+

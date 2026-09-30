@@ -13,6 +13,7 @@ Prerequisites
 
 Leave this process running. Cron is Mon–Fri **04:00 Europe/London** (slow hours).
 Each run hits the agency site; the flow result shows ``updated`` vs ``unchanged``.
+When status is ``updated``, the same flow rebuilds the DuckDB warehouse automatically.
 If the PC is asleep at 04:00, the run waits until it wakes (serve must still be running).
 
 Trigger once immediately from the UI (Deployments → Run) to verify without waiting.

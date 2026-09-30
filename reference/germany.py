@@ -22,6 +22,10 @@ import pandas as pd
 import pdfplumber
 import requests
 
+from reference.dashboard_helpers import (
+    DEFAULT_SEASONALITY_PANELS_CANONICAL,
+    default_seasonality_chart_inputs,
+)
 from reference.jodi_compare import JodiCompareSeries, sum_natives_series_for_jodi
 
 logger = logging.getLogger(__name__)
@@ -240,8 +244,14 @@ UNITS_KIND: dict[str, str] = {
     "Weitere, nicht aufgeführte Produkte": "other",
 }
 
-GASOLINE_JODI_NATIVES: frozenset[str] = frozenset({"Ottokraftstoff"})
-DIESEL_JODI_NATIVES: frozenset[str] = frozenset({"Dieselkraftstoff"})
+# JODI GASOLINE ≈ motor gasoline + blendstocks (Otto alone sits ~13% low).
+GASOLINE_JODI_NATIVES: frozenset[str] = frozenset(
+    {"Ottokraftstoff", "Benzinkomponenten"}
+)
+# JODI GASDIES ≈ road diesel + light heating oil (same middle-distillate pool).
+DIESEL_JODI_NATIVES: frozenset[str] = frozenset(
+    {"Dieselkraftstoff", "Heizöl, leicht"}
+)
 JET_JODI_NATIVES: frozenset[str] = frozenset({"Flugturb.Kraftst.,schwer"})
 LPG_JODI_NATIVES: frozenset[str] = frozenset({"Flüssiggas"})
 NAPHTHA_JODI_NATIVES: frozenset[str] = frozenset({"Rohbenzin"})
@@ -834,11 +844,36 @@ def attach_value_kbd(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def seasonality_chart_inputs(
+    demand: pd.DataFrame,
+    demand_canonical: pd.DataFrame,
+    *,
+    view: str = "native",
+    value_col: str = "value_kbd",
+) -> tuple[pd.DataFrame, str, list[str], dict[str, str], str]:
+    """Dashboard-compatible native/canonical seasonality inputs."""
+    return default_seasonality_chart_inputs(
+        demand,
+        demand_canonical,
+        view=view,
+        value_col=value_col,
+        native_products=SEASONALITY_DEMAND_PRODUCTS,
+        display_labels=DISPLAY_LABELS,
+        canonical_panels=DEFAULT_SEASONALITY_PANELS_CANONICAL,
+    )
+
+
+def seasonality_chart_inputs_metric(
     long: pd.DataFrame,
     *,
     metric_type: str = BAFA_DEMAND_METRIC,
     products: Optional[tuple[str, ...]] = None,
 ) -> tuple[pd.DataFrame, str, list[str], dict[str, str], str]:
+    """
+    BAFA exploration helper: filter raw long frame by metric_type.
+
+    Kept for notebooks that still slice demand vs bio blends from one long
+    table; the Streamlit dashboard uses ``seasonality_chart_inputs`` instead.
+    """
     if products is None:
         products = (
             SEASONALITY_BIO_PRODUCTS
